@@ -12,7 +12,17 @@ class CreateArticlesTable extends Migration
      */
     public function up()
     {
-        //
+      Schema::create('articles', function(Blueprint $table) {
+        $table->increments('id');
+        $table->string('title');
+        $table->string('slug')->unique();
+        $table->text('description');
+        $table->string('status');
+        $table->string('type');
+        $table->integer('order');
+        $table->string('article_parent');
+        $table->timestamps();
+      });
     }
 
     /**
@@ -22,6 +32,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        //
+      Schema::drop('articles');
     }
 }
