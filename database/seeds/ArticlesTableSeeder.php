@@ -11,13 +11,16 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-      $title = $faker->unique()->title;
+      for ($i=0; $i < 10; $i++) {
+        $faker = Faker\Factory::create();
+        $title = $faker->unique()->word;
 
-      DB::table('users')->insert([
-        'title' => $title,
-        'slug' => str_slug($title),
-        'description' => $faker->paragraph,
-        
-      ]);
+        DB::table('articles')->insert([
+          'title' => $title,
+          'slug' => str_slug($title),
+          'description' => $faker->text($maxNbChars = 400),
+          'published' => 1,
+        ]);
+      }
     }
 }

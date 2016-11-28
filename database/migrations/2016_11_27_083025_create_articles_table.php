@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
         $table->integer('order');
         $table->string('article_parent');
         $table->timestamps();
+        $table->boolean('published')->default(false);
       });
     }
 
