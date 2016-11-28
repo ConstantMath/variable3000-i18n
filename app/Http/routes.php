@@ -16,5 +16,5 @@ Route::get('/', function () {
 });
 
 Route::auth();
-
 Route::get('/admintool', 'AdmintoolController@index');
+Route::resource('articles', 'ArticlesController');

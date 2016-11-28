@@ -1,13 +1,24 @@
 <?php
-
 namespace App\Http\Controllers;
+
+use App\Http\Requests\ArticlesCreateRequest;
+use App\Http\Requests\ArticlesUpdateRequest;
+
+use App\Repositories\ArticlesRepository;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 
 class ArticlesController extends Controller
 {
+    protected $articlesRepository;
+    protected $nbrPerPage = 4;
+
+    public function __construct(ArticlesRepository $articlesRepository)
+    {
+        $this->articlesRepository = $articlesRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +26,10 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
+      $articles = $this->articlesRepository->getPaginate($this->nbrPerPage);
+      $links = $articles->render();
+
+      return view('index', compact('articles', 'links'));
     }
 
     /**
