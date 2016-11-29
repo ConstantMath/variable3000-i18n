@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('admintool.layouts.main')
 
 @section('content')
 <div class="container">
@@ -11,7 +11,14 @@
                     <ul>
                       <li>Projects</li>
                     </ul>
-                    
+                    <table>
+                    @foreach ($articles as $article)
+                        <tr>
+                            <td>{!! $article->id !!}</td>
+                            <td class="text-primary"><strong>{!! $article->title !!}</strong></td>
+                        </tr>
+                    @endforeach
+                    </table>
                 </div>
             </div>
         </div>

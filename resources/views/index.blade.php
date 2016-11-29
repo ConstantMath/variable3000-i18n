@@ -9,13 +9,6 @@
                     Index page
                 </div>
 
-                @foreach ($articles as $article)
-                    <tr>
-                        <td>{!! $article->id !!}</td>
-                        <td class="text-primary"><strong>{!! $article->title !!}</strong></td>
-                    </tr>
-                @endforeach
-
             </div>
         </div>
     </div>
