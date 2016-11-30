@@ -16,11 +16,19 @@ class ArticlesRepository
 
 	private function save(Article $Article, Array $inputs)
 	{
-		$Article->name = $inputs['name'];
-		$Article->email = $inputs['email'];
-		$Article->admin = isset($inputs['admin']);
-
+    $Article->title = $inputs['title'];
+    $Article->slug = str_slug($inputs['title']);
+    $Article->description = $inputs['description'];
+    // $Article->status = $inputs['status'];
+    // $Article->type = $inputs['type'];
+    // $Article->order = $inputs['order'];
+    // $Article->article_parent = $inputs['article_parent'];
 		$Article->save();
+	}
+
+  public function getAll()
+	{
+		return $this->Article->get();
 	}
 
 	public function getPaginate($n)
@@ -31,10 +39,7 @@ class ArticlesRepository
 	public function store(Array $inputs)
 	{
 		$Article = new $this->Article;
-		$Article->password = bcrypt($inputs['password']);
-
 		$this->save($Article, $inputs);
-
 		return $Article;
 	}
 

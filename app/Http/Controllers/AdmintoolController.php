@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 class AdmintoolController extends Controller
 {
     protected $articlesRepository;
-    protected $nbrPerPage = 4;
+    protected $nbrPerPage = 5;
 
     /**
      * Create a new controller instance.
@@ -32,9 +32,8 @@ class AdmintoolController extends Controller
      */
     public function index()
     {
-      $articles = $this->articlesRepository->getPaginate($this->nbrPerPage);
-      $links = $articles->render();
+      $articles = $this->articlesRepository->getAll();
 
-      return view('admintool/dashboard', compact('articles', 'links'));
+      return view('admintool/dashboard', compact('articles'));
     }
 }

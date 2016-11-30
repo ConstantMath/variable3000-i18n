@@ -61,7 +61,8 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        //
+      $article = $this->articlesRepository->getById($id);
+      return view('admintool/article-show', compact('article'));
     }
 
     /**
@@ -72,7 +73,8 @@ class ArticlesController extends Controller
      */
     public function edit($id)
     {
-        //
+      $article = $this->articlesRepository->getById($id);
+  	  return view('admintool/article-edit',  compact('article'));
     }
 
     /**
@@ -84,7 +86,8 @@ class ArticlesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->articlesRepository->update($id, $request->all());
+      return redirect('admintool')->withOk("L'article " . $request->input('title') . " a été modifié.");
     }
 
     /**
