@@ -19,7 +19,12 @@ class ArticlesRepository
     $Article->title = $inputs['title'];
     $Article->slug = str_slug($inputs['title']);
     $Article->description = $inputs['description'];
-    // $Article->status = $inputs['status'];
+    // Chekcbox test
+    if(!empty($inputs['published'])):
+      $Article->published = $inputs['published'];
+    else:
+      $Article->published = 0;
+    endif;
     // $Article->type = $inputs['type'];
     // $Article->order = $inputs['order'];
     // $Article->article_parent = $inputs['article_parent'];

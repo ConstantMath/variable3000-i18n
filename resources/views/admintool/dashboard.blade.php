@@ -1,6 +1,11 @@
 @extends('admintool.layouts.main')
 
 @section('content')
+<style media="screen">
+  .published-1{
+    font-weight: bold;
+  }
+</style>
 <div class="container">
   <div class="row">
     <div class="col-md-10 col-md-offset-1">
