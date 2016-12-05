@@ -13,6 +13,5 @@
 </div>
 <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
   {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Description']) !!}
-  {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
 </div>
 {!! Form::submit($submitButtonText, ['class' => 'btn btn-primary pull-right']) !!}

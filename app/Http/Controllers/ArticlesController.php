@@ -3,9 +3,10 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Http\Requests;
+use App\Http\Requests\CreateArticleREquest;
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
+use Illuminate\HttpResponse;
 
 
 class ArticlesController extends Controller
@@ -23,8 +24,7 @@ class ArticlesController extends Controller
       return view('admintool.article-create');
     }
 
-    public function store(Request $request){
-      $this -> validate();
+    public function store(CreateArticleRequest $request){
       $inputs = $request->all();
       $inputs['slug'] = str_slug($inputs['title']);
       Article::create($inputs);

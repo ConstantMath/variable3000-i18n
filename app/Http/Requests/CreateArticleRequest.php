@@ -11,9 +11,8 @@ class CreateArticleRequest extends Request
      *
      * @return bool
      */
-    public function authorize()
-    {
-        return false;
+    public function authorize(){
+      return true;
     }
 
     /**
@@ -21,10 +20,10 @@ class CreateArticleRequest extends Request
      *
      * @return array
      */
-    public function rules()
-    {
-        return [
-            //
-        ];
+    public function rules(){
+      return [
+        'title' => 'required|min:3',
+
+      ];
     }
 }
