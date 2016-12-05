@@ -5,14 +5,11 @@
 			<div class="panel-heading">Modifier</div>
 			<div class="panel-body">
 				<div class="col-sm-12">
-					{!! Form::model($article, ['route' => ['articles.update', $article->id], 'method' => 'put', 'class' => 'form-horizontal panel']) !!}
+					{!! Form::open(['url' => 'articles','class' => 'form-horizontal panel']) !!}
             @include('admintool.article-form', ['submitButtonText' => 'Save'])
 					{!! Form::close() !!}
 				</div>
 			</div>
 		</div>
-		<a href="javascript:history.back()" class="btn btn-primary">
-			<span class="glyphicon glyphicon-circle-arrow-left"></span> Retour
-		</a>
 	</div>
 @endsection

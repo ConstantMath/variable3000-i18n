@@ -15,4 +15,4 @@
   {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => 'Description']) !!}
   {!! $errors->first('description', '<small class="help-block">:message</small>') !!}
 </div>
-{!! Form::submit('Envoyer', ['class' => 'btn btn-primary pull-right']) !!}
+{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary pull-right']) !!}

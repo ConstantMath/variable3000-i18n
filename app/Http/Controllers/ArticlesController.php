@@ -1,93 +1,68 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ArticlesCreateRequest;
-use App\Http\Requests\ArticlesUpdateRequest;
-
-use App\Repositories\ArticlesRepository;
+use App\Article;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
 
 class ArticlesController extends Controller
 {
-    protected $articlesRepository;
-    protected $nbrPerPage = 4;
 
-    public function __construct(ArticlesRepository $articlesRepository)
-    {
-        $this->articlesRepository = $articlesRepository;
+    public function __construct(){
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-      $articles = $this->articlesRepository->getPaginate($this->nbrPerPage);
-      $links = $articles->render();
-
+    public function index(){
+      $articles = Article::all();
       return view('index', compact('articles', 'links'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
+      return view('admintool.article-create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+      $this -> validate();
+      $inputs = $request->all();
+      $inputs['slug'] = str_slug($inputs['title']);
+      Article::create($inputs);
+      return redirect('admintool')->withOk("L'article " . $request->input('title') . " a été modifié.");
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-      $article = $this->articlesRepository->getById($id);
+      $article = Article::findOrFail($id);
       return view('admintool/article-show', compact('article'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-      $article = $this->articlesRepository->getById($id);
+
+    public function edit($id){
+      $article = Article::findOrFail($id);
   	  return view('admintool/article-edit',  compact('article'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-      $this->articlesRepository->update($id, $request->all());
-      return redirect('admintool')->withOk("L'article " . $request->input('title') . " a été modifié.");
+
+    public function update(){
+      $inputs = Request::all();
+      return $inputs;
+      // $Article->title = $inputs['title'];
+      // $Article->slug = str_slug($inputs['title']);
+      // $Article->description = $inputs['description'];
+      // // Chekcbox test
+      // if(!empty($inputs['published'])):
+      //   $Article->published = $inputs['published'];
+      // else:
+      //   $Article->published = 0;
+      // endif;
+      // // $Article->type = $inputs['type'];
+      // // $Article->order = $inputs['order'];
+      // // $Article->article_parent = $inputs['article_parent'];
+  		// $Article->save();
+      //
+      // //$this->articlesRepository->update($id, $request->all());
+      // return redirect('admintool')->withOk("L'article " . $request->input('title') . " a été modifié.");
     }
 
     /**
