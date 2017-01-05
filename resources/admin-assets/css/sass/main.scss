@@ -1,0 +1,322 @@
+@import "/admin-assets/css/libs.css";
+@import "libs/settings";
+@import "libs/fontawesome/variables";
+@import "libs/fontawesome/mixins";
+@import "libs/fontawesome/path";
+@import "libs/fontawesome/core";
+@import "libs/fontawesome/larger";
+@import "libs/fontawesome/fixed-width";
+@import "libs/fontawesome/list";
+@import "libs/fontawesome/bordered-pulled";
+@import "libs/fontawesome/animated";
+@import "libs/fontawesome/rotated-flipped";
+@import "libs/fontawesome/stacked";
+@import "libs/fontawesome/icons";
+@import "libs/fontawesome/screen-reader";
+
+
+body{
+  font-family: 'Arial','Helvetica neue', sans-serif;
+  letter-spacing: 1px;
+  color: #222;
+  background: #efefef;
+}
+
+a,
+a:active,
+a:hover{
+  color: #0065ff;
+}
+
+/* ----- bootstrap hack ----- */
+
+*{
+  border-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+
+// Navigation
+
+.navbar-default {
+  background-color: $white;
+  a{
+    color: $black;
+  }
+  .navbar-brand{
+    color: $black;
+    font-size: inherit;
+    font-weight: bold;
+  }
+  .navbar-nav > li > a{
+    color: $black;
+  }
+}
+
+
+// Panneaux
+
+.panel{
+  border: none;
+  box-shadow: none;
+  > .panel-heading{
+    background-color: $white;
+    border-bottom: 2px solid $grey;
+
+  }
+  input[type="submit"]{
+    margin-top: $spacing-default;
+  }
+}
+
+.table>thead:first-child>tr:first-child>td{
+    vertical-align: middle;
+}
+
+.media-panel{
+  .list-group-item{
+    display: flex;
+    align-items: center;
+    font-size: 11px;
+    letter-spacing: normal;
+    border: none;
+    padding: $spacing-small 0;
+    img{
+      max-height: 20px;
+      height: auto;
+      margin-right: $spacing-xsmall;
+    }
+    span{
+      display: inline-block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
+    i {
+      display: inline-block;
+      min-width: 10px;
+      padding: 5px 10px;
+      font-size: 12px;
+      line-height: 1;
+    }
+  }
+  .m-delete{
+    float: right;
+    display: inline-block;
+    color: $black;
+  }
+  input[type="file"]{
+    display: none;
+  }
+  .media-add{
+    color: $blue;
+  }
+}
+
+
+
+// Formulaires
+
+.form-group{
+      margin-bottom: 30px;
+}
+
+.form-control{
+  font-family: 'Helvetica neue', sans-serif;
+  letter-spacing: 1px;
+  border: 2px solid $greyDark;
+  box-shadow: none;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  &:focus {
+    border-color: $blue;
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
+.btn{
+  background-color: $white;
+  padding: .5em 1.2em;
+  letter-spacing: 1px;
+  transition: 0.1s background-color linear, 0.1s color linear;
+  border-width: 2px;
+}
+
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
+  outline: 0;
+}
+
+
+
+.btn-default{
+  border-color:$greyDark;
+  color: $black;
+  &:hover,
+  &:active{
+    border-color: $black;
+    color: $black;
+    background-color: $white;
+  }
+
+}
+
+.btn-primary{
+  border-color:$blue;
+  color: $blue;
+  &:hover,
+  &:active{
+    border-color: $blue;
+    color: $white;
+    background-color: $blue;
+  }
+
+}
+
+.help-block{
+  display: inline-block;
+  background-color: $yellow;
+}
+
+/* ----- summernote ----- */
+.note-editor.note-frame{
+  border: 2px solid $greyDark;
+}
+
+.note-editor{
+  .btn{
+    border: none;
+    background-color: transparent;
+  }
+  .fa:before{
+    font-family: FontAwesome;
+  }
+  .note-icon-bold{
+    @extend .fa;
+    @extend .fa-bold;
+  }
+  .note-icon-underline{
+    @extend .fa;
+    @extend .fa-underline;
+  }
+  .note-icon-eraser{
+    @extend .fa;
+    @extend .fa-eraser;
+  }
+  .note-icon-unorderedlist{
+    @extend .fa;
+    @extend .fa-list-ul;
+  }
+  .note-icon-orderedlist{
+    @extend .fa;
+    @extend .fa-list-ol;
+  }
+  .note-icon-picture{
+    @extend .fa;
+    @extend .fa-image;
+  }
+  .note-icon-link{
+    @extend .fa;
+    @extend .fa-link;
+  }
+  .note-icon-chain-broken{
+    @extend .fa;
+    @extend .fa-unlink;
+  }
+  .note-icon-arrows-alt{
+    @extend .fa;
+    @extend .fa-expand;
+  }
+  .note-icon-code{
+    @extend .fa;
+    @extend .fa-code;
+  }
+  .note-icon-question{
+    @extend .fa;
+    @extend .fa-question;
+  }
+  .note-icon-magic{
+    @extend .fa;
+    @extend .fa-header;
+  }
+  .btn-default.active,
+  .btn-default:active,
+  .open>.dropdown-toggle.btn-default {
+    background-color: $yellow;
+  }
+  .modal-body{
+    padding: 25px;
+  }
+  > .panel-heading {
+    background-color: $grey;
+    border-bottom: none;
+  }
+}
+
+
+
+/* ----- select2min ----- */
+
+.select2-container--default .select2-selection--multiple {
+  border: 2px solid $greyDark;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: $blue;
+  border: none;
+  color: $white;
+  // margin: $spacing-small $spacing-xsmall $spacing-xsmall $spacing-xsmall;
+  padding: .2em .5em;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  @extend .fa;
+  @extend .fa-times;
+  color: transparent;
+  width: 0;
+  margin-right: 18px;
+  &:hover{
+    color: transparent;
+  }
+  &:before{
+    color: white;
+  }
+}
+
+/* ----- sortable ----- */
+
+.sortable-ghost{
+  opacity: 0;
+}
+
+/* ----- custom ----- */
+
+.panel-heading{
+  font-weight: bold;
+  .message{
+    font-size: 10px;
+    background-color: $yellow;
+    position: relative;
+    top: 2px;
+  }
+}
+
+
+.page-index{
+  table .time{
+    text-align: right;
+    color: $greyDark;
+  }
+  tbody{
+    tr i{
+      color: $red;
+      font-size: 10px;
+      margin-right: $spacing-xsmall;
+    }
+
+    tr.published-1 i{
+      color: $green;
+    }
+  }
+}

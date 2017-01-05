@@ -1,0 +1,1 @@
+{"version":3,"sources":["main.scss"],"names":[],"mappings":"AACA;EACE,iCAAiC;EACjC,oBAAoB,EACrB","file":"styles.css","sourcesContent":["\nbody {\n  font-family: 'Arial', sans-serif;\n  letter-spacing: 1px;\n}\n"]}
