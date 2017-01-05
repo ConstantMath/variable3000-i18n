@@ -25,10 +25,9 @@ class ArticlesController extends Controller
     }
 
     public function store(CreateArticleRequest $request){
-      $inputs = $request->all();
-      $inputs['slug'] = str_slug($inputs['title']);
-      Article::create($inputs);
-      return redirect('admintool')->withOk("L'article " . $request->input('title') . " a été modifié.");
+      Article::create($request->all());
+      return redirect('admintool');
+      //return redirect('admintool')->withOk("L'article " . $request->input('title') . " a été modifié.");
     }
 
     public function show($id)
@@ -44,25 +43,10 @@ class ArticlesController extends Controller
     }
 
 
-    public function update(){
-      $inputs = Request::all();
-      return $inputs;
-      // $Article->title = $inputs['title'];
-      // $Article->slug = str_slug($inputs['title']);
-      // $Article->description = $inputs['description'];
-      // // Chekcbox test
-      // if(!empty($inputs['published'])):
-      //   $Article->published = $inputs['published'];
-      // else:
-      //   $Article->published = 0;
-      // endif;
-      // // $Article->type = $inputs['type'];
-      // // $Article->order = $inputs['order'];
-      // // $Article->article_parent = $inputs['article_parent'];
-  		// $Article->save();
-      //
-      // //$this->articlesRepository->update($id, $request->all());
-      // return redirect('admintool')->withOk("L'article " . $request->input('title') . " a été modifié.");
+    public function update(CreateArticleRequest $request, $id){
+      $article = Article::findOrFail($id);
+      $article->update($request->all());
+      return redirect('admintool');
     }
 
     /**

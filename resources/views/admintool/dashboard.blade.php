@@ -2,8 +2,21 @@
 
 @section('content')
 <style media="screen">
-  .published-1{
-    font-weight: bold;
+
+  tbody span{
+    color: Tomato;
+    margin-right: 10px;
+  }
+  th,
+  td{
+    width: 50%;
+  }
+  .published-1 span{
+    color: LightGreen;
+  }
+  .actions a{
+    display: inline-block;
+    margin-left: 10px;
   }
 </style>
 <div class="container">
@@ -16,20 +29,17 @@
             <caption>Index</caption>
             <thead>
               <tr>
-                <th>#</th>
-                <th>Nom</th>
+                <th>Title</th>
                 <th></th>
-                <th></th>
-                <th></th>
-              </tr>
             </thead>
             <tbody>
             @foreach ($articles as $article)
-              <tr>
-                <th scope="row published-{!! $article->published !!}">•</th>
-                <td><strong>{!! $article->title !!}</strong></td>
-                <td>{!! link_to_route('articles.show', 'Voir', [$article->id], ['class' => '']) !!}</td>
-                <td>{!! link_to_route('articles.edit', 'Modifier', [$article->id], ['class' => '']) !!}<td>
+              <tr class="published-{!! $article->published !!}">
+                <th><span>•</span>&nbsp;<strong>{!! $article->title !!}</strong></th>
+                <td class="actions">
+                  {!! link_to_route('articles.show', 'Voir', [$article->id], ['class' => '']) !!}
+                  {!! link_to_route('articles.edit', 'Modifier', [$article->id], ['class' => '']) !!}
+                <td>
               </tr>
             @endforeach
             </tbody>
