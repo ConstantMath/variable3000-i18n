@@ -17,20 +17,15 @@ class ArticlesController extends Controller
   }
 
   /**
-   * Lsite des sous-articles par article parent
+   * Lsite des articles par parent
    *
    * @param  string  $parent_slug
    * @return \Illuminate\Http\Response
    */
 
   public function index($parent_slug = null){
-    if(empty($parent_slug)){
-      $default_parent_id = Article::where('parent_id', 0)->pluck('id')->first();
-      $parent_slug = Article::getSlugFromId($default_parent_id);
-    }
-    $articles = (!empty($parent_slug))? Article::getByParent($parent_slug) : '' ;
-    $main_title = Article::where('slug', $parent_slug)->pluck('title')->first();
-    return view('admin/index', compact('articles', 'main_title', 'parent_slug'));
+    $articles = Article::all();
+    return view('admin/index', compact('articles'));
   }
 
 

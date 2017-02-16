@@ -12,19 +12,10 @@ class ArticlesTableSeeder extends Seeder
   public function run(){
     $faker = Faker\Factory::create();
     DB::table('articles')->insert([
-      'title' => 'Publications',
-      'slug'  => 'publications',
-      'intro' => $faker->text($maxNbChars = 300),
-      'text'  => $faker->text($maxNbChars = 800),
-      'published' => 1,
-      'parent_id' => 0,
-    ]);
-
-    DB::table('articles')->insert([
-      'title' => 'Activities',
-      'slug'  => 'activities',
-      'intro' => $faker->text($maxNbChars = 300),
-      'text'  => $faker->text($maxNbChars = 800),
+      'title' => 'Projects',
+      'slug'  => 'projects',
+      'intro' => '',
+      'text'  => '',
       'published' => 1,
       'parent_id' => 0,
     ]);
@@ -32,13 +23,22 @@ class ArticlesTableSeeder extends Seeder
     DB::table('articles')->insert([
       'title' => 'Pages',
       'slug'  => 'pages',
-      'intro' => $faker->text($maxNbChars = 300),
-      'text'  => $faker->text($maxNbChars = 800),
+      'intro' => '',
+      'text'  => '',
       'published' => 1,
       'parent_id' => 0,
     ]);
 
-    for ($i=0; $i < 10; $i++) {
+    DB::table('articles')->insert([
+      'title' => 'Contact',
+      'slug'  => 'contact',
+      'intro' => '',
+      'text'  => $faker->text($maxNbChars = 300),
+      'published' => 1,
+      'parent_id' => 2,
+    ]);
+
+    for ($i=0; $i < 5; $i++) {
       $title = $faker->unique()->word;
       DB::table('articles')->insert([
         'title' => $title,
