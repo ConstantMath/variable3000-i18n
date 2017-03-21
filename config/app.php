@@ -153,6 +153,8 @@ return [
         Collective\Html\HtmlServiceProvider::class,
         // Intervention image
         Intervention\Image\ImageServiceProvider::class,
+        // Markdown
+        Buzzylab\Laradown\MarkdownServiceProvider::class,
 
 
         /*
@@ -213,6 +215,8 @@ return [
         'Html' => 'Collective\Html\HtmlFacade',
         // Intervention image
         'Image' => Intervention\Image\Facades\Image::class,
+        // Markdown
+        'Markdown' => Buzzylab\Laradown\Facades\MarkdownFacade::class,
 
     ],
 

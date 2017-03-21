@@ -57,7 +57,7 @@ return array(
         // 'large' => 'Intervention\Image\Templates\Large',
 
         'small' => function ($image) {
-          $image->resize(320, null, function ($constraint) {
+          $image->resize(320, 320, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
           });
@@ -65,7 +65,7 @@ return array(
         },
 
         'medium' => function ($image) {
-          $image->resize(640, null, function ($constraint) {
+          $image->resize(640, 640, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
           });
@@ -73,7 +73,7 @@ return array(
         },
 
         'large' => function ($image) {
-          $image->resize(1400, null, function ($constraint) {
+          $image->resize(1400, 1400, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
           });

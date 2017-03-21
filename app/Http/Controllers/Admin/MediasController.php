@@ -36,13 +36,41 @@ class MediasController extends Controller {
       $orig_name = $file->getClientOriginalName();
       $name = time() .'-'. $orig_name;
       $file->move('medias', $name);
-
+      // ajax return
       return response()->json([
         'status' => 'success',
         'alt' => $orig_name,
         'name' => '/medias/'.$name,
       ]);
     }
+  }
+
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+
+  public function update(Request $request){
+    $id = $request->media_id;
+    $media = Media::findOrFail($id);
+    $file = $request->file('background_image_file');
+    if($file){
+      // Upload
+      $background_image = Media::uploadMediaFile($file);
+      $media->update(['background_image' => $background_image['name']]);
+    }
+    $media->update($request->all());
+    return response()->json([
+      'status'                  => 'success',
+      'media_id'                => $media->id,
+      'media_alt'               => $media->alt,
+      'media_description'       => $media->description,
+      'media_size'              => $media->size,
+      'media_background_image'   => $media->background_image,
+      'media_background_color'  => $media->background_color,
+    ]);
   }
 
 }

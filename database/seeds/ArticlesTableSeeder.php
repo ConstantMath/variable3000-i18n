@@ -29,16 +29,7 @@ class ArticlesTableSeeder extends Seeder
       'parent_id' => 0,
     ]);
 
-    DB::table('articles')->insert([
-      'title' => 'Contact',
-      'slug'  => 'contact',
-      'intro' => '',
-      'text'  => $faker->text($maxNbChars = 300),
-      'published' => 1,
-      'parent_id' => 2,
-    ]);
-
-    for ($i=0; $i < 5; $i++) {
+    for ($i=0; $i < 2; $i++) {
       $title = $faker->unique()->word;
       DB::table('articles')->insert([
         'title' => $title,
@@ -49,5 +40,15 @@ class ArticlesTableSeeder extends Seeder
         'published' => 1,
       ]);
     }
+
+    DB::table('articles')->insert([
+      'title' => 'About',
+      'slug'  => 'about',
+      'intro' => $faker->text($maxNbChars = 300),
+      'text' => $faker->text($maxNbChars = 800),
+      'published' => 1,
+      'parent_id' => 2,
+    ]);
+
   }
 }

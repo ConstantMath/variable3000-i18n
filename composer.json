@@ -10,7 +10,8 @@
         "barryvdh/laravel-debugbar": "^2.3",
         "laravelcollective/html": "~5.0",
         "intervention/image": "^2.3",
-        "intervention/imagecache": "^2.3"
+        "intervention/imagecache": "^2.3",
+        "buzzylab/laradown": "0.1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
