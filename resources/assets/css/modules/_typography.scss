@@ -1,0 +1,228 @@
+/*------------------------------------*\
+  #FONTS
+\*------------------------------------*/
+
+
+.font-body {
+  font-family: "FGrotesk-Regular", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: .04em;
+}
+
+.font-body-italic {
+  font-family: "FGrotesk-Italic", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  font-style: italic;
+}
+
+.font-var {
+  font-family: "Times New Roman", Times, Georgia, serif;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: .02em;
+  word-spacing: -.03em;
+}
+
+
+
+/*------------------------------------*\
+    #TYPESIZE/SCALE
+\*------------------------------------*/
+
+
+$font-size-xs      : 12px;
+$font-size-sm      : 14px;
+$font-size-md      : 20px;
+$font-size-lg      : 36px;
+
+//** Unit-less `line-height`
+$line-height          : 1.6;
+// for use in components like buttons, labels
+$line-height-form     : 1.428571429 !default;     // 20/14
+$font-res-ratio       : 1.2;                      // responsive ratio
+
+
+
+/*------------------------------------*\
+    #FONTSIZES
+\*------------------------------------*/
+
+
+
+$font-sizes-xs: (
+  null : ($font-size-xs / ($font-res-ratio * $font-res-ratio), $line-height),
+  sm   : ($font-size-xs / $font-res-ratio, $line-height),
+  md   : ($font-size-xs, $line-height),
+  lg   : ($font-size-xs * $font-res-ratio, $line-height),
+);
+
+$font-sizes-sm: (
+  null : ($font-size-sm / ($font-res-ratio * $font-res-ratio), $line-height),
+  sm   : ($font-size-sm / $font-res-ratio, $line-height),
+  md   : ($font-size-sm, $line-height),
+  lg   : ($font-size-sm * $font-res-ratio, $line-height),
+);
+
+$font-sizes-md: (
+  null : ($font-size-md / ($font-res-ratio * $font-res-ratio), $line-height),
+  sm   : ($font-size-md / $font-res-ratio, $line-height),
+  md   : ($font-size-md, $line-height),
+  lg   : ($font-size-md * $font-res-ratio, $line-height),
+);
+
+$font-sizes-lg: (
+  null : ($font-size-lg / ($font-res-ratio * $font-res-ratio), $line-height),
+  sm   : ($font-size-lg / $font-res-ratio, $line-height),
+  md   : ($font-size-lg, $line-height),
+  lg   : ($font-size-lg * $font-res-ratio, $line-height),
+);
+
+
+
+
+/*------------------------------------*\
+    #CORE TYPOGRAPHY
+\*------------------------------------*/
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @include font-size($font-sizes-md);
+}
+
+p {
+  @include font-size($font-sizes-md);
+  margin-bottom: .5em;
+}
+
+blockquote p {
+  @include font-size($font-sizes-md);
+  text-align: center;
+}
+
+a {
+  color: $action;
+	border-bottom: $border-width-sm solid $action;
+	padding-bottom: .1em;
+  text-decoration: none;
+  @include link-active-styles {   // Mixin for interactions (hover,focus,active)
+    color: $base-color;
+  }
+}
+
+em,
+i{
+  @extend .font-body-italic;
+}
+
+b,
+strong{
+  @extend .font-body;
+}
+
+em > b,
+b > em,
+i > b,
+b > i,
+em > strong,
+strong > em,
+i > strong,
+strong > i {
+  @extend .font-body-italic;
+}
+
+p sub, p sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+p sup {
+  top: -0.5em;
+}
+
+p sub {
+  bottom: -0.25em;
+}
+
+p small{
+  @include font-size($font-sizes-sm);
+}
+
+p abbr {
+  border-bottom: $border-width-sm dotted $base-color;
+  cursor: help;
+}
+
+p q,
+p cite {
+ &:before {
+    content:'"';
+ }
+ &:after {
+    content:'"';
+ }
+}
+
+p mark {
+  background-color: rgba($action, .2);
+  color: $base-color;
+}
+
+p code,
+p samp {
+  font-family: monospace;
+  @include font-size($font-sizes-md);
+}
+
+pre {
+  font-family: monospace;
+  @include font-size($font-sizes-md);
+}
+
+hr {
+  background: $base-color;
+  height: $border-width-md;
+  border: none;
+  margin: 0;
+}
+
+figcaption {
+  @include font-size($font-sizes-sm);
+  @include margin-top($spacing-xs-responsive);
+}
+
+ol, ul, pre, dl {
+  @include font-size($font-sizes-md);
+}
+ul, ol {
+  @include nobullet;
+}
+ul ul {
+  @include font-size($font-sizes-md);
+}
+ol ol {
+  @include font-size($font-sizes-md);
+}
+.text ul {
+  @include unordered; margin-left: 1em;
+}
+.text ol {
+  @include ordered; margin-left: 1em;
+}
+.text > ul,
+.text > ol {
+  margin-bottom: 1em;
+}
+li {
+  line-height: inherit;
+}
+input, textarea, label, select {
+  line-height: $line-height-form
+}

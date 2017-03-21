@@ -25,8 +25,11 @@ class ArticlesController extends Controller{
 
   public function show($parent_slug, $slug){
     $article = Article::where('slug', $slug)->first();
-    $image_une =  ($article->media_id)? Media::find($article->media_id) : null;
-    return view('templates/article-view', compact('article', 'image_une'));
+    $data = array(
+      'page_class' => 'article'.' '.$parent_slug.' '.$article->slug,
+      'page_title' => $article->title,
+    );
+    // $text01 = Article::where('slug', 'about')->where('published', 1)->first();
+    return view('templates/article', compact('article'));
   }
-
 }

@@ -17,23 +17,19 @@ class ArticlesMediasController extends Controller
     $this->middleware('auth');
   }
 
+
   /**
-   * Ajoute un media à l'article courant
+   * Ajoute un media unique à l'article courant
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
 
-  public function addMedia(Request $request, $id){
-    if(!empty($id) && $id != 'null'){
-      $article = Article::findOrFail($id);
-    }
-    $type = $request->input('type');
-
-    // File
-    $file = $request->file('image');
-
+  public function addSingleMedia(Request $request, $id){
+    // Champs requests
+    $file        = $request->file('image');
+    $column_name = $request->input('column_name');
     if($file){
       // Upload
       $media_file = Media::uploadMediaFile($file);
@@ -42,39 +38,24 @@ class ArticlesMediasController extends Controller
       $media->name = $media_file['name'];
       $media->alt  = $media_file['orig_name'];
       $media->type = $file->getClientOriginalExtension();
-
-      // Ajout d'un media de type gallerie (one to many)
-      if($type == 'mediagallery'){
-        if(isset($article)){
-          // retourne le dernier media
-          $next_media_order = $article->lastMediaId();
-          $next_media_order += 1;
-          // Article -> media
-          $media->order = $next_media_order;
-          $article->medias()->save($media);
-        }
-        $media->save();
-
-      // Ajout d'un media de type image une (media_id dans table article)
-      }else{
-        // Si article déjà créé (ID)
-        if(isset($article)){
-          $old_media_id =  $article->media_id;
-          if($old_media_id){ Media::deleteMediaFile($old_media_id); }
-          $media->save();
-          $article->media_id = $media->id;
-          $article->update();
-        }else{
-          $media->save();
-        }
+      $media->save();
+      // Si article déjà créé (ID) > update de l'article
+      if(!empty($id) && $id != 'null'){
+        $article = Article::findOrFail($id);
+        // Si media existant > supprime l'ancien media de la DB & le fichier
+        $old_media_id =  $article[$column_name];
+        if(!empty($old_media_id)){ Media::deleteMediaFile($old_media_id);}
+        Article::where('id', $article->id)
+          ->update([$column_name => $media->id]);
       }
-
       return response()->json([
-        'alt'           => $media_file['orig_name'],
-        'name'          => '/imagecache/small/'.$media_file['name'],
-        'article_id'    => $id,
-        'media_id'      => $media->id,
-        'type'          => $type,
+        'media_alt'         => $media->alt,
+        'media_name'        => $media->name,
+        'media_type'        => $media->type,
+        'article_id'        => $id,
+        'media_id'          => $media->id,
+        'media_description' => $media->description,
+        'column_name'       => $column_name,
       ]);
     }
   }
@@ -89,20 +70,68 @@ class ArticlesMediasController extends Controller
    */
 
   public function deleteMedia(Request $request, $id){
-    $article = Article::findOrFail($id);
-    $media_id  = $request->media_id;
+    // $article = Article::findOrFail($id);
+    $column_name  = $request->column_name;
+    $media_id     = $request->media_id;
     Media::deleteMediaFile($media_id);
-
-    if($request->type && $request->type == 'image-une'){
-      $article->media_id = null;
-      $article->update();
+    // Si pas gallerie (one to many)
+    if($column_name != 'mediagallery'){
+      Article::where('id', $id)->update([$column_name => null]);
     }
     return response()->json([
-      'status'    => 'success',
-      'type'      => $request->type,
-      'media_id'  => $media_id,
+      'status'       => 'success',
+      'column_name'  => $column_name,
+      'media_id'     => $media_id,
     ]);
   }
+
+
+  /**
+   * Ajoute des medias de type gallerie à l'article courant
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+
+  public function addManyMedia(Request $request, $id){
+    if(!empty($id) && $id != 'null'){
+      $article = Article::findOrFail($id);
+    }
+    $column_name = $request->input('column_name');
+    $file = $request->file('image');
+
+    if($file){
+      // Upload
+      $media_file = Media::uploadMediaFile($file);
+      // Media store
+      $media = New media;
+      $media->name = $media_file['name'];
+      $media->alt  = $media_file['orig_name'];
+      $media->type = $file->getClientOriginalExtension();
+
+      if(isset($article)){
+        // retourne le dernier media
+        $next_media_order = $article->lastMediaId();
+        $next_media_order += 1;
+        // Article -> media
+        $media->order = $next_media_order;
+        $article->medias()->save($media);
+      }
+      $media->save();
+
+      return response()->json([
+        'media_alt'         => $media->alt,
+        'media_name'        => $media->name,
+        'media_type'        => $media->type,
+        'article_id'        => $id,
+        'media_id'          => $media->id,
+        'media_description' => $media->description,
+        'column_name'       => $column_name,
+      ]);
+    }
+  }
+
 
   /**
    * Réordonne les médias liés à l'article

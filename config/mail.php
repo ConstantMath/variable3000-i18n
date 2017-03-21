@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => null, 'name' => null],
+    'from' => ['address' => 'bonjour@variable.club', 'name' => 'Variable'],
 
     /*
     |--------------------------------------------------------------------------

@@ -1,27 +1,15 @@
 <?php
-/*
-|--------------------------------------------------------------------------
-| Front
-|--------------------------------------------------------------------------
-*/
-// Homepage
-Route::get('/', 'HomeController@index');
-// Article : view
-Route::get('/{parent_slug}/{article_slug}', 'ArticlesController@show')->name('articles.show');
 
+// auth
+Route::auth(
+  ['except' => ['register']] // désactive register
+);
 
 /*
 |--------------------------------------------------------------------------
 | Admin
 |--------------------------------------------------------------------------
 */
-
-// auth
-Route::auth(['except' => [
-    'register' // désactive register
-]]);
-
-// Admin
 
 // Articles : all
 Route::get('/admin', 'Admin\ArticlesController@index')->name('admin.index.all')->middleware('auth');
@@ -39,14 +27,26 @@ Route::get('/admin/{parent_slug}/articles/{articles}/edit/', 'Admin\ArticlesCont
 // Articles : reorder
 Route::post('/admin/articles/{id}/reorder', 'Admin\ArticlesController@reorder')->name('admin.articles.reorder');
 
-// Medias add
-Route::post('/admin/articles/{id?}/addmedia', 'Admin\ArticlesMediasController@addMedia')->name('admin.articles.addmedia');
+// Medias add // Single
+Route::post('/admin/articles/{id?}/addsinglemedia', 'Admin\ArticlesMediasController@addSingleMedia')->name('admin.articles.addsinglemedia');
 // Medias delete
-Route::post('/admin/articles/{id}/deletemedia', 'Admin\ArticlesMediasController@deletemedia')->name('admin.articles.deletemedia');
+Route::post('/admin/articles/{id}/deletemedia', 'Admin\ArticlesMediasController@deleteMedia')->name('admin.articles.deleteMedia');
+// Medias add // Many(Gallery)
+Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
+// Medias edit
+Route::post('/admin/medias/update/', 'Admin\MediasController@update')->name('admin.medias.update')->middleware('auth');
 // Medias reorder
 Route::post('/admin/articles/{id}/reordermedia', 'Admin\ArticlesMediasController@reorderMedia')->name('admin.articles.reordermedia');
-
-// Image une
-Route::post('/admin/articles/{id}/addimageune', 'Admin\ArticlesController@addimageune')->name('admin.articles.addimageune');
 // Generic
 Route::post('/admin/fileupload', 'Admin\MediasController@fileUpload')->name('admin.fileupload')->middleware('auth');
+
+
+/*
+|--------------------------------------------------------------------------
+| Front
+|--------------------------------------------------------------------------
+*/
+// Homepage
+Route::get('/', 'HomeController@index');
+// Article : view
+Route::get('/{parent_slug}/{article_slug}', 'ArticlesController@show')->name('articles.show');
