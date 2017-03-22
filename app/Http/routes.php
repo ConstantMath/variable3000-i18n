@@ -37,8 +37,15 @@ Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasControlle
 Route::post('/admin/medias/update/', 'Admin\MediasController@update')->name('admin.medias.update')->middleware('auth');
 // Medias reorder
 Route::post('/admin/articles/{id}/reordermedia', 'Admin\ArticlesMediasController@reorderMedia')->name('admin.articles.reordermedia');
-// Generic
+// Generic file upload
 Route::post('/admin/fileupload', 'Admin\MediasController@fileUpload')->name('admin.fileupload')->middleware('auth');
+
+// Taxonomies : create
+Route::get('/admin/taxonomies/create/{parent_id}', 'Admin\TaxonomiesController@create')->name('admin.taxonomies.create')->middleware('auth');
+// Taxonomies : ressources
+Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => [
+    'create',
+]]);
 
 
 /*

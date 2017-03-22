@@ -32,6 +32,11 @@ a:hover{
   color: #0065ff;
 }
 
+h2{
+  font-size: 14px;
+  margin-bottom: $spacing-regular;
+  font-weight: bold;
+}
 
 /* ----- bootstrap hack ----- */
 
@@ -486,4 +491,20 @@ a:hover{
 
 .modal-footer{
   text-align: left;
+}
+
+
+/* ----- Tags ----- */
+
+.page-tags-index{
+  .panel{
+    margin-bottom: 1px;
+  }
+  .panel-heading{
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .table>tbody>tr>td{
+    padding: $spacing-xsmall $spacing-small;
+  }
 }

@@ -88,4 +88,24 @@ class Tag extends Model{
     return $currentTags;
   }
 
+
+  /**
+   * Get all children
+   *
+   */
+  public function children(){
+    return $this->hasMany('App\tag', 'parent_id')->orderBy('name');
+  }
+
+
+  /**
+   * Get the parent Taxonomy
+   * @param int  $id
+	 *
+   */
+
+   public function parent(){
+     return $this->belongsTo('App\Tag', 'parent_id');
+   }
+
 }

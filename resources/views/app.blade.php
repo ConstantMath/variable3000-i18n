@@ -18,7 +18,7 @@
   <meta property="og:locale" content="en_EN" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="@yield('page_title')" />
-  <meta property="og:description" content="Gioa Seghers" />
+  <meta property="og:description" content="[site]" />
   <meta property="og:image" content="/assets/favicon/favicon-194x194.png" />
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-touch-icon-60x60.png">

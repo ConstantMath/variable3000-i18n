@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @yield('meta')
-    <title>Admin variable</title>
-    <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link href="{{ url('/dist/admin/main.css') }}" rel="stylesheet">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  @yield('meta')
+  <title>Admin variable</title>
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="{{ url('/dist/admin/main.css') }}" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-default navbar-static-top">
@@ -32,8 +32,8 @@
         </ul> --}}
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
-          {{-- <li><a href="{{ url('/admin/system') }}">Admin</a></li> --}}
-          <!-- Authentication Links -->
+          <li><a href="{{ url('/admin/taxonomies') }}">Admin</a></li>
+          {{-- <!-- Authentication Links --> --}}
           @if (Auth::guest())
             <li><a href="{{ url('/login') }}">Login</a></li>
             <li><a href="{{ url('/register') }}">Register</a></li>
