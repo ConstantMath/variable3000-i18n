@@ -177,8 +177,18 @@ class Article extends Model{
    * Nécessaire pour le dropdown select
    *
    */
-   
+
    public function getCategoriesAttribute() {
     return $this->tags->lists('id')->all();
  	}
+
+  /**
+   * Retourne une liste des tags associées à l'article
+   * Nécessaire pour le dropdown select
+   *
+   */
+
+    public function getTagListAttribute() {
+     return $this->tags->lists('id')->all();
+  	}
 }

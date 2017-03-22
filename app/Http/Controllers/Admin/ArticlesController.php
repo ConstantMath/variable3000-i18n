@@ -45,9 +45,10 @@ class ArticlesController extends Controller
     $article->parent = Article::where('slug', $parent_slug)->first();
     $article->medias = $article->medias;
     $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
-    // All Categories for dropdown select
+    // Taxonomies for dropdown select
     $categories = Tag::where('parent_id', 1)->lists('name', 'id')->prepend('', '');
-  	return view('admin/templates/article-edit',  compact('article', 'categories'));
+    $tags = Tag::where('parent_id', 2)->lists('name', 'id');
+  	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags'));
   }
 
 
@@ -61,9 +62,12 @@ class ArticlesController extends Controller
   public function create($parent_slug){
     $article = collect(new Article);
     $article->parent = Article::where('slug', $parent_slug)->first();
-    // All Categories for dropdown select
+    // Taxonomies for dropdown select
     $categories = Tag::where('parent_id', 1)->lists('name', 'id')->prepend('', '');
-    return view('admin.templates.article-edit', compact('article', 'categories'));
+    if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
+    $tags = Tag::where('parent_id', 2)->lists('name', 'id');
+    if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
+    return view('admin.templates.article-edit', compact('article', 'categories', 'tags'));
   }
 
 
@@ -93,7 +97,15 @@ class ArticlesController extends Controller
       $categories_parent_id = 1;
       $categories_input = $request->input('categories');
       Tag::detachOldAddNew($categories_input, $categories_parent_id, $id);
-
+      // Tags
+      $tags_parent_id = 2;
+      $tags_input = $request->input('tag_list');
+      if(!empty($tags_input)){
+        $new_tags = Tag::processTags($tags_input, $tags_parent_id);
+      }else{
+        $new_tags = "";
+      }
+      Tag::detachOldAddNew($new_tags, $tags_parent_id, $id);
       // Update de l'article
       $article->update($request->all());
       $data = $request->all();
@@ -123,29 +135,18 @@ class ArticlesController extends Controller
       return redirect()->route('admin.articles.create', ['parent_slug' => $parent_slug])->withErrors($validator);
     } else {
 
-      // Custom fields
-      // Header image
-      if(!empty($request->file('hd_image_1_file'))){
-        if(!empty($article->hd_image_1)){
-          Media::deleteMediaFile($article->hd_image_1);
-        }
-        $hd_image_1 = Media::uploadMediaSave($request->file('hd_image_1_file'));
-        $request['hd_image_1'] = $hd_image_1['media_id'];
-      }
-      // Header image 2
-      if(!empty($request->file('hd_image_2_file'))){
-        if(!empty($article->hd_image_2)){
-          Media::deleteMediaFile($article->hd_image_2);
-        }
-        $hd_image_2 = Media::uploadMediaSave($request->file('hd_image_2_file'));
-        $request['hd_image_2'] = $hd_image_2['media_id'];
-      }
+
+      // Store the article
+      $article = Article::create($request->all());
       // ----- Taxonomies ----- //
       $categories = $request->input('categories');
       if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
-
-      $article = Article::create($request->all());
-      // Medias gallery array
+      // Image une
+      if ($request->has('post_image_une')) {
+        $article->image_une = $request->get('post_image_une');
+        $article->update();
+      }
+      // Medias gallery
       if ($request->has('mediagallery') && !empty($request->mediagallery[0])) {
         $medias = $request->get('mediagallery');
         $medias_a = explode(",", $medias[0]);
