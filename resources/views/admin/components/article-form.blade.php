@@ -38,10 +38,11 @@
 </div>
 
 <hr>
-{{-- Taxonomy: topics --}}
+
+{{-- Taxonomy: category --}}
 <div class="form-group">
   <label for="category">Category</label>
-  {!! Form::select('categories[]', $cat_topics, null, ['class' => 'form-control select2', 'id' => '']) !!}
+  {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2', 'id' => '']) !!}
 </div>
 
 {{-- Submit buttons --}}

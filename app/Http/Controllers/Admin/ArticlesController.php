@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Article;
 use App\Media;
+use App\Tag;
 
 class ArticlesController extends Controller
 {
@@ -16,7 +17,7 @@ class ArticlesController extends Controller
   }
 
   /**
-   * Lsite les articles par parent
+   * List all articles by parent
    *
    * @param  string  $parent_slug
    * @return \Illuminate\Http\Response
@@ -44,7 +45,9 @@ class ArticlesController extends Controller
     $article->parent = Article::where('slug', $parent_slug)->first();
     $article->medias = $article->medias;
     $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
-  	return view('admin/templates/article-edit',  compact('article'));
+    // All Categories for dropdown select
+    $categories = Tag::where('parent_id', 1)->lists('name', 'id')->prepend('', '');
+  	return view('admin/templates/article-edit',  compact('article', 'categories'));
   }
 
 
@@ -58,7 +61,9 @@ class ArticlesController extends Controller
   public function create($parent_slug){
     $article = collect(new Article);
     $article->parent = Article::where('slug', $parent_slug)->first();
-    return view('admin.templates.article-edit', compact('article'));
+    // All Categories for dropdown select
+    $categories = Tag::where('parent_id', 1)->lists('name', 'id')->prepend('', '');
+    return view('admin.templates.article-edit', compact('article', 'categories'));
   }
 
 
@@ -81,6 +86,14 @@ class ArticlesController extends Controller
     } else {
       // Checkbox update
       $request['published'] = (($request->published) ? 1 : 0);
+
+      // ----- Taxonomies ----- //
+
+      // Categories
+      $categories_parent_id = 1;
+      $categories_input = $request->input('categories');
+      Tag::detachOldAddNew($categories_input, $categories_parent_id, $id);
+
       // Update de l'article
       $article->update($request->all());
       $data = $request->all();
@@ -127,6 +140,10 @@ class ArticlesController extends Controller
         $hd_image_2 = Media::uploadMediaSave($request->file('hd_image_2_file'));
         $request['hd_image_2'] = $hd_image_2['media_id'];
       }
+      // ----- Taxonomies ----- //
+      $categories = $request->input('categories');
+      if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
+
       $article = Article::create($request->all());
       // Medias gallery array
       if ($request->has('mediagallery') && !empty($request->mediagallery[0])) {

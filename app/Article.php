@@ -160,4 +160,25 @@ class Article extends Model{
   public function children(){
     return $this->hasMany('App\article', 'parent_id')->orderBy('order', 'asc');
   }
+
+
+  /**
+   * Retourne tous les tags
+   *
+   */
+
+  public function tags(){
+    return $this->belongsToMany('App\Tag')->withTimestamps();
+  }
+
+
+  /**
+   * Retourne une liste de catégories associées à l'article
+   * Nécessaire pour le dropdown select
+   *
+   */
+   
+   public function getCategoriesAttribute() {
+    return $this->tags->lists('id')->all();
+ 	}
 }
