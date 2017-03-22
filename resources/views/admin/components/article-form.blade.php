@@ -37,6 +37,13 @@
   {!! Form::textarea('text', null, ['class' => 'form-control', 'id' => 'rich-editor', 'placeholder' => 'Text']) !!}
 </div>
 
+<hr>
+{{-- Taxonomy: topics --}}
+<div class="form-group">
+  <label for="category">Category</label>
+  {!! Form::select('categories[]', $cat_topics, null, ['class' => 'form-control select2', 'id' => '']) !!}
+</div>
+
 {{-- Submit buttons --}}
 <div class="form-group submit">
   {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'save']) !!}
