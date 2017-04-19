@@ -47,9 +47,19 @@ class TaxonomiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-      dd('sdlfkj');
+    public function store(Request $request){
+
+      $validator = Validator::make($request->all(), [
+        'name' => 'required',
+      ]);
+      // Validator check
+      if ($validator->fails()) {
+        return redirect()->route('admin.taxonomies.create', ['parent_id' => $request->parent_id])->withErrors($validator);
+      } else {
+        // Store the taxonomy
+        $article = Tag::create($request->all());
+        return redirect()->route('admin.taxonomies.index');
+      }
     }
 
     /**

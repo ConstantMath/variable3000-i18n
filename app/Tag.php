@@ -42,7 +42,6 @@ class Tag extends Model{
    */
 
   public static function detachOldAddNew($new_tags, $tag_parent_id, $article_id){
-    // dd($new_tags);
     $article = Article::findOrFail($article_id);
     $all_tags = Tag::where('parent_id', $tag_parent_id)->get();
     if(!$all_tags->isEmpty()){

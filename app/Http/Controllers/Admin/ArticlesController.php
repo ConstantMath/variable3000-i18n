@@ -134,8 +134,6 @@ class ArticlesController extends Controller
     if ($validator->fails()) {
       return redirect()->route('admin.articles.create', ['parent_slug' => $parent_slug])->withErrors($validator);
     } else {
-
-
       // Store the article
       $article = Article::create($request->all());
       // ----- Taxonomies ----- //
