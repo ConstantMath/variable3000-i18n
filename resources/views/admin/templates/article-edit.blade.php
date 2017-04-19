@@ -27,7 +27,14 @@
       </div>
       {!! Form::close() !!}
       @if(isset($article->id))
-        @include('admin.components.article-delete-form')
+        <ul class="nav navbar-nav">
+          <li>
+            @include('admin.components.article-delete-form')
+          </li>
+          <li>
+            <a href="{{ url('/') }}/{{ $article->slug }}" target="_blank"><i class="fa fa-eye"></i> preview</a>
+          </li>
+        </ul>
       @endif
     </div>
     <div class="col-sm-4 col-md-3 col-lg-3">
