@@ -155,6 +155,8 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         // Markdown
         Buzzylab\Laradown\MarkdownServiceProvider::class,
+        // Sluggable
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
 
 
         /*

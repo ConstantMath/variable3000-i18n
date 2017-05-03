@@ -113,9 +113,9 @@ class ArticlesController extends Controller
       $article->update($request->all());
       $data = $request->all();
       if(isset($data['finish'])){
-        return redirect()->route('admin.index', ['parent_slug' => $article->parent_id]);
+        return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
       }else{
-        return redirect()->route('admin.articles.edit', ['parent_slug' => $article->parent_id, 'articles' => $id]);
+        return redirect()->route('admin.articles.edit', ['parent_id' => $article->parent_id, 'articles' => $id]);
       }
     }
   }

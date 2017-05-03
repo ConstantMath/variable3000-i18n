@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 
 class Article extends Model{
 
   use Mediatable;
+  use Sluggable;
   protected $table = 'articles';
 
   protected $fillable = [
@@ -21,6 +23,21 @@ class Article extends Model{
       'published',
       'image_une',
   ];
+
+  /**
+   * Return the sluggable configuration array for this model.
+   *
+   * @return array
+   */
+
+  public function sluggable(){
+    return [
+      'slug' => [
+        'source' => 'title',
+                'onUpdate' => true
+      ]
+    ];
+  }
 
 
   /**
