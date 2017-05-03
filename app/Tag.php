@@ -3,15 +3,31 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Tag extends Model{
 
+  use Sluggable;
   protected $fillable = [
     'name',
     'slug',
     'parent_id',
   ];
 
+  /**
+   * Return the sluggable configuration array for this model.
+   *
+   * @return array
+   */
+
+  public function sluggable(){
+    return [
+      'slug' => [
+        'source' => 'name',
+                'onUpdate' => true
+      ]
+    ];
+  }
 
   /**
    * Retourne les articles associés au tag
@@ -20,18 +36,6 @@ class Tag extends Model{
 
   public function articles(){
     return $this->belongsToMany('App\Article');
-  }
-
-
-  /**
-   * Ajoute nom & slug, lancé lorsque un nom est créé
-   * @param string  $name
-	 *
-   */
-
-  public function setNameAttribute($name){
-    $this->attributes['name'] = $name;
-    $this->attributes['slug'] = str_slug($name);
   }
 
 
