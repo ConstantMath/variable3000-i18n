@@ -14,6 +14,10 @@
                     <label for="alt">Title</label>
                     <input class="form-control" name="alt" type="text" value="" id="input_media_alt">
                   </div>
+                  <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" placeholder="Intro" rows="5" name="description" id="input_media_description"></textarea>
+                  </div>                  
                 </div>
               </div>
             </div>
