@@ -54,11 +54,11 @@ class TaxonomiesController extends Controller
       ]);
       // Validator check
       if ($validator->fails()) {
-        return redirect()->route('admin.taxonomies.create', ['parent_id' => $request->parent_id])->withErrors($validator);
+        return redirect()->route('taxonomies.create', ['parent_id' => $request->parent_id])->withErrors($validator);
       } else {
         // Store the taxonomy
         $article = Tag::create($request->all());
-        return redirect()->route('admin.taxonomies.index');
+        return redirect()->route('taxonomies.index');
       }
     }
 
@@ -102,7 +102,7 @@ class TaxonomiesController extends Controller
       } else {
         // Update de l'article
         $taxonomy->update($request->all());
-        return redirect()->route('admin.taxonomies.index');
+        return redirect()->route('taxonomies.index');
       }
     }
 
@@ -116,6 +116,6 @@ class TaxonomiesController extends Controller
       $taxonomy = Tag::findOrFail($id);
       $taxonomy -> delete();
       session()->flash('flash_message', 'Deleted');
-      return redirect()->route('admin.taxonomies.index');
+      return redirect()->route('taxonomies.index');
     }
 }

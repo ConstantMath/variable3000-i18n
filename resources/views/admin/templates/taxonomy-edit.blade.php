@@ -5,7 +5,7 @@
     <div class="col-sm-8 col-md-7 col-md-offset-1 col-lg-7 col-md-offset-2 article-edit">
 
       @if(isset($taxonomy->id))
-        {!! Form::model($taxonomy, ['route' => ['admin.taxonomies.update', $taxonomy->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+        {!! Form::model($taxonomy, ['route' => ['taxonomies.update', $taxonomy->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
       @else
         {!! Form::open(['url' => 'admin/taxonomies','class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
       @endif
@@ -37,7 +37,7 @@
       </div>
       {!! Form::close() !!}
       @if(isset($taxonomy->id))
-        {!! Form::model($taxonomy, ['route' => ['admin.taxonomies.destroy', $taxonomy->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
+        {!! Form::model($taxonomy, ['route' => ['taxonomies.destroy', $taxonomy->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
           {{ Form::hidden('_method', 'DELETE') }}
           <input type="button" name="btn" value="Delete this taxonomy" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-default" />
           <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -32,10 +32,6 @@ class ArticlesController extends Controller
     }else{
       $articles = Article::where('parent_id', $parent_id)->get();
     }
-    // Map sub attributes
-    // foreach ($articles as $a) {
-    //   $a->children = Article::mapElements($a->children);
-    // }
     return view('admin/templates/home', compact('articles'));
   }
 
@@ -47,14 +43,14 @@ class ArticlesController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-  public function edit($parent_slug, $id){
+  public function edit($parent_id, $id){
     $article = Article::findOrFail($id);
-    $article->parent = Article::where('slug', $parent_slug)->first();
+    $article->parent = Article::where('id', $parent_id)->first();
     $article->medias = $article->medias;
     $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
     // Taxonomies for dropdown select
-    $categories = Tag::where('parent_id', 1)->lists('name', 'id')->prepend('', '');
-    $tags = Tag::where('parent_id', 2)->lists('name', 'id');
+    $categories = Tag::where('parent_id', 1)->pluck('name', 'id')->prepend('', '');
+    $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
   	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags'));
   }
 
@@ -70,9 +66,9 @@ class ArticlesController extends Controller
     $article = collect(new Article);
     $article->parent = Article::where('slug', $parent_slug)->first();
     // Taxonomies for dropdown select
-    $categories = Tag::where('parent_id', 1)->lists('name', 'id')->prepend('', '');
+    $categories = Tag::where('parent_id', 1)->pluck('name', 'id')->prepend('', '');
     if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
-    $tags = Tag::where('parent_id', 2)->lists('name', 'id');
+    $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
     if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
     return view('admin.templates.article-edit', compact('article', 'categories', 'tags'));
   }

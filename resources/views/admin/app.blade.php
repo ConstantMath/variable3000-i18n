@@ -28,8 +28,8 @@
         <!-- Left Side Of Navbar -->
         @if (Auth::check())
         <ul class="nav navbar-nav">
-          <li><a href="{{ url('/en/admin/1/articles') }}">Projects</a></li>
-          <li><a href="{{ url('/en/admin/6/articles') }}">Static texts</a></li>
+          <li><a href="{{ url('/admin/1/articles') }}">Projects</a></li>
+          <li><a href="{{ url('/admin/2/articles') }}">Static texts</a></li>
         </ul>
         @endif
         <!-- Right Side Of Navbar -->

@@ -10,7 +10,7 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h3>{{ $taxonomy->name }}</h3>
-            <a href="{{ route('admin.taxonomies.create', $taxonomy->id) }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
+            <a href="{{ route('taxonomies.create', $taxonomy->id) }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
           </div>
           <div class="panel-body table-responsive">
             <table class="table">
@@ -18,7 +18,7 @@
                 @if($taxonomy->children)
                   @foreach ($taxonomy->children as $child)
                 <tr>
-                  <td>{!! link_to_route('admin.taxonomies.edit', $child->name, $child->id, ['class' => '']) !!}</td>
+                  <td>{!! link_to_route('taxonomies.edit', $child->name, $child->id, ['class' => '']) !!}</td>
                 </tr>
                 @endforeach @endif
               </tbody>

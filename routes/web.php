@@ -21,7 +21,7 @@ Route::resource('/admin/articles', 'Admin\ArticlesController', ['except' => [
     'edit'
 ]]);
 // Articles : create
-Route::get('/admin/{parent_slug}/articles/create', 'Admin\ArticlesController@create')->name('admin.articles.create')->middleware('auth');
+Route::get('/admin/{parent_id}/articles/create', 'Admin\ArticlesController@create')->name('admin.articles.create')->middleware('auth');
 // Articles : edit
 Route::get('/admin/{parent_slug}/articles/{articles}/edit/', 'Admin\ArticlesController@edit')->name('admin.articles.edit')->middleware('auth');
 // Articles : reorder
@@ -41,7 +41,7 @@ Route::post('/admin/articles/{id}/reordermedia', 'Admin\ArticlesMediasController
 Route::post('/admin/fileupload', 'Admin\MediasController@fileUpload')->name('admin.fileupload')->middleware('auth');
 
 // Taxonomies : create
-Route::get('/admin/taxonomies/create/{parent_id}', 'Admin\TaxonomiesController@create')->name('admin.taxonomies.create')->middleware('auth');
+Route::get('/admin/taxonomies/create/{parent_id}', 'Admin\TaxonomiesController@create')->name('taxonomies.create')->middleware('auth');
 // Taxonomies : ressources
 Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => [
     'create',

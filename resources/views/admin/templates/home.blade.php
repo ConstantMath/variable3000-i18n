@@ -17,8 +17,11 @@
                 @if($article->children)
                   @foreach ($article->children as $child)
                 <tr class="published-{!! $child->published !!}" url="{{ URL::to('/') }}/admin/articles/{{$child->id}}/reorder" parent="{{$child->parent_id}}">
-                  <td><i class="fa fa-circle"></i>&nbsp;{!! link_to_route('admin.articles.edit', $child->title, [$child->parent_id, $child->id], ['class' => '']) !!}</td>
-                  <td class="time">{{ $child->updated_at }}</td>
+                  <td>
+                    <i class="fa fa-circle"></i>
+                    {!! link_to_route('admin.articles.edit', $child->title, [$child->parent_id, $child->id], ['class' => '']) !!}
+                  </td>
+                  <td class="attribute time">{{ $child->created_at }}</td>
                 </tr>
                 @endforeach @endif
               </tbody>

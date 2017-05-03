@@ -17,6 +17,7 @@
 @import "libs/99-fontawesome/icons";
 @import "libs/99-fontawesome/screen-reader";
 
+@import "includes/01-markdown-editor";
 
 
 body{
@@ -39,6 +40,7 @@ h2{
 }
 
 /* ----- bootstrap hack ----- */
+
 
 *{
   border-radius: 0 !important;
@@ -152,6 +154,13 @@ h2{
 
 // Formulaires
 
+input,
+textarea{
+  &::placeholder{
+    color: $greyDark !important;
+  }
+}
+
 .main-form{
   hr{
     margin: $spacing-large -30px;
@@ -197,6 +206,8 @@ h2{
     height: 20px;
     width: 200px;
     text-align: right;
+    padding: 0;
+    margin: 0;
   }
   &.show{
     span{
@@ -232,7 +243,6 @@ h2{
 .btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus {
   outline: 0;
 }
-
 
 
 .btn-default{
@@ -285,103 +295,13 @@ h2{
   margin-bottom: $spacing-large;
 }
 
-/* ----- SimpleMDE - Markdown Editor ----- */
-
-.CodeMirror{
-  border: 2px solid $greyDark;
-}
-
-.CodeMirror:not(.CodeMirror-fullscreen),
-.CodeMirror:not(.CodeMirror-fullscreen) .CodeMirror-scroll {
-  min-height: 200px;
-  max-height: 80vh;
-}
-
-.editor-toolbar {
-  border-top: 2px solid $greyDark;
-  border-left: 2px solid $greyDark;
-  border-right: 2px solid $greyDark;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  opacity: 1;
-  a{
-    opacity: .6;
-  }
-}
-
-/* ----- réécriture des icones ----- */
-
-.fa:before{
-  font-family: FontAwesome;
-}
-
-.note-icon-bold{
-  @extend .fa;
-  @extend .fa-bold;
-}
-.note-icon-underline{
-  @extend .fa;
-  @extend .fa-underline;
-}
-.note-icon-eraser{
-  @extend .fa;
-  @extend .fa-eraser;
-}
-.note-icon-unorderedlist{
-  @extend .fa;
-  @extend .fa-list-ul;
-}
-.note-icon-orderedlist{
-  @extend .fa;
-  @extend .fa-list-ol;
-}
-.note-icon-picture{
-  @extend .fa;
-  @extend .fa-image;
-}
-.note-icon-link{
-  @extend .fa;
-  @extend .fa-link;
-}
-.note-icon-chain-broken{
-  @extend .fa;
-  @extend .fa-unlink;
-}
-.note-icon-arrows-alt{
-  @extend .fa;
-  @extend .fa-expand;
-}
-.note-icon-code{
-  @extend .fa;
-  @extend .fa-code;
-}
-.note-icon-question{
-  @extend .fa;
-  @extend .fa-question;
-}
-.note-icon-magic{
-  @extend .fa;
-  @extend .fa-header;
-}
-.note-icon-caret{
-  @extend .fa;
-  @extend .fa-caret-down;
-}
-
-.note-icon-trash{
-  @extend .fa;
-  @extend .fa-trash-o;
-}
-
-.note-icon-italic{
-  @extend .fa;
-  @extend .fa-italic;
-}
 
 /* ----- select2min ----- */
 
-.select2-container--default .select2-selection--multiple {
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-selection--single {
   border: 2px solid $greyDark;
+  min-height: 32px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
@@ -391,6 +311,14 @@ h2{
   // margin: $spacing-small $spacing-xsmall $spacing-xsmall $spacing-xsmall;
   padding: .2em .5em;
 }
+
+.select2-container--default .select2-selection--single .select2-selection__placeholder,
+.select2-container--default .select2-search--inline .select2-search__field,
+.select2-search__field{
+  letter-spacing: 1px;
+  color: $greyDark;
+}
+
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
   @extend .fa;
@@ -431,7 +359,7 @@ h2{
 
 
 .page-index{
-  table .time{
+  table .attribute{
     text-align: right;
     color: $greyDark;
   }
@@ -494,6 +422,7 @@ h2{
 }
 
 
+
 /* ----- Tags ----- */
 
 .page-tags-index{
@@ -507,4 +436,27 @@ h2{
   .table>tbody>tr>td{
     padding: $spacing-xsmall $spacing-small;
   }
+}
+
+
+/* ----- Tabs ----- */
+
+.nav-tabs{
+  border-width: 2px;
+  margin-bottom: $spacing-regular;
+  >li{
+    margin-bottom: -2px;
+  }
+}
+
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover{
+  border-width: 2px;
+}
+
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:focus,
+.dropdown-menu>.active>a:hover {
+  background-color: $blue;
 }

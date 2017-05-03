@@ -32,15 +32,6 @@ class Article extends Model{
 
   public static function mapElements($articles){
     $articles->map(function ($item, $key) {
-      // events cat
-      $event_cat = $item->tags()->where('parent_id', 3)->first();
-      $item['event_cat'] = $event_cat['name'];
-      // exhibitors cat
-      $exhibitors_cat = $item->tags()->where('parent_id', 2)->first();
-      $item['exhibitors_cat'] = $exhibitors_cat['name'];
-      // places cat
-      $place_cat = $item->tags()->where('parent_id', 4)->first();
-      $item['place_cat'] = $place_cat['name'];
       // Year
       // $year = $item->tags()->where('parent_id', 1)->first();
       // $item['year'] = $year['name'];
@@ -72,32 +63,32 @@ class Article extends Model{
     }
   }
 
-  /**
-   * Retourne l'id de l'article sur base du slug
-   * @param string  $slug
-   *
-   */
+  // /**
+  //  * Retourne l'id de l'article sur base du slug
+  //  * @param string  $slug
+  //  *
+  //  */
+  //
+  // public static function getIdFromSlug($slug){
+  //   $article = Article::where('slug', $slug)->pluck('id');
+  //   if($article){
+  //     return $article[0];
+  //   }
+  // }
 
-  public static function getIdFromSlug($slug){
-    $article = Article::where('slug', $slug)->pluck('id');
-    if($article){
-      return $article[0];
-    }
-  }
-
-  /**
-   * Ajoute titre & slug,  lancé lorsque un titre est créé
-   * @param string  $title
-	 *
-   */
-
-   public function setTitleAttribute($title){
-     $this->attributes['title'] = $title;
-     $article_id = (isset($this->attributes['id'])) ? $this->attributes['id'] : 0;
-     if (empty($this->attributes['slug'])){
-       $this->attributes['slug'] = Self::makeSlugFromTitle($title, $article_id);
-     }
-   }
+  // /**
+  //  * Ajoute titre & slug,  lancé lorsque un titre est créé
+  //  * @param string  $title
+	//  *
+  //  */
+  //
+  //  public function setTitleAttribute($title){
+  //    $this->attributes['title'] = $title;
+  //    $article_id = (isset($this->attributes['id'])) ? $this->attributes['id'] : 0;
+  //    if (empty($this->attributes['slug'])){
+  //      $this->attributes['slug'] = Self::makeSlugFromTitle($title, $article_id);
+  //    }
+  //  }
 
 
    /**
@@ -134,34 +125,34 @@ class Article extends Model{
   }
 
 
-  /**
-   * Réécrit le parent id > parent slug
-   * @param int  $id
-	 *
-   */
+  // /**
+  //  * Réécrit le parent id > parent slug
+  //  * @param int  $id
+	//  *
+  //  */
+  //
+  // public function getParentIdAttribute($id){
+  //   $parent = Article::find($id);
+  //   return $parent->slug;
+  // }
 
-  public function getParentIdAttribute($id){
-    $parent = Article::find($id);
-    return $parent->slug;
-  }
-
-  /**
-   * Crée un slug unique
-   * @param string  $title
-   *
-   */
-
-  public function makeSlugFromTitle($title, $article_id = 0){
-    $slug = str_slug($title);
-    $count = Article::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->where('id', '!=' , $article_id)->count();
-    if($count){
-      $count += 1;
-      $new_slug = $slug.'-'.$count;
-    }else{
-      $new_slug = $slug;
-    }
-    return $new_slug;
-  }
+  // /**
+  //  * Crée un slug unique
+  //  * @param string  $title
+  //  *
+  //  */
+  //
+  // public function makeSlugFromTitle($title, $article_id = 0){
+  //   $slug = str_slug($title);
+  //   $count = Article::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->where('id', '!=' , $article_id)->count();
+  //   if($count){
+  //     $count += 1;
+  //     $new_slug = $slug.'-'.$count;
+  //   }else{
+  //     $new_slug = $slug;
+  //   }
+  //   return $new_slug;
+  // }
 
 
   /**
@@ -190,7 +181,7 @@ class Article extends Model{
    */
 
    public function getCategoriesAttribute() {
-    return $this->tags->lists('id')->all();
+    return $this->tags->pluck('id')->all();
  	}
 
   /**
@@ -200,6 +191,6 @@ class Article extends Model{
    */
 
     public function getTagListAttribute() {
-     return $this->tags->lists('id')->all();
+     return $this->tags->pluck('id')->all();
   	}
 }
