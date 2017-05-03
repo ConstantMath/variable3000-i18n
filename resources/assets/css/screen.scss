@@ -2,45 +2,32 @@
   #MODULES
 \*------------------------------------*/
 
+
 @import "modules/_reset.scss";
+@import "modules/_fonts.scss";
 @import "modules/_variables.scss";
+@import "modules/_grid.scss";
+@import "modules/_overwrite-floats.scss";
 @import "modules/_mixins.scss";
-@import "modules/_grid-settings.scss";
-@import "modules/_grid-mixins.scss";
-@import "modules/_grid-make.scss";
 @import "modules/_typography.scss";
-@import "modules/_forms.scss";
-@import "modules/_extends.scss";
 @import "modules/_global.scss";
-
-
-/*------------------------------------*\
-  #VENDOR
-\*------------------------------------*/
-
-@import "vendor/_flickity.scss";
-
 
 
 /*------------------------------------*\
   #PARTIALS
 \*------------------------------------*/
 
-// components
+
+@import "partials/components/_patternlab.scss";
 @import "partials/components/_buttons.scss";
-@import "partials/components/_images.scss";
-@import "partials/components/_header.scss";
-@import "partials/components/_hero.scss";
-@import "partials/components/_gallery.scss";
-@import "partials/components/_credits.scss";
-@import "partials/components/_infos.scss";
-// templates
-@import "partials/templates/_project.scss";
-@import "partials/templates/_infos.scss";
+@import "partials/components/_medias.scss";
 
 
+/*------------------------------------*\
+  #VENDOR
+\*------------------------------------*/
 
-
+// @import "vendor/_vendor.scss";
 
 
 
@@ -49,27 +36,14 @@
 \*------------------------------------*/
 
 
-html {
-  font-size: 100%;
-  @include respond-to-max(768px, $IE9: false) { // Stop at precise width, as we're talking about devices
-    -webkit-text-size-adjust: 100%; // Stops text scaling in iOS.
-  }
-}
-
 body {
-  @extend .font-body;
+  @extend %font-body;
   background: $body-color;
   color: $base-color;
   text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body,
-html {
-  height: 100%;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
+  -webkit-font-smoothing: subpixel-antialiased;
+  ::-moz-selection { background-color: rgba($base-color, .2); color: $base-color; }
+  ::selection { background-color: rgba($base-color, .2); color: $base-color; }
 }
 
 

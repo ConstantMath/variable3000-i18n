@@ -1,29 +1,22 @@
 {
-  "name": "starterlab-v2",
-  "version": "1.0.0",
-  "description": "![license](https://img.shields.io/github/license/pattern-lab/patternlab-php.svg) [![Packagist](https://img.shields.io/packagist/v/pattern-lab/edition-mustache-standard.svg)](https://packagist.org/packages/pattern-lab/edition-mustache-standard) [![Gitter](https://img.shields.io/gitter/room/pattern-lab/php.svg)](https://gitter.im/pattern-lab/php)",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prod": "gulp --production",
+    "dev": "gulp watch"
   },
-  "repository": {
-    "type": "git",
-    "url": ""
-  },
-  "author": "Variable",
-  "license": "ISC",
-  "homepage": "",
   "devDependencies": {
+    "bootstrap-sass": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
-    "gulp-beautify": "^2.0.0",
-    "gulp-concat": "^2.6.0",
+    "gulp-beautify": "^2.0.1",
+    "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.1.7",
     "gulp-livereload": "^3.8.1",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^2.3.2",
-    "gulp-shell": "^0.5.2",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-uglify": "^2.0.0"
-  }
+    "gulp-sass": "^3.1.0",
+    "gulp-shell": "^0.6.3",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.1.0"
+  },
+  "dependencies": {}
 }

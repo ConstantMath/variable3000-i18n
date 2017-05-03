@@ -1,87 +1,4 @@
 /*------------------------------------*\
-  #FONTS
-\*------------------------------------*/
-
-
-.font-body {
-  font-family: "FGrotesk-Regular", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  font-style: normal;
-  letter-spacing: .04em;
-}
-
-.font-body-italic {
-  font-family: "FGrotesk-Italic", Helvetica, Arial, sans-serif;
-  font-weight: normal;
-  font-style: italic;
-}
-
-.font-var {
-  font-family: "Times New Roman", Times, Georgia, serif;
-  font-weight: normal;
-  font-style: normal;
-  letter-spacing: .02em;
-  word-spacing: -.03em;
-}
-
-
-
-/*------------------------------------*\
-    #TYPESIZE/SCALE
-\*------------------------------------*/
-
-
-$font-size-xs      : 12px;
-$font-size-sm      : 14px;
-$font-size-md      : 20px;
-$font-size-lg      : 36px;
-
-//** Unit-less `line-height`
-$line-height          : 1.6;
-// for use in components like buttons, labels
-$line-height-form     : 1.428571429 !default;     // 20/14
-$font-res-ratio       : 1.2;                      // responsive ratio
-
-
-
-/*------------------------------------*\
-    #FONTSIZES
-\*------------------------------------*/
-
-
-
-$font-sizes-xs: (
-  null : ($font-size-xs / ($font-res-ratio * $font-res-ratio), $line-height),
-  sm   : ($font-size-xs / $font-res-ratio, $line-height),
-  md   : ($font-size-xs, $line-height),
-  lg   : ($font-size-xs * $font-res-ratio, $line-height),
-);
-
-$font-sizes-sm: (
-  null : ($font-size-sm / ($font-res-ratio * $font-res-ratio), $line-height),
-  sm   : ($font-size-sm / $font-res-ratio, $line-height),
-  md   : ($font-size-sm, $line-height),
-  lg   : ($font-size-sm * $font-res-ratio, $line-height),
-);
-
-$font-sizes-md: (
-  null : ($font-size-md / ($font-res-ratio * $font-res-ratio), $line-height),
-  sm   : ($font-size-md / $font-res-ratio, $line-height),
-  md   : ($font-size-md, $line-height),
-  lg   : ($font-size-md * $font-res-ratio, $line-height),
-);
-
-$font-sizes-lg: (
-  null : ($font-size-lg / ($font-res-ratio * $font-res-ratio), $line-height),
-  sm   : ($font-size-lg / $font-res-ratio, $line-height),
-  md   : ($font-size-lg, $line-height),
-  lg   : ($font-size-lg * $font-res-ratio, $line-height),
-);
-
-
-
-
-/*------------------------------------*\
     #CORE TYPOGRAPHY
 \*------------------------------------*/
 
@@ -92,37 +9,56 @@ h3,
 h4,
 h5,
 h6 {
-  @include font-size($font-sizes-md);
+  @extend %font-body;
+  @extend %font-size-md;
+  .body & {
+    display: table;
+    padding-bottom: .5em;
+    border-bottom: $border-width-sm solid $base-color;
+  }
+}
+
+h1,
+h2 {
+  .body & {
+    text-transform: uppercase;
+  }
 }
 
 p {
-  @include font-size($font-sizes-md);
-  margin-bottom: .5em;
+  @extend %font-body;
+  @extend %font-size-md;
+  .body & {
+    margin-bottom: 1em;
+  }
 }
 
-blockquote p {
-  @include font-size($font-sizes-md);
-  text-align: center;
+blockquote {
+  padding-left: 1em;
+  border-left: $border-width-sm solid $base-color;
+  margin-top: 1em;
+  p {
+    @extend %font-body-italic;
+  }
 }
 
 a {
   color: $action;
-	border-bottom: $border-width-sm solid $action;
-	padding-bottom: .1em;
   text-decoration: none;
-  @include link-active-styles {   // Mixin for interactions (hover,focus,active)
-    color: $base-color;
+  &:hover {
+    color: $action-response;
+    text-decoration: underline;
   }
 }
 
 em,
 i{
-  @extend .font-body-italic;
+  @extend %font-body-italic;
 }
 
 b,
 strong{
-  @extend .font-body;
+  @extend %font-body-bold;
 }
 
 em > b,
@@ -133,11 +69,43 @@ em > strong,
 strong > em,
 i > strong,
 strong > i {
-  @extend .font-body-italic;
+  @extend %font-body-bold-italic;
+}
+
+p + h2,
+ul + h2,
+ol + h2,
+blockquote + h2,
+p + h3,
+ul + h3,
+ol + h3,
+blockquote + h3,
+p + h4,
+ul + h4,
+ol + h4,
+blockquote + h4 {
+  margin-top: 2em;
+}
+h2,
+h3,
+h4,
+blockquote {
+  margin-bottom: 1em;
+}
+h2 + h3,
+h3 + h4 {
+  margin-top: 0;
+}
+
+.body ul,
+.body ol,
+.body .embed-container {
+  margin-bottom: $spacing-md;
+  @extend %font-size-md;
 }
 
 p sub, p sup {
-  font-size: 75%;
+  font-size: .75em;
   line-height: 0;
   position: relative;
   vertical-align: baseline;
@@ -152,7 +120,7 @@ p sub {
 }
 
 p small{
-  @include font-size($font-sizes-sm);
+  @extend %font-size-sm;
 }
 
 p abbr {
@@ -171,58 +139,142 @@ p cite {
 }
 
 p mark {
-  background-color: rgba($action, .2);
+  background-color: rgba($base-color, .6);
   color: $base-color;
 }
 
 p code,
-p samp {
-  font-family: monospace;
-  @include font-size($font-sizes-md);
-}
-
+p samp,
 pre {
   font-family: monospace;
-  @include font-size($font-sizes-md);
+  @extend %font-size-md;
 }
 
 hr {
   background: $base-color;
-  height: $border-width-md;
+  height: $border-width-sm;
   border: none;
-  margin: 0;
+  margin: $spacing-lg 0;
 }
 
 figcaption {
-  @include font-size($font-sizes-sm);
-  @include margin-top($spacing-xs-responsive);
+  @extend %font-size-sm;
+  margin-top: .5em;
 }
 
 ol, ul, pre, dl {
-  @include font-size($font-sizes-md);
+  @extend %font-size-md;
 }
-ul, ol {
-  @include nobullet;
+
+
+/*------------------------------------*\
+  #DEFINITIONS
+\*------------------------------------*/
+
+
+.body dl {
+  @extend %font-size-md;
+  dt {
+    @extend %font-body-bold;
+    padding-bottom: .3em;
+    &:first-of-type {
+      padding-top: .6em;
+      border-top: $border-width-sm solid $base-color;
+    }
+  }
+  dd{
+    padding-bottom: .6em;
+    margin-bottom: .6em;
+    border-bottom: $border-width-sm $base-color solid;
+  }
 }
-ul ul {
-  @include font-size($font-sizes-md);
+
+
+
+/*------------------------------------*\
+  #ORDERED
+\*------------------------------------*/
+
+
+.body ol {
+  counter-reset:li;
+  li {
+    position: relative;
+    padding-left: 1.2em;
+    @extend %font-size-md;
+    margin-bottom: .5em;
+    &:before {
+      content:counter(li);
+      counter-increment:li;
+      position: absolute;
+      left: 0;
+      @extend %font-body;
+      font-size: 1em;
+      color: rgba($base-color, .5);
+    }
+  }
+  ol > li:first-of-type {
+    margin-top: .5em;
+  }
 }
-ol ol {
-  @include font-size($font-sizes-md);
+
+
+/*------------------------------------*\
+  #UNORDERED
+\*------------------------------------*/
+
+
+.body ul {
+  li {
+    position: relative;
+    padding-left: 1.2em;
+    @extend %font-size-md;
+    margin-bottom: .5em;
+    &:before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      @extend %font-body;
+      font-size: 1em;
+    }
+  }
+  ol > li:first-of-type {
+    margin-top: .5em;
+  }
 }
-.text ul {
-  @include unordered; margin-left: 1em;
-}
-.text ol {
-  @include ordered; margin-left: 1em;
-}
-.text > ul,
-.text > ol {
-  margin-bottom: 1em;
-}
-li {
-  line-height: inherit;
-}
-input, textarea, label, select {
-  line-height: $line-height-form
+
+
+
+/*------------------------------------*\
+  #TABLE
+\*------------------------------------*/
+
+
+.body table {
+  width: 100%;
+  thead {
+    border-bottom: $border-width-md solid $base-color;
+  }
+  th {
+    text-align: left;
+    @extend %font-body-bold;
+  }
+  tbody tr {
+    &:nth-child(odd) {
+      background-color: rgba($base-color, .1);
+    }
+  }
+  tfoot {
+    border-top: $border-width-md solid $base-color;
+  }
+  th,
+  td {
+    padding: .5em 0;
+  }
+  @media (max-width: $screen-xs-max) {
+    th,
+    td {
+      display: block;
+    }
+  }
 }

@@ -19,16 +19,23 @@ class ArticlesController extends Controller
   /**
    * List all articles by parent
    *
-   * @param  string  $parent_slug
+   * @param  string  $parent_id
    * @return \Illuminate\Http\Response
    */
 
-  public function index($parent_slug = null){
-    $articles = Article::where('parent_id', 0)->orderBy('order', 'asc')->get();
-    // Ajoute les articles enfants à la collection
-    foreach ($articles as $a) {
-      $a->children = $a->children;
+  public function index($parent_id = 0){
+    if($parent_id > 0){
+      $articles = Article::where('id', $parent_id)
+                    ->orderBy('order', 'asc')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+    }else{
+      $articles = Article::where('parent_id', $parent_id)->get();
     }
+    // Map sub attributes
+    // foreach ($articles as $a) {
+    //   $a->children = Article::mapElements($a->children);
+    // }
     return view('admin/templates/home', compact('articles'));
   }
 
@@ -190,25 +197,27 @@ class ArticlesController extends Controller
    */
 
   public function reorder(Request $request, $id){
-    $parent_slug = $request->parent_slug;
+    $parent_id = $request->parent_id;
     $new_order   = $request->new_order;
-    if(!empty($parent_slug)){
-      $articles = (!empty($parent_slug))? Article::getByParent($parent_slug) : '' ;
+    // dd($id);
+    // dd($new_order);
+    if(!empty($parent_id)){
+      $articles = Article::where('parent_id', $parent_id)
+                    ->get();
     }
     if(isset($articles)){
       $v = 0;
-      // Loop dans les articles
+      // Articles loop
       foreach ($articles as $article) {
         if($v == $new_order){$v++;}
-        $a = Article::find($article->id);
-        if($a->id == $id){
+        if($article->id == $id){
           $n_order = $new_order;
         }else{
           $n_order = $v;
           $v++;
         }
-        $a->timestamps = false;
-        $a->update(['order' => $n_order]);
+        $article->timestamps = false;
+        $article->update(['order' => $n_order]);
       }
     }
     return response()->json([

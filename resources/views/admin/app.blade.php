@@ -26,18 +26,20 @@
       </div>
       <div class="collapse navbar-collapse" id="app-navbar-collapse">
         <!-- Left Side Of Navbar -->
-        {{-- <ul class="nav navbar-nav">
-          <li><a href="{{ url('/admin') }}">Dashboard</a></li>
-          <li><a href="{{ url('/admin/pages/articles') }}">Pages</a></li>
-        </ul> --}}
+        @if (Auth::check())
+        <ul class="nav navbar-nav">
+          <li><a href="{{ url('/en/admin/1/articles') }}">Projects</a></li>
+          <li><a href="{{ url('/en/admin/6/articles') }}">Static texts</a></li>
+        </ul>
+        @endif
         <!-- Right Side Of Navbar -->
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{ url('/admin/taxonomies') }}">Admin</a></li>
           {{-- <!-- Authentication Links --> --}}
           @if (Auth::guest())
             <li><a href="{{ url('/login') }}">Login</a></li>
             <li><a href="{{ url('/register') }}">Register</a></li>
           @else
+            <li><a href="{{ url('/admin/taxonomies') }}">Admin</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 {{ Auth::user()->name }} <span class="caret"></span>

@@ -14,7 +14,7 @@ Route::auth(
 // Articles : all
 Route::get('/admin', 'Admin\ArticlesController@index')->name('admin.index.all')->middleware('auth');
 // Articles : all by parent
-Route::get('/admin/{parent_slug}/articles', 'Admin\ArticlesController@index')->name('admin.index')->middleware('auth');
+Route::get('/admin/{parent_id}/articles', 'Admin\ArticlesController@index')->name('admin.index')->middleware('auth');
 // Articles : ressources
 Route::resource('/admin/articles', 'Admin\ArticlesController', ['except' => [
     'create',

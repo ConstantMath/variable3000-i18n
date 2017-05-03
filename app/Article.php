@@ -24,20 +24,31 @@ class Article extends Model{
 
 
   /**
-	 * Liste des articles par parent
-	 *
-	 * @param string  $parent_slug
-	 * @return Builder
-	 */
-	public static function getByParent($parent_slug){
-    $parent_id = Article::where('slug', $parent_slug)->pluck('id');
-    if(!empty($parent_id)){
-      $articles = Article::where('parent_id', $parent_id)->orderBy('order', 'asc')->get();
-    }else{
-      $articles = '';
-    }
+   * Add sub attributes to articles
+   *
+   * @param string  $parent_slug
+   * @return Builder
+   */
+
+  public static function mapElements($articles){
+    $articles->map(function ($item, $key) {
+      // events cat
+      $event_cat = $item->tags()->where('parent_id', 3)->first();
+      $item['event_cat'] = $event_cat['name'];
+      // exhibitors cat
+      $exhibitors_cat = $item->tags()->where('parent_id', 2)->first();
+      $item['exhibitors_cat'] = $exhibitors_cat['name'];
+      // places cat
+      $place_cat = $item->tags()->where('parent_id', 4)->first();
+      $item['place_cat'] = $place_cat['name'];
+      // Year
+      // $year = $item->tags()->where('parent_id', 1)->first();
+      // $item['year'] = $year['name'];
+      // Add main image
+      $item['media'] =  ($item->image_une)? Media::find($item->image_une) : null;
+    });
     return $articles;
-	}
+  }
 
 
   /**

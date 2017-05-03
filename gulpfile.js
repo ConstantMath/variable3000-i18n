@@ -16,19 +16,19 @@ var gulp = require('gulp'),
 ////
 
 gulp.task('front-js', function() {
-  gulp.src(['resources/assets/js/vendor/*.js', 'assets/js/*.js'])
+  gulp.src(['resources/assets/js/vendor/*.js', 'resources/assets/js/*.js'])
   // Concatène tous les fichiers js en 1
   .pipe(concat('scripts.js'))
   // Indente
   .pipe(beautify({indentSize: 2}))
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest("public/dist"))
+  // Sauve le fichier dans public/assets
+  .pipe(gulp.dest("public/assets"))
   // Renomme le fichier avec .min
   .pipe(rename({suffix: '.min'}))
   // Compresse le fichier
   .pipe(uglify())
-  // Sauve le fichier compressé dans public/dist
-  .pipe(gulp.dest('public/dist'))
+  // Sauve le fichier compressé dans public/assets
+  .pipe(gulp.dest('public/assets'))
 });
 
 gulp.task("front-sass", function(){
@@ -43,37 +43,14 @@ gulp.task("front-sass", function(){
   .pipe(autoprefixer())
   // Commente le code pour debug avec firebug
   .pipe(sourcemaps.write())
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest("public/dist"))
+  // Sauve le fichier dans public/assets
+  .pipe(gulp.dest("public/assets"))
   // Renomme le fichier avec .min
   .pipe(rename({suffix: '.min'}))
   // Compresse le fichier
   .pipe(cssmin())
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest('public/dist'))
-  .pipe(livereload())
-});
-
-gulp.task("front-css-font", function(){
-  gulp.src('resources/assets/fonts/*.scss')
-  .pipe(sourcemaps.init())
-  // Compile sass avec les commentaires dans la source
-  .pipe(sass({
-    style: 'expanded',
-    sourceComments: 'normal'
-  }))
-  // Ajoute des préfixes automatiquement
-  .pipe(autoprefixer())
-  // Commente le code pour debug avec firebug
-  .pipe(sourcemaps.write())
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest("public/dist"))
-  // Renomme le fichier avec .min
-  .pipe(rename({suffix: '.min'}))
-  // Compresse le fichier
-  .pipe(cssmin())
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest('public/dist'))
+  // Sauve le fichier dans public/assets
+  .pipe(gulp.dest('public/assets'))
   .pipe(livereload())
 });
 
@@ -86,7 +63,6 @@ gulp.task('front', function() {
   livereload.listen();
   gulp.watch('resources/assets/js/**/*.js',['front-js']);
   gulp.watch('resources/assets/css/**/*.scss',['front-sass']);
-  gulp.watch('resources/assets/fonts/*.scss',['front-css-font']);
 });
 
 
@@ -96,26 +72,26 @@ gulp.task('front', function() {
 
 gulp.task('admin-js', function() {
   gulp.src([
-    'resources/admin-assets/js/vendor/*.js',
-    'resources/admin-assets/js/libs/*.js', 
-    'resources/admin-assets/js/*.js'
+    'resources/assets/admin/js/vendor/*.js',
+    'resources/assets/admin/js/libs/*.js',
+    'resources/assets/admin/js/*.js'
   ])
   // Concatène tous les fichiers js en 1
   .pipe(concat('scripts.js'))
   // Indente
   .pipe(beautify({indentSize: 2}))
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest("public/dist/admin"))
+  // Sauve le fichier dans public/assets
+  .pipe(gulp.dest("public/assets/admin"))
   // Renomme le fichier avec .min
   .pipe(rename({suffix: '.min'}))
   // Compresse le fichier
   .pipe(uglify())
-  // Sauve le fichier compressé dans public/dist
-  .pipe(gulp.dest('public/dist/admin'))
+  // Sauve le fichier compressé dans public/assets
+  .pipe(gulp.dest('public/assets/admin'))
 });
 
 gulp.task("admin-sass", function(){
-  gulp.src('resources/admin-assets/css/*.scss')
+  gulp.src('resources/assets/admin/css/*.scss')
   .pipe(sourcemaps.init())
   // Compile sass avec les commentaires dans la source
   .pipe(sass({
@@ -126,20 +102,20 @@ gulp.task("admin-sass", function(){
   .pipe(autoprefixer())
   // Commente le code pour debug avec firebug
   .pipe(sourcemaps.write())
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest('public/dist/admin'))
+  // Sauve le fichier dans public/assets
+  .pipe(gulp.dest('public/assets/admin'))
   // Renomme le fichier avec .min
   .pipe(rename({suffix: '.min'}))
   // Compresse le fichier
   .pipe(cssmin())
-  // Sauve le fichier dans public/dist
-  .pipe(gulp.dest('public/dist/admin'))
+  // Sauve le fichier dans public/assets
+  .pipe(gulp.dest('public/assets/admin'))
   .pipe(livereload())
 });
 
 
 gulp.task('admin', function() {
   livereload.listen();
-  gulp.watch('resources/admin-assets/js/**/*.js',['admin-js']);
-  gulp.watch('resources/admin-assets/css/**/*.scss',['admin-sass']);
+  gulp.watch('resources/assets/admin/js/**/*.js',['admin-js']);
+  gulp.watch('resources/assets/admin/css/**/*.scss',['admin-sass']);
 });
