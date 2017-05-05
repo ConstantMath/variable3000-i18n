@@ -1,0 +1,26 @@
+// replace floats with inline-block
+%set-inline-block {
+  float: none; 
+  display: inline-block; 
+  margin: 0 -0.125em;
+  vertical-align: top;
+}
+
+@mixin replaceFloatloop($class) {
+  @for $i from 1 through 12 {
+    .col-#{$class}-#{$i} { @extend %set-inline-block; }
+  }
+}
+
+@each $size in xs, sm, md, lg {
+  @include replaceFloatloop($size);
+}
+
+// vertical align utility classes
+@mixin addVerticalAlign($pos) {
+  .vertical-align-#{$pos} { vertical-align: $pos }
+}
+
+@each $pos in top, middle, bottom {
+  @include addVerticalAlign($pos);
+}
