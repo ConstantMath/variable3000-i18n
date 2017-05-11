@@ -87,6 +87,7 @@ class ArticlesController extends Controller
       'title' => 'required',
     ]);
     $article = Article::findOrFail($id);
+    $request['created_at'] = Carbon::createFromFormat('d.m.Y', $request->input('created_at'))->format('Y-m-d H:i:s');
     // Validator check
     if ($validator->fails()) {
       return redirect()->route('admin.articles.edit', ['parent_slug' => $article->parent_id, 'id' => $id])->withErrors($validator);

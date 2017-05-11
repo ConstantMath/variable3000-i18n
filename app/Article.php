@@ -14,14 +14,15 @@ class Article extends Model{
   protected $table = 'articles';
 
   protected $fillable = [
-      'title',
-      'intro',
-      'text',
-      'slug',
-      'order',
-      'parent_id',
-      'published',
-      'image_une',
+    'created_at',
+    'title',
+    'intro',
+    'text',
+    'slug',
+    'order',
+    'parent_id',
+    'published',
+    'image_une',
   ];
 
   /**
@@ -210,4 +211,18 @@ class Article extends Model{
     public function getTagListAttribute() {
      return $this->tags->pluck('id')->all();
   	}
+
+    /**
+     * GET: Formate le champs 'created_at'
+     * @param date  $date
+  	 *
+     */
+
+    public function getCreatedAtAttribute($date){
+      if(empty($date)){
+        $date = Carbon::now('Europe/Paris');
+      }
+      $date = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d.m.Y');
+      return $date;
+    }    
 }
