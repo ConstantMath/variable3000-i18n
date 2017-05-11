@@ -47,6 +47,7 @@
   @endif
 </head>
 <body>
+  <div class="page @yield('page_class')">
   <!-- header -->
   <header class="primary-header">
     <h1 class="primary-title">
@@ -64,5 +65,6 @@
   @else
     <script src="{{ url('/dist/scripts.min.js') }}"></script>
   @endif
+  </div>
 </body>
 </html>

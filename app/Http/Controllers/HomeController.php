@@ -26,6 +26,10 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+      $data = array(
+        'page_class' => 'homepage',
+        'page_title' => 'Homepage',
+      );
       $articles = Article::where('parent_id', 1)
                     ->where('published', 1)
                     ->orderBy('order', 'asc')
@@ -34,6 +38,6 @@ class HomeController extends Controller
       foreach ($articles as $a) {
         $a->children = $a->children;
       }
-      return view('templates/home', compact('articles'));
+      return view('templates/home', compact('articles','data'));
     }
 }
