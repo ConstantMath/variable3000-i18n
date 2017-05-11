@@ -20,30 +20,41 @@ class MediasController extends Controller {
    * @return \Illuminate\Http\Response
    */
 
-  public function fileUpload(Request $request){
+   public function fileUpload(Request $request){
+     // Validator conditions
+     $validator = Validator::make($request->all(), [
+       'file' => 'required|mimes:jpeg,jpg,png,gif,pdf',
+     ]);
+     // Validator test
+     if ($validator->fails()) {
+       return response()->json([
+         'status' => 'error',
+         'error'    =>  'Error while uploading file, please check file format and size.'
+       ]);
+     }else{
+       $file = $request->file;
+       $file_name = $file->getClientOriginalName();
+       $orig_name = pathinfo($file_name, PATHINFO_FILENAME);
+       $extension = $file->getClientOriginalExtension();
+       $name = time() .'-'. str_slug($orig_name).'.'.$extension;
+       $mediapath = public_path().'/medias/';
+       // Store the file
+       //$path = $file->storeAs('public', $name);
+       if($extension == 'pdf'){
+         $file_url = '/medias/'.$name;
+       }else{
+         $file_url = '/imagecache/large/'.$name;
+       }
+       $file->move('medias', $name);
 
-    $validator = Validator::make($request->all(), [
-      'file' => 'required|image|mimes:jpeg,jpg,png,gif',
-    ]);
-
-    if ($validator->fails()) {
-      return response()->json([
-        'status' => 'error',
-        'msg'    =>  'Format de fichier non valide'
-      ]);
-    }else{
-      $file = $request->file;
-      $orig_name = $file->getClientOriginalName();
-      $name = time() .'-'. $orig_name;
-      $file->move('medias', $name);
-      // ajax return
-      return response()->json([
-        'status' => 'success',
-        'alt' => $orig_name,
-        'name' => '/medias/'.$name,
-      ]);
-    }
-  }
+       return response()->json([
+         'status'     => 'success',
+         'filename'   => $file_url,
+         'name'       => $file_name,
+         'extension' =>  $extension
+       ]);
+     }
+   }
 
   /**
    * Update the specified resource in storage.
