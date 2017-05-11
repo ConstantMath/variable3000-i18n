@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Article;
 use App\Media;
 use App\Tag;
+use DB;
 
 class ArticlesController extends Controller
 {
@@ -138,6 +139,10 @@ class ArticlesController extends Controller
     if ($validator->fails()) {
       return redirect()->route('admin.articles.create', ['parent_slug' => $parent_slug])->withErrors($validator);
     } else {
+      // Increment order of all articles
+      DB::table('articles')
+            ->where('parent_id', $request->input('parent_id'))
+            ->increment('order');
       // Store the article
       $article = Article::create($request->all());
       // ----- Taxonomies ----- //
@@ -193,33 +198,34 @@ class ArticlesController extends Controller
    * @return Json response
    */
 
-  public function reorder(Request $request, $id){
-    $parent_id = $request->parent_id;
-    $new_order   = $request->new_order;
-    // dd($id);
-    // dd($new_order);
-    if(!empty($parent_id)){
-      $articles = Article::where('parent_id', $parent_id)
+   public function reorder(Request $request, $id){
+     $parent_id   = $request->parent_id;
+     $new_order   = $request->new_order;
+     // Select articles by parent
+     if(!empty($parent_id)){
+       $articles = Article::where('parent_id', $parent_id)
+                    ->orderBy('order', 'asc')
                     ->get();
-    }
-    if(isset($articles)){
-      $v = 0;
-      // Articles loop
-      foreach ($articles as $article) {
-        if($v == $new_order){$v++;}
-        if($article->id == $id){
-          $n_order = $new_order;
-        }else{
-          $n_order = $v;
-          $v++;
-        }
-        $article->timestamps = false;
-        $article->update(['order' => $n_order]);
-      }
-    }
-    return response()->json([
-      'status' => 'success',
-    ]);
-  }
+     }
+     if(isset($articles)){
+       $v = 0;
+       // Articles loop
+       foreach ($articles as $article) {
+         if($v == $new_order){$v++;}
+         if($article->id == $id){
+           $n_order = $new_order;
+         }else{
+           $n_order = $v;
+           $v++;
+         }
+         $article->timestamps = false;
+         // Update article with new order
+         $article->update(['order' => $n_order]);
+       }
+     }
+     return response()->json([
+       'status' => 'success',
+     ]);
+   }
 
 }

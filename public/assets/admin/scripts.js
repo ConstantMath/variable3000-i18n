@@ -20674,13 +20674,13 @@ $(document).ready(function() {
         Sortable.create(el, {
             onUpdate: function(evt) {
                 var url = evt.item.getAttribute('url');
-                var parent_slug = evt.item.getAttribute('parent');
+                var parent_id = evt.item.getAttribute('parent_id');
                 var new_order = evt.newIndex;
-                if (url && parent_slug) {
+                if (url && parent_id) {
                     jQuery.ajax({
                         url: url,
                         data: {
-                            'parent_slug': parent_slug,
+                            'parent_id': parent_id,
                             'new_order': new_order,
                         },
                         type: 'POST',

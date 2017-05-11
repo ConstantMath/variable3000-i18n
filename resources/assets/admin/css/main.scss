@@ -460,3 +460,15 @@ textarea{
 .dropdown-menu>.active>a:hover {
   background-color: $blue;
 }
+
+/* ----- Auth ----- */
+.page-login{
+  .has-error{
+    .control-label{
+      color: $black;
+    }
+  }
+  .help-block strong{
+    font-weight: 400;
+  }
+}

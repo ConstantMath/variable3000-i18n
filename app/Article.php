@@ -109,21 +109,21 @@ class Article extends Model{
   //  }
 
 
-   /**
-    * Ajoute un attirbut order si absent
-    * @param string  $order
- 	 *
-    */
-
-    public function setOrderAttribute($order){
-      if(!isset($order) or $order == ''):
-        $parent_id = $this->attributes['parent_id'];
-        $increments = Article::where('parent_id', $parent_id)->increment('order');
-        $this->attributes['order'] = 0;
-      else:
-        $this->attributes['order'] = $order;
-      endif;
-    }
+  //  /**
+  //   * Ajoute un attirbut order si absent
+  //   * @param string  $order
+ // 	 *
+  //   */
+   //
+  //   public function setOrderAttribute($order){
+  //     if(!isset($order) or $order == ''):
+  //       $parent_id = $this->attributes['parent_id'];
+  //       $increments = Article::where('parent_id', $parent_id)->increment('order');
+  //       $this->attributes['order'] = 0;
+  //     else:
+  //       $this->attributes['order'] = $order;
+  //     endif;
+  //   }
 
 
   /**
@@ -224,5 +224,5 @@ class Article extends Model{
       }
       $date = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d.m.Y');
       return $date;
-    }    
+    }
 }

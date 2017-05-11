@@ -1,5 +1,5 @@
 {!! Form::hidden('parent_id', $article->parent->id) !!}
-{!! Form::hidden('order', (!empty($article->order))? $article->order : '') !!}
+{!! Form::hidden('order', (!empty($article->order))? $article->order : 0) !!}
 {!! Form::hidden('image_une', (!empty($article->image_une))? $article->image_une->id : '', ['id' => 'image_une']) !!}
 {!! Form::hidden('mediagallery[]', null, ['id' => 'input-mediagallery']) !!}
 
