@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use DB;
 use Exception;
 use Illuminate\Filesystem\Filesystem;
+use Schema;
 use Symfony\Component\Console\Helper\SymfonyQuestionHelper;
 
 class Variable3000Install extends Command
@@ -50,9 +51,9 @@ class Variable3000Install extends Command
      */
     public function handle(){
       $this->line('');
-      $this->line('                    °°');
       $this->line('');
-      $this->line('°°       Welcome to Variable 3000       °°');
+      $this->line('');
+      $this->line('         Welcome to Variable 3000');
       $this->line('');
       $this->line('                    °°');
       $this->line('');
@@ -81,6 +82,7 @@ class Variable3000Install extends Command
       if (!$contents) {
         throw new Exception('Error while writing credentials to .env file.');
       }
+      $this->line('Creating database…');
       // Set DB username and password in config
       $this->laravel['config']['database.connections.mysql.username'] = $dbUserName;
       $this->laravel['config']['database.connections.mysql.password'] = $dbPassword;
@@ -92,6 +94,22 @@ class Variable3000Install extends Command
       DB::unprepared('CREATE DATABASE IF NOT EXISTS `'.$dbName.'`');
       DB::unprepared('USE `'.$dbName.'`');
       DB::connection()->setDatabaseName($dbName);
+      $this->line('°°');
+      $this->line('Database created');
+      // Migration & seed
+      if (Schema::hasTable('migrations')) {
+          $this->error('A migrations table was found in database ['.$dbName.'], no migration and seed were done.');
+      } else {
+          $this->line('Migrating…');
+          $this->call('migrate');
+          $this->line('Seeding…');
+          $this->call('db:seed');
+      }
+      // Done
+      $this->line('');
+      $this->line('°°');
+      $this->line('Done, thank you.');
+      $this->line('');
     }
 
 
