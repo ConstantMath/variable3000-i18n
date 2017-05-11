@@ -35,7 +35,7 @@
 {{-- Texte --}}
 <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
   <label for="text">Text</label>
-  {!! Form::textarea('text', null, ['class' => 'form-control', 'id' => 'rich-editor', 'placeholder' => 'Text']) !!}
+  {!! Form::textarea('text', null, ['class' => 'form-control md-editor', 'placeholder' => 'Text']) !!}
 </div>
 
 <hr>
