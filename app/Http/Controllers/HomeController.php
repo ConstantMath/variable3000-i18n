@@ -26,8 +26,11 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-      $articles = Article::where('parent_id', 0)->orderBy('order', 'asc')->get();
-      // Ajoute les articles enfants à la collection
+      $articles = Article::where('parent_id', 1)
+                    ->where('published', 1)
+                    ->orderBy('order', 'asc')
+                    ->get();
+      // Add children to collection
       foreach ($articles as $a) {
         $a->children = $a->children;
       }
