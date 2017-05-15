@@ -1,16 +1,12 @@
-vendor/
-node_modules/
-
-# Laravel 5
-bootstrap/cache/
-.env.*.php
-.env.php
+/node_modules
+/public/hot
+/public/storage
+/public/media
+/storage/*.key
+/vendor
+/.idea
+/.vagrant
+Homestead.json
+Homestead.yaml
+npm-debug.log
 .env
-
-<<<<<<< HEAD
-=======
-# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
-.rocketeer/
-
->>>>>>> master
-public/medias
