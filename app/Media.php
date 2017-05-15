@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 class Media extends Model
 {
   protected $table = 'media';
 =======
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 use Intervention\Image\ImageManagerStatic as Image;
@@ -92,6 +95,9 @@ class Media extends Model{
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 =======
 >>>>>>> master

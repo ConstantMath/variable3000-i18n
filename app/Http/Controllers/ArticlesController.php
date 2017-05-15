@@ -1,6 +1,7 @@
 <?php
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 namespace App\Http\Controllers;
 
 use App\Article;
@@ -64,6 +65,8 @@ class ArticlesController extends Controller
 =======
 =======
 >>>>>>> master
+=======
+>>>>>>> master
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
@@ -98,6 +101,9 @@ class ArticlesController extends Controller{
     return view('templates/article', compact('article'));
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 =======
 >>>>>>> master

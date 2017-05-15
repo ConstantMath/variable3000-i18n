@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 class Article extends Model
 {
@@ -34,6 +35,8 @@ class Article extends Model
     return ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
   }
 =======
+=======
+>>>>>>> master
 =======
 >>>>>>> master
 use Carbon\Carbon;
@@ -259,6 +262,9 @@ class Article extends Model{
       return $date;
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 =======
 >>>>>>> master

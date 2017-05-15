@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 @extends('layouts.front')
 
 @section('content')
@@ -7,11 +8,16 @@
 =======
 =======
 >>>>>>> master
+=======
+>>>>>>> master
 @extends('admin.app')
 
 @section('content')
 <div class="container page-login">
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 =======
 >>>>>>> master

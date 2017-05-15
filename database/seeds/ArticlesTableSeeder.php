@@ -6,6 +6,7 @@ class ArticlesTableSeeder extends Seeder
 {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * Run the database seeds.
      *
@@ -26,6 +27,8 @@ class ArticlesTableSeeder extends Seeder
       }
     }
 =======
+=======
+>>>>>>> master
 =======
 >>>>>>> master
   /**
@@ -76,6 +79,9 @@ class ArticlesTableSeeder extends Seeder
 
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 =======
 >>>>>>> master
