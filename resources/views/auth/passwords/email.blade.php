@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @extends('layouts.app')
+=======
+@extends('admin.app')
+>>>>>>> master
 
 <!-- Main Content -->
 @section('content')
