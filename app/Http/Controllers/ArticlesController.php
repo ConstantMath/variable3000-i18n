@@ -1,5 +1,6 @@
 <?php
 <<<<<<< HEAD
+<<<<<<< HEAD
 namespace App\Http\Controllers;
 
 use App\Article;
@@ -61,6 +62,8 @@ class ArticlesController extends Controller
         //
     }
 =======
+=======
+>>>>>>> master
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
@@ -94,5 +97,8 @@ class ArticlesController extends Controller{
     // $text01 = Article::where('slug', 'about')->where('published', 1)->first();
     return view('templates/article', compact('article'));
   }
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 }

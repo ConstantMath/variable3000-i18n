@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 class ArticlesTableSeeder extends Seeder
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     /**
      * Run the database seeds.
      *
@@ -25,6 +26,8 @@ class ArticlesTableSeeder extends Seeder
       }
     }
 =======
+=======
+>>>>>>> master
   /**
   * Run the database seeds.
   *
@@ -72,5 +75,8 @@ class ArticlesTableSeeder extends Seeder
     ]);
 
   }
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 }

@@ -4,11 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 class Media extends Model
 {
   protected $table = 'media';
 =======
+=======
+>>>>>>> master
 use Intervention\Image\ImageManagerStatic as Image;
 use Config;
 
@@ -88,5 +91,8 @@ class Media extends Model{
       $media->delete();
     }
   }
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 }

@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 @extends('layouts.front')
+=======
+@extends('admin.app')
+>>>>>>> master
 =======
 @extends('admin.app')
 >>>>>>> master

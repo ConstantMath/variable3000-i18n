@@ -6,11 +6,14 @@
   },
   "devDependencies": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "gulp": "^3.9.1",
     "laravel-elixir": "^5.0.0",
     "bootstrap-sass": "^3.0.0"
   }
 =======
+=======
+>>>>>>> master
     "bootstrap-sass": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
@@ -25,5 +28,8 @@
     "gulp-uglify": "^2.1.0"
   },
   "dependencies": {}
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 }
