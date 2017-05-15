@@ -7,4 +7,10 @@ bootstrap/cache/
 .env.php
 .env
 
+<<<<<<< HEAD
+=======
+# Rocketeer PHP task runner and deployment package. https://github.com/rocketeers/rocketeer
+.rocketeer/
+
+>>>>>>> master
 public/medias
