@@ -261,6 +261,7 @@ textarea{
   color: $blue;
   &:hover,
   &:active,
+  &:active:hover,
   &:focus,
   &:active:focus{
     color: $blueLight;
