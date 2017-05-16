@@ -11,11 +11,13 @@ use App\Tag;
 use DB;
 use Carbon\Carbon;
 
-class ArticlesController extends Controller
+class ArticlesController extends AdminController
 {
 
   public function __construct(){
     $this->middleware('auth');
+    // Construct admin controller
+    parent::__construct();
   }
 
   /**

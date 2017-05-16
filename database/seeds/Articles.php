@@ -29,12 +29,11 @@ class Articles extends Seeder
       ]);
 
       DB::table('articles')->insert([
-        'title' => 'Texts',
-        'slug'  => 'texts',
+        'title' => 'Static texts',
+        'slug'  => 'static_texts',
         'published' => 1,
         'parent_id' => 0,
         'order' => 2,
-
       ]);
 
       for ($i=0; $i < 2; $i++) {
@@ -44,7 +43,7 @@ class Articles extends Seeder
           'slug' => str_slug($title),
           'intro' => $faker->text($maxNbChars = 300),
           'text' => $faker->text($maxNbChars = 800),
-          'parent_id' => 0,
+          'parent_id' => 1,
           'published' => 1,
           'order' => $i,
         ]);
@@ -56,7 +55,7 @@ class Articles extends Seeder
         'slug' => str_slug($title),
         'intro' => $faker->text($maxNbChars = 300),
         'text' => $faker->text($maxNbChars = 800),
-        'parent_id' => 1,
+        'parent_id' => 2,
         'published' => 1,
         'order' => 0,
       ]);
@@ -66,7 +65,7 @@ class Articles extends Seeder
         'title' => 'Contact',
         'slug'  => 'contact',
         'published' => 1,
-        'parent_id' => 2,
+        'parent_id' => 3,
         'order' => 0,
       ]);
 

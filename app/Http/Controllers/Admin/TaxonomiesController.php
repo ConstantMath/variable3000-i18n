@@ -8,10 +8,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tag;
 
-class TaxonomiesController extends Controller
+class TaxonomiesController extends AdminController
 {
   public function __construct(){
     $this->middleware('auth');
+    // Construct admin controller
+    parent::__construct();
   }
 
 

@@ -26,10 +26,11 @@
       </div>
       <div class="collapse navbar-collapse" id="app-navbar-collapse">
         <!-- Left Side Of Navbar -->
-        @if (Auth::check())
+        @if (Auth::check() && !empty($parent_articles))
         <ul class="nav navbar-nav">
-          <li><a href="{{ url('/admin/1/articles') }}">Projects</a></li>
-          <li><a href="{{ url('/admin/2/articles') }}">Static texts</a></li>
+          @foreach ($parent_articles as $parent_article)
+          <li><a href="{{ url('/admin/'.$parent_article->id.'/articles') }}">{{ $parent_article->title }}</a></li>
+          @endforeach
         </ul>
         @endif
         <!-- Right Side Of Navbar -->
