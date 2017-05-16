@@ -162,6 +162,17 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        // Debugbar
+        Barryvdh\Debugbar\ServiceProvider::class,
+        // Html Collective
+        Collective\Html\HtmlServiceProvider::class,
+        // Intervention image
+        Intervention\Image\ImageServiceProvider::class,
+        // Markdown
+        Buzzylab\Laradown\MarkdownServiceProvider::class,
+        // Sluggable
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -225,7 +236,13 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        // Html Collective
+        'Form' => 'Collective\Html\FormFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
+        // Intervention image
+        'Image' => Intervention\Image\Facades\Image::class,
+        // Markdown
+        'Markdown' => Buzzylab\Laradown\Facades\MarkdownFacade::class,
     ],
 
 ];
