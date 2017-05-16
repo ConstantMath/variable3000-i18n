@@ -45,7 +45,7 @@
                 {{ Auth::user()->name }} <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
               </ul>
             </li>
           @endif
@@ -53,6 +53,8 @@
       </div>
     </div>
   </nav>
+  {{-- Logout form since Lrvl 5.3 arr This prevents other web applications from logging your users out of your application. --}}
+  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
   <div class="main-container container-fluid">
     @yield('content')
   </div>
