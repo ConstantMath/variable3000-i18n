@@ -285,10 +285,6 @@ textarea{
   margin-right: 10px;
 }
 
-.help-block{
-  display: inline-block;
-  background-color: $yellow;
-}
 
 .delete-form{
   margin-bottom: $spacing-large;
@@ -460,14 +456,23 @@ textarea{
   background-color: $blue;
 }
 
-/* ----- Auth ----- */
-.page-login{
-  .has-error{
-    .control-label{
-      color: $black;
-    }
+/* ----- errors / help ----- */
+
+.has-error{
+  .control-label{
+    color: $blue;
   }
-  .help-block strong{
+  .form-control,
+  .form-control:focus{
+    border-color: $blue;
+    box-shadow: none;
+  }
+}
+
+.help-block{
+  background-color: white;
+  strong{
+    color: $greyDarker;
     font-weight: 400;
   }
 }
