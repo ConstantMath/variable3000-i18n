@@ -1,0 +1,32 @@
+.navbar{
+  margin-bottom: 0;
+}
+
+/* ----- Main navigation ----- */
+
+.navbar-default {
+  background-color: $white;
+  z-index: 9;
+  a{
+    color: $black;
+  }
+  .navbar-brand{
+    color: $black;
+    font-size: inherit;
+    font-weight: bold;
+  }
+  .navbar-nav > li > a{
+    color: $black;
+  }
+}
+
+
+/* ----- Sub navigation ----- */
+.navbar-sub{
+  a{
+    color: $black;
+  }
+  .nav > li:first-of-type{
+    margin-left: -15px;
+  }
+}

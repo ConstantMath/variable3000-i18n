@@ -57,7 +57,9 @@
   </nav>
   {{-- Logout form since Lrvl 5.3 arr This prevents other web applications from logging your users out of your application. --}}
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+  @yield('sub_navigation')
   @endif
+
   <div class="main-container container-fluid">
     @yield('content')
   </div>

@@ -19,6 +19,7 @@
 
 @import "includes/01-markdown-editor";
 @import "includes/02-auth";
+@import "includes/03-navigation";
 
 body{
   @extend .font-body;
@@ -48,31 +49,15 @@ h2{
 }
 
 .main-container{
+  margin-top: $spacing-large;
   margin-bottom: $spacing-large;
-}
-
-// Navigation
-
-.navbar-default {
-  background-color: $white;
-  z-index: 9;
-  a{
-    color: $black;
-  }
-  .navbar-brand{
-    color: $black;
-    font-size: inherit;
-    font-weight: bold;
-  }
-  .navbar-nav > li > a{
-    color: $black;
-  }
 }
 
 
 // Panneaux
 
 .panel{
+
   border: none;
   box-shadow: none;
   > .panel-heading{
