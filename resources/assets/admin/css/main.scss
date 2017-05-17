@@ -21,8 +21,7 @@
 @import "includes/02-auth";
 
 body{
-  font-family: 'Arial','Helvetica neue', sans-serif;
-  letter-spacing: 1px;
+  @extend .font-body;
   color: #222;
   background: #efefef;
 }
@@ -34,7 +33,7 @@ a:hover{
 }
 
 h2{
-  font-size: 14px;
+  font-size: $font-size-sm;
   margin-bottom: $spacing-regular;
   font-weight: bold;
 }

@@ -1,5 +1,5 @@
 @extends('admin.app')
-
+@section('page_class', 'reset_password')
 @section('content')
 <div class="container">
     <div class="row">

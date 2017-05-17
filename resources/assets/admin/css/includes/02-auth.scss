@@ -1,26 +1,74 @@
 /* ----- Login page ----- */
 
-.admin.login{
-  .panel-container{
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-  }
-  .panel{
-    @media(min-width:768px){
-      min-width: 520px;
-      margin-bottom: 0;
+.admin.login,
+.admin.reset_mail{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  .main-container{
+    width: 100%;
+    margin: 0;
+    @media (min-width: $screen-sm-min) {
+      width: 400px;
     }
   }
-  .form-group.submit{
+  .login__header{
+    padding: 1px;
+    background-color: $blue;
+  }
+  .login__title{
+    text-align: center;
+    font-size: $font-size-regular;
+    color: white;
+    font-weight: 400;
+    margin: 15px;
+  }
+  .login__body{
+    background-color: white;
+    padding: $spacing-regular;
+  }
+  .login__footer{
+    margin-top: $spacing-regular;
+  }
+  .login__btn{
+    text-align: right;
+  }
+  .login__password{
+    line-height: 40px;
+    a{
+      color: $greyDarker;
+      font-size: $font-size-xs;
+    }
+  }
+  label{
+    display: none;
+  }
+  .form-control{
+    height: 40px;
+  }
+  input[type='password'] {
+    border-top: 0;
+  }
+  .help-block + label + input[type='password'] {
+    border: 2px solid $greyDark;
+  }
+  .form-group{
     margin-bottom: 0;
+  }
+  .remember{
+    display: none;
+  }
+  .oizo{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 }
 
-.btn.bottom-link{
-  background-color: transparent;
-  padding-left: 0;
-  color: $greyDarker
+.admin.reset_password{
+  .panel{
+    margin-top: 10%;
+  }
 }

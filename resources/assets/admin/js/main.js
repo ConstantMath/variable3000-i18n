@@ -80,13 +80,14 @@ $(document).ready(function() {
   }
 
   // ----- Tags list select ----- //
-
-  $('.select2').select2({
-    placeholder : 'Select or add something',
-    tags        : true,
-    tokenSeparators: [","],
-    allowClear: true,
-  });
+  if ( $('.select2').length ){
+    $('.select2').select2({
+      placeholder : 'Select or add something',
+      tags        : true,
+      tokenSeparators: [","],
+      allowClear: true,
+    });
+  }
 
 
   // ----- Sortable indexes----- //
@@ -126,7 +127,13 @@ $(document).ready(function() {
 
   // ----- Color picker ----- //
 
-  $('.color-picker').colorpicker({ /*options...*/ });
+  if ( $('.sortable').length ){
+    $('.color-picker').colorpicker({ /*options...*/ });
+  }
 
-
+  $top = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
+  $left = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
+  $('.oizo').css("left", $left+"%");
+  $('.oizo').css("top", $top+"%");
+  $('.oizo').css("display", "block");
 });
