@@ -1,0 +1,26 @@
+/* ----- Login page ----- */
+
+.admin.login{
+  .panel-container{
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .panel{
+    @media(min-width:768px){
+      min-width: 520px;
+      margin-bottom: 0;
+    }
+  }
+  .form-group.submit{
+    margin-bottom: 0;
+  }
+}
+
+.btn.bottom-link{
+  background-color: transparent;
+  padding-left: 0;
+  color: $greyDarker
+}

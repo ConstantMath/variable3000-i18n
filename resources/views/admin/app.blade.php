@@ -10,7 +10,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link href="{{ url('/assets/admin/main.css') }}" rel="stylesheet">
 </head>
-<body>
+<body  class="admin @yield('page_class')">
+  @if (Auth::check())
   <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
       <div class="navbar-header">
@@ -26,7 +27,7 @@
       </div>
       <div class="collapse navbar-collapse" id="app-navbar-collapse">
         <!-- Left Side Of Navbar -->
-        @if (Auth::check() && !empty($parent_articles))
+        @if (!empty($parent_articles))
         <ul class="nav navbar-nav">
           @foreach ($parent_articles as $parent_article)
           <li><a href="{{ url('/admin/'.$parent_article->id.'/articles') }}">{{ $parent_article->title }}</a></li>
@@ -54,6 +55,7 @@
       </div>
     </div>
   </nav>
+  @endif
   {{-- Logout form since Lrvl 5.3 arr This prevents other web applications from logging your users out of your application. --}}
   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
   <div class="main-container container-fluid">
