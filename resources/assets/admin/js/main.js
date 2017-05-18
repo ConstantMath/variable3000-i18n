@@ -131,9 +131,12 @@ $(document).ready(function() {
     $('.color-picker').colorpicker({ /*options...*/ });
   }
 
-  $top = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
-  $left = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
-  $('.oizo').css("left", $left+"%");
-  $('.oizo').css("top", $top+"%");
-  $('.oizo').css("display", "block");
+  var top = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
+  var left = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
+  var n = Math.floor(Math.random() * (11 - 1 + 1)) + 1;
+  var oizo = $('#oizo');
+  oizo.css("left", left + "%");
+  oizo.css("top", top + "%");
+  oizo.css("display", "block");
+  oizo.html('<img src="/assets/admin/images/'+ n +'.png"/>');
 });

@@ -20,10 +20,9 @@
           <span class="sr-only">Toggle Navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
         </button>
         <!-- Branding Image -->
-        <a class="navbar-brand" href="{{ url('/admin') }}">Variable</a>
+        <a class="navbar-brand" href="{{ url('/admin') }}"><img src="{{ url('/assets/admin/images/7.png') }}" width="32" height="32" /></a>
       </div>
       <div class="collapse navbar-collapse" id="app-navbar-collapse">
         <!-- Left Side Of Navbar -->
@@ -48,6 +47,7 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+
               </ul>
             </li>
           @endif

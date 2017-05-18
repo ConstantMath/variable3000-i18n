@@ -36,5 +36,5 @@
     </div>
   </form>
 </div>
-<div class="oizo"><img src="{{ url('/assets/admin/images/N47-icon.png') }}" /></div>
+<div id="oizo" class="oizo"></div>
 @endsection
