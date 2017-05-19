@@ -203,7 +203,7 @@ class ArticlesController extends AdminController
       Media::deleteMediaFile($media->id);
     }
     $article -> delete();
-    session()->flash('flash_message', 'Article supprimé');
+    session()->flash('flash_message', 'Deleted');
     return redirect('admin');
     // return redirect()->action('Admin\ArticlesController@edit', ['id'=>$id]);
   }

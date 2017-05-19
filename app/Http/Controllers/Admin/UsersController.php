@@ -33,7 +33,11 @@ class UsersController extends AdminController
 
     public function create()
     {
-        //
+      $data = array(
+        'page_class' => 'users-edit',
+        'page_title' => 'Create a user',
+      );
+      return view('admin/templates/user-edit', compact('data'));
     }
 
 
@@ -44,9 +48,29 @@ class UsersController extends AdminController
      * @return \Illuminate\Http\Response
      */
 
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+      $validator = Validator::make($request->all(),
+        [
+          'name'                  => 'required|max:255|unique:users',
+          'email'                 => 'required|email|max:255|unique:users',
+          'password'              => 'required|min:6|max:20|confirmed',
+          'password_confirmation' => 'required|same:password',
+        ]
+      );
+
+      if($validator->fails()) {
+        $this->throwValidationException(
+          $request, $validator
+        );
+      }else{
+        $user =  User::create([
+          'name'       => $request->input('name'),
+          'email'      => $request->input('email'),
+          'password'   => bcrypt($request->input('password')),
+        ]);
+        $user->save();
+        return redirect()->route('users.index');
+      }
     }
 
 
@@ -73,11 +97,11 @@ class UsersController extends AdminController
     public function edit($id){
       $data = array(
         'page_class' => 'users-edit',
-        'page_title' => 'Users index',
+        'page_title' => 'Edit a user',
       );
       $user = User::findOrFail($id);
 
-      return view('admin/templates/users-edit', compact('user', 'data'));
+      return view('admin/templates/user-edit', compact('user', 'data'));
     }
 
 
@@ -132,8 +156,10 @@ class UsersController extends AdminController
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+      $user = User::findOrFail($id);
+      $user->delete();
+      session()->flash('flash_message', 'Deleted');
+      return redirect()->route('users.index');
     }
 }

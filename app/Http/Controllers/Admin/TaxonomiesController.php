@@ -143,7 +143,7 @@ class TaxonomiesController extends AdminController
 
     public function destroy($id){
       $taxonomy = Tag::findOrFail($id);
-      $taxonomy -> delete();
+      $taxonomy->delete();
       session()->flash('flash_message', 'Deleted');
       return redirect()->route('taxonomies.index');
     }
