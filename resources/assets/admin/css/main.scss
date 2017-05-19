@@ -39,7 +39,7 @@ h2{
   font-weight: bold;
 }
 
-/* ----- bootstrap hack ----- */
+/* ----- Bootstrap hack ----- */
 
 
 *{
@@ -54,7 +54,7 @@ h2{
 }
 
 
-// Panneaux
+/* ----- Panels ----- */
 
 .panel{
 
@@ -136,7 +136,7 @@ h2{
 }
 
 
-// Formulaires
+/* ----- Forms ----- */
 
 input,
 textarea{
@@ -315,13 +315,23 @@ textarea{
   }
 }
 
-/* ----- sortable ----- */
+/* ----- Sortable ----- */
 
 .sortable-ghost{
   opacity: 0;
 }
 
-/* ----- custom ----- */
+
+/* ----- Alerts ----- */
+
+.alert-success {
+  color: $black;
+  background-color: $yellowLight;
+  border: none;
+}
+
+
+/* ----- Custom ----- */
 
 .panel-heading{
   h3{
@@ -373,7 +383,8 @@ textarea{
   }
 }
 
-/* ----- modal ----- */
+
+/* ----- Modal ----- */
 
 .modal{
   .form-horizontal .form-group {
@@ -401,7 +412,6 @@ textarea{
 .modal-footer{
   text-align: left;
 }
-
 
 
 /* ----- Tags ----- */
@@ -460,5 +470,9 @@ textarea{
   strong{
     color: $greyDarker;
     font-weight: 400;
+  }
+  .create &{
+    display: inline-block;
+    background-color: $yellowLight;
   }
 }

@@ -1,5 +1,8 @@
 @extends('admin.app')
 
+@section('page_title', $data['page_title'])
+@section('page_class', $data['page_class'])
+
 @section('content')
 <div class="container page-index">
   <div class="row">

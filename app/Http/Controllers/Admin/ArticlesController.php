@@ -33,10 +33,18 @@ class ArticlesController extends AdminController
                     ->orderBy('order', 'asc')
                     ->orderBy('created_at', 'desc')
                     ->get();
+      $data = array(
+        'page_class' => 'index-'.$parent_id,
+        'page_title' => 'Index',
+      );
     }else{
       $articles = Article::where('parent_id', $parent_id)->get();
+      $data = array(
+        'page_class' => 'index',
+        'page_title' => 'Index',
+      );
     }
-    return view('admin/templates/home', compact('articles'));
+    return view('admin/templates/home', compact('articles', 'data'));
   }
 
 
@@ -49,13 +57,17 @@ class ArticlesController extends AdminController
 
   public function edit($parent_id, $id){
     $article = Article::findOrFail($id);
+    $data = array(
+      'page_class' => 'article',
+      'page_title' => 'Article edit',
+    );
     $article->parent = Article::where('id', $parent_id)->first();
     $article->medias = $article->medias;
     $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
     // Taxonomies for dropdown select
     $categories = Tag::where('parent_id', 1)->pluck('name', 'id')->prepend('', '');
     $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
-  	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags'));
+  	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags', 'data'));
   }
 
 
@@ -67,6 +79,10 @@ class ArticlesController extends AdminController
    */
 
   public function create($parent_slug){
+    $data = array(
+      'page_class' => 'article create',
+      'page_title' => 'Article create',
+    );
     $article = collect(new Article);
     $article->parent = Article::where('slug', $parent_slug)->first();
     // Taxonomies for dropdown select
@@ -74,7 +90,7 @@ class ArticlesController extends AdminController
     if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
     $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
     if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
-    return view('admin.templates.article-edit', compact('article', 'categories', 'tags'));
+    return view('admin.templates.article-edit', compact('article', 'categories', 'tags', 'data'));
   }
 
 

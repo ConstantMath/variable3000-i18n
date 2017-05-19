@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   @yield('meta')
-  <title>Admin variable</title>
+  <title>@yield('page_title')</title>
   <!-- Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link href="{{ url('/assets/admin/main.css') }}" rel="stylesheet">
@@ -22,14 +22,14 @@
           <span class="icon-bar"></span>
         </button>
         <!-- Branding Image -->
-        <a class="navbar-brand" href="{{ url('/admin') }}"><img src="{{ url('/assets/admin/images/7.png') }}" width="32" height="32" /></a>
+        <a class="navbar-brand" href="{{ url('/admin') }}"><img src="{{ url('/assets/admin/images/5.png') }}" width="32" height="32" /></a>
       </div>
       <div class="collapse navbar-collapse" id="app-navbar-collapse">
         <!-- Left Side Of Navbar -->
         @if (!empty($parent_articles))
         <ul class="nav navbar-nav">
           @foreach ($parent_articles as $parent_article)
-          <li><a href="{{ url('/admin/'.$parent_article->id.'/articles') }}">{{ $parent_article->title }}</a></li>
+          <li><a href="{{ url('/admin/'.$parent_article->id.'/articles') }}" class="@if($data['page_class'] == 'index-'.$parent_article->id) active @endif">{{ $parent_article->title }}</a></li>
           @endforeach
         </ul>
         @endif
@@ -40,14 +40,13 @@
             <li><a href="{{ url('/login') }}">Login</a></li>
             <li><a href="{{ url('/register') }}">Register</a></li>
           @else
-            <li><a href="{{ url('/admin/taxonomies') }}">Admin</a></li>
+            <li><a href="{{ url('/admin/taxonomies') }}" class="@if($data['page_class'] == 'index-taxonomies') active @endif">Admin</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                 {{ Auth::user()->name }} <span class="caret"></span>
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
-
               </ul>
             </li>
           @endif

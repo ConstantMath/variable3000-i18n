@@ -23,12 +23,16 @@ class TaxonomiesController extends AdminController
    * @return \Illuminate\Http\Response
    */
    public function index($parent_slug = null){
+     $data = array(
+       'page_class' => 'index-taxonomies',
+       'page_title' => 'Taxonomies',
+     );
      $taxonomies = Tag::where('parent_id', 0)->orderBy('name')->get();
      // Add children
      foreach ($taxonomies as $t) {
        $t->children = $t->children;
      }
-     return view('admin/templates/taxonomies', compact('taxonomies'));
+     return view('admin/templates/taxonomies', compact('taxonomies', 'data'));
    }
 
     /**
@@ -38,9 +42,13 @@ class TaxonomiesController extends AdminController
      */
 
     public function create($parent_id){
+      $data = array(
+        'page_class' => 'taxonomy create',
+        'page_title' => 'Taxonomy create',
+      );
       $taxonomy = collect(new Tag);
       $taxonomy->parent = Tag::where('id', $parent_id)->first();
-      return view('admin.templates.taxonomy-edit', compact('taxonomy'));
+      return view('admin.templates.taxonomy-edit', compact('taxonomy', 'data'));
     }
 
     /**
@@ -50,7 +58,6 @@ class TaxonomiesController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request){
-
       $validator = Validator::make($request->all(), [
         'name' => 'required',
       ]);
@@ -82,8 +89,12 @@ class TaxonomiesController extends AdminController
      * @return \Illuminate\Http\Response
      */
     public function edit($id){
+      $data = array(
+        'page_class' => 'taxonomy edit',
+        'page_title' => 'Taxonomy edit',
+      );
       $taxonomy = Tag::findOrFail($id);
-      return view('admin/templates/taxonomy-edit',  compact('taxonomy'));
+      return view('admin/templates/taxonomy-edit',  compact('taxonomy', 'data'));
     }
 
     /**

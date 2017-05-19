@@ -1,5 +1,8 @@
 @extends('admin.app')
 
+@section('page_title', $data['page_title'])
+@section('page_class', $data['page_class'])
+
 @section('content')
   <div class="row">
     <div class="col-sm-8 col-md-7 col-md-offset-1 col-lg-7 col-md-offset-2 article-edit">
