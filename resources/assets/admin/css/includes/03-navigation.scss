@@ -38,6 +38,9 @@
 
 /* ----- Sub navigation ----- */
 .navbar-sub{
+  ul{
+    padding-left: 53px;
+  }
   a{
     color: $black;
   }

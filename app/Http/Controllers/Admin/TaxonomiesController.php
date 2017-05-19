@@ -22,6 +22,7 @@ class TaxonomiesController extends AdminController
    *
    * @return \Illuminate\Http\Response
    */
+
    public function index($parent_slug = null){
      $data = array(
        'page_class' => 'index-taxonomies',
@@ -34,6 +35,7 @@ class TaxonomiesController extends AdminController
      }
      return view('admin/templates/taxonomies', compact('taxonomies', 'data'));
    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -51,12 +53,14 @@ class TaxonomiesController extends AdminController
       return view('admin.templates.taxonomy-edit', compact('taxonomy', 'data'));
     }
 
+
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request){
       $validator = Validator::make($request->all(), [
         'name' => 'required',
@@ -71,16 +75,19 @@ class TaxonomiesController extends AdminController
       }
     }
 
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     
     public function show($id)
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -88,6 +95,7 @@ class TaxonomiesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id){
       $data = array(
         'page_class' => 'taxonomy edit',
@@ -97,6 +105,7 @@ class TaxonomiesController extends AdminController
       return view('admin/templates/taxonomy-edit',  compact('taxonomy', 'data'));
     }
 
+
     /**
      * Update the specified resource in storage.
      *
@@ -104,6 +113,7 @@ class TaxonomiesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id){
       $validator = Validator::make($request->all(), [
         'name' => 'required',
@@ -119,12 +129,14 @@ class TaxonomiesController extends AdminController
       }
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id){
       $taxonomy = Tag::findOrFail($id);
       $taxonomy -> delete();

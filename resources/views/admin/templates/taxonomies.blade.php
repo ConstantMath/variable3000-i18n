@@ -1,5 +1,8 @@
 @extends('admin.app')
 
+@section('page_title', $data['page_title'])
+@section('page_class', $data['page_class'])
+
 @section('sub_navigation')
   @include('admin.components.admin-sub-navigation')
 @endsection
