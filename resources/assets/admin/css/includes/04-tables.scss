@@ -1,0 +1,44 @@
+
+/* ----- Tables ----- */
+
+.table{
+  >thead:first-child>tr:first-child>td{
+    vertical-align: middle;
+  }
+
+  >tbody>tr>td{
+    border-top: none;
+  }
+
+  .attribute{
+    text-align: right;
+    color: $greyDark;
+  }
+}
+
+tbody{
+  tr i{
+    color: $red;
+    font-size: 10px;
+    margin-right: $spacing-xsmall;
+  }
+
+  tr.published-1 i{
+    color: $green;
+  }
+}
+
+tfoot{
+  border-top: 1px solid #DDD;
+
+  >tr>td{
+    border-top: none
+  }
+}
+
+
+/* ----- Sortable ----- */
+
+.sortable-ghost{
+  opacity: 0;
+}

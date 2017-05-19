@@ -20,6 +20,8 @@
 @import "includes/01-markdown-editor";
 @import "includes/02-auth";
 @import "includes/03-navigation";
+@import "includes/04-tables";
+@import "includes/05-alerts";
 
 body{
   @extend .font-body;
@@ -79,13 +81,7 @@ h2{
   display: none;
 }
 
-.table>thead:first-child>tr:first-child>td{
-    vertical-align: middle;
-}
 
-.table>tbody>tr>td{
-  border-top: none;
-}
 
 .media-panel{
   .list-group-item{
@@ -315,21 +311,6 @@ textarea{
   }
 }
 
-/* ----- Sortable ----- */
-
-.sortable-ghost{
-  opacity: 0;
-}
-
-
-/* ----- Alerts ----- */
-
-.alert-success {
-  color: $black;
-  background-color: $yellowLight;
-  border: none;
-}
-
 
 /* ----- Custom ----- */
 
@@ -349,31 +330,6 @@ textarea{
 }
 
 
-.page-index{
-  table .attribute{
-    text-align: right;
-    color: $greyDark;
-  }
-  tbody{
-    tr i{
-      color: $red;
-      font-size: 10px;
-      margin-right: $spacing-xsmall;
-    }
-
-    tr.published-1 i{
-      color: $green;
-    }
-  }
-  tfoot{
-
-      border-top: 1px solid #DDD;
-
-    >tr>td{
-      border-top: none
-    }
-  }
-}
 
 .article-edit{
   .slug{
@@ -414,22 +370,6 @@ textarea{
 }
 
 
-/* ----- Tags ----- */
-
-.page-tags-index{
-  .panel{
-    margin-bottom: 1px;
-  }
-  .panel-heading{
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .table>tbody>tr>td{
-    padding: $spacing-xsmall $spacing-small;
-  }
-}
-
-
 /* ----- Tabs ----- */
 
 .nav-tabs{
@@ -450,29 +390,4 @@ textarea{
 .dropdown-menu>.active>a:focus,
 .dropdown-menu>.active>a:hover {
   background-color: $blue;
-}
-
-/* ----- errors / help ----- */
-
-.has-error{
-  .control-label{
-    color: $blue;
-  }
-  .form-control,
-  .form-control:focus{
-    border-color: $blue;
-    box-shadow: none;
-  }
-}
-
-.help-block{
-  background-color: white;
-  strong{
-    color: $greyDarker;
-    font-weight: 400;
-  }
-  .create &{
-    display: inline-block;
-    background-color: $yellowLight;
-  }
 }

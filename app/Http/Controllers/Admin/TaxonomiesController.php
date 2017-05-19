@@ -25,7 +25,7 @@ class TaxonomiesController extends AdminController
 
    public function index($parent_slug = null){
      $data = array(
-       'page_class' => 'index-taxonomies',
+       'page_class' => 'taxonomies-index',
        'page_title' => 'Taxonomies',
      );
      $taxonomies = Tag::where('parent_id', 0)->orderBy('name')->get();
@@ -45,7 +45,7 @@ class TaxonomiesController extends AdminController
 
     public function create($parent_id){
       $data = array(
-        'page_class' => 'taxonomy create',
+        'page_class' => 'taxonomies-edit',
         'page_title' => 'Taxonomy create',
       );
       $taxonomy = collect(new Tag);
@@ -67,7 +67,9 @@ class TaxonomiesController extends AdminController
       ]);
       // Validator check
       if ($validator->fails()) {
-        return redirect()->route('taxonomies.create', ['parent_id' => $request->parent_id])->withErrors($validator);
+        $this->throwValidationException(
+            $request, $validator
+        );
       } else {
         // Store the taxonomy
         $article = Tag::create($request->all());
@@ -98,7 +100,7 @@ class TaxonomiesController extends AdminController
 
     public function edit($id){
       $data = array(
-        'page_class' => 'taxonomy edit',
+        'page_class' => 'taxonomies-edit',
         'page_title' => 'Taxonomy edit',
       );
       $taxonomy = Tag::findOrFail($id);
@@ -121,7 +123,9 @@ class TaxonomiesController extends AdminController
       $taxonomy = Tag::findOrFail($id);
       // Validator check
       if ($validator->fails()) {
-        return redirect()->route('admin.taxonomies.edit', $id)->withErrors($validator);
+        $this->throwValidationException(
+            $request, $validator
+        );
       } else {
         // Update de l'article
         $taxonomy->update($request->all());
