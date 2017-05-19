@@ -44,7 +44,7 @@ class ArticlesController extends AdminController
         'page_title' => 'Index',
       );
     }
-    return view('admin/templates/home', compact('articles', 'data'));
+    return view('admin/templates/articles-index', compact('articles', 'data'));
   }
 
 

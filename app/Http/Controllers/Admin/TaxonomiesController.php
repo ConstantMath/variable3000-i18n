@@ -33,7 +33,7 @@ class TaxonomiesController extends AdminController
      foreach ($taxonomies as $t) {
        $t->children = $t->children;
      }
-     return view('admin/templates/taxonomies', compact('taxonomies', 'data'));
+     return view('admin/templates/taxonomies-index', compact('taxonomies', 'data'));
    }
 
 
@@ -82,7 +82,7 @@ class TaxonomiesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     
+
     public function show($id)
     {
         //
