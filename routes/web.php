@@ -68,11 +68,16 @@ Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => 
 ]]);
 
 
+// Users : ressources
+Route::resource('/admin/users', 'Admin\UsersController');
+
+
 /*
 |--------------------------------------------------------------------------
 | Front
 |--------------------------------------------------------------------------
 */
+
 // Homepage
 Route::get('/', 'HomeController@index');
 // Article : view
