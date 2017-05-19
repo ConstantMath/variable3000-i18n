@@ -42,8 +42,8 @@
       @if(isset($taxonomy->id))
         {!! Form::model($taxonomy, ['route' => ['taxonomies.destroy', $taxonomy->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
           {{ Form::hidden('_method', 'DELETE') }}
-          <input type="button" name="btn" value="Delete this taxonomy" id="submitBtn" data-toggle="modal" data-target="#confirm-submit" class="btn btn-default" />
-          <div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <a href="#" class="" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> delete</a>
+          <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -58,7 +58,6 @@
             </div>
           </div>
         {{ Form::close() }}
-
       @endif
     </div>
 
