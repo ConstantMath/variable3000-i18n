@@ -3,14 +3,7 @@
 @section('page_title', $data['page_title'])
 @section('page_class', $data['page_class'])
 
-@section('sub_navigation')
-  @include('admin.components.admin-sub-navigation')
-@endsection
-
 @section('content')
-<div class="container">
-  <div class="row">
-    <div class="col-md-10 col-md-offset-1">
       @include('admin.components.flash-message')
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -22,7 +15,10 @@
             <tbody>
               @if($users) @foreach ($users as $user)
               <tr>
-                <td>{!! link_to_route('users.edit', $user->name, $user->id, ['class' => '']) !!}</td>
+                <td>
+                  <i class="fa fa-smile-o"></i>
+                  {!! link_to_route('users.edit', $user->name, $user->id, ['class' => '']) !!}
+                </td>
                 <td class="attribute">{{ $user->email }}</td>
               </tr>
               @endforeach @endif
@@ -30,9 +26,6 @@
           </table>
         </div>
       </div>
-    </div>
-  </div>
-</div>
 @endsection
 
 @section('meta')

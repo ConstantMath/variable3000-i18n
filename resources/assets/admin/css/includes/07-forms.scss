@@ -1,0 +1,88 @@
+/* ----- Forms ----- */
+
+input,
+textarea{
+  &::placeholder{
+    color: $greyDark !important;
+  }
+}
+
+label{
+  font-size: $font-size-sm;
+}
+
+.main-form{
+  hr{
+    margin: $spacing-large -30px;
+    border-top: 2px solid $grey;
+  }
+  > .panel .panel{
+    border-bottom: 2px solid $greyDark;
+    .panel-heading{
+      padding: 0;
+      border-bottom: none;
+    }
+    .panel-body{
+      padding: 0;
+    }
+  }
+  .list-group{
+    margin-bottom: $spacing-small;
+  }
+  .list-group-item{
+    padding: 0;
+    border: none;
+  }
+
+}
+
+
+.form-group{
+  &:not(.submit) {
+    margin-bottom: 30px;
+  }
+}
+
+.tip{
+  font-weight: 400;
+  color: $greyDark;
+}
+
+.tip.created_at{
+  input{
+    display: none;
+    padding: $spacing-small;
+    height: 20px;
+    width: 200px;
+    text-align: right;
+    padding: 0;
+    margin: 0;
+  }
+  &.show{
+    span{
+      display: none;
+    }
+    input{
+      display: inline;
+    }
+  }
+}
+
+.form-control{
+  font-family: 'Helvetica neue', sans-serif;
+  letter-spacing: 1px;
+  border: 2px solid $greyDark;
+  box-shadow: none;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  &:focus {
+    border-color: $blue;
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
+.slug{
+  display: inline-block;
+  margin-top: 3px;
+  color: $greyDark;
+}

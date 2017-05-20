@@ -75,3 +75,9 @@
     color: $blue;
   }
 }
+
+.sortable{
+  tr:hover{
+    cursor: move;
+  }
+}

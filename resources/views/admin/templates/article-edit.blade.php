@@ -22,10 +22,8 @@
           @endif
         </div>
         <div class="panel-body">
-          <div class="col-sm-12">
-            <div id="validation"></div>
-            @include('admin.components.article-form', ['submitButtonText' => 'Save'])
-          </div>
+          <div id="validation"></div>
+          @include('admin.components.article-form', ['submitButtonText' => 'Save'])
         </div>
       </div>
       {!! Form::close() !!}

@@ -26,12 +26,17 @@ tbody{
   tr{
     border-bottom: 1px solid $grey;
   }
-  tr .fa{
+  .fa{
+    margin-right: $spacing-xsmall;
+
+  }
+  .published .fa{
+    position: relative;
+    top: -1px;
     color: $red;
     font-size: 10px;
-    margin-right: $spacing-xsmall;
   }
-  tr.published-1 i{
+  .published-1 .fa{
     color: $green;
   }
   a{

@@ -16,7 +16,7 @@
         <tbody id="index" class="sortable">
           @if($article->children)
             @foreach ($article->children as $child)
-            <tr class="published-{!! $child->published !!}" url="{{ URL::to('/') }}/admin/articles/{{$child->id}}/reorder" parent_id="{{$child->parent_id}}">
+            <tr class="published published-{!! $child->published !!}" url="{{ URL::to('/') }}/admin/articles/{{$child->id}}/reorder" parent_id="{{$child->parent_id}}">
             <td>
               <i class="fa fa-circle"></i>
               {!! link_to_route('admin.articles.edit', $child->title, [$child->parent_id, $child->id], ['class' => '']) !!}

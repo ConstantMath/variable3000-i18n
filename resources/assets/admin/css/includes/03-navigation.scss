@@ -82,9 +82,13 @@ ul ul{
 
 .nav-sidebar {
   margin-left: 10px;
+  margin-right: -21px;
   margin-bottom: 20px;
   li > a {
     padding: 5px 15px;
+  }
+  a:hover{
+    text-decoration: none;
   }
 }
 
@@ -100,5 +104,9 @@ ul ul{
   box-shadow: 0 6px 12px rgba(0,0,0,.175);
   > li > a{
     color: white;
+    &:hover{
+      background-color: $black;
+      color: $blue;
+    }
   }
 }
