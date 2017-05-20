@@ -6,7 +6,13 @@
     vertical-align: middle;
   }
 
-  >tbody>tr>td{
+  tbody>tr>td,
+  tbody>tr>th,
+  tfoot>tr>td,
+  tfoot>tr>th,
+  thead>tr>td,
+  thead>tr>th {
+    padding: 15px;
     border-top: none;
   }
 
@@ -17,20 +23,24 @@
 }
 
 tbody{
-  tr i{
+  tr{
+    border-bottom: 1px solid $grey;
+  }
+  tr .fa{
     color: $red;
     font-size: 10px;
     margin-right: $spacing-xsmall;
   }
-
   tr.published-1 i{
     color: $green;
+  }
+  a{
+    color: $black;
   }
 }
 
 tfoot{
   border-top: 1px solid #DDD;
-
   >tr>td{
     border-top: none
   }

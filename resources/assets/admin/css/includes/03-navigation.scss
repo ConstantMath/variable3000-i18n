@@ -1,3 +1,17 @@
+nav{
+  ul ul{
+    padding-left: 10px;
+  }
+  li,
+  a{
+    position: relative;
+    display: block;
+  }
+  a{
+    color: $black;
+  }
+}
+
 .navbar{
   margin-bottom: 0;
   .active{
@@ -7,12 +21,11 @@
 
 /* ----- Main navigation ----- */
 
-.navbar-brand{
+.navbar>.container-fluid .navbar-brand{
   padding: 10px;
 }
 
-.navbar-default {
-  background-color: $white;
+.nav-primary{
   z-index: 9;
   a{
     color: $black;
@@ -27,16 +40,16 @@
       background-color: $black;
     }
   }
-  .navbar-nav > li > a{
-    color: $black;
-    &.active{
-      color: $blue;
-    }
-  }
+
 }
 
 
 /* ----- Sub navigation ----- */
+
+ul ul{
+  list-style-type: none;
+}
+
 .navbar-sub{
   ul{
     padding-left: 53px;
@@ -46,5 +59,46 @@
   }
   .nav > li:first-of-type{
     margin-left: -15px;
+  }
+}
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: $screen-sm) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: $spacing-regular;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.nav-sidebar {
+  margin-left: 10px;
+  margin-bottom: 20px;
+  li > a {
+    padding: 5px 15px;
+  }
+}
+
+
+/* ----- Dropdown menu ----- */
+
+.dropdown-menu {
+  font-size: font-size-regular;
+  color: white;
+  background-color: $black;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  > li > a{
+    color: white;
   }
 }

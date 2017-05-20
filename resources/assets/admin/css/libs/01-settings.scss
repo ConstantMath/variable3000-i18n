@@ -13,7 +13,7 @@ $font-family-body:  "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 // ----- Typesize / scale ----- //
 
 $scale           : 1.414;
-$font-size-base  : 18px;
+$font-size-base  : 15px;
 
 $font-size-xs      : 10px;
 $font-size-sm      : $font-size-base / $scale;
@@ -52,7 +52,7 @@ $screen-xs:                  600px !default;
 $screen-xs-min:              $screen-xs !default;
 
 // Small screen / tablet
-$screen-sm:                  900px !default;
+$screen-sm:                  768px !default;
 $screen-sm-min:              $screen-sm !default;
 
 // Medium screen / desktop
