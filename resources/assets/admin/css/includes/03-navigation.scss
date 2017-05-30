@@ -27,9 +27,21 @@ nav{
 
 .nav-primary{
   z-index: 9;
-  background-color: $grey;
+  background-color: $black;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+  .nav>li>a:focus,
+  .nav>li>a:hover,
+  .nav>li>a:active,
+  .nav .open > a
+  {
+    color: $grey;
+    background-color: $black;
+  }
   a{
-    color: $black;
+    color: $white;
+    &:hover{
+      text-decoration: underline;
+    }
   }
   .navbar-toggle{
     border: 0;
@@ -41,7 +53,6 @@ nav{
       background-color: $black;
     }
   }
-
 }
 
 
@@ -70,7 +81,7 @@ ul ul{
 @media (min-width: $screen-sm) {
   .sidebar {
     position: fixed;
-    top: 51px;
+    top: 70px;
     bottom: 0;
     left: 0;
     z-index: 1000;

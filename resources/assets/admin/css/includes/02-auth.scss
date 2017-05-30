@@ -6,40 +6,16 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  .main-container{
+  .form__container{
     width: 100%;
-    margin: 0;
+    margin: -100px 0 0 0;
     @media (min-width: $screen-sm-min) {
-      width: 400px;
+      width: 350px;
     }
   }
-  .login__header{
-    padding: 1px;
-    background-color: $blue;
-  }
-  .login__title{
-    text-align: center;
-    font-size: $font-size-regular;
-    color: white;
-    font-weight: 400;
-    margin: 15px;
-  }
-  .login__body{
+  .form__body{
     background-color: white;
     padding: $spacing-regular;
-  }
-  .login__footer{
-    margin-top: $spacing-regular;
-  }
-  .login__btn{
-    text-align: right;
-  }
-  .login__password{
-    line-height: 40px;
-    a{
-      color: $greyDarker;
-      font-size: $font-size-xs;
-    }
   }
   label{
     display: none;
@@ -64,6 +40,32 @@
     position: absolute;
     top: 0;
     left: 0;
+  }
+}
+
+
+.login__header{
+  padding: 1px;
+  background-color: $blue;
+}
+.login__title{
+  text-align: center;
+  font-size: $font-size-regular;
+  color: white;
+  font-weight: 400;
+  margin: 15px;
+}
+.login__footer{
+  margin-top: $spacing-regular;
+}
+.login__btn{
+  text-align: right;
+}
+.login__password{
+  line-height: 40px;
+  a{
+    color: $greyDarker;
+    font-size: $font-size-xs;
   }
 }
 

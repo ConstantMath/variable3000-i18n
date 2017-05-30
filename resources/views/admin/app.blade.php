@@ -14,8 +14,12 @@
   @if (Auth::check())  @include('admin.components.navigation-primary') @endif
   <div class="container-fluid">
     <div class="row">
-      @if(Auth::check()) @include('admin.components.navigation-secondary') @endif
-      <main class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      @if(Auth::check())
+        @include('admin.components.navigation-secondary')
+        <main class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      @else
+        <main>
+      @endif
       @yield('content')
       </main>
     </div>

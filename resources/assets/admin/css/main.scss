@@ -24,6 +24,7 @@
 @import "includes/05-alerts";
 @import "includes/06-panels";
 @import "includes/07-forms";
+@import "includes/08-modal";
 
 
 body{
@@ -31,7 +32,7 @@ body{
   @extend .font-body;
   color: #222;
   background: #efefef;
-  padding-top: 70px;
+  padding-top: 90px;
 }
 
 .container-fluid {
@@ -189,36 +190,6 @@ h2{
     margin-top: 3px;
     color: $greyDark;
   }
-}
-
-
-/* ----- Modal ----- */
-
-.modal{
-  .form-horizontal .form-group {
-    margin-right: 0;
-    margin-left: 0;
-  }
-  figure img{
-    max-width: 100%;
-    height: auto;
-  }
-}
-
-.modal-content {
-  box-shadow: none;
-  border: none;
-}
-
-.modal-backdrop {
-  background-color: $grey;
-}
-.modal-backdrop.in{
-  opacity: 1;
-}
-
-.modal-footer{
-  text-align: left;
 }
 
 

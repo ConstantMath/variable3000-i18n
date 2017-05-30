@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <!-- Branding Image -->
-      <a class="navbar-brand" href="{{ url('/admin') }}"><img src="{{ url('/assets/admin/images/5.png') }}" width="32" height="32" /></a>
+      <a class="navbar-brand" href="{{ url('/admin') }}"><img src="{{ url('/assets/admin/images/branding.png') }}" width="32" height="32" /></a>
     </div>
     <div class="collapse navbar-collapse" id="app-navbar-collapse">
       <!-- Right Side Of Navbar -->

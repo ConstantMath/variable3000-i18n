@@ -3,9 +3,11 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-8 col-md-offset-2 form__container">
             <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
+                <header class="login__header">
+                  <h2 class="login__title">Reset Password</h2>
+                </header>
 
                 <div class="panel-body">
                     @if (session('status'))
@@ -16,7 +18,7 @@
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
                         {{ csrf_field() }}
-
+                      <div class="form__body">
                         <input type="hidden" name="token" value="{{ $token }}">
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -67,6 +69,7 @@
                                 </button>
                             </div>
                         </div>
+                      </div>
                     </form>
                 </div>
             </div>

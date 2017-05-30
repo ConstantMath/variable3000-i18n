@@ -3,13 +3,13 @@
 @section('page_class', 'login')
 
 @section('content')
-<div class="login__container">
+<div class="form__container">
   <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
     <header class="login__header">
       <h2 class="login__title">Variable 3000</h2>
     </header>
-    <div class="login__body">
+    <div class="login__body form__body">
         <label for="email" class="col-md-4 control-label">E-Mail Address</label>
         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
         @if ($errors->has('email'))
