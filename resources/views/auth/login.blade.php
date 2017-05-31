@@ -36,5 +36,7 @@
     </div>
   </form>
 </div>
-<div id="oizo" class="oizo"></div>
+<div id="fantom" class="fantom"></div>
 @endsection
+{{-- Movement  --}}
+{{-- http://jsfiddle.net/denisenepraunig/XEZEq/ --}}

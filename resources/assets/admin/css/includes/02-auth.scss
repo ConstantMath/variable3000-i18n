@@ -6,9 +6,11 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
+  padding-top: 0;
+  overflow: hidden;
   .form__container{
     width: 100%;
-    margin: -100px 0 0 0;
+    margin: 0;
     @media (min-width: $screen-sm-min) {
       width: 350px;
     }
@@ -35,11 +37,12 @@
   .remember{
     display: none;
   }
-  .oizo{
-    display: none;
+  .fantom{
     position: absolute;
-    top: 0;
-    left: 0;
+    width: 28px;
+    height: 22px;
+    background-image: url('images/fantom.gif');
+    background-repeat: no-repeat;
   }
 }
 
