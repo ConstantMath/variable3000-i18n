@@ -159,10 +159,10 @@ var div = document.getElementById('fantom');
 // screen limits
 var maxY = $(window).height();
 var maxX = $(window).width();
-// move around up and down
-var range = 20;
 var x = 0;
-var start_y = getRandomY(range, maxY-range);
+// move around up and down y
+var range = 20;
+var start_y = getRandomY(range, maxY - range);
 
 // calculate the sin-values from the angle variable
 // since the Math.sin function is working in radiants
@@ -180,20 +180,17 @@ function animate() {
   // always add to a fixed value
   // multiply with range, sine only delivers values between -1 and 1
   y = start_y + Math.sin(angle) * range;
-  // if you would increase or decrease the range value,
-  // then the movement would "swing up" or "swing down"
-  //range += 0.10;
   if(x > (maxX + 30)) {
-      x = 0;
-      start_y = getRandomY(range, maxY-range);
-      // increase range
-      range += 0.10;
+    maxY = $(window).height();
+    maxX = $(window).width();
+    x = 0;
+    // increase range
+    range += 0.10;
+    start_y = getRandomY(range, maxY - range);
   }
   div.style.top = y + "px";
   div.style.left = x + "px";
   setTimeout(animate, 33);
 }
-
-
 
 animate();
