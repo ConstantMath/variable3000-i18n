@@ -20727,7 +20727,6 @@ $(document).ready(function() {
 });
 
 
-
 // ----- Login fantom  ----- //
 
 function getRandomY(bottom, top) {

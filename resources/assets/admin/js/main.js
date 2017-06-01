@@ -147,7 +147,6 @@ $(document).ready(function() {
 });
 
 
-
 // ----- Login fantom  ----- //
 
 function getRandomY(bottom, top){
@@ -156,22 +155,26 @@ function getRandomY(bottom, top){
 
 // fantom
 var div = document.getElementById('fantom');
-// screen limits
-var maxY = $(window).height();
-var maxX = $(window).width();
-var x = 0;
-// move around up and down y
-var range = 20;
-var start_y = getRandomY(range, maxY - range);
 
-// calculate the sin-values from the angle variable
-// since the Math.sin function is working in radiants
-// we must increase the angle value in small steps -> anglespeed
-// the bigger the anglespeed value is, the wider the sine gets
-var angle = 0;
-var anglespeed = 0.10;
-// speed of the movement - 1 means it increases the x value
-var speed = 1;
+if (typeof(div) != 'undefined' && div != null){
+  // screen limits
+  var maxY = $(window).height();
+  var maxX = $(window).width();
+  var x = 0;
+  // move around up and down y
+  var range = 20;
+  var start_y = getRandomY(range, maxY - range);
+  // calculate the sin-values from the angle variable
+  // since the Math.sin function is working in radiants
+  // we must increase the angle value in small steps -> anglespeed
+  // the bigger the anglespeed value is, the wider the sine gets
+  var angle = 0;
+  var anglespeed = 0.10;
+  // speed of the movement - 1 means it increases the x value
+  var speed = 1;
+  // go
+  animate();
+}
 
 function animate() {
   x += speed;
@@ -192,5 +195,3 @@ function animate() {
   div.style.left = x + "px";
   setTimeout(animate, 33);
 }
-
-animate();
