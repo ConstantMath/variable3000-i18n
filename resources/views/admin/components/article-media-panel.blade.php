@@ -10,9 +10,9 @@
       @include('admin.components.molecules-media-li')
     </ul>
     @if (isset($article->id))
-      {!! Form::model($article, ['route' => ['admin.articles.addsinglemedia', $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data']) !!}
+      {!! Form::model($article, ['route' => ['admin.articles.addsinglemedia', $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else
-      {!! Form::model($article, ['route' => ['admin.articles.addsinglemedia', 'null'], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data']) !!}
+      {!! Form::model($article, ['route' => ['admin.articles.addsinglemedia', 'null'], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @endif
     {!! Form::hidden('column_name', $column_name) !!}
       {{-- Toujours placer le champs file avant le submit  --}}

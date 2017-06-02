@@ -15,7 +15,8 @@ class Media extends Model{
       'type',
       'background_color',
       'background_image',
-      'size',
+      'width',
+      'height',
   ];
 
 
