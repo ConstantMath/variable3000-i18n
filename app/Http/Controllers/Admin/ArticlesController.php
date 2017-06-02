@@ -183,7 +183,7 @@ class ArticlesController extends AdminController
           }
         }
       }
-      return redirect()->route('admin.index', ['parent_slug' => $parent_slug]);
+      return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
     }
   }
 
