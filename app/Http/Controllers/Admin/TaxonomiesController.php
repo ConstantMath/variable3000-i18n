@@ -28,7 +28,7 @@ class TaxonomiesController extends AdminController
        'page_class' => 'taxonomies-index',
        'page_title' => 'Taxonomies',
      );
-     $taxonomies = Tag::where('parent_id', 0)->orderBy('name')->get();
+     $taxonomies = Tag::where('parent_id', 0)->orderBy('order', 'asc')->get();
      // Add children
      foreach ($taxonomies as $t) {
        $t->children = $t->children;
@@ -147,4 +147,43 @@ class TaxonomiesController extends AdminController
       session()->flash('flash_message', 'Deleted');
       return redirect()->route('taxonomies.index');
     }
+
+
+    /**
+     * Reorder the taxonomies relative to parent
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return Json response
+     */
+
+     public function reorder(Request $request, $id){
+       $parent_id   = $request->parent_id;
+       $new_order   = $request->new_order;
+       // Select articles by parent
+       if(!empty($parent_id)){
+         $tags = Tag::where('parent_id', $parent_id)
+                      ->orderBy('order', 'asc')
+                      ->get();
+       }
+       if(isset($tags)){
+         $v = 0;
+         // Articles loop
+         foreach ($tags as $tag) {
+           if($v == $new_order){$v++;}
+           if($tag->id == $id){
+             $n_order = $new_order;
+           }else{
+             $n_order = $v;
+             $v++;
+           }
+           $tag->timestamps = false;
+           // Update with new order
+           $tag->update(['order' => $n_order]);
+         }
+       }
+       return response()->json([
+         'status' => 'success',
+       ]);
+     }
 }

@@ -38,7 +38,10 @@ class ArticlesController extends AdminController
         'page_title' => 'Index',
       );
     }else{
-      $articles = Article::where('parent_id', $parent_id)->get();
+      $articles = Article::where('parent_id', $parent_id)
+                    ->orderBy('order', 'asc')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
       $data = array(
         'page_class' => 'index',
         'page_title' => 'Index',
@@ -210,7 +213,7 @@ class ArticlesController extends AdminController
 
 
   /**
-   * Reorder the media relative to parent
+   * Reorder the articles relative to parent
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  int  $id

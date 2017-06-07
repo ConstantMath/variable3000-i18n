@@ -63,10 +63,9 @@ Route::post('/admin/fileupload', 'Admin\MediasController@fileUpload')->name('adm
 // Taxonomies : create
 Route::get('/admin/taxonomies/create/{parent_id}', 'Admin\TaxonomiesController@create')->name('taxonomies.create')->middleware('auth');
 // Taxonomies : ressources
-Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => [
-    'create',
-]]);
-
+Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => ['create']]);
+// Taxonomies : reorder
+Route::post('/admin/taxonomies/reorder/{id}', 'Admin\TaxonomiesController@reorder')->name('taxonomies.reorder');
 
 // Users : ressources
 Route::resource('/admin/users', 'Admin\UsersController');

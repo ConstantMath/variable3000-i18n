@@ -14,10 +14,10 @@
     </div>
     <div class="panel-body table-responsive">
       <table class="table">
-        <tbody>
+        <tbody id="index" class="sortable">
           @if($taxonomy->children)
             @foreach ($taxonomy->children as $child)
-          <tr>
+          <tr url="{{ route('taxonomies.reorder', $child->id) }}" parent_id="{{$child->parent_id}}">
             <td><i class="fa fa-tag" aria-hidden="true"></i> {!! link_to_route('taxonomies.edit', $child->name, $child->id, ['class' => '']) !!}</td>
           </tr>
           @endforeach @endif
