@@ -172,7 +172,8 @@ return [
         Buzzylab\Laradown\MarkdownServiceProvider::class,
         // Sluggable
         Cviebrock\EloquentSluggable\ServiceProvider::class,
-
+        // Translatable
+        Dimsav\Translatable\TranslatableServiceProvider::class,
 
         /*
          * Package Service Providers...
