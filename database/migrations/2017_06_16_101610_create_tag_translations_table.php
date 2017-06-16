@@ -19,7 +19,7 @@ class CreateTagTranslationsTable extends Migration
         $table->string('locale')->index();
         $table->string('name');
         $table->string('slug');
-        $table->unique(['tag_id','locale']);
+        $table->unique(['tag_id','locale', 'slug']);
         $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
       });
 
