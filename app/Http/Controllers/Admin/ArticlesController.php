@@ -10,14 +10,14 @@ use App\Media;
 use App\Tag;
 use DB;
 use Carbon\Carbon;
+use Lang;
 
 class ArticlesController extends AdminController
 {
 
   public function __construct(){
+    Lang::setLocale('en');
     $this->middleware('auth');
-    // Construct admin controller
-    parent::__construct();
   }
 
   /**
@@ -68,8 +68,8 @@ class ArticlesController extends AdminController
     $article->medias = $article->medias;
     $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
     // Taxonomies for dropdown select
-    $categories = Tag::where('parent_id', 1)->pluck('name', 'id')->prepend('', '');
-    $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
+    $categories = Tag::where('parent_id', 1)->get()->pluck('name', 'id')->prepend('', '');
+    $tags = Tag::where('parent_id', 2)->get()->pluck('name', 'id');
   	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags', 'data'));
   }
 
