@@ -4,13 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
-use Cviebrock\EloquentSluggable\Sluggable;
 
 
 class Article extends Model{
 
   use Mediatable;
-  use Sluggable;
   use \Dimsav\Translatable\Translatable;
   protected $table = 'articles';
 
@@ -35,20 +33,6 @@ class Article extends Model{
   }
 
 
-  /**
-   * Return the sluggable configuration array for this model.
-   *
-   * @return array
-   */
-
-  public function sluggable(){
-    return [
-      'slug' => [
-        'source' => 'title',
-                'onUpdate' => true
-      ]
-    ];
-  }
 
 
   /**

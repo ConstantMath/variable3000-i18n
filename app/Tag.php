@@ -7,7 +7,6 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Tag extends Model{
 
-  use Sluggable;
   use \Dimsav\Translatable\Translatable;
 
   protected $table = 'tags';
@@ -15,20 +14,6 @@ class Tag extends Model{
   protected $fillable = ['parent_id', 'order',];
 
 
-  /**
-   * Return the sluggable configuration array for this model.
-   *
-   * @return array
-   */
-
-  public function sluggable(){
-    return [
-      'slug' => [
-        'source' => 'name',
-                'onUpdate' => true
-      ]
-    ];
-  }
 
   /**
    * Retourne les articles associés au tag
