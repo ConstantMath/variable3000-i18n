@@ -5,36 +5,52 @@
 
 {{-- Is published ? --}}
 <div class="form-group">
+
   <div class="checkbox">
     <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
   </div>
 </div>
 
-{{-- Title --}}
-<div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-  <label for="title">Title</label>
-  {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!}
-  <span class="slug">
-    @if(isset($article->slug))
-    <i class="fa fa-link "></i>&nbsp;{{ $article->slug }}
-    @endif
-  </span>
-  {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
-</div>
 
-@if($article->parent->slug != 'pages')
-  {{-- Intro --}}
-  <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-    <label for="intro">Intro</label>
-    {!! Form::textarea('intro', null, ['class' => 'form-control', 'placeholder' => 'Intro', 'rows' => '5']) !!}
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    @foreach (config('translatable.locales') as $lang)
+      <li role="presentation" @if($loop->first) class="active" @endif"><a href="#tab{{ $lang }}" role="tab" id="dropdown{{ $lang }}-tab" data-toggle="tab" aria-controls="dropdown{{ $lang }}">{{ $lang }}</a></li>
+    @endforeach
+  </ul>
+  {{-- tabs --}}
+  <div class="tab-content">
+    {{-- lang panels  --}}
+    @foreach (config('translatable.locales') as $lang)
+    <div id="tab{{ $lang }}" class="tab-pane @if($lang == Lang::getLocale()) active @endif">
+      {{-- Title --}}
+      <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+        <label for="title">Title</label>
+        {!! Form::text($lang.'[title]', (!empty($article->id) && !empty($article->translate($lang)->title))? $article->translate($lang)->title : '', ['class' => 'form-control', 'placeholder' => 'Title']) !!}
+        <span class="slug">
+          @if(isset($article->slug))
+          <i class="fa fa-link "></i>&nbsp;{{ (!empty($article->id) && !empty( $article->translate($lang)->slug))? $article->translate($lang)->slug : '' }}
+          @endif
+        </span>
+        @if($lang == Lang::getLocale())
+          {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
+        @endif
+      </div>
+      {{-- Intro --}}
+      <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+        <label for="intro">Intro</label>
+        {!! Form::textarea($lang.'[intro]', (!empty($article->id) && !empty($article->translate($lang)->intro))? $article->translate($lang)->intro :'', ['class' => 'form-control md-editor', 'placeholder' => 'Infos', 'rows' => '5']) !!}
+      </div>
+      {{-- Text --}}
+      <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+        <label for="text">Text</label>
+        {!! Form::textarea($lang.'[text]', (!empty($article->id) && !empty($article->translate($lang)->text))? $article->translate($lang)->text : '', ['class' => 'form-control md-editor', 'id' => '', 'placeholder' => 'Text']) !!}
+      </div>
+    </div>
+    @endforeach
   </div>
-@endif
-
-{{-- Texte --}}
-<div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-  <label for="text">Text</label>
-  {!! Form::textarea('text', null, ['class' => 'form-control md-editor', 'placeholder' => 'Text']) !!}
 </div>
+
 
 <hr>
 
