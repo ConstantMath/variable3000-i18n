@@ -31,7 +31,7 @@ return array(
     */
 
     'paths' => array(
-        // public_path('storage/uploads/images'),
+        // public_path('upload'),
         public_path('medias')
     ),
 
@@ -57,7 +57,7 @@ return array(
         // 'large' => 'Intervention\Image\Templates\Large',
 
         'small' => function ($image) {
-          $image->resize(320, 320, function ($constraint) {
+          $image->resize(800, 800, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
           });
@@ -65,7 +65,7 @@ return array(
         },
 
         'medium' => function ($image) {
-          $image->resize(640, 640, function ($constraint) {
+          $image->resize(1200, 1200, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
           });
@@ -73,7 +73,7 @@ return array(
         },
 
         'large' => function ($image) {
-          $image->resize(1400, 1400, function ($constraint) {
+          $image->resize(1600, 1600, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
           });

@@ -1,0 +1,79 @@
+/* ----- Login page ----- */
+
+.admin.login,
+.admin.reset_mail{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding-top: 0;
+  overflow: hidden;
+  .form__container{
+    width: 100%;
+    margin: 0;
+    @media (min-width: $screen-sm-min) {
+      width: 350px;
+    }
+  }
+  .form__body{
+    background-color: white;
+    padding: $spacing-regular;
+  }
+  label{
+    display: none;
+  }
+  .form-control{
+    height: 40px;
+  }
+  input[type='password'] {
+    border-top: 0;
+  }
+  .help-block + label + input[type='password'] {
+    border: 2px solid $greyDark;
+  }
+  .form-group{
+    margin-bottom: 0;
+  }
+  .remember{
+    display: none;
+  }
+  .fantom{
+    position: absolute;
+    width: 28px;
+    height: 22px;
+    background-image: url('images/fantom.gif');
+    background-repeat: no-repeat;
+  }
+}
+
+
+.login__header{
+  padding: 1px;
+  background-color: $blue;
+}
+.login__title{
+  text-align: center;
+  font-size: $font-size-regular;
+  color: white;
+  font-weight: 400;
+  margin: 15px;
+}
+.login__footer{
+  margin-top: $spacing-regular;
+}
+.login__btn{
+  text-align: right;
+}
+.login__password{
+  line-height: 40px;
+  a{
+    color: $greyDarker;
+    font-size: $font-size-xs;
+  }
+}
+
+.admin.reset_password{
+  .panel{
+    margin-top: 10%;
+  }
+}

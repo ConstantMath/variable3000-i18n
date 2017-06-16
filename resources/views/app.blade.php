@@ -51,7 +51,7 @@
   <!-- header -->
   <header class="primary-header">
     <h1 class="primary-title">
-      <a href="{{ url('/') }}" id="infos-button">Variable 3000</a>
+      <a href="{{ url('/') }}" id="infos-button">Variable</a>
     </h1>
     <nav class="primary-nav">
       <ul class="nav">

@@ -1,0 +1,132 @@
+nav{
+  ul ul{
+    padding-left: 10px;
+  }
+  li,
+  a{
+    position: relative;
+    display: block;
+  }
+  a{
+    color: $black;
+  }
+}
+
+.navbar{
+  margin-bottom: 0;
+  .active{
+    color: $blue;
+  }
+}
+
+/* ----- Main navigation ----- */
+
+.navbar>.container-fluid .navbar-brand{
+  padding: 10px;
+  background-image: url('images/fantom.gif');
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  text-indent: -9999px;
+  width: 50px;
+  &:hover{
+    background-image: url('images/fantom_.gif');
+  }
+}
+
+.nav-primary{
+  z-index: 9;
+  background-color: $black;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .5);
+  .nav>li>a:focus,
+  .nav>li>a:hover,
+  .nav>li>a:active,
+  .nav .open > a
+  {
+    color: $grey;
+    background-color: $black;
+  }
+  a{
+    color: $white;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+  .navbar-toggle{
+    border: 0;
+    padding: 13px 10px;
+    &:hover{
+      background-color: $grey;
+    }
+    .icon-bar {
+      background-color: $black;
+    }
+  }
+}
+
+
+/* ----- Sub navigation ----- */
+
+ul ul{
+  list-style-type: none;
+}
+
+.navbar-sub{
+  ul{
+    padding-left: 53px;
+  }
+  a{
+    color: $black;
+  }
+  .nav > li:first-of-type{
+    margin-left: -15px;
+  }
+}
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: $screen-sm) {
+  .sidebar {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    display: block;
+    padding: $spacing-regular;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}
+
+.nav-sidebar {
+  margin-left: 10px;
+  margin-right: -21px;
+  margin-bottom: 20px;
+  li > a {
+    padding: 5px 15px;
+  }
+  a:hover{
+    text-decoration: none;
+  }
+}
+
+
+/* ----- Dropdown menu ----- */
+
+.dropdown-menu {
+  font-size: font-size-regular;
+  color: white;
+  background-color: $black;
+  border: none;
+  border-radius: 0;
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  > li > a{
+    color: white;
+    &:hover{
+      background-color: $black;
+      color: $blue;
+    }
+  }
+}

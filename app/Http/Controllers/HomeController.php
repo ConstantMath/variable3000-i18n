@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Media;
-use GrahamCampbell\Markdown\Facades\Markdown;
 
 class HomeController extends Controller
 {
@@ -20,6 +18,7 @@ class HomeController extends Controller
         //$this->middleware('auth');
     }
 
+
     /**
      * Show the homepage
      *
@@ -30,14 +29,10 @@ class HomeController extends Controller
         'page_class' => 'homepage',
         'page_title' => 'Homepage',
       );
-      $articles = Article::where('parent_id', 1)
+      $articles = Article::where('parent_id', 0)
                     ->where('published', 1)
                     ->orderBy('order', 'asc')
                     ->get();
-      // Add children to collection
-      foreach ($articles as $a) {
-        $a->children = $a->children;
-      }
       return view('templates/home', compact('articles','data'));
     }
 }

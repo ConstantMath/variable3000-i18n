@@ -8,10 +8,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tag;
 
-class TaxonomiesController extends Controller
+class TaxonomiesController extends AdminController
 {
   public function __construct(){
     $this->middleware('auth');
+    // Construct admin controller
+    parent::__construct();
   }
 
 
@@ -20,14 +22,20 @@ class TaxonomiesController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
    public function index($parent_slug = null){
-     $taxonomies = Tag::where('parent_id', 0)->orderBy('name')->get();
+     $data = array(
+       'page_class' => 'taxonomies-index',
+       'page_title' => 'Taxonomies',
+     );
+     $taxonomies = Tag::where('parent_id', 0)->orderBy('order', 'asc')->get();
      // Add children
      foreach ($taxonomies as $t) {
        $t->children = $t->children;
      }
-     return view('admin/templates/taxonomies', compact('taxonomies'));
+     return view('admin/templates/taxonomies-index', compact('taxonomies', 'data'));
    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -36,10 +44,15 @@ class TaxonomiesController extends Controller
      */
 
     public function create($parent_id){
+      $data = array(
+        'page_class' => 'taxonomies-edit',
+        'page_title' => 'Taxonomy create',
+      );
       $taxonomy = collect(new Tag);
       $taxonomy->parent = Tag::where('id', $parent_id)->first();
-      return view('admin.templates.taxonomy-edit', compact('taxonomy'));
+      return view('admin.templates.taxonomy-edit', compact('taxonomy', 'data'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -47,14 +60,16 @@ class TaxonomiesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
 
+    public function store(Request $request){
       $validator = Validator::make($request->all(), [
         'name' => 'required',
       ]);
       // Validator check
       if ($validator->fails()) {
-        return redirect()->route('taxonomies.create', ['parent_id' => $request->parent_id])->withErrors($validator);
+        $this->throwValidationException(
+            $request, $validator
+        );
       } else {
         // Store the taxonomy
         $article = Tag::create($request->all());
@@ -62,16 +77,19 @@ class TaxonomiesController extends Controller
       }
     }
 
+
     /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -79,10 +97,16 @@ class TaxonomiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id){
+      $data = array(
+        'page_class' => 'taxonomies-edit',
+        'page_title' => 'Taxonomy edit',
+      );
       $taxonomy = Tag::findOrFail($id);
-      return view('admin/templates/taxonomy-edit',  compact('taxonomy'));
+      return view('admin/templates/taxonomy-edit',  compact('taxonomy', 'data'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -91,6 +115,7 @@ class TaxonomiesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id){
       $validator = Validator::make($request->all(), [
         'name' => 'required',
@@ -98,7 +123,9 @@ class TaxonomiesController extends Controller
       $taxonomy = Tag::findOrFail($id);
       // Validator check
       if ($validator->fails()) {
-        return redirect()->route('admin.taxonomies.edit', $id)->withErrors($validator);
+        $this->throwValidationException(
+            $request, $validator
+        );
       } else {
         // Update de l'article
         $taxonomy->update($request->all());
@@ -106,16 +133,57 @@ class TaxonomiesController extends Controller
       }
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function destroy($id){
       $taxonomy = Tag::findOrFail($id);
-      $taxonomy -> delete();
+      $taxonomy->delete();
       session()->flash('flash_message', 'Deleted');
       return redirect()->route('taxonomies.index');
     }
+
+
+    /**
+     * Reorder the taxonomies relative to parent
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return Json response
+     */
+
+     public function reorder(Request $request, $id){
+       $parent_id   = $request->parent_id;
+       $new_order   = $request->new_order;
+       // Select articles by parent
+       if(!empty($parent_id)){
+         $tags = Tag::where('parent_id', $parent_id)
+                      ->orderBy('order', 'asc')
+                      ->get();
+       }
+       if(isset($tags)){
+         $v = 0;
+         // Articles loop
+         foreach ($tags as $tag) {
+           if($v == $new_order){$v++;}
+           if($tag->id == $id){
+             $n_order = $new_order;
+           }else{
+             $n_order = $v;
+             $v++;
+           }
+           $tag->timestamps = false;
+           // Update with new order
+           $tag->update(['order' => $n_order]);
+         }
+       }
+       return response()->json([
+         'status' => 'success',
+       ]);
+     }
 }

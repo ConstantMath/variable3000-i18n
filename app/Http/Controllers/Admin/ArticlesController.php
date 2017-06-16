@@ -9,12 +9,15 @@ use App\Article;
 use App\Media;
 use App\Tag;
 use DB;
+use Carbon\Carbon;
 
-class ArticlesController extends Controller
+class ArticlesController extends AdminController
 {
 
   public function __construct(){
     $this->middleware('auth');
+    // Construct admin controller
+    parent::__construct();
   }
 
   /**
@@ -30,10 +33,21 @@ class ArticlesController extends Controller
                     ->orderBy('order', 'asc')
                     ->orderBy('created_at', 'desc')
                     ->get();
+      $data = array(
+        'page_class' => 'index-'.$parent_id,
+        'page_title' => 'Index',
+      );
     }else{
-      $articles = Article::where('parent_id', $parent_id)->get();
+      $articles = Article::where('parent_id', $parent_id)
+                    ->orderBy('order', 'asc')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+      $data = array(
+        'page_class' => 'index',
+        'page_title' => 'Index',
+      );
     }
-    return view('admin/templates/home', compact('articles'));
+    return view('admin/templates/articles-index', compact('articles', 'data'));
   }
 
 
@@ -46,13 +60,17 @@ class ArticlesController extends Controller
 
   public function edit($parent_id, $id){
     $article = Article::findOrFail($id);
+    $data = array(
+      'page_class' => 'article',
+      'page_title' => 'Article edit',
+    );
     $article->parent = Article::where('id', $parent_id)->first();
     $article->medias = $article->medias;
     $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
     // Taxonomies for dropdown select
     $categories = Tag::where('parent_id', 1)->pluck('name', 'id')->prepend('', '');
     $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
-  	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags'));
+  	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags', 'data'));
   }
 
 
@@ -64,6 +82,10 @@ class ArticlesController extends Controller
    */
 
   public function create($parent_slug){
+    $data = array(
+      'page_class' => 'article create',
+      'page_title' => 'Article create',
+    );
     $article = collect(new Article);
     $article->parent = Article::where('slug', $parent_slug)->first();
     // Taxonomies for dropdown select
@@ -71,7 +93,7 @@ class ArticlesController extends Controller
     if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
     $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
     if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
-    return view('admin.templates.article-edit', compact('article', 'categories', 'tags'));
+    return view('admin.templates.article-edit', compact('article', 'categories', 'tags', 'data'));
   }
 
 
@@ -164,7 +186,7 @@ class ArticlesController extends Controller
           }
         }
       }
-      return redirect()->route('admin.index', ['parent_slug' => $parent_slug]);
+      return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
     }
   }
 
@@ -184,14 +206,14 @@ class ArticlesController extends Controller
       Media::deleteMediaFile($media->id);
     }
     $article -> delete();
-    session()->flash('flash_message', 'Article supprimé');
+    session()->flash('flash_message', 'Deleted');
     return redirect('admin');
     // return redirect()->action('Admin\ArticlesController@edit', ['id'=>$id]);
   }
 
 
   /**
-   * Reorder the media relative to parent
+   * Reorder the articles relative to parent
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  int  $id

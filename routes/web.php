@@ -1,9 +1,29 @@
 <?php
 
-// auth
-Route::auth(
-  ['except' => ['register']] // désactive register
-);
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Auth
+|--------------------------------------------------------------------------
+*/
+
+Auth::routes();
+
+
+// Route::auth(
+//   ['except' => ['register']] // désactive register
+// );
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +63,12 @@ Route::post('/admin/fileupload', 'Admin\MediasController@fileUpload')->name('adm
 // Taxonomies : create
 Route::get('/admin/taxonomies/create/{parent_id}', 'Admin\TaxonomiesController@create')->name('taxonomies.create')->middleware('auth');
 // Taxonomies : ressources
-Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => [
-    'create',
-]]);
+Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => ['create']]);
+// Taxonomies : reorder
+Route::post('/admin/taxonomies/reorder/{id}', 'Admin\TaxonomiesController@reorder')->name('taxonomies.reorder');
+
+// Users : ressources
+Route::resource('/admin/users', 'Admin\UsersController');
 
 
 /*
@@ -53,6 +76,7 @@ Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => 
 | Front
 |--------------------------------------------------------------------------
 */
+
 // Homepage
 Route::get('/', 'HomeController@index');
 // Article : view

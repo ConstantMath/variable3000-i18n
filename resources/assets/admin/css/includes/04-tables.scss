@@ -1,0 +1,59 @@
+
+/* ----- Tables ----- */
+
+.table{
+  >thead:first-child>tr:first-child>td{
+    vertical-align: middle;
+  }
+
+  tbody>tr>td,
+  tbody>tr>th,
+  tfoot>tr>td,
+  tfoot>tr>th,
+  thead>tr>td,
+  thead>tr>th {
+    padding: 15px;
+    border-top: none;
+  }
+
+  .attribute{
+    text-align: right;
+    color: $greyDark;
+  }
+}
+
+tbody{
+  tr{
+    border-bottom: 1px solid $grey;
+  }
+  .fa{
+    margin-right: $spacing-xsmall;
+
+  }
+  .published .fa{
+    position: relative;
+    top: -1px;
+    color: $red;
+    font-size: 10px;
+  }
+  .published-1 .fa{
+    color: $green;
+  }
+  a{
+    color: $black;
+  }
+}
+
+tfoot{
+  border-top: 1px solid #DDD;
+  >tr>td{
+    border-top: none
+  }
+}
+
+
+/* ----- Sortable ----- */
+
+.sortable-ghost{
+  opacity: 0;
+}

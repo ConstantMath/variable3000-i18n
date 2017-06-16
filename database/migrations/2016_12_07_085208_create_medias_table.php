@@ -16,11 +16,11 @@ class CreateMediasTable extends Migration
         $table->increments('id');
         $table->string('type');
         $table->string('name');
-        $table->string('alt');
-        $table->text('description');
-        $table->integer('mediatable_id');
-        $table->integer('order');
-        $table->string('mediatable_type');
+        $table->string('alt')->nullable();
+        $table->text('description')->nullable();
+        $table->integer('mediatable_id')->nullable();
+        $table->integer('order')->nullable();
+        $table->string('mediatable_type')->nullable();
         $table->timestamps();
       });
     }

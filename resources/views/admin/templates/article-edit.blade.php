@@ -1,8 +1,11 @@
 @extends('admin.app')
 
+@section('page_title', $data['page_title'])
+@section('page_class', $data['page_class'])
+
 @section('content')
   <div class="row">
-    <div class="col-sm-8 col-md-7 col-md-offset-1 col-lg-7 col-md-offset-2 article-edit">
+    <div class="col-sm-12 col-md-9">
       @if(isset($article->id))
         {!! Form::model($article, ['route' => ['articles.update', $article->id], 'method' => 'put', 'class' => 'panel main-form', 'id' => 'main-form', 'files' => true]) !!}
       @else
@@ -19,10 +22,8 @@
           @endif
         </div>
         <div class="panel-body">
-          <div class="col-sm-12">
-            <div id="validation"></div>
-            @include('admin.components.article-form', ['submitButtonText' => 'Save'])
-          </div>
+          <div id="validation"></div>
+          @include('admin.components.article-form', ['submitButtonText' => 'Save'])
         </div>
       </div>
       {!! Form::close() !!}
@@ -37,7 +38,7 @@
         </ul>
       @endif
     </div>
-    <div class="col-sm-4 col-md-3 col-lg-3">
+    <div class="col-sm-12 col-md-3">
       @include('admin.components.article-aside')
     </div>
   </div>

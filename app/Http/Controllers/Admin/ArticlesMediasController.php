@@ -31,6 +31,7 @@ class ArticlesMediasController extends Controller
     $file        = $request->file('image');
     $column_name = $request->input('column_name');
     if($file){
+      list($width, $height) = getimagesize($file);
       // Upload
       $media_file = Media::uploadMediaFile($file);
       // Media store
@@ -38,6 +39,8 @@ class ArticlesMediasController extends Controller
       $media->name = $media_file['name'];
       $media->alt  = $media_file['orig_name'];
       $media->type = $file->getClientOriginalExtension();
+      $media->width = $width;
+      $media->height = $height;
       $media->save();
       // Si article déjà créé (ID) > update de l'article
       if(!empty($id) && $id != 'null'){
@@ -102,6 +105,7 @@ class ArticlesMediasController extends Controller
     $file = $request->file('image');
 
     if($file){
+      list($width, $height) = getimagesize($file);
       // Upload
       $media_file = Media::uploadMediaFile($file);
       // Media store
@@ -109,7 +113,9 @@ class ArticlesMediasController extends Controller
       $media->name = $media_file['name'];
       $media->alt  = $media_file['orig_name'];
       $media->type = $file->getClientOriginalExtension();
-
+      $media->width = $width;
+      $media->height = $height;
+      // Link media to article
       if(isset($article)){
         // retourne le dernier media
         $next_media_order = $article->lastMediaId();

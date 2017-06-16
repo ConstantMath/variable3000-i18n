@@ -12,6 +12,7 @@ class Tag extends Model{
     'name',
     'slug',
     'parent_id',
+    'order',
   ];
 
   /**
@@ -97,7 +98,7 @@ class Tag extends Model{
    *
    */
   public function children(){
-    return $this->hasMany('App\tag', 'parent_id')->orderBy('name');
+    return $this->hasMany('App\tag', 'parent_id')->orderBy('order', 'asc');
   }
 
 

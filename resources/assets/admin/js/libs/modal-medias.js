@@ -21,6 +21,7 @@ $('#modal-media-edit').on('show.bs.modal', function (event) {
   $("#modalButton").off('click');
 })
 
+
 $('#modal-media-edit-custom').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget);
   var article_id = button.data('article_id');

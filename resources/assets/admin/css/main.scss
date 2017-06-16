@@ -18,29 +18,43 @@
 @import "libs/99-fontawesome/screen-reader";
 
 @import "includes/01-markdown-editor";
+@import "includes/02-auth";
+@import "includes/03-navigation";
+@import "includes/04-tables";
+@import "includes/05-alerts";
+@import "includes/06-panels";
+@import "includes/07-forms";
+@import "includes/08-modal";
 
 
 body{
-  font-family: 'Arial','Helvetica neue', sans-serif;
-  letter-spacing: 1px;
+  font-size: $font-size-regular;
+  @extend .font-body;
   color: #222;
   background: #efefef;
+  padding-top: 90px;
+}
+
+.container-fluid {
+  padding-right: 40px;
+  padding-left: 40px;
 }
 
 a,
 a:active,
-a:hover{
+a:hover,
+a.active{
   color: #0065ff;
 }
 
 h2{
-  font-size: 14px;
+  font-size: $font-size-sm;
   margin-bottom: $spacing-regular;
   font-weight: bold;
 }
 
-/* ----- bootstrap hack ----- */
 
+/* ----- Bootstrap hack ----- */
 
 *{
   border-radius: 0 !important;
@@ -48,189 +62,8 @@ h2{
   border-top-right-radius: 0 !important;
 }
 
-.main-container{
-  margin-bottom: $spacing-large;
-}
 
-// Navigation
-
-.navbar-default {
-  background-color: $white;
-  z-index: 9;
-  a{
-    color: $black;
-  }
-  .navbar-brand{
-    color: $black;
-    font-size: inherit;
-    font-weight: bold;
-  }
-  .navbar-nav > li > a{
-    color: $black;
-  }
-}
-
-
-// Panneaux
-
-.panel{
-  border: none;
-  box-shadow: none;
-  > .panel-heading{
-    background-color: $white;
-    border-bottom: 2px solid $grey;
-  }
-  .tips{
-    font-size: 10px;
-    color: $greyDarker;
-    font-weight: 400;
-    padding-top: $spacing-small;
-  }
-  input[type="submit"]{
-    margin-top: $spacing-regular;
-  }
-}
-
-.ghost{
-  display: none;
-}
-
-.table>thead:first-child>tr:first-child>td{
-    vertical-align: middle;
-}
-
-.table>tbody>tr>td{
-  border-top: none;
-}
-
-.media-panel{
-  .list-group-item{
-    font-size: 11px;
-    letter-spacing: normal;
-    border: none;
-    padding: $spacing-small 0;
-    a{
-      display: block;
-      width: 100%;
-      overflow:hidden;
-      white-space:nowrap;
-      text-overflow:ellipsis;
-      color: $black;
-      padding-left: 25px;
-      &:hover{
-        text-decoration: none;
-        i.fa-image{
-          @extend .fa-ellipsis-h;
-        }
-      }
-      &:focus,
-      &:active{
-        outline:0;
-        text-decoration: none;
-      }
-    }
-    i {
-      position: absolute;
-      left: 0;
-      font-size: 14px;
-      line-height: 1;
-      padding-right: $spacing-small;
-    }
-
-  }
-  .m-delete{
-    float: right;
-    display: inline-block;
-    color: $black;
-  }
-  input[type="file"]{
-    display: none;
-  }
-  .media-add{
-    color: $blue;
-  }
-}
-
-
-// Formulaires
-
-input,
-textarea{
-  &::placeholder{
-    color: $greyDark !important;
-  }
-}
-
-.main-form{
-  hr{
-    margin: $spacing-large -30px;
-    border-top: 2px solid $grey;
-  }
-  > .panel .panel{
-    border-bottom: 2px solid $greyDark;
-    .panel-heading{
-      padding: 0;
-      font-weight: bold;
-      border-bottom: none;
-    }
-    .panel-body{
-      padding: 0;
-    }
-  }
-  .list-group{
-    margin-bottom: $spacing-small;
-  }
-  .list-group-item{
-    padding: 0;
-    border: none;
-  }
-
-}
-
-
-.form-group{
-  &:not(.submit) {
-    margin-bottom: 30px;
-  }
-}
-
-.tip{
-  font-weight: 400;
-  color: $greyDark;
-}
-
-.tip.created_at{
-  input{
-    display: none;
-    padding: $spacing-small;
-    height: 20px;
-    width: 200px;
-    text-align: right;
-    padding: 0;
-    margin: 0;
-  }
-  &.show{
-    span{
-      display: none;
-    }
-    input{
-      display: inline;
-    }
-  }
-}
-
-.form-control{
-  font-family: 'Helvetica neue', sans-serif;
-  letter-spacing: 1px;
-  border: 2px solid $greyDark;
-  box-shadow: none;
-  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-  &:focus {
-    border-color: $blue;
-    outline: 0;
-    box-shadow: none;
-  }
-}
+/* ----- Buttons ----- */
 
 .btn{
   background-color: $white;
@@ -262,6 +95,7 @@ textarea{
   color: $blue;
   &:hover,
   &:active,
+  &:active:hover,
   &:focus,
   &:active:focus{
     color: $blueLight;
@@ -286,10 +120,6 @@ textarea{
   margin-right: 10px;
 }
 
-.help-block{
-  display: inline-block;
-  background-color: $yellow;
-}
 
 .delete-form{
   margin-bottom: $spacing-large;
@@ -334,13 +164,8 @@ textarea{
   }
 }
 
-/* ----- sortable ----- */
 
-.sortable-ghost{
-  opacity: 0;
-}
-
-/* ----- custom ----- */
+/* ----- Custom ----- */
 
 .panel-heading{
   h3{
@@ -348,7 +173,7 @@ textarea{
     font-size: 14px;
     padding: 0;
     margin: 0;
-    font-weight: bold;
+    font-weight: 400;
   }
   .message{
     font-size: 10px;
@@ -358,83 +183,12 @@ textarea{
 }
 
 
-.page-index{
-  table .attribute{
-    text-align: right;
-    color: $greyDark;
-  }
-  tbody{
-    tr i{
-      color: $red;
-      font-size: 10px;
-      margin-right: $spacing-xsmall;
-    }
-
-    tr.published-1 i{
-      color: $green;
-    }
-  }
-  tfoot{
-
-      border-top: 1px solid #DDD;
-
-    >tr>td{
-      border-top: none
-    }
-  }
-}
 
 .article-edit{
   .slug{
     display: block;
     margin-top: 3px;
     color: $greyDark;
-  }
-}
-
-/* ----- modal ----- */
-
-.modal{
-  .form-horizontal .form-group {
-    margin-right: 0;
-    margin-left: 0;
-  }
-  figure img{
-    max-width: 100%;
-    height: auto;
-  }
-}
-
-.modal-content {
-  box-shadow: none;
-  border: none;
-}
-
-.modal-backdrop {
-  background-color: $grey;
-}
-.modal-backdrop.in{
-  opacity: 1;
-}
-
-.modal-footer{
-  text-align: left;
-}
-
-
-
-/* ----- Tags ----- */
-
-.page-tags-index{
-  .panel{
-    margin-bottom: 1px;
-  }
-  .panel-heading{
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .table>tbody>tr>td{
-    padding: $spacing-xsmall $spacing-small;
   }
 }
 
@@ -459,16 +213,4 @@ textarea{
 .dropdown-menu>.active>a:focus,
 .dropdown-menu>.active>a:hover {
   background-color: $blue;
-}
-
-/* ----- Auth ----- */
-.page-login{
-  .has-error{
-    .control-label{
-      color: $black;
-    }
-  }
-  .help-block strong{
-    font-weight: 400;
-  }
 }

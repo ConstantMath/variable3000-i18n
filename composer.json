@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.6.4",
         "laravel/framework": "5.4.*",
+        "laravel/tinker": "~1.0",
         "barryvdh/laravel-debugbar": "^2.3",
         "laravelcollective/html": "~5.0",
         "intervention/image": "^2.3",
@@ -30,13 +31,13 @@
         }
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/TestCase.php"
-        ]
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "post-root-package-install": [
-            "php -r \"copy('.env.example', '.env');\""
+            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
             "php artisan key:generate"
@@ -51,6 +52,8 @@
         ]
     },
     "config": {
-        "preferred-install": "dist"
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
     }
 }
