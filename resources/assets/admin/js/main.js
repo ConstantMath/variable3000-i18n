@@ -93,29 +93,33 @@ $(document).ready(function() {
   // ----- Sortable indexes----- //
 
   if ( $('.sortable').length ){
-    var el = document.getElementById("index");
-    Sortable.create(el, {
-      onUpdate: function (evt) {
-        var url          = evt.item.getAttribute('url');
-        var parent_id  = evt.item.getAttribute('parent_id');
-        var new_order    = evt.newIndex;
-        if (url && parent_id) {
-          jQuery.ajax({
-            url: url,
-            data: {
-              'parent_id' : parent_id,
-              'new_order' : new_order,
-            },
-            type: 'POST',
-            success: function(response){
-              if(response.status == 'success'){
-                //$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
+    // Get sortables elements
+    var elements = document.getElementsByClassName("sortable");
+    // Loop sortable elements
+    for(var i = 0; i < elements.length; i++){
+      Sortable.create(elements.item(i), {
+        onUpdate: function (evt) {
+          var url          = evt.item.getAttribute('url');
+          var parent_id  = evt.item.getAttribute('parent_id');
+          var new_order    = evt.newIndex;
+          if (url && parent_id) {
+            jQuery.ajax({
+              url: url,
+              data: {
+                'parent_id' : parent_id,
+                'new_order' : new_order,
+              },
+              type: 'POST',
+              success: function(response){
+                if(response.status == 'success'){
+                  //$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
+                }
               }
-            }
-          });
+            });
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   // ----- Display created at ----- //

@@ -6,9 +6,7 @@
 {{-- Is published ? --}}
 <div class="form-group">
   <div class="checkbox">
-    <label>
-      {!! Form::checkbox('published', 1, null) !!}Published
-    </label>
+    <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
   </div>
 </div>
 

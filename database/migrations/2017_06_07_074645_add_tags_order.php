@@ -23,8 +23,9 @@ class AddTagsOrder extends Migration
     *
     * @return void
     */
-   public function down()
-   {
-     $table->dropColumn('order');
-   }
+    public function down(){
+     Schema::table('tags', function(Blueprint $table){
+      $table->dropColumn('order');
+     });
+    }
 }

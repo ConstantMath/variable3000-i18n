@@ -7,7 +7,7 @@
 @section('content')
   @include('admin.components.flash-message')
   @if($taxonomies) @foreach ($taxonomies as $taxonomy)
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-index">
     <div class="panel-heading">
       <h3>{{ $taxonomy->name }}</h3>
       <a href="{{ route('taxonomies.create', $taxonomy->id) }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>

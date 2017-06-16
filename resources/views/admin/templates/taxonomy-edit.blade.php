@@ -10,7 +10,7 @@
     {!! Form::open(['url' => 'admin/taxonomies','class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
   @endif
   {!! Form::hidden('parent_id', $taxonomy->parent->id) !!}
-  {!! Form::hidden('order', (!empty($article->order))? $article->order : 0) !!}
+  {!! Form::hidden('order', (!empty($taxonomy->order))? $taxonomy->order : 0) !!}
 
   <div class="panel panel-default">
     <div class="panel-heading">
