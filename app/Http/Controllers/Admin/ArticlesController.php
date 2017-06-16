@@ -106,20 +106,51 @@ class ArticlesController extends AdminController
    */
 
   public function update(Request $request, $id){
-    $validator = Validator::make($request->all(), [
-      'title' => 'required',
-    ]);
+    $unset_requests = array();
+    // Validator test
+    if(empty($request->input('en.title'))){
+      $validator = Validator::make($request->all(), [
+        'title' => 'required|size:400',
+      ]);
+    }else{
+
+      $validator = Validator::make($request->all(), [
+        'title' => 'size:400',
+      ]);
+    }
+    // Get the current article
     $article = Article::findOrFail($id);
-    $request['created_at'] = Carbon::createFromFormat('d.m.Y', $request->input('created_at'))->format('Y-m-d H:i:s');
+    // Loop in locales to test if empty
+    foreach (config('translatable.locales') as $lang){
+      if($lang != Lang::getLocale()){
+        // If lang title is empty
+        if(empty($request->input($lang.'.title'))){
+          // If text is not empty
+          if(!empty($request->input($lang.'.text'))){
+            $validator = Validator::make($request->all(), [
+              'title' => 'required|size:400',
+            ]);
+          }else{
+            // If lang title is empty : add to unset_requests array to avoid saving it later
+            array_push($unset_requests, $lang);
+            $translation = $article->getTranslation($lang);
+            if(!empty($translation) && $translation->locale != Lang::getLocale()){
+              // Delete this translation
+              $translation->delete();
+            }
+          }
+        }
+      }
+    }
+
     // Validator check
     if ($validator->fails()) {
       return redirect()->route('admin.articles.edit', ['parent_slug' => $article->parent_id, 'id' => $id])->withErrors($validator);
     } else {
+      $request['created_at'] = Carbon::createFromFormat('d.m.Y', $request->input('created_at'))->format('Y-m-d H:i:s');
       // Checkbox update
       $request['published'] = (($request->published) ? 1 : 0);
-
       // ----- Taxonomies ----- //
-
       // Categories
       $categories_parent_id = 1;
       $categories_input = $request->input('categories');
@@ -133,8 +164,12 @@ class ArticlesController extends AdminController
         $new_tags = "";
       }
       Tag::detachOldAddNew($new_tags, $tags_parent_id, $id);
-      // Update de l'article
-      $article->update($request->all());
+      // Article update : test if there are requests to remove ($unset_requests)
+      if(empty($unset_requests)):
+        $article->update($request->all());
+      else:
+        $article->update($request->except($unset_requests));
+      endif;
       $data = $request->all();
       if(isset($data['finish'])){
         return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
