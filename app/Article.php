@@ -11,19 +11,29 @@ class Article extends Model{
 
   use Mediatable;
   use Sluggable;
+  use \Dimsav\Translatable\Translatable;
   protected $table = 'articles';
 
+  public $translatedAttributes = ['title', 'intro', 'text', 'slug'];
   protected $fillable = [
     'created_at',
-    'title',
-    'intro',
-    'text',
-    'slug',
     'order',
     'parent_id',
     'published',
     'image_une',
   ];
+
+
+  /**
+   * Construct : default Locale
+   *
+   */
+
+  public function __construct(array $attributes = []){
+      parent::__construct($attributes);
+      // $this->defaultLocale = 'en';
+  }
+
 
   /**
    * Return the sluggable configuration array for this model.

@@ -8,12 +8,12 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Tag extends Model{
 
   use Sluggable;
-  protected $fillable = [
-    'name',
-    'slug',
-    'parent_id',
-    'order',
-  ];
+  use \Dimsav\Translatable\Translatable;
+
+  protected $table = 'tags';
+  public $translatedAttributes = ['name', 'slug'];
+  protected $fillable = ['parent_id', 'order',];
+
 
   /**
    * Return the sluggable configuration array for this model.
