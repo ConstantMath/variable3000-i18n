@@ -304,7 +304,7 @@ class ArticlesController extends AdminController
        }
      }
      return response()->json([
-       'status' => 'success',
+      'status' => 'success',
      ]);
    }
 
