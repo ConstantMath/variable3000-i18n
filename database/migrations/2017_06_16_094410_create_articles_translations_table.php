@@ -19,8 +19,8 @@ class CreateArticlesTranslationsTable extends Migration
            $table->string('locale')->index();
            $table->string('title');
            $table->string('slug');
-           $table->text('intro');
-           $table->text('text');
+           $table->text('intro')->nullable();
+           $table->text('text')->nullable();
            $table->unique(['article_id','locale', 'slug']);
            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
          });
