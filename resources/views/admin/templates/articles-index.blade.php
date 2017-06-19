@@ -9,7 +9,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3>{{ $article->title }}</h3>
-      <a href="{{ route('admin.articles.create', [$article->slug]) }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
+      <a href="{{ route('admin.articles.create', [$article->id]) }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
     </div>
     <div class="panel-body table-responsive">
       <table class="table">

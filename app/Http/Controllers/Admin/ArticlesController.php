@@ -18,6 +18,7 @@ class ArticlesController extends AdminController
   public function __construct(){
     Lang::setLocale('en');
     $this->middleware('auth');
+    parent::__construct();
   }
 
   /**
@@ -81,17 +82,17 @@ class ArticlesController extends AdminController
    * @return \Illuminate\Http\Response
    */
 
-  public function create($parent_slug){
+  public function create($parent_id){
     $data = array(
       'page_class' => 'article create',
       'page_title' => 'Article create',
     );
     $article = collect(new Article);
-    $article->parent = Article::where('slug', $parent_slug)->first();
+    $article->parent = Article::where('id', $parent_id)->first();
     // Taxonomies for dropdown select
-    $categories = Tag::where('parent_id', 1)->pluck('name', 'id')->prepend('', '');
+    $categories = Tag::where('parent_id', 1)->get()->pluck('name', 'id')->prepend('', '');
     if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
-    $tags = Tag::where('parent_id', 2)->pluck('name', 'id');
+    $tags = Tag::where('parent_id', 2)->get()->pluck('name', 'id');
     if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
     return view('admin.templates.article-edit', compact('article', 'categories', 'tags', 'data'));
   }
@@ -113,7 +114,6 @@ class ArticlesController extends AdminController
         'title' => 'required|size:400',
       ]);
     }else{
-
       $validator = Validator::make($request->all(), [
         'title' => 'size:400',
       ]);
@@ -188,23 +188,46 @@ class ArticlesController extends AdminController
    */
 
   public function store(Request $request){
-    $validator = Validator::make($request->all(), [
-      'title' => 'required',
-    ]);
-    $parent_slug = Article::getSlugFromId($request->input('parent_id'));
-
+    $unset_requests = array();
+    // Loop in locales to test if empty
+    foreach (config('translatable.locales') as $lang){
+      if($lang != Lang::getLocale()){
+        // If lang title is empty : add to unset array to avoid saving it later
+        if(empty($request->input($lang.'.title'))){
+          array_push($unset_requests, $lang);
+        }
+      }
+    }
+    // Validator test
+    if(empty($request->input('en.title'))){
+      $validator = Validator::make($request->all(), [
+        'title' => 'required|size:400',
+      ]);
+    }else{
+      $validator = Validator::make($request->all(), [
+        'title' => 'size:400',
+      ]);
+    }
+    // Validation test
     if ($validator->fails()) {
-      return redirect()->route('admin.articles.create', ['parent_slug' => $parent_slug])->withErrors($validator);
+      return redirect()->route('admin.articles.create', ['parent_id' => $request->input('parent_id')])->withErrors($validator);
     } else {
       // Increment order of all articles
       DB::table('articles')
             ->where('parent_id', $request->input('parent_id'))
             ->increment('order');
-      // Store the article
-      $article = Article::create($request->all());
-      // ----- Taxonomies ----- //
+      // Article create : test if there are requests to remove ($unset_requests)
+      if(empty($unset_requests)):
+        $article = Article::create($request->all());
+      else:
+        $article = Article::create($request->except($unset_requests));
+      endif;
+      // ----- Taxonomies : categories ----- //
       $categories = $request->input('categories');
       if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
+      // ----- Taxonomies: tags ----- //
+      $tags = $request->input('tag_list');
+      if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
       // Image une
       if ($request->has('post_image_une')) {
         $article->image_une = $request->get('post_image_une');
