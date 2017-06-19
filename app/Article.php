@@ -28,8 +28,8 @@ class Article extends Model{
    */
 
   public function __construct(array $attributes = []){
-      parent::__construct($attributes);
-      // $this->defaultLocale = 'en';
+    parent::__construct($attributes);
+    // $this->defaultLocale = 'en';
   }
 
 
