@@ -13,7 +13,6 @@
         @if($article->publishedChildren)
           <ul>
           @foreach ($article->publishedChildren as $child)
-            {{ dump($child->imageUne)}}
             <li>
               <a href="{{ route('articles.show', [$child->slug]) }}">{{ $child->title }}</a>
             </li>

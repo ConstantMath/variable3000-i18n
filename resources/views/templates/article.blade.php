@@ -30,6 +30,24 @@
       </section>
       @endif
       <!-- /gallery -->
+      <!-- category -->
+      @if ($article->category)
+      <ul>
+        @foreach($article->category as $category)
+          <li>{{$category->name}}</li>
+        @endforeach
+      </ul>
+      @endif
+      <!-- /category -->
+      <!-- tags -->
+      @if ($article->theTags)
+      <ul>
+        @foreach($article->theTags as $tag)
+          <li>{{$tag->name}}</li>
+        @endforeach
+      </ul>
+      @endif
+      <!-- /tags -->
     </article>
     <!-- /article -->
   </main>
