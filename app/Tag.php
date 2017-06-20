@@ -7,28 +7,13 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Tag extends Model{
 
-  use Sluggable;
-  protected $fillable = [
-    'name',
-    'slug',
-    'parent_id',
-    'order',
-  ];
+  use \Dimsav\Translatable\Translatable;
 
-  /**
-   * Return the sluggable configuration array for this model.
-   *
-   * @return array
-   */
+  protected $table = 'tags';
+  public $translatedAttributes = ['name', 'slug'];
+  protected $fillable = ['parent_id', 'order',];
 
-  public function sluggable(){
-    return [
-      'slug' => [
-        'source' => 'name',
-                'onUpdate' => true
-      ]
-    ];
-  }
+
 
   /**
    * Retourne les articles associés au tag
@@ -36,7 +21,9 @@ class Tag extends Model{
    */
 
   public function articles(){
-    return $this->belongsToMany('App\Article');
+    return $this->belongsToMany('App\Article')
+            ->where('published', 1)
+            ->orderBy('order');
   }
 
 
@@ -66,7 +53,6 @@ class Tag extends Model{
    */
 
   public static function processTags($tags, $parent_tag_id){
-
     // sépare le tableau retourné en numeric (tags existant) et string (nouveaux tags)
     $currentTags = array_filter($tags, 'is_numeric');
     $newTags = array_filter($tags, 'is_string');
@@ -77,8 +63,8 @@ class Tag extends Model{
       if(in_array($newTag, $currentTags)):
         continue;
       endif;
-      // check si le tag exsite déjà
-      $tag = Tag::where("name", "=", $newTag)->first();
+      // check si le tag existe déjà
+      $tag = Tag::whereTranslation("name", "=", $newTag)->first();
       // sinon, création du nouveau tag
       if(!$tag):
         $tag = Tag::create([

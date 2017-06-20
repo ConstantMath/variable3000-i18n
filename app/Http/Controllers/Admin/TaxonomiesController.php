@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tag;
+use Lang;
 
 class TaxonomiesController extends AdminController
 {
@@ -37,45 +38,59 @@ class TaxonomiesController extends AdminController
    }
 
 
-    /**
-     * Show the form for creating a new resource.
-     * @param  int  $parent_id     *
-     * @return \Illuminate\Http\Response
-     */
+   /**
+    * Show the form for creating a new resource.
+    * @param  int  $parent_id     *
+    * @return \Illuminate\Http\Response
+    */
 
-    public function create($parent_id){
-      $data = array(
-        'page_class' => 'taxonomies-edit',
-        'page_title' => 'Taxonomy create',
-      );
-      $taxonomy = collect(new Tag);
-      $taxonomy->parent = Tag::where('id', $parent_id)->first();
-      return view('admin.templates.taxonomy-edit', compact('taxonomy', 'data'));
-    }
+   public function create($parent_id){
+     $data = array(
+       'page_class' => 'taxonomies-create',
+       'page_title' => 'Taxonomy create',
+     );
+     $taxonomy = collect(new Tag);
+     $taxonomy->parent = Tag::where('id', $parent_id)->first();
+     return view('admin.templates.taxonomy-edit', compact('taxonomy', 'data'));
+   }
 
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+   /**
+    * Store a newly created resource in storage.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+   public function store(Request $request){
+     $unset_requests = array();
+     // Loop in locales to test if empty
+     foreach (config('translatable.locales') as $lang){
+       if($lang != Lang::getLocale()){
+         // If lang title is empty : add to array
+         if(empty($request->input($lang.'.name'))){
+           array_push($unset_requests, $lang);
+         }
+       }
+     }
+     if(empty($request->input('en.name'))){
+       $validator = Validator::make($request->all(), [
+         'name' => 'required|size:400',
+       ]);
+     }else{
+       $validator = Validator::make($request->all(), [
+         'name' => 'size:400',
+       ]);
+     }
 
-    public function store(Request $request){
-      $validator = Validator::make($request->all(), [
-        'name' => 'required',
-      ]);
-      // Validator check
-      if ($validator->fails()) {
-        $this->throwValidationException(
-            $request, $validator
-        );
-      } else {
-        // Store the taxonomy
-        $article = Tag::create($request->all());
-        return redirect()->route('taxonomies.index');
-      }
-    }
+     // Validator check
+     if ($validator->fails()) {
+       return redirect()->route('taxonomies.create', ['parent_id' => $request->parent_id])->withErrors($validator);
+     } else {
+       // Store the taxonomy
+       $article = Tag::create($request->all());
+       return redirect()->route('taxonomies.index');
+     }
+   }
 
 
     /**
@@ -115,17 +130,31 @@ class TaxonomiesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
     public function update(Request $request, $id){
-      $validator = Validator::make($request->all(), [
-        'name' => 'required',
-      ]);
+      $unset_requests = array();
+      // Loop in locales to test if empty
+      foreach (config('translatable.locales') as $lang){
+        if($lang != Lang::getLocale()){
+          // If lang title is empty : add to array
+          if(empty($request->input($lang.'.name'))){
+            array_push($unset_requests, $lang);
+          }
+        }
+      }
+      if(empty($request->input('en.name'))){
+        $validator = Validator::make($request->all(), [
+          'name' => 'required|size:400',
+        ]);
+      }else{
+        $validator = Validator::make($request->all(), [
+          'name' => 'size:400',
+        ]);
+      }
+
       $taxonomy = Tag::findOrFail($id);
       // Validator check
       if ($validator->fails()) {
-        $this->throwValidationException(
-            $request, $validator
-        );
+        return redirect()->route('taxonomies.edit', $id)->withErrors($validator);
       } else {
         // Update de l'article
         $taxonomy->update($request->all());
