@@ -85,6 +85,35 @@ class Article extends Model{
 
 
   /**
+  * Returns the category (unique)
+  */
+
+  public function category(){
+    return $this->belongsToMany('App\Tag')->where('parent_id', 1)->withTimestamps();
+  }
+
+
+  /**
+   * Returns the tags (n)
+   *
+   */
+
+  public function tags(){
+    return $this->belongsToMany('App\Tag')->withTimestamps();
+  }
+
+
+  /**
+   * Returns éall the taxono
+   *
+   */
+
+  public function theTags(){
+    return $this->belongsToMany('App\Tag')->where('parent_id', 2)->withTimestamps();
+  }
+
+
+  /**
    * Retourne l'id de l'article sur base du slug
    * @param string  $title
    *
@@ -112,16 +141,6 @@ class Article extends Model{
       $date = "";
     }
     return $date;
-  }
-
-
-  /**
-   * Retourne tous les tags
-   *
-   */
-
-  public function tags(){
-    return $this->belongsToMany('App\Tag')->withTimestamps();
   }
 
 
