@@ -10,11 +10,12 @@
     @foreach ($articles as $article)
       <li>
         {{ $article->title }}
-        @if($article->children)
+        @if($article->publishedChildren)
           <ul>
-          @foreach ($article->children as $child)
+          @foreach ($article->publishedChildren as $child)
+            {{ dump($child->imageUne)}}
             <li>
-              <a href="{{ route('articles.show', [$child->parent_id, $child->slug]) }}">{{ $child->title }}</a>
+              <a href="{{ route('articles.show', [$child->slug]) }}">{{ $child->title }}</a>
             </li>
           @endforeach
           </ul>

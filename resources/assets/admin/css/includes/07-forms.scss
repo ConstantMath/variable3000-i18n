@@ -41,6 +41,9 @@ label{
   &:not(.submit) {
     margin-bottom: 30px;
   }
+  .panel-taxonomy &{
+    margin-bottom: 10px;
+  }
 }
 
 .tip{

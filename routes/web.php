@@ -80,4 +80,4 @@ Route::resource('/admin/users', 'Admin\UsersController');
 // Homepage
 Route::get('/', 'HomeController@index');
 // Article : view
-Route::get('/{parent_slug}/{article_slug}', 'ArticlesController@show')->name('articles.show');
+Route::get('/{article_slug}', 'ArticlesController@show')->name('articles.show');
