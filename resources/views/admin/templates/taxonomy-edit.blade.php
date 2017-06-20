@@ -12,7 +12,7 @@
   {!! Form::hidden('parent_id', $taxonomy->parent->id) !!}
   {!! Form::hidden('order', (!empty($taxonomy->order))? $taxonomy->order : 0) !!}
 
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-taxonomy">
     <div class="panel-heading">
       {{ $taxonomy->parent->name }}
     </div>
@@ -20,16 +20,22 @@
       <div class="col-sm-12">
         <div id="validation"></div>
         {{-- Name --}}
-        <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
-          <label for="name">Title</label>
-          {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+
+          @foreach (config('translatable.locales') as $lang)
+          <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+          <label for="name">Name {{ $lang }}</label>
+          {{-- {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Title']) !!} --}}
+
+          {!! Form::text($lang.'[name]', (!empty($taxonomy->id) && !empty($taxonomy->translate($lang)->name))? $taxonomy->translate($lang)->name : '', ['class' => 'form-control', 'placeholder' => 'Name']) !!}
           <span class="slug">
             @if(isset($taxonomy->slug))
-            <i class="fa fa-link "></i>&nbsp;{{ $taxonomy->slug }}
+              <i class="fa fa-link "></i>&nbsp;{{ (!empty($taxonomy->id) && !empty( $taxonomy->translate($lang)->slug))? $taxonomy->translate($lang)->slug : '' }}
             @endif
           </span>
-          {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
-        </div>
+          </div>
+          @endforeach
+
+
         {{-- Submit buttons --}}
         <div class="form-group submit">
           {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'save']) !!}

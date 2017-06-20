@@ -23,13 +23,13 @@ class ArticlesController extends Controller{
    * @return \Illuminate\Http\Response
    */
 
-  public function show($parent_slug, $slug){
-    $article = Article::where('slug', $slug)->first();
+  public function show($slug){
+    $article = Article::whereTranslation('slug', $slug)->first();
     $data = array(
-      'page_class' => 'article'.' '.$parent_slug.' '.$article->slug,
+      'page_class' => 'article'.' '.$article->slug,
       'page_title' => $article->title,
     );
     // $text01 = Article::where('slug', 'about')->where('published', 1)->first();
-    return view('templates/article', compact('article'));
+    return view('templates/article', compact('article', 'data'));
   }
 }

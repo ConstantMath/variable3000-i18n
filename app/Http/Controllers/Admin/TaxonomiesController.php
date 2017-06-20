@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Tag;
+use Lang;
 
 class TaxonomiesController extends AdminController
 {
@@ -34,6 +35,23 @@ class TaxonomiesController extends AdminController
        $t->children = $t->children;
      }
      return view('admin/templates/taxonomies-index', compact('taxonomies', 'data'));
+   }
+
+
+   /**
+    * Show the form for creating a new resource.
+    * @param  int  $parent_id     *
+    * @return \Illuminate\Http\Response
+    */
+
+   public function create($parent_id){
+     $data = array(
+       'page_class' => 'taxonomies-create',
+       'page_title' => 'Taxonomy create',
+     );
+     $taxonomy = collect(new Tag);
+     $taxonomy->parent = Tag::where('id', $parent_id)->first();
+     return view('admin.templates.taxonomy-edit', compact('taxonomy', 'data'));
    }
 
 
