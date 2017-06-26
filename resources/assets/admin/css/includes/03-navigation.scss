@@ -22,14 +22,15 @@ nav{
 /* ----- Main navigation ----- */
 
 .navbar>.container-fluid .navbar-brand{
-  padding: 10px;
+  font-size: $font-size-regular;
+  padding-left: 50px;
   background-image: url('images/fantom.gif');
   background-repeat: no-repeat;
   background-position: 5px center;
-  text-indent: -9999px;
-  width: 50px;
   &:hover{
     background-image: url('images/fantom_.gif');
+    color: $grey;
+    text-decoration: none;
   }
 }
 

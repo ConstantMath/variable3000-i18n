@@ -18,6 +18,22 @@
   }
 }
 
+
+.panel-heading{
+  h3{
+    display: inline;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+  }
+  .message{
+    font-size: 10px;
+    background-color: $yellow;
+    position: relative;
+  }
+}
+
 .panel-body.table-responsive{
   padding: 0;
 }
