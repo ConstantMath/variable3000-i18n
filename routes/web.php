@@ -77,6 +77,8 @@ Route::resource('/admin/users', 'Admin\UsersController');
 |--------------------------------------------------------------------------
 */
 
+
+
 // Homepage
 Route::get('/', 'HomeController@index');
 // Article : view
