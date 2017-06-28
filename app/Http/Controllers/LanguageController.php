@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
+use Cookie;
 
 class LanguageController extends Controller
 {
@@ -23,12 +24,12 @@ class LanguageController extends Controller
     // Store the segments of the last request as an array
     $segments = $previous_request->segments();
 
-
     // Check if the first segment matches a language code
     if (in_array($lang, config('translatable.locales'))) {
+      // Store in a cookie
+      Cookie::queue('locale', $lang, 500000);
       // If it was indeed a translated route name
       if ($route_name && Lang::has('routes.' . $route_name, $lang)) {
-
         // Translate the route name to get the correct URI in the required language, and redirect to that URL.
         if (count($query)) {
             return redirect()->to($lang . '/' .  trans('routes.' . $route_name, [], $lang) . '?' . http_build_query($query));
