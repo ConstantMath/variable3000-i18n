@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,6 +50,10 @@
   <div class="page @yield('page_class')">
   <!-- header -->
   <header class="primary-header">
+    <ul class="lang">
+      <li class="lang__item @if (app()->getLocale() == "fr") active @endif"><a href="{{ route('lang.switch', "fr") }}" class="lang__link">Fr</a></li>
+      <li class="lang__item @if (app()->getLocale() == "en") active @endif"><a href="{{ route('lang.switch', "en") }}" class="lang__link">En</a></li>
+    </ul>
     <h1 class="primary-title">
       <a href="{{ url('/') }}" id="infos-button">Variable</a>
     </h1>
