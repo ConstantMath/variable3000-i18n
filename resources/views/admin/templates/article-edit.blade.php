@@ -9,7 +9,7 @@
       @if(isset($article->id))
         {!! Form::model($article, ['route' => ['articles.update', $article->id], 'method' => 'put', 'class' => 'panel main-form', 'id' => 'main-form', 'files' => true]) !!}
       @else
-        {!! Form::open(['url' => 'admin/articles','class' => 'panel', 'id' => 'main-form', 'files' => true]) !!}
+        {!! Form::model($article, ['route' => ['articles.store', $article->parent->id], 'method' => 'post', 'class' => 'panel main-form', 'id' => 'main-form', 'files' => true]) !!}
       @endif
       <div class="panel panel-default">
         <div class="panel-heading">
