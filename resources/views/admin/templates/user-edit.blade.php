@@ -7,7 +7,7 @@
   @if(isset($user->id))
     {!! Form::model($user, ['route' => ['users.update', $user->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
   @else
-    {!! Form::open(['url' => 'admin/users','class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
+    {!! Form::model($user, ['route' => ['users.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
   @endif
   <div class="panel panel-default">
     <div class="panel-heading">
