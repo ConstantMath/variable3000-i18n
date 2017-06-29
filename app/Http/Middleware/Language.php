@@ -23,8 +23,6 @@ class Language
       }else{
         $segments = array_prepend($segments, config('app.fallback_locale'));
       }
-      //dd(config('translatable.locales'));
-      // dd($segments);
       // Redirect to the correct url
       return redirect()->to(implode('/', $segments));
     }
