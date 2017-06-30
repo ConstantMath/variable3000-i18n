@@ -7,7 +7,7 @@
   @if(isset($taxonomy->id))
     {!! Form::model($taxonomy, ['route' => ['taxonomies.update', $taxonomy->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
   @else
-    {!! Form::open(['url' => 'admin/taxonomies','class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
+    {!! Form::model($taxonomy, ['route' => ['taxonomies.store'], 'method' => 'post', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
   @endif
   {!! Form::hidden('parent_id', $taxonomy->parent->id) !!}
   {!! Form::hidden('order', (!empty($taxonomy->order))? $taxonomy->order : 0) !!}
