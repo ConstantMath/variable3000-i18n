@@ -37,7 +37,8 @@ class UsersController extends AdminController
         'page_class' => 'users-edit',
         'page_title' => 'Create a user',
       );
-      return view('admin/templates/user-edit', compact('data'));
+      $user = collect(new User);
+      return view('admin/templates/user-edit', compact('data', 'user'));
     }
 
 

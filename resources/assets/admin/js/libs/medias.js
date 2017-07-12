@@ -98,7 +98,6 @@ $(document).ready(function() {
       }
     });
   }
-
 })
 
 
@@ -118,7 +117,7 @@ function updateModalInfos(data){
   media2.find('a').attr("data-media-background-color", data.media_background_color);
   media2.find('a').attr("data-media-background-image", data.media_background_image);
 
-  media2.find('a').attr("data-delete-link", '/admin/articles/'+ data.media_id +'/deletemedia');
+  media2.find('a').attr("data-delete-link", '/en/admin/articles/'+ data.media_id +'/deletemedia');
   if(data.media_type == 'jpg' || data.media_type == 'png' || data.media_type == 'gif' || data.media_type == 'svg' || data.media_type == 'jpeg'){
     var icon = '<i class="fa fa-image"></i>';
     media2.find('a').attr("data-media-url", '/imagecache/large/'+data.media_name);

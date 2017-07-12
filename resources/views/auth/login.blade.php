@@ -7,7 +7,7 @@
   <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
     <header class="login__header">
-      <h2 class="login__title">Variable 3000</h2>
+      <h2 class="login__title">admin variable</h2>
     </header>
     <div class="login__body form__body">
         <label for="email" class="col-md-4 control-label">E-Mail Address</label>

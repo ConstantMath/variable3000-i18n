@@ -1,6 +1,6 @@
 <li class="list-group-item @if(empty($media)) ghost @endif"
     media-id="@if(!empty($media)){{$media->id}}@endif"
-    url="@if(!empty($article->id)){{ URL::to('admin/articles/'.$article->id.'/reordermedia') }}@endif"
+    url="@if(!empty($article->id)){{ URL::to('en/admin/articles/'.$article->id.'/reordermedia') }}@endif"
     id="media-@if (!empty($media)){{$media->id}}@endif"
 >
   <a href=""

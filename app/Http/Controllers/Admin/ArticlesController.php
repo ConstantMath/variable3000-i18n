@@ -109,7 +109,7 @@ class ArticlesController extends AdminController
   public function update(Request $request, $id){
     $unset_requests = array();
     // Validator test
-    if(empty($request->input('en.title'))){
+    if(empty($request->input(Lang::getLocale().'.title'))){
       $validator = Validator::make($request->all(), [
         'title' => 'required|size:400',
       ]);
@@ -199,7 +199,7 @@ class ArticlesController extends AdminController
       }
     }
     // Validator test
-    if(empty($request->input('en.title'))){
+    if(empty($request->input(Lang::getLocale().'.title'))){
       $validator = Validator::make($request->all(), [
         'title' => 'required|size:400',
       ]);

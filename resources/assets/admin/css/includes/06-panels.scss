@@ -18,6 +18,22 @@
   }
 }
 
+
+.panel-heading{
+  h3{
+    display: inline;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+  }
+  .message{
+    font-size: 10px;
+    background-color: $yellow;
+    position: relative;
+  }
+}
+
 .panel-body.table-responsive{
   padding: 0;
 }
@@ -26,43 +42,58 @@
   display: none;
 }
 
+.article-aside .list-group{
+  margin-bottom:0;
+}
 
+.article-aside .list-group-item{
+  font-size: 11px;
+  letter-spacing: normal;
+  border: none;
+  padding: 0 0 15px 25px;
+  .column-title{
+    display: inline-block;
+    width: 100%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    color: $black;
+
+    &:hover{
+      text-decoration: none;
+      i.fa-image{
+        @extend .fa-ellipsis-h;
+      }
+    }
+    &:focus,
+    &:active{
+      outline:0;
+      text-decoration: none;
+    }
+  }
+   &.has-action .column-title{
+    width: calc(100% - 20px);
+  }
+  &:last-of-type &:not('.ghost'){
+    margin-bottom: $spacing-small;
+  }
+  i {
+    position: absolute;
+    left: 0;
+    font-size: 14px;
+    line-height: 1;
+    padding-right: $spacing-small;
+  }
+  a.action{
+    line-height: 1;
+    color: $blue;
+    display: inline-block;
+    width: auto;
+    font-size: $font-size-regular;
+  }
+}
 
 .media-panel{
-  .list-group-item{
-    font-size: 11px;
-    letter-spacing: normal;
-    border: none;
-    padding: $spacing-small 0;
-    a{
-      display: block;
-      width: 100%;
-      overflow:hidden;
-      white-space:nowrap;
-      text-overflow:ellipsis;
-      color: $black;
-      padding-left: 25px;
-      &:hover{
-        text-decoration: none;
-        i.fa-image{
-          @extend .fa-ellipsis-h;
-        }
-      }
-      &:focus,
-      &:active{
-        outline:0;
-        text-decoration: none;
-      }
-    }
-    i {
-      position: absolute;
-      left: 0;
-      font-size: 14px;
-      line-height: 1;
-      padding-right: $spacing-small;
-    }
-
-  }
   .m-delete{
     float: right;
     display: inline-block;
@@ -79,5 +110,12 @@
 .sortable{
   tr:hover{
     cursor: move;
+  }
+}
+
+
+.panel-related-articles{
+  .group-select{
+    margin-bottom: $spacing-regular;
   }
 }
