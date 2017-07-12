@@ -50,7 +50,7 @@
   font-size: 11px;
   letter-spacing: normal;
   border: none;
-  padding: $spacing-small 0 $spacing-small 25px;
+  padding: 0 0 15px 25px;
   .column-title{
     display: inline-block;
     width: 100%;
@@ -74,7 +74,7 @@
    &.has-action .column-title{
     width: calc(100% - 20px);
   }
-  &:last-of-type{
+  &:last-of-type &:not('.ghost'){
     margin-bottom: $spacing-small;
   }
   i {
@@ -112,6 +112,7 @@
     cursor: move;
   }
 }
+
 
 .panel-related-articles{
   .group-select{
