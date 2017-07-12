@@ -38,7 +38,7 @@
         </ul>
       @endif
     </div>
-    <div class="col-sm-12 col-md-3">
+    <div class="col-sm-12 col-md-3 article-aside">
       @include('admin.components.article-aside')
     </div>
   </div>
