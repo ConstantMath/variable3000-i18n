@@ -13,12 +13,15 @@
 
 
 <div class="tabbable">
+  {{-- tabs --}}
+  @if(count(config('translatable.locales')) > 1 )
   <ul class="nav nav-tabs">
     @foreach (config('translatable.locales') as $lang)
-      <li role="presentation" @if($loop->first) class="active" @endif"><a href="#tab{{ $lang }}" role="tab" id="dropdown{{ $lang }}-tab" data-toggle="tab" aria-controls="dropdown{{ $lang }}">{{ $lang }}</a></li>
+      <li role="presentation" @if($loop->first) class="active" @endif><a href="#tab{{ $lang }}" role="tab" id="dropdown{{ $lang }}-tab" data-toggle="tab" aria-controls="dropdown{{ $lang }}">{{ $lang }}</a></li>
     @endforeach
   </ul>
-  {{-- tabs --}}
+  @endif
+
   <div class="tab-content">
     {{-- lang panels  --}}
     @foreach (config('translatable.locales') as $lang)
