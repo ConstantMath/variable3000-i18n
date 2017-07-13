@@ -34,7 +34,7 @@ return [
     | you can specify what default should be used here.
     |
     */
-    'locale' => null,
+    'locale' => env('APP_LOCALE', null),
 
     /*
     |--------------------------------------------------------------------------

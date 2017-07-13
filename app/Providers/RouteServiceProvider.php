@@ -49,14 +49,20 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @return void
      */
-     protected function mapWebRoutes()
-     {
-         $locale = Request::segment(1);
+     protected function mapWebRoutes(){
 
-         Route::prefix($locale)
-              ->middleware('web')
-              ->namespace($this->namespace)
-              ->group(base_path('routes/web.php'));
+      // If there is more than one language defined
+      if(count(config('translatable.locales')) > 1 ){
+        $locale = Request::segment(1);
+        Route::prefix($locale)
+            ->middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+      }else{
+        Route::middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/web.php'));
+      }
      }
 
     /**
