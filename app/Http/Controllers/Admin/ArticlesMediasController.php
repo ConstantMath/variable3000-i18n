@@ -147,25 +147,25 @@ class ArticlesMediasController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-  public function reorderMedia(Request $request, $id){
-    $article = Article::findOrFail($id);
-    $media_id  = $request->mediaId;
-    $new_order = $request->newOrder;
-    $v = 0;
-    // loop dans les médias liés
-    foreach ($article->medias as $media) {
-      if($v == $new_order){$v++;}
-      $media = Media::findOrFail($media->id);
-      if($media->id == $media_id){
-        $media->order = $new_order;
-      }else{
-        $media->order = $v;
-        $v++;
-      }
-      $media->update();
-    }
-    return response()->json([
-      'status'        => 'success',
-    ]);
-  }
+   public function reorderMedia(Request $request, $id){
+     $article = Article::findOrFail($id);
+     $media_id  = $request->mediaId;
+     $new_order = $request->newOrder;
+     $v = 1;
+     // loop dans les médias liés
+     foreach ($article->medias as $media) {
+       if($v == $new_order){$v++;}
+       $media = Media::findOrFail($media->id);
+       if($media->id == $media_id){
+         $media->order = $new_order;
+       }else{
+         $media->order = $v;
+         $v++;
+       }
+       $media->update();
+     }
+     return response()->json([
+       'status'        => 'success',
+     ]);
+   }
 }

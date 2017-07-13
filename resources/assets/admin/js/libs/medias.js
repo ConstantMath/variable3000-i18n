@@ -69,6 +69,7 @@ $(document).ready(function() {
     }
   }
 
+
   // ----- Sortable ----- //
 
   if ( $('#mediagallery').length ){
@@ -98,6 +99,7 @@ $(document).ready(function() {
       }
     });
   }
+
 })
 
 

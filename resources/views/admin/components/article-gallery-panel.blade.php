@@ -1,7 +1,13 @@
 <div class="panel panel-default media-panel panel-mediagallery" id="panel-mediagallery">
   <div class="panel-heading">Gallery</div>
   <div class="panel-body">
-    <ul class="list-group @if(count($article->medias) == 0) ul-empty @endif" id="mediagallery">
+    <ul
+      class="
+        list-group
+        @if( !isset($article->medias) or count($article->medias) == 0) ul-empty @endif
+        @if (isset($article->id)) sortable @endif" 
+      id="mediagallery"
+      >
       <?php $media = array(); ?>
       @include('admin.components.molecules-media-li')
       @if (isset($article->medias))
