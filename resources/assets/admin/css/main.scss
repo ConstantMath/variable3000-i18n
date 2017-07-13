@@ -223,3 +223,16 @@ h2{
 .dropdown-menu>.active>a:hover {
   background-color: $blue;
 }
+
+
+/* ----- Sortable ----- */
+
+.sortable tr:hover,
+.sortable li:hover,
+.sortable li:hover a{
+  cursor: move;
+}
+
+.sortable-ghost{
+  opacity: 0;
+}

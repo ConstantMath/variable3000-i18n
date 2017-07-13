@@ -5,7 +5,6 @@
 
 {{-- Is published ? --}}
 <div class="form-group">
-
   <div class="checkbox">
     <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
   </div>
@@ -71,5 +70,7 @@
 {{-- Submit buttons --}}
 <div class="form-group submit">
   {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'save']) !!}
+  @if(isset($article->id))
   {!! Form::submit('save & close', ['class' => 'btn btn-primary', 'name' => 'finish']) !!}
+  @endif
 </div>
