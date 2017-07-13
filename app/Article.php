@@ -104,13 +104,29 @@ class Article extends Model{
 
 
   /**
-   * Returns éall the taxono
+   * Returns all the tags
    *
    */
 
   public function theTags(){
     return $this->belongsToMany('App\Tag')->where('parent_id', 2)->withTimestamps();
   }
+
+
+
+  /**
+   * Returns the categories for a select
+   *
+   */
+
+  public function taxonomiesDropdown($parent_id, $appendEmpty=0){
+    if($appendEmpty){
+      return Tag::where('parent_id', $parent_id)->get()->pluck('name', 'id')->prepend('', '');
+    }else{
+      return Tag::where('parent_id', $parent_id)->get()->pluck('name', 'id');
+    }
+  }
+
 
 
   /**

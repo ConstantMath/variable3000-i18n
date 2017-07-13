@@ -68,10 +68,7 @@ class ArticlesController extends AdminController
     $article->parent = Article::where('id', $parent_id)->first();
     $article->medias = $article->medias;
     $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
-    // Taxonomies for dropdown select
-    $categories = Tag::where('parent_id', 1)->get()->pluck('name', 'id')->prepend('', '');
-    $tags = Tag::where('parent_id', 2)->get()->pluck('name', 'id');
-  	return view('admin/templates/article-edit',  compact('article', 'categories', 'tags', 'data'));
+  	return view('admin/templates/article-edit',  compact('article', 'data'));
   }
 
 
@@ -87,14 +84,9 @@ class ArticlesController extends AdminController
       'page_class' => 'article create',
       'page_title' => 'Article create',
     );
-    $article = collect(new Article);
+    $article = new Article;
     $article->parent = Article::where('id', $parent_id)->first();
-    // Taxonomies for dropdown select
-    $categories = Tag::where('parent_id', 1)->get()->pluck('name', 'id')->prepend('', '');
-    if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
-    $tags = Tag::where('parent_id', 2)->get()->pluck('name', 'id');
-    if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
-    return view('admin.templates.article-edit', compact('article', 'categories', 'tags', 'data'));
+    return view('admin.templates.article-edit', compact('article', 'data'));
   }
 
 

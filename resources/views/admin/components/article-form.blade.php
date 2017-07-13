@@ -10,7 +10,6 @@
   </div>
 </div>
 
-
 <div class="tabbable">
   {{-- tabs --}}
   @if(count(config('translatable.locales')) > 1 )
@@ -58,13 +57,13 @@
 {{-- Taxonomy: category --}}
 <div class="form-group">
   <label for="category">Category</label>
-  {!! Form::select('categories[]', $categories, null, ['class' => 'form-control select2', 'id' => '']) !!}
+  {!! Form::select('categories[]', $article->taxonomiesDropdown(1,1), null, ['class' => 'form-control select2', 'id' => '']) !!}
 </div>
 
 {{-- Taxonomy: tags --}}
 <div class="form-group">
   <label for="tags_general">Tags</label>
-  {!! Form::select('tag_list[]', $tags, null, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
+  {!! Form::select('tag_list[]', $article->taxonomiesDropdown(2), null, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
 </div>
 
 {{-- Submit buttons --}}
