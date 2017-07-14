@@ -16,8 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(Request $request)
     {
       Schema::defaultStringLength(191);
-      // Set the app locale according to the URL
-      app()->setLocale($request->segment(1));
+      // If many languages > Set the app locale according to the URL
+      if(count(config('translatable.locales')) > 1 ){
+        app()->setLocale($request->segment(1));
+      }
     }
 
     /**
