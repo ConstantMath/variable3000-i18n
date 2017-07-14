@@ -5,7 +5,10 @@
       @if(!empty($parent_articles))
       <ul>
         @foreach ($parent_articles as $parent_article)
-        <li class="nav-item"><a href="{{ url(app()->getLocale().'/admin/'.$parent_article->id.'/articles') }}" class="@if($data['page_class'] == 'index-'.$parent_article->id) active @endif">{{ $parent_article->title }}</a></li>
+        <li class="nav-item">
+          <?php $index_active = ($data['page_class'] == 'index-'.$parent_article->id) ? 'active' : ''; ?>
+          {!! link_to_route('admin.index', $parent_article->title , $parent_article->id, ['class' => $index_active]) !!}
+        </li>
         @endforeach
       </ul>
       @endif
@@ -16,10 +19,12 @@
       Admin
       <ul>
         <li class="nav-item">
-          <a href="{{ url(app()->getLocale().'/admin/taxonomies') }}" class="@if($data['page_class'] == 'taxonomies-index' or $data['page_class'] == 'taxonomies-edit') active @endif">Categories</a>
+          <?php $categories_active = (strpos($data['page_class'], 'taxonomies') !== false) ? 'active' : ''; ?>
+          {!! link_to_route('taxonomies.index', 'Categories', '', ['class' => $categories_active] ) !!}
         </li>
         <li class="nav-item">
-          <a href="{{ url(app()->getLocale().'/admin/users') }}" class="@if($data['page_class'] == 'users-index' or $data['page_class'] == 'users-edit') active @endif">Users</a>
+          <?php $users_active = (strpos($data['page_class'], 'users') !== false) ? 'active' : ''; ?>
+          {!! link_to_route('users.index', 'Users', '', ['class' => $users_active] ) !!}
         </li>
       </ul>
     </li>
