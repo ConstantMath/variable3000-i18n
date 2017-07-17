@@ -103,11 +103,11 @@ class ArticlesController extends AdminController
     // Validator test
     if(empty($request->input(Lang::getLocale().'.title'))){
       $validator = Validator::make($request->all(), [
-        'title' => 'required|size:400',
+        'title' => 'required|max:400',
       ]);
     }else{
       $validator = Validator::make($request->all(), [
-        'title' => 'size:400',
+        'title' => 'max:400',
       ]);
     }
     // Get the current article
@@ -120,7 +120,7 @@ class ArticlesController extends AdminController
           // If text is not empty
           if(!empty($request->input($lang.'.text'))){
             $validator = Validator::make($request->all(), [
-              'title' => 'required|size:400',
+              'title' => 'required|max:400',
             ]);
           }else{
             // If lang title is empty : add to unset_requests array to avoid saving it later
@@ -180,6 +180,7 @@ class ArticlesController extends AdminController
    */
 
   public function store(Request $request){
+    // dd($request->all());
     $unset_requests = array();
     // Loop in locales to test if empty
     foreach (config('translatable.locales') as $lang){
@@ -193,11 +194,11 @@ class ArticlesController extends AdminController
     // Validator test
     if(empty($request->input(Lang::getLocale().'.title'))){
       $validator = Validator::make($request->all(), [
-        'title' => 'required|size:400',
+        'title' => 'required|max:400',
       ]);
     }else{
       $validator = Validator::make($request->all(), [
-        'title' => 'size:400',
+        'title' => 'max:400',
       ]);
     }
     // Validation test

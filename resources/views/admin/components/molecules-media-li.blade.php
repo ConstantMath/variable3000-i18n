@@ -21,7 +21,6 @@
     data-media-url="@if(!empty($media)){{ URL::to('/') }}/imagecache/large/{{ $media->name }}@endif"
     data-delete-link="@if(!empty($article->id)){{ route('admin.articles.deleteMedia', $article->id) }}@endif"
   >
-
     <span>@if(!empty($media)){{ $media->alt }}@endif</span>
   </a>
 </li>

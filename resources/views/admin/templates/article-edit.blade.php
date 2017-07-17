@@ -14,7 +14,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           {{$parent->title or 'Edit' }}
-          @if(isset($article->created_at))
+          @if(isset($article->id))
           <div class="tip pull-right created_at">
             <span>{{ $article->created_at }}</span>
             {!! Form::text('created_at', null, ['class' => 'form-control']) !!}

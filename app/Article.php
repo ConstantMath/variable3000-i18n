@@ -193,4 +193,5 @@ class Article extends Model{
       $date = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d.m.Y');
       return $date;
     }
+  
 }

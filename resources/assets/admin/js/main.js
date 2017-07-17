@@ -7,7 +7,6 @@ $(document).ready(function() {
   });
 
 
-
   // ----- Date picker ----- //
   // http://eonasdan.github.io/bootstrap-datetimepicker/
 
