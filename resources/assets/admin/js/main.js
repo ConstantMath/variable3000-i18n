@@ -79,6 +79,7 @@ $(document).ready(function() {
     })
   }
 
+
   // ----- Tags list select ----- //
   if ( $('.select2').length ){
     $('.select2').select2({
@@ -99,8 +100,8 @@ $(document).ready(function() {
     for(var i = 0; i < elements.length; i++){
       Sortable.create(elements.item(i), {
         onUpdate: function (evt) {
-          var url          = evt.item.getAttribute('url');
-          var parent_id  = evt.item.getAttribute('parent_id');
+          var url          = '/admin/articles/' + evt.item.getAttribute('data-article-id') + '/reorder';
+          var parent_id    = evt.item.getAttribute('data-parent-id');
           var new_order    = evt.newIndex;
           if (url && parent_id) {
             jQuery.ajax({

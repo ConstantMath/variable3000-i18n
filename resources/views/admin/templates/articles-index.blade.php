@@ -16,7 +16,11 @@
         <tbody id="index" class="sortable">
           @if($article->children)
             @foreach ($article->children as $child)
-            <tr class="published published-{!! $child->published !!}" url="{{ url(app()->getLocale().'/admin/articles/'.$child->id.'/reorder') }}" parent_id="{{$child->parent_id}}">
+            <tr
+              class="published published-{!! $child->published !!}"
+              data-parent-id="@if(!empty($child->parent_id)){{$child->parent_id}}@endif"
+              data-article-id="@if(!empty($child->id)){{$child->id}}@endif"              
+            >
             <td>
               <i class="fa fa-circle"></i>
               {!! link_to_route('admin.articles.edit', $child->title, [$child->parent_id, $child->id], ['class' => '']) !!}
