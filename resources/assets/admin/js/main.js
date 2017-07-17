@@ -104,7 +104,7 @@ $(document).ready(function() {
           var new_order    = evt.newIndex;
           if (article_id && parent_id) {
             jQuery.ajax({
-              url: '/admin/articles/' + article_id + '/reordermedia',
+              url: '/admin/articles/' + article_id + '/reorder',
               data: {
                 'parent_id' : parent_id,
                 'new_order' : new_order,
@@ -112,6 +112,7 @@ $(document).ready(function() {
               type: 'POST',
               success: function(response){
                 if(response.status == 'success'){
+                  console.log(url + '--');
                   //$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
                 }
               }
