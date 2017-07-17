@@ -20390,16 +20390,16 @@ $(document).ready(function() {
         Sortable.create(mediagallery, {
             /* options */
             onUpdate: function(evt) {
-                var url = evt.item.getAttribute('url');
-                var mediaId = evt.item.getAttribute('media-id');
-                var newOrder = evt.newIndex;
+                var article_id = evt.item.getAttribute('data-article-id');
+                var media_id = evt.item.getAttribute('data-media-id');
+                var new_order = evt.newIndex;
 
-                if (url && mediaId) {
+                if (article_id && media_id) {
                     jQuery.ajax({
-                        url: url,
+                        url: '/admin/articles/' + article_id + '/reordermedia',
                         data: {
-                            'mediaId': mediaId,
-                            'newOrder': newOrder,
+                            'mediaId': media_id,
+                            'newOrder': new_order,
                         },
                         type: 'POST',
                         success: function(response) {
@@ -20423,8 +20423,8 @@ function updateModalInfos(data) {
     media2.removeClass('ghost');
     media2.attr("media-id", data.media_id);
     media2.attr("id", 'media-' + data.media_id);
-    media2.find('a').attr("data-article-id", data.article_id);
-    media2.find('a').attr("data-media-id", data.media_id);
+    media2.attr("data-article-id", data.article_id);
+    media2.attr("data-media-id", data.media_id);
     media2.find('a').attr("data-media-alt", data.media_alt);
     media2.find('a').attr("data-media-description", data.media_description);
     // Custom
@@ -20681,12 +20681,12 @@ $(document).ready(function() {
         for (var i = 0; i < elements.length; i++) {
             Sortable.create(elements.item(i), {
                 onUpdate: function(evt) {
-                    var url = '/admin/articles/' + evt.item.getAttribute('data-article-id') + '/reorder';
+                    var article_id = evt.item.getAttribute('data-article-id');
                     var parent_id = evt.item.getAttribute('data-parent-id');
                     var new_order = evt.newIndex;
-                    if (url && parent_id) {
+                    if (article_id && parent_id) {
                         jQuery.ajax({
-                            url: url,
+                            url: '/admin/articles/' + article_id + '/reordermedia',
                             data: {
                                 'parent_id': parent_id,
                                 'new_order': new_order,

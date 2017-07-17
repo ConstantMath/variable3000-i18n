@@ -76,16 +76,16 @@ $(document).ready(function() {
     Sortable.create(mediagallery, {
       /* options */
       onUpdate: function (evt) {
-        var url       = evt.item.getAttribute('url');
-        var mediaId   = evt.item.getAttribute('media-id');
-        var newOrder  = evt.newIndex;
+        var article_id = evt.item.getAttribute('data-article-id');
+        var media_id   = evt.item.getAttribute('data-media-id');
+        var new_order   = evt.newIndex;
 
-        if (url && mediaId) {
+        if (article_id && media_id) {
           jQuery.ajax({
-            url: url,
+            url: '/admin/articles/' + article_id + '/reordermedia',
             data: {
-              'mediaId' : mediaId,
-              'newOrder': newOrder,
+              'mediaId' : media_id,
+              'newOrder': new_order,
             },
             type: 'POST',
             success: function(response){
@@ -110,8 +110,8 @@ function updateModalInfos(data){
   media2.removeClass('ghost');
   media2.attr("media-id", data.media_id);
   media2.attr("id", 'media-'+data.media_id);
-  media2.find('a').attr("data-article-id", data.article_id);
-  media2.find('a').attr("data-media-id", data.media_id);
+  media2.attr("data-article-id", data.article_id);
+  media2.attr("data-media-id", data.media_id);
   media2.find('a').attr("data-media-alt", data.media_alt);
   media2.find('a').attr("data-media-description", data.media_description);
   // Custom

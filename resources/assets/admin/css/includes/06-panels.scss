@@ -58,8 +58,8 @@
     white-space:nowrap;
     text-overflow:ellipsis;
     color: $black;
-
     &:hover{
+      cursor: pointer;
       text-decoration: none;
       i.fa-image{
         @extend .fa-ellipsis-h;

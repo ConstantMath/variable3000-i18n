@@ -100,12 +100,12 @@ $(document).ready(function() {
     for(var i = 0; i < elements.length; i++){
       Sortable.create(elements.item(i), {
         onUpdate: function (evt) {
-          var url          = '/admin/articles/' + evt.item.getAttribute('data-article-id') + '/reorder';
+          var article_id   = evt.item.getAttribute('data-article-id');
           var parent_id    = evt.item.getAttribute('data-parent-id');
           var new_order    = evt.newIndex;
-          if (url && parent_id) {
+          if (article_id && parent_id) {
             jQuery.ajax({
-              url: url,
+              url: '/admin/articles/' + article_id + '/reordermedia',
               data: {
                 'parent_id' : parent_id,
                 'new_order' : new_order,

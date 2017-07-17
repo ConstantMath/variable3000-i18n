@@ -258,7 +258,6 @@ class ArticlesController extends AdminController
     $article -> delete();
     session()->flash('flash_message', 'Deleted');
     return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
-    // return redirect()->action('Admin\ArticlesController@edit', ['id'=>$id]);
   }
 
 
