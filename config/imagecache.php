@@ -61,6 +61,7 @@ return array(
             $constraint->aspectRatio();
             $constraint->upsize();
           });
+          $image->encode('jpg', 60);
           return $image;
         },
 
@@ -69,6 +70,7 @@ return array(
             $constraint->aspectRatio();
             $constraint->upsize();
           });
+          $image->encode('jpg', 60);
           return $image;
         },
 
@@ -77,6 +79,7 @@ return array(
             $constraint->aspectRatio();
             $constraint->upsize();
           });
+          $image->encode('jpg', 60);
           return $image;
         },
     ),
