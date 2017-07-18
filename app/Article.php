@@ -193,5 +193,18 @@ class Article extends Model{
       $date = Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d.m.Y');
       return $date;
     }
-  
+
+
+    /**
+    * Create formated date-time
+    */
+
+    public function dateTime($date){
+      if(!empty($date)){
+        return Carbon::createFromFormat('d.m.Y', $date)->format('Y-m-d');
+      }else{
+        return null;
+      }
+    }
+
 }
