@@ -13,13 +13,13 @@
     </div>
     <div class="panel-body table-responsive">
       <table class="table">
-        <tbody id="index" class="sortable">
+        <tbody id="index" class="@if($article->id == 1) sortable @endif">
           @if($article->children)
             @foreach ($article->children as $child)
             <tr
               class="published published-{!! $child->published !!}"
               data-parent-id="@if(!empty($child->parent_id)){{$child->parent_id}}@endif"
-              data-article-id="@if(!empty($child->id)){{$child->id}}@endif"              
+              data-article-id="@if(!empty($child->id)){{$child->id}}@endif"
             >
             <td>
               <i class="fa fa-circle"></i>
