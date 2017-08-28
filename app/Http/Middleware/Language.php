@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 
 class Language
 {
@@ -28,9 +29,9 @@ class Language
         // Redirect to the correct url
         return redirect()->to(implode('/', $segments));
       }
-
     }
     return $next($request);
 
   }
+
 }

@@ -10,7 +10,10 @@ return [
     | Contains an array with the applications available locales.
     |
     */
-    'locales' => explode(',', env('APP_LOCALES')),
+    'locales' => [
+        'fr',
+        'en'
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +37,7 @@ return [
     | you can specify what default should be used here.
     |
     */
-    'locale' => env('APP_LOCALE', null),
+    'locale' => null,
 
     /*
     |--------------------------------------------------------------------------
