@@ -90,9 +90,9 @@ return array(
     |--------------------------------------------------------------------------
     |
     | Lifetime in minutes of the images handled by the imagecache route.
+    | 43200 = 30 jours
     |
     */
-
     'lifetime' => 43200,
 
 );
