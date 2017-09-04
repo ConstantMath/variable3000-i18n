@@ -41,9 +41,9 @@
   <meta name="theme-color" content="#ffffff">
   <!-- Styles -->
   @if (app('env') == 'local' )
-    <link href="{{ url('/dist/screen.css') }}" rel="stylesheet">
+    <link href="{{ url('/assets/screen.css') }}" rel="stylesheet">
   @else
-    <link href="{{ url('/dist/screen.min.css') }}" rel="stylesheet">
+    <link href="{{ url('/assets/screen.min.css') }}" rel="stylesheet">
   @endif
 </head>
 <body>
@@ -65,9 +65,9 @@
   </header>
   @yield('content')
   @if (app('env') == 'local' )
-    <script src="{{ url('/dist/scripts.js') }}"></script>
+    <script src="{{ url('/assets/scripts.js') }}"></script>
   @else
-    <script src="{{ url('/dist/scripts.min.js') }}"></script>
+    <script src="{{ url('/assets/scripts.min.js') }}"></script>
   @endif
   </div>
 </body>
