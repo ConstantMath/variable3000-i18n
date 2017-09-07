@@ -1,7 +1,7 @@
   <div class="modal fade" id="modal-media-edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
-        {!! Form::model($article, ['route' => ['admin.medias.update'], 'method' => 'post', 'class' => 'form-horizontal media-edit-form', 'name' => 'media-edit-form']) !!}
+        {!! Form::model($article, ['route' => ['admin.medias.update'], 'method' => 'post', 'class' => 'form-horizontal media-edit-form', 'name' => 'media-edit-form', 'enctype' => 'multipart/form-data']) !!}
           {!! Form::hidden('media_id', '', ['id' => 'input_media_id']) !!}
           <div class="modal-body">
             <div class="container-fluid">
@@ -17,7 +17,7 @@
                   <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" placeholder="Intro" rows="5" name="description" id="input_media_description"></textarea>
-                  </div>                  
+                  </div>
                 </div>
               </div>
             </div>

@@ -54,7 +54,7 @@ Route::post('/admin/articles/{id}/deletemedia', 'Admin\ArticlesMediasController@
 // Medias add // Many(Gallery)
 Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
 // Medias edit
-Route::post('/admin/medias/update/', 'Admin\MediasController@update')->name('admin.medias.update')->middleware('auth');
+Route::post('/admin/medias/update', 'Admin\MediasController@update')->name('admin.medias.update')->middleware('auth');
 // Medias reorder
 Route::post('/admin/articles/{id}/reordermedia', 'Admin\ArticlesMediasController@reorderMedia')->name('admin.articles.reordermedia');
 // Generic file upload

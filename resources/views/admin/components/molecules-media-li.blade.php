@@ -16,6 +16,7 @@
     data-toggle="modal"
     data-target="#modal-media-edit"
     data-column-name="{{ $column_name }}"
+    data-media-id="@if(!empty($media)){{ $media->id }}@endif"
     data-media-description="@if(!empty($media)){{ $media->description }}@endif"
     data-media-alt="@if(!empty($media)){{ $media->alt }}@endif"
     data-media-url="@if(!empty($media)){{ URL::to('/') }}/imagecache/large/{{ $media->name }}@endif"

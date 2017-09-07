@@ -20412,19 +20412,16 @@ $(document).ready(function() {
             }
         });
     }
-
 })
-
 
 function updateModalInfos(data) {
     var media = $('#panel-' + data.column_name + ' .ghost');
     var media2 = media.clone();
     media.before(media2);
     media2.removeClass('ghost');
-    media2.attr("media-id", data.media_id);
-    media2.attr("id", 'media-' + data.media_id);
     media2.attr("data-article-id", data.article_id);
     media2.attr("data-media-id", data.media_id);
+    media2.find('a').attr("data-media-id", data.media_id);
     media2.find('a').attr("data-media-alt", data.media_alt);
     media2.find('a').attr("data-media-description", data.media_description);
     // Custom
@@ -20432,7 +20429,7 @@ function updateModalInfos(data) {
     media2.find('a').attr("data-media-background-color", data.media_background_color);
     media2.find('a').attr("data-media-background-image", data.media_background_image);
 
-    media2.find('a').attr("data-delete-link", '/en/admin/articles/' + data.media_id + '/deletemedia');
+    media2.find('a').attr("data-delete-link", '/admin/articles/' + data.article_id + '/deletemedia');
     if (data.media_type == 'jpg' || data.media_type == 'png' || data.media_type == 'gif' || data.media_type == 'svg' || data.media_type == 'jpeg') {
         var icon = '<i class="fa fa-image"></i>';
         media2.find('a').attr("data-media-url", '/imagecache/large/' + data.media_name);
@@ -20518,24 +20515,23 @@ $(document).ready(function() {
 
     function mediaEditResponse(response, statusText, xhr, $form) {
         if (response.status == 'success') {
-            var media = $('li#media-' + response.media_id);
+            var media = $('li[data-media-id|=' + response.media_id + ']');
             // Clonage de l'élément, sinon impossible de mettre à jour les attributs
             var media2 = media.clone();
             media.hide();
             var media_link = media2.find('> a');
             media2.find('span').text(response.media_alt);
+            media2.find('a').attr("data-media-id", response.media_id);
             media2.find('a').attr("data-media-alt", response.media_alt);
             media2.find('a').attr("data-media-description", response.media_description);
             // Custom
             media2.find('a').attr("data-media-size", response.media_size);
             media2.find('a').attr("data-media-background-image", '/imagecache/small/' + response.media_background_image);
             media2.find('a').attr("data-media-background-color", response.media_background_color);
-
             media.before(media2);
             media.remove();
         }
     }
-
 
     // ----- Delete a media ----- //
 
@@ -20569,7 +20565,8 @@ $(document).ready(function() {
                         } else {
                             $('#main-form #' + column_name).val(null);
                         }
-                        $('#panel-' + response.column_name + ' .list-group #media-' + response.media_id).detach();
+                        var deleted_li = $('#panel-' + response.column_name + ' li[data-media-id|=' + response.media_id + ']');
+                        deleted_li.remove();
                     }
                 }
             });
