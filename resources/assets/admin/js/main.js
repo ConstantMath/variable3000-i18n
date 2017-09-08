@@ -124,17 +124,19 @@ $(document).ready(function() {
   }
 
   // ----- Display created at ----- //
-
   $('.tip.created_at').on('click',function(){
     $(this).addClass('show');
   });
 
 
   // ----- Color picker ----- //
-
   if ( $('.sortable').length ){
     $('.color-picker').colorpicker({ /*options...*/ });
   }
+
+
+  // ----- Hide index alerts ----- //
+  $("main .alert").delay(2000).fadeOut(300);
 
 
   // ----- Login logo  ----- //
