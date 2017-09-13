@@ -5,21 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('page_title')</title>
-  <meta name="description" content="[site]">
-  <meta name="keywords" content="[site]">
+  <meta name="description" content="Alice Gallery Brussels">
+  <meta name="keywords" content="Alice gallery Brussels Bruxelles Brussel Belgium">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta property="fb:admins" content="569403070">
   <meta property="fb:app_id" content="307156226006266">
-  <meta name="theme-color" content="#ffffff">
-  <meta name="apple-mobile-web-app-title" content="[site]">
-  <meta name="application-name" content="[site]">
+  <meta name="apple-mobile-web-app-title" content="Alice Gallery Brussels">
+  <meta name="application-name" content="Alice Gallery Brussels">
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="theme-color" content="#ffffff">
-  <meta property="og:locale" content="en_EN" />
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="@yield('page_title')" />
-  <meta property="og:description" content="[site]" />
-  <meta property="og:image" content="/assets/favicon/favicon-194x194.png" />
+  <meta property="og:title" content="@yield('page_title')">
+  <meta property="og:description" content="Alice Gallery Brussels">
+  <meta property="og:image" content="">
+  <meta property="og:url" content="">
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-touch-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicon/apple-touch-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicon/apple-touch-icon-72x72.png">

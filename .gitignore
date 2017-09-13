@@ -5,12 +5,11 @@ public/storage
 public/medias
 storage/*.key
 storage/debugbar
-vendor
 .idea
 .vagrant
 Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
-vendor/*
+/vendor/*
 composer.lock
