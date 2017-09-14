@@ -20,8 +20,8 @@ class TagsTableSeeder extends Seeder
       ]);
 
       Tag::create([
-        'en'  => ['name' => 'Category', 'slug' => 'tags'],
-        'fr'  => ['name' => 'Categorie', 'slug' => 'tags'],
+        'en'  => ['name' => 'Tags', 'slug' => 'tags'],
+        'fr'  => ['name' => 'Tags', 'slug' => 'tags'],
         'parent_id' => 0,
         'order' => 1,
       ]);
