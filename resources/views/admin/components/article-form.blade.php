@@ -23,7 +23,7 @@
   <div class="tab-content">
     {{-- lang panels  --}}
     @foreach (config('translatable.locales') as $lang)
-    <div id="tab{{ $lang }}" class="tab-pane @if($lang == Lang::getLocale()) active @endif">
+    <div id="tab{{ $lang }}" class="tab-pane @if($loop->first) active @endif">
       {{-- Title --}}
       <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
         <label for="title">Title</label>
