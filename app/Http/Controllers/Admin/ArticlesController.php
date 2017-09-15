@@ -95,13 +95,14 @@ class ArticlesController extends AdminController
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  int  $id
-   * @return \Illuminate\Http\Response
    */
 
   public function update(Request $request, $id){
     $unset_requests = array();
+    $app_locale = config('app.locale');
     // Validator test
-    if(empty($request->input(Lang::getLocale().'.title'))){
+    // Check if app locale title is set
+    if(empty($request->input($app_locale.'.title'))){
       $validator = Validator::make($request->all(), [
         'title' => 'required|max:400',
       ]);
@@ -114,7 +115,7 @@ class ArticlesController extends AdminController
     $article = Article::findOrFail($id);
     // Loop in locales to test if empty
     foreach (config('translatable.locales') as $lang){
-      if($lang != Lang::getLocale()){
+      if($lang != $app_locale){
         // If lang title is empty
         if(empty($request->input($lang.'.title'))){
           // If text is not empty

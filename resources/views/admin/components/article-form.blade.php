@@ -25,7 +25,7 @@
     @foreach (config('translatable.locales') as $lang)
     <div id="tab{{ $lang }}" class="tab-pane @if($loop->first) active @endif">
       {{-- Title --}}
-      <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+      <div class="form-group {!! $errors->has('title') ? 'has-error' : '' !!}">
         <label for="title">Title</label>
         {!! Form::text($lang.'[title]', (!empty($article->id) && !empty($article->translate($lang)->title))? $article->translate($lang)->title : '', ['class' => 'form-control', 'placeholder' => 'Title']) !!}
         <span class="slug">
@@ -33,17 +33,18 @@
           <i class="fa fa-link "></i>&nbsp;{{ (!empty($article->id) && !empty( $article->translate($lang)->slug))? $article->translate($lang)->slug : '' }}
           @endif
         </span>
-        @if($lang == Lang::getLocale())
+        {{config('app.name')}}
+        @if($lang == config('app.locale'))
           {!! $errors->first('title', '<span class="help-block">:message</span>') !!}
         @endif
       </div>
       {{-- Intro --}}
-      <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+      <div class="form-group {!! $errors->has('intro') ? 'has-error' : '' !!}">
         <label for="intro">Intro</label>
         {!! Form::textarea($lang.'[intro]', (!empty($article->id) && !empty($article->translate($lang)->intro))? $article->translate($lang)->intro :'', ['class' => 'form-control md-editor', 'placeholder' => 'Infos', 'rows' => '5']) !!}
       </div>
       {{-- Text --}}
-      <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
+      <div class="form-group {!! $errors->has('text') ? 'has-error' : '' !!}">
         <label for="text">Text</label>
         {!! Form::textarea($lang.'[text]', (!empty($article->id) && !empty($article->translate($lang)->text))? $article->translate($lang)->text : '', ['class' => 'form-control md-editor', 'id' => '', 'placeholder' => 'Text']) !!}
       </div>

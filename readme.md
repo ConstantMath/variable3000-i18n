@@ -12,3 +12,5 @@ LN 120   `media2.find('a').attr("data-delete-link", '/admin/articles/'+ data.art
 
 ### Admin Controllers
 Generalize names : $article inst. $works
+
+### Admin lang switch
