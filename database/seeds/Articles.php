@@ -16,7 +16,7 @@ class Articles extends Seeder
 
       Article::create([
           'en'  => ['title' => 'Projects', 'slug' => 'projects'],
-          'fr'  => ['title' => 'Projecs', 'slug' => 'projecs'],
+          'fr'  => ['title' => 'Projets', 'slug' => 'projets'],
           'published' => 1,
           'parent_id' => 0,
           'order' => 0,
@@ -32,7 +32,7 @@ class Articles extends Seeder
 
       Article::create([
           'en'  => ['title' => 'Static texts', 'slug' => 'static_texts'],
-          'fr'  => ['title' => 'Textes', 'slug' => 'textes'],
+          'fr'  => ['title' => 'Textes statiques', 'slug' => 'textes-statiques'],
           'published' => 1,
           'parent_id' => 0,
           'order' => 2,

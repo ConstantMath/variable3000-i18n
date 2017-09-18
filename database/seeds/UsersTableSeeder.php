@@ -11,16 +11,11 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-    //   DB::table('users')->insert([
-    //     'name' => '',
-    //     'email'  => '',
-    //     'password' => bcrypt(''),
-    //   ]);
-      //
-    //   DB::table('users')->insert([
-    //     'name' => '',
-    //     'email'  => '',
-    //     'password' => bcrypt(''),
-    //   ]);
+      DB::table('users')->insert([
+        'name' => 'Constant',
+        'email'  => 'constant@variable.club',
+        'password' => bcrypt('0000'),
+      ]);
+
     }
 }

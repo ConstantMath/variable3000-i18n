@@ -25,6 +25,19 @@
               <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
             </ul>
           </li>
+          {{-- lang dropdown --}}
+          @if(count(config('translatable.locales')) > 1 )
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+              {{app()->getLocale()}}&nbsp;<i class="fa fa-angle-down"></i>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+            @foreach (config('translatable.locales') as $lang)
+              <li class="lang__item @if (app()->getLocale() ==  $lang) active @endif"><a href="{{ route('lang.switch', $lang) }}" class="lang__link">{{ $lang }}</a></li>
+            @endforeach
+            </ul>
+          </li>
+          @endif
         @endif
       </ul>
     </div>

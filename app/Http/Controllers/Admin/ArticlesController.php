@@ -16,7 +16,7 @@ class ArticlesController extends AdminController
 {
 
   public function __construct(){
-    Lang::setLocale('en');
+    Lang::setLocale(config('app.locale'));
     $this->middleware('auth');
     parent::__construct();
   }
@@ -98,47 +98,19 @@ class ArticlesController extends AdminController
    */
 
   public function update(Request $request, $id){
-    $unset_requests = array();
-    $app_locale = config('app.locale');
-    // Validator test
-    // Check if app locale title is set
-    if(empty($request->input($app_locale.'.title'))){
-      $validator = Validator::make($request->all(), [
-        'title' => 'required|max:400',
-      ]);
-    }else{
-      $validator = Validator::make($request->all(), [
-        'title' => 'max:400',
-      ]);
-    }
     // Get the current article
     $article = Article::findOrFail($id);
-    // Loop in locales to test if empty
+    // Validator test by lang
     foreach (config('translatable.locales') as $lang){
-      if($lang != $app_locale){
-        // If lang title is empty
-        if(empty($request->input($lang.'.title'))){
-          // If text is not empty
-          if(!empty($request->input($lang.'.text'))){
-            $validator = Validator::make($request->all(), [
-              'title' => 'required|max:400',
-            ]);
-          }else{
-            // If lang title is empty : add to unset_requests array to avoid saving it later
-            array_push($unset_requests, $lang);
-            $translation = $article->getTranslation($lang);
-            if(!empty($translation) && $translation->locale != Lang::getLocale()){
-              // Delete this translation
-              $translation->delete();
-            }
-          }
-        }
+      if(empty($request->input($lang.'.title'))){
+        $validator = Validator::make($request->all(), [
+          'title' => 'required|max:400',
+        ]);
       }
     }
-
     // Validator check
-    if ($validator->fails()) {
-      return redirect()->route('admin.articles.edit', ['parent_slug' => $article->parent_id, 'id' => $id])->withErrors($validator);
+    if (isset($validator) && $validator->fails()) {
+      return redirect()->route('admin.articles.edit', ['parent_slug' => $article->parent_id, 'id' => $id])->withErrors($validator)->withInput();
     } else {
       $request['created_at'] = Carbon::createFromFormat('d.m.Y', $request->input('created_at'))->format('Y-m-d H:i:s');
       // Checkbox update
@@ -157,12 +129,8 @@ class ArticlesController extends AdminController
         $new_tags = "";
       }
       Tag::detachOldAddNew($new_tags, $tags_parent_id, $id);
-      // Article update : test if there are requests to remove ($unset_requests)
-      if(empty($unset_requests)):
-        $article->update($request->all());
-      else:
-        $article->update($request->except($unset_requests));
-      endif;
+      // Article update
+      $article->update($request->all());
       $data = $request->all();
       if(isset($data['finish'])){
         return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
@@ -181,41 +149,25 @@ class ArticlesController extends AdminController
    */
 
   public function store(Request $request){
-    // dd($request->all());
-    $unset_requests = array();
-    // Loop in locales to test if empty
+    // Validator test
+    // if(empty($request->input(Lang::getLocale().'.title'))){
     foreach (config('translatable.locales') as $lang){
-      if($lang != Lang::getLocale()){
-        // If lang title is empty : add to unset array to avoid saving it later
-        if(empty($request->input($lang.'.title'))){
-          array_push($unset_requests, $lang);
-        }
+      if(empty($request->input($lang.'.title'))){
+        $validator = Validator::make($request->all(), [
+          'title' => 'required|max:400',
+        ]);
       }
     }
-    // Validator test
-    if(empty($request->input(Lang::getLocale().'.title'))){
-      $validator = Validator::make($request->all(), [
-        'title' => 'required|max:400',
-      ]);
-    }else{
-      $validator = Validator::make($request->all(), [
-        'title' => 'max:400',
-      ]);
-    }
     // Validation test
-    if ($validator->fails()) {
-      return redirect()->route('admin.articles.create', ['parent_id' => $request->input('parent_id')])->withErrors($validator);
+    if (isset($validator) && $validator->fails()) {
+      return redirect()->route('admin.articles.create', ['parent_id' => $request->input('parent_id')])->withErrors($validator)->withInput();
     } else {
       // Increment order of all articles
       DB::table('articles')
             ->where('parent_id', $request->input('parent_id'))
             ->increment('order');
-      // Article create : test if there are requests to remove ($unset_requests)
-      if(empty($unset_requests)):
-        $article = Article::create($request->all());
-      else:
-        $article = Article::create($request->except($unset_requests));
-      endif;
+      // Article create
+      $article = Article::create($request->all());
       // ----- Taxonomies : categories ----- //
       $categories = $request->input('categories');
       if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
