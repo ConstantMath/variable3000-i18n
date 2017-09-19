@@ -20396,7 +20396,7 @@ $(document).ready(function() {
 
                 if (article_id && media_id) {
                     jQuery.ajax({
-                        url: '/admin/articles/' + article_id + '/reordermedia',
+                        url: '/en/admin/articles/' + article_id + '/reordermedia',
                         data: {
                             'mediaId': media_id,
                             'newOrder': new_order,
