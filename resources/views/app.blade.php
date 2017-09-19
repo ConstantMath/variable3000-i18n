@@ -50,7 +50,7 @@
   @if (app('env') == 'local' )
     <script src="{{ url('/assets/scripts.js') }}"></script>
   @else
-    <script src="{{ url('/asset/scripts.min.js') }}"></script>
+    <script src="{{ url('/assets/scripts.min.js') }}"></script>
   @endif
   </div>
 </body>
