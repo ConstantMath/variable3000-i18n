@@ -33,14 +33,21 @@ class Tag extends Model{
 	 *
    */
 
-  public static function detachOldAddNew($new_tags, $tag_parent_id, $article_id){
+  public static function detachOldAddNew($taxonomies_input, $taxonomy_parent_id, $article_id){
+    if(!empty($taxonomies_input)){
+      // Add new taxonomies
+      $new_taxonomies = Tag::processTags($taxonomies_input, $taxonomy_parent_id);
+    }else{
+      $new_taxonomies = "";
+    }
     $article = Article::findOrFail($article_id);
-    $all_tags = Tag::where('parent_id', $tag_parent_id)->get();
+    $all_tags = Tag::where('parent_id', $taxonomy_parent_id)->get();
     if(!$all_tags->isEmpty()){
       $article->tags()->detach($all_tags);
     }
-    if($new_tags && !empty($new_tags[0])){
-      $article->tags()->syncWithoutDetaching($new_tags);
+    if($new_taxonomies && !empty($new_taxonomies[0])){
+      //dd($new_taxonomies);
+      $article->tags()->syncWithoutDetaching($new_taxonomies);
     }
   }
 
@@ -52,14 +59,14 @@ class Tag extends Model{
    * @return Aray
    */
 
-  public static function processTags($tags, $parent_tag_id){
+  public static function processTags($tags, $tag_parent_id){
     // sépare le tableau retourné en numeric (tags existant) et string (nouveaux tags)
     $currentTags = array_filter($tags, 'is_numeric');
     $newTags = array_filter($tags, 'is_string');
 
     // crée un nouveau tag pour chaque string retournée et l'ajoute au tableau ‘tags' courant
     foreach ($newTags as $newTag):
-      // check si le tag n'es tpas déjà dans les tags existants
+      // check si le tag n'est pas déjà dans les tags existants
       if(in_array($newTag, $currentTags)):
         continue;
       endif;
@@ -69,7 +76,7 @@ class Tag extends Model{
       if(!$tag):
         $tag = Tag::create([
           'name' => $newTag,
-          'parent_id' => $parent_tag_id,
+          'parent_id' => $tag_parent_id,
         ]);
       endif;
       // et ajoute le nouvel ID au tableau

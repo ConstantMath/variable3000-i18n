@@ -123,12 +123,7 @@ class ArticlesController extends AdminController
       // Tags
       $tags_parent_id = 2;
       $tags_input = $request->input('tag_list');
-      if(!empty($tags_input)){
-        $new_tags = Tag::processTags($tags_input, $tags_parent_id);
-      }else{
-        $new_tags = "";
-      }
-      Tag::detachOldAddNew($new_tags, $tags_parent_id, $id);
+      Tag::detachOldAddNew($tags_input, $tags_parent_id, $id);
       // Article update
       $article->update($request->all());
       $data = $request->all();
