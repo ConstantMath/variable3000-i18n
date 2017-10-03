@@ -24,7 +24,6 @@ Auth::routes();
 //   ['except' => ['register']] // désactive register
 // );
 
-
 /*
 |--------------------------------------------------------------------------
 | Admin
@@ -79,8 +78,6 @@ Route::resource('/admin/users', 'Admin\UsersController');
 
 // Language switcher
 Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);
-
-
 // Homepage
 Route::get('/', 'HomeController@index');
 // Article : view

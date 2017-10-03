@@ -169,7 +169,7 @@ return [
         // Intervention image
         Intervention\Image\ImageServiceProvider::class,
         // Markdown
-        Buzzylab\Laradown\MarkdownServiceProvider::class,
+        // Buzzylab\Laradown\MarkdownServiceProvider::class,
         // Sluggable
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         // Translatable
@@ -243,7 +243,7 @@ return [
         // Intervention image
         'Image' => Intervention\Image\Facades\Image::class,
         // Markdown
-        'Markdown' => Buzzylab\Laradown\Facades\MarkdownFacade::class,
+        // 'Markdown' => Buzzylab\Laradown\Facades\MarkdownFacade::class,
     ],
 
 ];
