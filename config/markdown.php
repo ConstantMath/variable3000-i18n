@@ -51,6 +51,6 @@ return [
     |
     */
 
-    'breaks' => true,
+    'breaks' => false,
 
 ];
