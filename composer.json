@@ -6,7 +6,6 @@
     "type": "project",
     "require": {
         "php": ">=7.0.0",
-        "andreasindal/laravel-markdown": "^2.0",
         "barryvdh/laravel-debugbar": "^2.3",
         "cviebrock/eloquent-sluggable": "^4.2",
         "dimsav/laravel-translatable": "^8.0",
@@ -15,7 +14,8 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "~5.0",
-        "spatie/laravel-sitemap": "^3.2"
+        "spatie/laravel-sitemap": "^3.2",
+        "variablebxl/laravel-markdown": "2.0.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -62,5 +62,11 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "optimize-autoloader": true
+    },
+    "repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/variablebxl/laravel-markdown"
     }
+    ]
 }

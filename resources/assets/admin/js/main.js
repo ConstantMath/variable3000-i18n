@@ -41,7 +41,7 @@ $(document).ready(function() {
       // simplemde.render();
 
       inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
-        uploadUrl: '/admin/fileupload',
+        uploadUrl: '/en/admin/fileupload',
         allowedTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'application/pdf'],
         extraHeaders: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
