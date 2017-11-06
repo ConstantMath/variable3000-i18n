@@ -19,6 +19,7 @@ class UsersController extends AdminController
       $data = array(
         'page_class' => 'users-index',
         'page_title' => 'Users index',
+        'page_id'    => 'users',
       );
       $users = User::all();
       return view('admin/templates/users-index', compact('users', 'data'));
@@ -36,6 +37,7 @@ class UsersController extends AdminController
       $data = array(
         'page_class' => 'users-edit',
         'page_title' => 'Create a user',
+        'page_id'    => 'users',
       );
       $user = collect(new User);
       return view('admin/templates/user-edit', compact('data', 'user'));
@@ -99,6 +101,7 @@ class UsersController extends AdminController
       $data = array(
         'page_class' => 'users-edit',
         'page_title' => 'Edit a user',
+        'page_id'    => 'users',
       );
       $user = User::findOrFail($id);
 

@@ -44,8 +44,10 @@ class ArticlesController extends AdminController
                     ->orderBy('created_at', 'desc')
                     ->get();
       $data = array(
-        'page_class' => 'index',
+        'page_class' => 'index-articles index-'.$parent_id,
         'page_title' => 'Index',
+        'page_id'    => 'index-'.$parent_id,
+
       );
     }
     return view('admin/templates/articles-index', compact('articles', 'data'));
@@ -64,6 +66,8 @@ class ArticlesController extends AdminController
     $data = array(
       'page_class' => 'article',
       'page_title' => 'Article edit',
+      'page_id'    => 'index-'.$parent_id,
+
     );
     $article->parent = Article::where('id', $parent_id)->first();
     $article->medias = $article->medias;
@@ -83,6 +87,7 @@ class ArticlesController extends AdminController
     $data = array(
       'page_class' => 'article create',
       'page_title' => 'Article create',
+      'page_id'    => 'index-'.$parent_id,      
     );
     $article = new Article;
     $article->parent = Article::where('id', $parent_id)->first();

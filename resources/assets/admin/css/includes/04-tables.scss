@@ -17,8 +17,11 @@
   }
 
   .attribute{
-    text-align: right;
     color: $greyDark;
+  }
+
+  td:last-of-type{
+    text-align: right;
   }
 }
 

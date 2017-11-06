@@ -28,6 +28,7 @@ class TaxonomiesController extends AdminController
      $data = array(
        'page_class' => 'taxonomies-index',
        'page_title' => 'Taxonomies',
+       'page_id'    => 'taxonomies',
      );
      $taxonomies = Tag::where('parent_id', 0)->orderBy('order', 'asc')->get();
      // Add children
@@ -48,6 +49,7 @@ class TaxonomiesController extends AdminController
      $data = array(
        'page_class' => 'taxonomies-create',
        'page_title' => 'Taxonomy create',
+       'page_id'    => 'taxonomies',
      );
      $taxonomy = collect(new Tag);
      $taxonomy->parent = Tag::where('id', $parent_id)->first();
@@ -117,6 +119,8 @@ class TaxonomiesController extends AdminController
       $data = array(
         'page_class' => 'taxonomies-edit',
         'page_title' => 'Taxonomy edit',
+        'page_id'    => 'taxonomies',
+
       );
       $taxonomy = Tag::findOrFail($id);
       return view('admin/templates/taxonomy-edit',  compact('taxonomy', 'data'));
