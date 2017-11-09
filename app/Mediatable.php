@@ -10,8 +10,13 @@ trait Mediatable{
    */
 
   public function medias(){
-    return $this->morphMany(Media::class, 'mediatable')->orderBy('order', 'asc');
+    return $this->morphMany(Media::class, 'mediatable')
+                ->orderBy('order', 'asc');
   }
+
+
+
+
 
   /**
    * Fetch last media from article
@@ -20,7 +25,10 @@ trait Mediatable{
    */
 
   public function lastMediaId(){
-    return $this->morphMany(Media::class, 'mediatable')->orderBy('order', 'desc')->pluck('order')->first();
+    return $this->morphMany(Media::class, 'mediatable')
+                ->orderBy('order', 'desc')
+                ->pluck('order')
+                ->first();
   }
 
 }

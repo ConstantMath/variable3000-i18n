@@ -3,9 +3,9 @@
     data-article-id="@if(!empty($article->id)){{$article->id}}@endif"
 >
   @if(!empty($article->id) && !empty($media))
-    @if($media->type == 'jpg' or $media->type == 'png' or $media->type == 'gif' or $media->type == 'svg' or $media->type == 'jpeg')
+    @if($media->ext == 'jpg' or $media->ext == 'png' or $media->ext == 'gif' or $media->ext == 'svg' or $media->ext == 'jpeg')
       <i class="fa fa-image"></i>
-    @elseif($media->type == 'pdf')
+    @elseif($media->ext == 'pdf')
       <i class="fa fa-file-pdf-o"></i>
     @else
       <i class="fa fa-file"></i>
@@ -15,7 +15,7 @@
     class="column-title"
     data-toggle="modal"
     data-target="#modal-media-edit"
-    data-column-name="{{ $column_name }}"
+    data-media-type="@if(!empty($media)){{ $media->type }}@endif"
     data-media-id="@if(!empty($media)){{ $media->id }}@endif"
     data-media-description="@if(!empty($media)){{ $media->description }}@endif"
     data-media-alt="@if(!empty($media)){{ $media->alt }}@endif"

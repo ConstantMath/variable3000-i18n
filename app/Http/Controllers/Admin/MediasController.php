@@ -23,7 +23,7 @@ class MediasController extends Controller {
    public function fileUpload(Request $request){
      // Validator conditions
      $validator = Validator::make($request->all(), [
-       'file' => 'required|mimes:jpeg,jpg,png,gif,pdf',
+       'file' => 'required|mimes:jpeg,jpg,png,gif,pdf,mp4',
      ]);
      // Validator test
      if ($validator->fails()) {

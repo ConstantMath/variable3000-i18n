@@ -37,7 +37,7 @@ class ArticlesController extends AdminController
       $data = array(
         'page_class' => 'index-'.$parent_id,
         'page_title' => 'Index',
-        'page_id'    => 'index-'.$parent_id,        
+        'page_id'    => 'index-'.$parent_id,
       );
     }else{
       $articles = Article::where('parent_id', $parent_id)
@@ -68,11 +68,7 @@ class ArticlesController extends AdminController
       'page_class' => 'article',
       'page_title' => 'Article edit',
       'page_id'    => 'index-'.$parent_id,
-
     );
-    $article->parent = Article::where('id', $parent_id)->first();
-    $article->medias = $article->medias;
-    $article->image_une =  ($article->image_une)? Media::find($article->image_une) : null;
   	return view('admin/templates/article-edit',  compact('article', 'data'));
   }
 

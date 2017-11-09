@@ -14,12 +14,13 @@ class CreateMediasTable extends Migration
     {
       Schema::create('medias', function (Blueprint $table) {
         $table->increments('id');
-        $table->string('type');
+        $table->string('ext');
         $table->string('name');
         $table->string('alt')->nullable();
         $table->text('description')->nullable();
         $table->integer('mediatable_id')->nullable();
         $table->integer('order')->nullable();
+        $table->string('type')->nullable();
         $table->string('mediatable_type')->nullable();
         $table->timestamps();
       });

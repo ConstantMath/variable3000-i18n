@@ -34,14 +34,38 @@ class Article extends Model{
 
 
   /**
+   * Fetch all medias by type for the model ordered
+   * @param string  $type
+   *
+   * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+   */
+
+  public function mediasByType(){
+    return $this->morphMany(Media::class, 'mediatable')
+                ->orderBy('order', 'asc');
+  }
+
+
+  /**
    * Retourne les articles enfants
    *
    */
 
   public function children(){
-    return $this->hasMany('App\article', 'parent_id')
+    return $this->hasMany('App\Article', 'parent_id')
                 ->orderBy('order', 'asc');
   }
+
+
+  /**
+   * Get the parent article
+   * @param int  $id
+	 *
+   */
+
+   public function parent(){
+     return $this->belongsTo('App\Article', 'parent_id');
+   }
 
 
   /**
@@ -55,24 +79,6 @@ class Article extends Model{
                 ->orderBy('order', 'asc');
   }
 
-
-  /**
-   * Add sub attributes to articles
-   *
-   * @param string  $parent_slug
-   * @return Builder
-   */
-
-  public static function mapElements($articles){
-    $articles->map(function ($item, $key) {
-      // Year
-      // $year = $item->tags()->where('parent_id', 1)->first();
-      // $item['year'] = $year['name'];
-      // Add main image
-      $item['media'] =  ($item->image_une)? Media::find($item->image_une) : null;
-    });
-    return $articles;
-  }
 
 
   /**
@@ -113,7 +119,6 @@ class Article extends Model{
   }
 
 
-
   /**
    * Returns the categories for a select
    *
@@ -126,7 +131,6 @@ class Article extends Model{
       return Tag::where('parent_id', $parent_id)->get()->pluck('name', 'id');
     }
   }
-
 
 
   /**
