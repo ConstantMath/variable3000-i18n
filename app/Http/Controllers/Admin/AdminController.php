@@ -14,6 +14,11 @@ class AdminController extends Controller
     $this->middleware('auth');
     // Header share : get all parent articles
     $parent_articles = Article::where('parent_id', 0)->get();
+    $data = array(
+      'page_class' => 'index-articles index-0',
+      'page_title' => 'Index',
+      'page_id'    => 'index-0'
+    );    
     View::share('parent_articles', $parent_articles );
   }
 }

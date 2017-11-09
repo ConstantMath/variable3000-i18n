@@ -37,6 +37,7 @@ class ArticlesController extends AdminController
       $data = array(
         'page_class' => 'index-'.$parent_id,
         'page_title' => 'Index',
+        'page_id'    => 'index-'.$parent_id,        
       );
     }else{
       $articles = Article::where('parent_id', $parent_id)
@@ -87,7 +88,7 @@ class ArticlesController extends AdminController
     $data = array(
       'page_class' => 'article create',
       'page_title' => 'Article create',
-      'page_id'    => 'index-'.$parent_id,      
+      'page_id'    => 'index-'.$parent_id,
     );
     $article = new Article;
     $article->parent = Article::where('id', $parent_id)->first();
