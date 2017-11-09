@@ -1,3 +1,5 @@
+var url = '/en/admin';
+
 $(document).ready(function() {
 
   $.ajaxSetup({
@@ -5,7 +7,6 @@ $(document).ready(function() {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-
 
   // ----- Date picker ----- //
   // http://eonasdan.github.io/bootstrap-datetimepicker/
@@ -16,6 +17,7 @@ $(document).ready(function() {
       format: 'DD/MM/YYYY'
     });
   }
+
 
 
   // ----- Markdown editor ----- //

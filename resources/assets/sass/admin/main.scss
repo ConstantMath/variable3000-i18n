@@ -236,3 +236,16 @@ h2{
 .sortable-ghost{
   opacity: 0;
 }
+
+
+/* ----- Loading ----- */
+
+@keyframes blink {
+  50% {opacity: 0.0}
+}
+
+.fa.blink {
+  display: none;
+  animation: blink .5s step-start 0s infinite;
+  .loading &{display: inline}
+}

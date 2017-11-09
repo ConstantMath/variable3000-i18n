@@ -1,22 +1,11 @@
 <?php
   $medias= $article->medias->where('type', $media_type);
 ?>
-<div class="panel panel-default media-panel" id="panel-{{ $media_type }}">
+<div class="panel panel-default media-panel loading" id="panel-{{ $media_type }}" data-media-type="{{ $media_type }}">
   <div class="panel-heading">{{  $panel_title }}</div>
   <div class="panel-body">
-    <ul
-      class="
-        list-group mediagallery
-        @if( count($medias) == 0) ul-empty @endif
-        @if (isset($article->id)) sortable @endif"
-      >
-      <?php $media = array(); ?>
-      @include('admin.components.molecules-media-li')
-      @if (isset($medias))
-        @foreach ($medias as $media)
-          @include('admin.components.molecules-media-li')
-        @endforeach
-      @endif
+    <i class="fa fa-ellipsis-h blink"></i>
+    <ul class="list-group sortable media-list">
     </ul>
     @if (isset($article->id))
       {!! Form::model($article, ['route' => ['admin.articles.addsinglemedia', $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}

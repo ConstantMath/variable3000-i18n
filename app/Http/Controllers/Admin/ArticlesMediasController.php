@@ -19,6 +19,23 @@ class ArticlesMediasController extends Controller
 
 
   /**
+   * Return article's medias
+   *
+   * @param  int  $id
+   * @return \Json\Response
+   */
+
+  public function getMedias($id, $media_type){
+    $article = Article::findOrFail($id);
+    $medias = $article->medias->where('type', $media_type);
+    return response()->json([
+      'success' => true,
+      'medias' => $medias,
+    ]);
+  }
+
+
+  /**
    * Ajoute un media unique à l'article courant
    *
    * @param  \Illuminate\Http\Request  $request
@@ -81,9 +98,9 @@ class ArticlesMediasController extends Controller
     $media_id = $request->media_id;
     Media::deleteMediaFile($media_id);
     return response()->json([
-      'status'       => 'success',
-      'type'  => $type,
-      'media_id'     => $media_id,
+      'status'    => 'success',
+      'type'      => $type,
+      'media_id'  => $media_id,
     ]);
   }
 

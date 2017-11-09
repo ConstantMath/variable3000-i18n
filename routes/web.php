@@ -47,6 +47,8 @@ Route::get('/admin/{parent_slug}/articles/{articles}/edit/', 'Admin\ArticlesCont
 Route::post('/admin/articles/{id}/reorder', 'Admin\ArticlesController@reorder')->name('admin.articles.reorder');
 
 // Medias add // Single
+Route::get('/admin/articles/{id}/getmedias/{media_type}', 'Admin\ArticlesMediasController@getMedias')->name('admin.articles.getmedias');
+// Medias add // Single
 Route::post('/admin/articles/{id?}/addsinglemedia', 'Admin\ArticlesMediasController@addSingleMedia')->name('admin.articles.addsinglemedia');
 // Medias delete
 Route::post('/admin/articles/{id}/deletemedia', 'Admin\ArticlesMediasController@deleteMedia')->name('admin.articles.deleteMedia');
