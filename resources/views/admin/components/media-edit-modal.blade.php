@@ -8,6 +8,9 @@
               <div class="row">
                 <div class="col-md-6">
                   <figure><img src="" id="pic"></figure>
+                  <video width="320" height="240" controls id="vid">
+                    <source src="" type="video/mp4">
+                  </video>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
@@ -23,7 +26,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <a href="#" class="media-delete btn" data-dismiss="modal" column_name="" media_id=""><i class="fa fa-trash"></i> delete</a>
+            <a href="#" class="media-delete btn" data-dismiss="modal" media_type="" media_id=""><i class="fa fa-trash"></i> delete</a>
             <div class="pull-right">
               <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
               <button type="button" class="btn btn-primary media-edit-save" data-dismiss="modal">Save</button>

@@ -4854,7 +4854,6 @@ $(document).ready(function() {
   }
 
 
-
   // ----- Markdown editor ----- //
   // https://github.com/NextStepWebs/simplemde-markdown-editor
 
@@ -5073,14 +5072,18 @@ $(document).ready(function() {
   // ----- Medias panel display data----- //
 
   if( $('.media-panel').length ){
-
     $('.media-panel').each(function( index ) {
       var media_type = $(this).attr('data-media-type');
+      // Build media list
       getMedias(media_type);
-
+      // Build hidden input
+      $('<input>').attr({
+        type: 'hidden',
+        id: media_type,
+        name: media_type+'[]'
+      }).appendTo('#main-form');
     });
   }
-
 
 
   // ----- Medias panel add & upload ----- //
@@ -5097,7 +5100,7 @@ $(document).ready(function() {
   // ----- Add single media w/ Ajax ----- //
 
   var single_media_options = {
-    success:  singleMediaResponse,
+    success:  mediaResponse,
     dataType: 'json'
   };
 
@@ -5108,52 +5111,11 @@ $(document).ready(function() {
     panel.addClass('loading');
   });
 
-  function singleMediaResponse(response, statusText, xhr, $form){
-    if(response.success == false){
-      // À faire
-    } else {
-      var media_type = response.type;
-      getMedias(media_type);
+  function mediaResponse(response, statusText, xhr, $form){
+    if(response.success == true){
+      getMedias(response.type);
     }
   }
-
-
-  // ----- Add gallery media w/ Ajax ----- //
-
-  // var options = {
-  //   success:  galleryMediaResponse,
-  //   dataType: 'json'
-  // };
-  //
-  // $('body').delegate('#gallery-image','change', function(){
-  //   $('#article-gallery-upload').ajaxForm(options).submit();
-  // });
-  //
-  // function galleryMediaResponse(response, statusText, xhr, $form)  {
-  //   if(response.success == false){
-  //     // À faire
-  //     // var arr = response.errors;
-  //     // $.each(arr, function(index, value){
-  //     //   if (value.length != 0){
-  //     //     $("#validation").append('<div class="alert alert-error"><strong>'+ value +'</strong><div>');
-  //     //   }
-  //     // });
-  //     // $("#validation").show();
-  //   } else {
-  //     if(response.article_id == 'null'){
-  //       var medias = [];
-  //       var current_medias = $('#input-mediagallery').val();
-  //       if(current_medias){
-  //         medias = medias.concat(current_medias);
-  //       }
-  //       // Ajoute le media courant au tableau des médias
-  //       medias.push(response.media_id);
-  //       $('#main-form #input-mediagallery').val(medias);
-  //     }
-  //     updateModalInfos(response);
-  //   }
-  // }
-
 
   // ----- Sortable ----- //
 
@@ -5212,8 +5174,10 @@ function printList(medias, media_type) {
   if(medias && media_type){
     var ul = $('#panel-'+media_type+' .media-list');
     var	li = '';
+    var	dataArray = [];
     // Json Medias loop
     $.each( medias, function( key, value ) {
+      // Build <li>
       li = li + '<li class="list-group-item">';
       // Icon
       if(value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg'){
@@ -5225,72 +5189,61 @@ function printList(medias, media_type) {
       }else{
         li = li + '<i class="fa fa-file"></i>';
       }
-      li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-alt="'+value.alt+'" data-media-url="/imagecache/large/'+value.name+'" data-delete-link="'+url+'/articles/'+value.mediatable_id+'/deleteMedia">';
+      li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">';
       li = li + '<span>'+value.alt+'</span>';
       li = li + '</a>';
       li = li + '</li>';
+      // Add input fields data
+      dataArray.push(value.id);
     });
     ul.html(li);
+    $('#' + media_type).val(dataArray);
   }
 }
 
 // ----- Declare modal ----- //
 
 $('#modal-media-edit').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-  var article_id = button.data('article_id');
-  var data_delete_link = button.data('delete-link');
-  var column_name = button.data('column-name');
-  var media_id = button.data('media-id');
-  var media_alt = button.data('media-alt');
-  var media_url = button.data('media-url');
+  var button            = $(event.relatedTarget);
+  var article_id        = button.data('article_id');
+  var column_name       = button.data('column-name');
+  var media_id          = button.data('media-id');
+  var media_alt         = button.data('media-alt');
+  var media_name        = button.data('media-name');
   var media_description = button.data('media-description');
-  var modal = $(this);
-  modal.find('.media-delete').attr("href", data_delete_link);
+  var media_ext         = button.data('media-ext');
+  var media_type        = button.data('media-type');
+  var modal             = $(this);
+  var pic_container     = modal.find('#pic');
+  var vid_container     = modal.find('#vid');
+  var vid_source        = modal.find('#vid > source');
+  modal.find('.media-delete').attr("href", url+'/articles/'+media_id+'/deletemedia');
   modal.find('.media-delete').attr("column_name", column_name);
   modal.find('.media-delete').attr("media_id", media_id);
-  modal.find('.single-m-delete').attr("media_id", media_id);
+  modal.find('.media-delete').attr("media_type", media_type);
   modal.find('#input_media_id').val(media_id);
   modal.find('#input_media_alt').val(media_alt);
   modal.find('#input_media_description').val(media_description);
-  modal.find('#pic').attr("src", media_url);
-  $("#modalButton").off('click');
-})
 
-
-$('#modal-media-edit-custom').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget);
-  var article_id = button.data('article_id');
-  var data_delete_link = button.data('delete-link');
-  var column_name = button.data('column-name');
-  var media_id = button.data('media-id');
-  var media_alt = button.data('media-alt');
-  var media_url = button.data('media-url');
-  var size = button.data('media-size');
-  var background_color = button.data('media-background-color');
-  var background_image = button.data('media-background-image');
-
-  var modal = $(this);
-  modal.find('#pic').attr("src", media_url);
-  modal.find('.media-delete').attr("href", data_delete_link);
-  modal.find('.media-delete').attr("column_name", column_name);
-  modal.find('.media-delete').attr("media_id", media_id);
-  modal.find('.single-m-delete').attr("media_id", media_id);
-  modal.find('#input_media_id').val(media_id);
-  modal.find('#input_media_alt').val(media_alt);
-  modal.find('#size').val(size);
-  modal.find('#background-color').val(background_color);
-  if(background_image.endsWith("small/")){ // background_imge vide
-    modal.find('#pic-background-image').hide();
+  if(media_ext == 'mp4'){
+    pic_container.attr('src', '').hide();
+    vid_container.show();
+    vid_source.attr('src', '/medias/'+media_name);
+    vid_container.load();
   }else{
-    modal.find('#pic-background-image').attr("src", background_image);
+    vid_container.hide();
+    vid_source.attr('src', '');
+    pic_container.show();
+    pic_container.attr('src', '/imagecache/large/'+media_name);
   }
   $("#modalButton").off('click');
 })
 
+
 $(document).ready(function() {
 
-  // ----- Edit media (single & gallery) ----- //
+
+  // ----- Edit media ----- //
 
   var media_edit_options = {
     success:       mediaEditResponse,
@@ -5304,21 +5257,7 @@ $(document).ready(function() {
 
   function mediaEditResponse(response, statusText, xhr, $form){
     if(response.status == 'success'){
-      var media = $( 'li[data-media-id|=' + response.media_id + ']');
-      // Clonage de l'élément, sinon impossible de mettre à jour les attributs
-      var media2 = media.clone();
-      media.hide();
-      var media_link = media2.find('> a');
-      media2.find('span').text(response.media_alt);
-      media2.find('a').attr("data-media-id", response.media_id);
-      media2.find('a').attr("data-media-alt", response.media_alt);
-      media2.find('a').attr("data-media-description", response.media_description);
-      // Custom
-      media2.find('a').attr("data-media-size", response.media_size);
-      media2.find('a').attr("data-media-background-image", '/imagecache/small/'+response.media_background_image);
-      media2.find('a').attr("data-media-background-color", response.media_background_color);
-      media.before(media2);
-      media.remove();
+      getMedias(response.media_type);
     }
   }
 
@@ -5328,34 +5267,20 @@ $(document).ready(function() {
   $('.modal').on('click', '.media-delete', function(e){
     e.preventDefault();
     var url         = $(this).attr('href')
-    var column_name = $(this).attr('column_name');
+    var media_type  = $(this).attr('media_type');
     var media_id    = $(this).attr('media_id');
 
     if (url && media_id) {
       jQuery.ajax({
         url: url,
         data: {
-          'column_name' : column_name,
-          'media_id'    : media_id,
+          'media_type' : media_type,
+          'media_id'   : media_id,
         },
         type: 'POST',
         success: function(response){
-          if(response.status == 'success'){
-            if(response.column_name == 'mediagallery'){
-              // Galleries : Loop dans les medias & delete
-              var mediagallery_val = $('#main-form #input-mediagallery').val();
-              var mediagallery_arr = mediagallery_val.split(',');
-              for(var i = mediagallery_arr.length - 1; i >= 0; i--) {
-                if(mediagallery_arr[i] === response.media_id) {
-                 mediagallery_arr.splice(i, 1);
-                 $('#main-form #input-mediagallery').val(mediagallery_arr);
-                }
-              }
-            }else{
-              $('#main-form #'+ column_name).val(null);
-            }
-            var deleted_li = $('#panel-' + response.column_name + ' li[data-media-id|=' + response.media_id + ']');
-            deleted_li.remove();
+          if(response.success == true){
+            getMedias(response.media_type);
           }
         }
       });

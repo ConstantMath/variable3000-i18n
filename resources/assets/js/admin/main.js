@@ -19,7 +19,6 @@ $(document).ready(function() {
   }
 
 
-
   // ----- Markdown editor ----- //
   // https://github.com/NextStepWebs/simplemde-markdown-editor
 

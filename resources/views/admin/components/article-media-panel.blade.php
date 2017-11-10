@@ -4,9 +4,9 @@
 <div class="panel panel-default media-panel loading" id="panel-{{ $media_type }}" data-media-type="{{ $media_type }}">
   <div class="panel-heading">{{  $panel_title }}</div>
   <div class="panel-body">
-    <i class="fa fa-ellipsis-h blink"></i>
     <ul class="list-group sortable media-list">
     </ul>
+    <i class="fa fa-ellipsis-h blink"></i>
     @if (isset($article->id))
       {!! Form::model($article, ['route' => ['admin.articles.addsinglemedia', $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else

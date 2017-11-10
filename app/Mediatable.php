@@ -21,11 +21,13 @@ trait Mediatable{
   /**
    * Fetch last media from article
    *
+   * @param  string  $type
    * @return \Illuminate\Database\Eloquent\Relations\MorphMany
    */
 
-  public function lastMediaId(){
+  public function lastMediaId($type){
     return $this->morphMany(Media::class, 'mediatable')
+                ->where('type', $type)
                 ->orderBy('order', 'desc')
                 ->pluck('order')
                 ->first();

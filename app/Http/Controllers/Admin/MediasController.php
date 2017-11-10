@@ -78,9 +78,7 @@ class MediasController extends Controller {
       'media_id'                => $media->id,
       'media_alt'               => $media->alt,
       'media_description'       => $media->description,
-      'media_size'              => $media->size,
-      'media_background_image'  => $media->background_image,
-      'media_background_color'  => $media->background_color,
+      'media_type'              => $media->type,
     ]);
   }
 

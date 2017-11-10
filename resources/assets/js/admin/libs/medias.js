@@ -3,14 +3,18 @@ $(document).ready(function() {
   // ----- Medias panel display data----- //
 
   if( $('.media-panel').length ){
-
     $('.media-panel').each(function( index ) {
       var media_type = $(this).attr('data-media-type');
+      // Build media list
       getMedias(media_type);
-
+      // Build hidden input
+      $('<input>').attr({
+        type: 'hidden',
+        id: media_type,
+        name: media_type+'[]'
+      }).appendTo('#main-form');
     });
   }
-
 
 
   // ----- Medias panel add & upload ----- //
@@ -27,7 +31,7 @@ $(document).ready(function() {
   // ----- Add single media w/ Ajax ----- //
 
   var single_media_options = {
-    success:  singleMediaResponse,
+    success:  mediaResponse,
     dataType: 'json'
   };
 
@@ -38,52 +42,11 @@ $(document).ready(function() {
     panel.addClass('loading');
   });
 
-  function singleMediaResponse(response, statusText, xhr, $form){
-    if(response.success == false){
-      // À faire
-    } else {
-      var media_type = response.type;
-      getMedias(media_type);
+  function mediaResponse(response, statusText, xhr, $form){
+    if(response.success == true){
+      getMedias(response.type);
     }
   }
-
-
-  // ----- Add gallery media w/ Ajax ----- //
-
-  // var options = {
-  //   success:  galleryMediaResponse,
-  //   dataType: 'json'
-  // };
-  //
-  // $('body').delegate('#gallery-image','change', function(){
-  //   $('#article-gallery-upload').ajaxForm(options).submit();
-  // });
-  //
-  // function galleryMediaResponse(response, statusText, xhr, $form)  {
-  //   if(response.success == false){
-  //     // À faire
-  //     // var arr = response.errors;
-  //     // $.each(arr, function(index, value){
-  //     //   if (value.length != 0){
-  //     //     $("#validation").append('<div class="alert alert-error"><strong>'+ value +'</strong><div>');
-  //     //   }
-  //     // });
-  //     // $("#validation").show();
-  //   } else {
-  //     if(response.article_id == 'null'){
-  //       var medias = [];
-  //       var current_medias = $('#input-mediagallery').val();
-  //       if(current_medias){
-  //         medias = medias.concat(current_medias);
-  //       }
-  //       // Ajoute le media courant au tableau des médias
-  //       medias.push(response.media_id);
-  //       $('#main-form #input-mediagallery').val(medias);
-  //     }
-  //     updateModalInfos(response);
-  //   }
-  // }
-
 
   // ----- Sortable ----- //
 
@@ -142,8 +105,10 @@ function printList(medias, media_type) {
   if(medias && media_type){
     var ul = $('#panel-'+media_type+' .media-list');
     var	li = '';
+    var	dataArray = [];
     // Json Medias loop
     $.each( medias, function( key, value ) {
+      // Build <li>
       li = li + '<li class="list-group-item">';
       // Icon
       if(value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg'){
@@ -155,11 +120,14 @@ function printList(medias, media_type) {
       }else{
         li = li + '<i class="fa fa-file"></i>';
       }
-      li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-alt="'+value.alt+'" data-media-url="/imagecache/large/'+value.name+'" data-delete-link="'+url+'/articles/'+value.mediatable_id+'/deleteMedia">';
+      li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">';
       li = li + '<span>'+value.alt+'</span>';
       li = li + '</a>';
       li = li + '</li>';
+      // Add input fields data
+      dataArray.push(value.id);
     });
     ul.html(li);
+    $('#' + media_type).val(dataArray);
   }
 }

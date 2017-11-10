@@ -61,17 +61,25 @@ class ArticlesMediasController extends Controller
       $media->type       = $request->input('type');
       $media->width      = $width;
       $media->height     = $height;
+      /// If Media unique (not gallery) > Delete current before saving,
+      if($media->type == 'une'){
+        $current_media = $article->medias->where('type', $media->type)->first();
+        if(!empty($current_media)):
+          Media::deleteMediaFile($current_media->id);
+        endif;
+      }
       $media->save();
       // Link media to article
       if(isset($article)){
         // retourne le dernier media
-        $next_media_order = $article->lastMediaId();
+        $next_media_order = $article->lastMediaId($media->type);
         $next_media_order += 1;
         // Article -> media
         $media->order = $next_media_order;
         $article->medias()->save($media);
       }
       return response()->json([
+        'success'     => true,
         'alt'         => $media->alt,
         'name'        => $media->name,
         'ext'         => $media->ext,
@@ -94,13 +102,13 @@ class ArticlesMediasController extends Controller
 
   public function deleteMedia(Request $request, $id){
     // $article = Article::findOrFail($id);
-    $type     = $request->type;
-    $media_id = $request->media_id;
+    $media_type = $request->media_type;
+    $media_id   = $request->media_id;
     Media::deleteMediaFile($media_id);
     return response()->json([
-      'status'    => 'success',
-      'type'      => $type,
-      'media_id'  => $media_id,
+      'success'    => true,
+      'media_type' => $media_type,
+      'media_id'   => $media_id,
     ]);
   }
 
