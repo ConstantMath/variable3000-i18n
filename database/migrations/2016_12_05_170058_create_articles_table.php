@@ -22,7 +22,6 @@ class CreateArticlesTable extends Migration
       $table->integer('order');
       $table->boolean('published')->default(false);
       $table->integer('parent_id')->nullable();
-      $table->integer('image_une')->nullable();
     });
   }
 

@@ -82,4 +82,21 @@ class MediasController extends Controller {
     ]);
   }
 
+  /**
+   * GEt all medias from id array
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getFromArray(Request $request){
+    $medias_array = explode( ',', $request->medias[0]);
+    $medias = Media::whereIn('id', $medias_array)->get();
+    return response()->json([
+      'success' => true,
+      'medias' => $medias,
+      'medias_array' => $medias_array,
+    ]);
+  }
+
 }

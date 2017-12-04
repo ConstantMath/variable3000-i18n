@@ -4928,7 +4928,7 @@ $(document).ready(function() {
 
   // ----- Sortable indexes----- //
 
-  if ( $('.sortable').length ){
+  if ( $('table .sortable').length ){
     // Get sortables elements
     var elements = document.getElementsByClassName("sortable");
     // Loop sortable elements
@@ -4948,7 +4948,6 @@ $(document).ready(function() {
               type: 'POST',
               success: function(response){
                 if(response.status == 'success'){
-                  console.log(url + '--');
                   //$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
                 }
               }
@@ -5076,12 +5075,6 @@ $(document).ready(function() {
       var media_type = $(this).attr('data-media-type');
       // Build media list
       getMedias(media_type);
-      // Build hidden input
-      $('<input>').attr({
-        type: 'hidden',
-        id: media_type,
-        name: media_type+'[]'
-      }).appendTo('#main-form');
     });
   }
 
@@ -5113,39 +5106,42 @@ $(document).ready(function() {
 
   function mediaResponse(response, statusText, xhr, $form){
     if(response.success == true){
-      getMedias(response.type);
+      addMediaInput(response.id, response.type);
     }
   }
 
   // ----- Sortable ----- //
 
-  if ( $('#mediagallery').length){
-    Sortable.create(mediagallery, {
-      /* options */
-      onUpdate: function (evt) {
-        var article_id = evt.item.getAttribute('data-article-id');
-        var media_id   = evt.item.getAttribute('data-media-id');
-        var new_order   = evt.newIndex;
-
-        if (article_id && media_id) {
-          jQuery.ajax({
-            url: '/en/admin/articles/' + article_id + '/reordermedia',
-            data: {
-              'mediaId' : media_id,
-              'newOrder': new_order,
-            },
-            type: 'POST',
-            success: function(response){
-              if(response.status == 'success'){
-            		$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
-            	} else {
-            	}
-            }
-          });
-        }
-      }
-    });
-  }
+  // if ( $('#panel-gallery').length){
+  //   var el = document.getElementById('panel-gallery');
+  //   Sortable.create(el, {
+  //     /* options */
+  //     onUpdate: function (evt) {
+  //       var article_id = evt.item.getAttribute('data-article-id');
+  //       var media_id   = evt.item.getAttribute('data-media-id');
+  //       var media_type = evt.item.getAttribute('data-media-type');
+  //       var new_order  = evt.newIndex;
+  //
+  //       if (article_id && media_id) {
+  //         jQuery.ajax({
+  //           url: url+'/articles/' + article_id + '/reordermedia' + media_type,
+  //           data: {
+  //             'mediaId' : media_id,
+  //             'mediaType' : media_type,
+  //             'newOrder': new_order,
+  //           },
+  //           type: 'POST',
+  //           success: function(response){
+  //             if(response.status == 'success'){
+  //           		$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
+  //           	} else {
+  //           	}
+  //           }
+  //         });
+  //       }
+  //     }
+  //   });
+  // }
 })
 
 
@@ -5155,8 +5151,10 @@ $(document).ready(function() {
 /* manage data list */
 function getMedias(media_type) {
   var article_id = $("#main-form input[name=id]").val();
+  var current_medias = $('#main-form #' + media_type).val();
   var panel = $("#panel-"+media_type);
-  if(article_id && media_type){
+  // Get from DB
+  if(article_id){
     $.ajax({
         dataType: 'json',
         url: url+'/articles/'+article_id+'/getmedias/'+media_type
@@ -5166,6 +5164,25 @@ function getMedias(media_type) {
         panel.removeClass('loading');
       }
     });
+  // Get from input field
+  }else if(current_medias){
+    var medias = [];
+    medias = medias.concat(current_medias);
+    $.ajax({
+        type: 'POST',
+        url: url+'/medias/get',
+        data: {medias}
+    }).done(function(data){
+      if(data.success == true){
+        printList(data.medias, media_type);
+        panel.removeClass('loading');
+      }
+    });
+
+
+
+  }else{
+    panel.removeClass('loading');
   }
 }
 
@@ -5174,11 +5191,10 @@ function printList(medias, media_type) {
   if(medias && media_type){
     var ul = $('#panel-'+media_type+' .media-list');
     var	li = '';
-    var	dataArray = [];
     // Json Medias loop
     $.each( medias, function( key, value ) {
       // Build <li>
-      li = li + '<li class="list-group-item">';
+      li = li + '<li class="list-group-item" data-media-id="'+value.id+'" data-article-id="'+value.mediatable_id+'" data-media-type="'+value.type+'">';
       // Icon
       if(value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg'){
         li = li + '<i class="fa fa-image"></i>';
@@ -5193,12 +5209,20 @@ function printList(medias, media_type) {
       li = li + '<span>'+value.alt+'</span>';
       li = li + '</a>';
       li = li + '</li>';
-      // Add input fields data
-      dataArray.push(value.id);
     });
     ul.html(li);
-    $('#' + media_type).val(dataArray);
   }
+}
+
+/* Update hidden medias inputs */
+function addMediaInput(media_id, media_type) {
+  var medias = [];
+  var inputField = $('#main-form #' + media_type);
+  var current_medias = inputField.val();
+  if(current_medias){medias = medias.concat(current_medias)}
+  medias.push(media_id);
+  inputField.val(medias);
+  getMedias(media_type);
 }
 
 // ----- Declare modal ----- //

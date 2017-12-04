@@ -62,7 +62,7 @@ class ArticlesMediasController extends Controller
       $media->width      = $width;
       $media->height     = $height;
       /// If Media unique (not gallery) > Delete current before saving,
-      if($media->type == 'une'){
+      if($media->type == 'une' && isset($article)){
         $current_media = $article->medias->where('type', $media->type)->first();
         if(!empty($current_media)):
           Media::deleteMediaFile($current_media->id);
@@ -174,10 +174,12 @@ class ArticlesMediasController extends Controller
    public function reorderMedia(Request $request, $id){
      $article = Article::findOrFail($id);
      $media_id  = $request->mediaId;
+     $media_type  = $request->mediaType;
      $new_order = $request->newOrder;
      $v = 1;
+     $medias = $article->medias->where('type', $media_type);
      // loop dans les médias liés
-     foreach ($article->medias as $media) {
+     foreach ($medias as $media) {
        if($v == $new_order){$v++;}
        $media = Media::findOrFail($media->id);
        if($media->id == $media_id){

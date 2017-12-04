@@ -93,7 +93,7 @@ $(document).ready(function() {
 
   // ----- Sortable indexes----- //
 
-  if ( $('.sortable').length ){
+  if ( $('table .sortable').length ){
     // Get sortables elements
     var elements = document.getElementsByClassName("sortable");
     // Loop sortable elements
@@ -113,7 +113,6 @@ $(document).ready(function() {
               type: 'POST',
               success: function(response){
                 if(response.status == 'success'){
-                  console.log(url + '--');
                   //$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
                 }
               }
