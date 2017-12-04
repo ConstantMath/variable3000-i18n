@@ -1,4 +1,4 @@
-var url = '/en/admin';
+var url = '/admin';
 
 $(document).ready(function() {
 

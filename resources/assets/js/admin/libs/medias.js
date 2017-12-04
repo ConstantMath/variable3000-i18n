@@ -5,8 +5,9 @@ $(document).ready(function() {
   if( $('.media-panel').length ){
     $('.media-panel').each(function( index ) {
       var media_type = $(this).attr('data-media-type');
+      var media_table_type = $(this).attr('data-media-table-type');
       // Build media list
-      getMedias(media_type);
+      getMedias(media_type, media_table_type);
     });
   }
 
@@ -38,7 +39,7 @@ $(document).ready(function() {
 
   function mediaResponse(response, statusText, xhr, $form){
     if(response.success == true){
-      addMediaInput(response.id, response.type);
+      addMediaInput(response.id, response.type, response.mediatable_type);
     }
   }
 
@@ -76,23 +77,26 @@ $(document).ready(function() {
   // }
 })
 
-
 // ----- Mixins ----- //
 
-
 /* manage data list */
-function getMedias(media_type) {
-  var article_id = $("#main-form input[name=id]").val();
-  var current_medias = $('#main-form #' + media_type).val();
+function getMedias(media_type, mediatable_type='articles') {
+  var main_form_id = 'main-form';
+  // Hack for settings many forms single page
+  if(mediatable_type == 'settings'){
+    main_form_id =  media_type + '-' + main_form_id;
+  }
+  var article_id = $('#' + main_form_id + ' input[name=id]').val();
+  var current_medias = $('#' + main_form_id + '#' + media_type).val();
   var panel = $("#panel-"+media_type);
   // Get from DB
   if(article_id){
     $.ajax({
         dataType: 'json',
-        url: url+'/articles/'+article_id+'/getmedias/'+media_type
+        url: url+'/' + mediatable_type + '/' + article_id + '/getmedias/'+ media_type
     }).done(function(data){
       if(data.success == true){
-        printList(data.medias, media_type);
+        printList(data.medias, media_type, mediatable_type);
         panel.removeClass('loading');
       }
     });
@@ -106,20 +110,17 @@ function getMedias(media_type) {
         data: {medias}
     }).done(function(data){
       if(data.success == true){
-        printList(data.medias, media_type);
+        printList(data.medias, media_type, mediatable_type);
         panel.removeClass('loading');
       }
     });
-
-
-
   }else{
     panel.removeClass('loading');
   }
 }
 
 /* manage data list */
-function printList(medias, media_type) {
+function printList(medias, media_type, mediatable_type = 'articles') {
   if(medias && media_type){
     var ul = $('#panel-'+media_type+' .media-list');
     var	li = '';
@@ -137,7 +138,7 @@ function printList(medias, media_type) {
       }else{
         li = li + '<i class="fa fa-file"></i>';
       }
-      li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">';
+      li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-table-type="'+mediatable_type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">';
       li = li + '<span>'+value.alt+'</span>';
       li = li + '</a>';
       li = li + '</li>';
@@ -147,12 +148,17 @@ function printList(medias, media_type) {
 }
 
 /* Update hidden medias inputs */
-function addMediaInput(media_id, media_type) {
+function addMediaInput(media_id, media_type, mediatable_type = 'articles') {
+  var main_form_id = 'main-form';
+  // Hack for settings many forms single page
+  if(mediatable_type == 'settings'){
+    main_form_id =  media_type + '-' + main_form_id;
+  }
   var medias = [];
-  var inputField = $('#main-form #' + media_type);
+  var inputField = $('#' + main_form_id + '#' + media_type);
   var current_medias = inputField.val();
   if(current_medias){medias = medias.concat(current_medias)}
   medias.push(media_id);
   inputField.val(medias);
-  getMedias(media_type);
+  getMedias(media_type, mediatable_type);
 }

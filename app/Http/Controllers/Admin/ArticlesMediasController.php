@@ -62,7 +62,7 @@ class ArticlesMediasController extends Controller
       $media->width      = $width;
       $media->height     = $height;
       /// If Media unique (not gallery) > Delete current before saving,
-      if($media->type == 'une' && isset($article)){
+      if(($media->type == 'une' or $media->type == 'home_media') && isset($article)){
         $current_media = $article->medias->where('type', $media->type)->first();
         if(!empty($current_media)):
           Media::deleteMediaFile($current_media->id);
@@ -84,6 +84,7 @@ class ArticlesMediasController extends Controller
         'name'        => $media->name,
         'ext'         => $media->ext,
         'type'        => $media->type,
+        'mediatable_type'  => 'articles',
         'article_id'  => $id,
         'id'          => $media->id,
         'description' => $media->description,
@@ -111,56 +112,6 @@ class ArticlesMediasController extends Controller
       'media_id'   => $media_id,
     ]);
   }
-
-
-  /**
-   * Ajoute des medias de type gallerie à l'article courant
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-
-  // public function addManyMedia(Request $request, $id){
-  //   if(!empty($id) && $id != 'null'){
-  //     $article = Article::findOrFail($id);
-  //   }
-  //   $column_name = $request->input('column_name');
-  //   $file = $request->file('image');
-  //
-  //   if($file){
-  //     list($width, $height) = getimagesize($file);
-  //     // Upload
-  //     $media_file = Media::uploadMediaFile($file);
-  //     // Media store
-  //     $media = New media;
-  //     $media->name = $media_file['name'];
-  //     $media->alt  = $media_file['orig_name'];
-  //     $media->type = $file->getClientOriginalExtension();
-  //     $media->width = $width;
-  //     $media->height = $height;
-  //     // Link media to article
-  //     if(isset($article)){
-  //       // retourne le dernier media
-  //       $next_media_order = $article->lastMediaId();
-  //       $next_media_order += 1;
-  //       // Article -> media
-  //       $media->order = $next_media_order;
-  //       $article->medias()->save($media);
-  //     }
-  //     $media->save();
-  //
-  //     return response()->json([
-  //       'media_alt'         => $media->alt,
-  //       'media_name'        => $media->name,
-  //       'media_type'        => $media->type,
-  //       'article_id'        => $id,
-  //       'media_id'          => $media->id,
-  //       'media_description' => $media->description,
-  //       'column_name'       => $column_name,
-  //     ]);
-  //   }
-  // }
 
 
   /**

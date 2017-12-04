@@ -86,7 +86,7 @@ class Article extends Model{
   */
 
   public function imageUne(){
-    return $this->hasOne('App\Media', 'id', 'image_une');
+    return $this->morphOne('App\Media', 'mediatable');
   }
 
 

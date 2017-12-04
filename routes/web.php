@@ -46,7 +46,7 @@ Route::get('/admin/{parent_slug}/articles/{articles}/edit/', 'Admin\ArticlesCont
 // Articles : reorder
 Route::post('/admin/articles/{id}/reorder', 'Admin\ArticlesController@reorder')->name('admin.articles.reorder');
 
-// Medias add // Single
+// Articles get Medias
 Route::get('/admin/articles/{id}/getmedias/{media_type}', 'Admin\ArticlesMediasController@getMedias')->name('admin.articles.getmedias');
 // Medias add // Single
 Route::post('/admin/articles/{id?}/addsinglemedia', 'Admin\ArticlesMediasController@addSingleMedia')->name('admin.articles.addsinglemedia');
@@ -63,6 +63,7 @@ Route::post('/admin/articles/{id}/reordermedia/{type}', 'Admin\ArticlesMediasCon
 // Generic file upload
 Route::post('/admin/fileupload', 'Admin\MediasController@fileUpload')->name('admin.fileupload')->middleware('auth');
 
+
 // Taxonomies : create
 Route::get('/admin/taxonomies/create/{parent_id}', 'Admin\TaxonomiesController@create')->name('taxonomies.create')->middleware('auth');
 // Taxonomies : ressources
@@ -71,7 +72,7 @@ Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => 
 Route::post('/admin/taxonomies/reorder/{id}', 'Admin\TaxonomiesController@reorder')->name('taxonomies.reorder');
 
 // Users : ressources
-Route::resource('/admin/users', 'Admin\UsersController');
+Route::resource('/admin/users', 'Admin\UsersController')->middleware('auth');
 
 
 /*

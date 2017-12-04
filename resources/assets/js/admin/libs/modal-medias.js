@@ -10,11 +10,12 @@ $('#modal-media-edit').on('show.bs.modal', function (event) {
   var media_description = button.data('media-description');
   var media_ext         = button.data('media-ext');
   var media_type        = button.data('media-type');
+  var media_table_type  = button.data('media-table-type');
   var modal             = $(this);
   var pic_container     = modal.find('#pic');
   var vid_container     = modal.find('#vid');
   var vid_source        = modal.find('#vid > source');
-  modal.find('.media-delete').attr("href", url+'/articles/'+media_id+'/deletemedia');
+  modal.find('.media-delete').attr("href", url+'/' + media_table_type + '/'+media_id+'/deletemedia');
   modal.find('.media-delete').attr("column_name", column_name);
   modal.find('.media-delete').attr("media_id", media_id);
   modal.find('.media-delete').attr("media_type", media_type);
@@ -77,7 +78,7 @@ $(document).ready(function() {
         type: 'POST',
         success: function(response){
           if(response.success == true){
-            getMedias(response.media_type);
+            getMedias(response.media_type, response.mediatable_type);
           }
         }
       });
