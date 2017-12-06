@@ -12,9 +12,9 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
       DB::table('users')->insert([
-        'name' => 'Constant',
-        'email'  => 'constant@variable.club',
-        'password' => bcrypt('0000'),
+        'name' => 'Variable',
+        'email'  => 'bonjour@variable.club',
+        'password' => bcrypt('000000'),
       ]);
 
     }
