@@ -5421,6 +5421,10 @@ ul ul {
   text-align: right;
 }
 
+.table td:first-of-type {
+  text-align: left;
+}
+
 tbody tr {
   border-bottom: 1px solid #EFEFEF;
 }
