@@ -18,7 +18,6 @@ class Article extends Model{
     'order',
     'parent_id',
     'published',
-    'image_une',
   ];
 
 

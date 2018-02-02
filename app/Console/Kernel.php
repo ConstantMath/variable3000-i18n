@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
       Commands\Variable3000Install::class,
       Commands\GenerateSitemap::class,
+      Commands\GenerateRessource::class,
     ];
 
     /**

@@ -1,7 +1,7 @@
 @extends('app')
 
-@section('page_title', $article->title)
-@section('page_class', 'article '.$article->slug)
+@section('page_title', $data['page_title'])
+@section('page_class', $data['page_class'])
 
 @section('content')
   <main class="wrapper" id="main">

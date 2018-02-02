@@ -46,12 +46,12 @@
 <body>
   <div class="page @yield('page_class')">
     @include('components.header')
-  @yield('content')
-  @if (app('env') == 'local' )
-    <script src="{{ url('/assets/scripts.js') }}"></script>
-  @else
-    <script src="{{ url('/assets/scripts.min.js') }}"></script>
-  @endif
+    @yield('content')
+    @if (app('env') == 'local' )
+      <script src="{{ url('/assets/scripts.js') }}"></script>
+    @else
+      <script src="{{ url('/assets/scripts.min.js') }}"></script>
+    @endif
   </div>
 </body>
 </html>
