@@ -86,9 +86,7 @@ class ArticlesController extends AdminController
    * @param  int  $id
    */
 
-  public function update(Request $request, $id){
-    // Get the current article
-    $article = Article::findOrFail($id);
+  public function update(Article $article, Request $request){
     // Validator test by lang
     foreach (config('translatable.locales') as $lang){
       if(empty($request->input($lang.'.title'))){
@@ -99,9 +97,10 @@ class ArticlesController extends AdminController
     }
     // Validator check
     if (isset($validator) && $validator->fails()) {
-      return redirect()->route('admin.articles.edit', ['parent_slug' => $article->parent_id, 'id' => $id])->withErrors($validator)->withInput();
+      return redirect()->route('admin.articles.edit', ['id' => $request->id])->withErrors($validator)->withInput();
     } else {
-      $this->saveObject(Article::class, $request);
+      $this->saveObject($article, $request);
+      return redirect()->route('admin.articles.index');
     }
   }
 

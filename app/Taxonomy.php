@@ -36,7 +36,7 @@ class Taxonomy extends Model{
   public static function detachOldAddNew($taxonomies_input, $taxonomy_parent_id, $article_id){
     if(!empty($taxonomies_input)){
       // Add new taxonomies
-      $new_taxonomies = Taxonomy::processtaxonomys($taxonomies_input, $taxonomy_parent_id);
+      $new_taxonomies = Taxonomy::processTaxonomies($taxonomies_input, $taxonomy_parent_id);
     }else{
       $new_taxonomies = "";
     }
@@ -66,7 +66,7 @@ class Taxonomy extends Model{
     // crée un nouveau tag pour chaque string retournée et l'ajoute au tableau ‘tags' courant
     foreach ($newTaxonomies as $newTaxonomy):
       // check si le tag n'est pas déjà dans les tags existants
-      if(in_array($newTaxonomy, $currentTaxonomy)):
+      if(in_array($newTaxonomy, $currentTaxonomies)):
         continue;
       endif;
       // check si le tag existe déjà

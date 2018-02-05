@@ -103,7 +103,7 @@ class Article extends Model{
    *
    */
 
-  public function taxonmies(){
+  public function taxonomies(){
     return $this->belongsToMany('App\Taxonomy')->withTimestamps();
   }
 
@@ -113,7 +113,7 @@ class Article extends Model{
    *
    */
 
-  public function theTaxonmies(){
+  public function theTaxonomies(){
     return $this->belongsToMany('App\Taxonomy')->where('parent_id', 2)->withTimestamps();
   }
 

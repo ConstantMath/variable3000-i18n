@@ -56,13 +56,15 @@
 {{-- Taxonomy: category --}}
 <div class="form-group">
   <label for="category">Category</label>
-  {!! Form::select('taxonomies.1[]', $article->taxonomiesDropdown(1,1), null, ['class' => 'form-control select2', 'id' => '']) !!}
+  {{-- [1] = parent_id --}}
+  {!! Form::select('taxonomies[1][]', $article->taxonomiesDropdown(1,1), null, ['class' => 'form-control select2', 'id' => '']) !!}
 </div>
 
 {{-- Taxonomy: tags --}}
 <div class="form-group">
   <label for="tags_general">Tags</label>
-  {!! Form::select('taxonomies.2[]', $article->taxonomiesDropdown(2), null, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
+  {{-- [2] = parent_id --}}
+  {!! Form::select('taxonomies[2][]', $article->taxonomiesDropdown(2), null, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
 </div>
 
 {{-- Submit buttons --}}

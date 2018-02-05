@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Tag;
+use App\Taxonomy;
 use Lang;
 
 class TaxonomiesController extends AdminController
@@ -30,7 +30,7 @@ class TaxonomiesController extends AdminController
        'page_title' => 'Taxonomies',
        'page_id'    => 'taxonomies',
      );
-     $taxonomies = Tag::where('parent_id', 0)->orderBy('order', 'asc')->get();
+     $taxonomies = Taxonomy::where('parent_id', 0)->orderBy('order', 'asc')->get();
      // Add children
      foreach ($taxonomies as $t) {
        $t->children = $t->children;
@@ -51,8 +51,8 @@ class TaxonomiesController extends AdminController
        'page_title' => 'Taxonomy create',
        'page_id'    => 'taxonomies',
      );
-     $taxonomy = collect(new Tag);
-     $taxonomy->parent = Tag::where('id', $parent_id)->first();
+     $taxonomy = collect(new Taxonomy);
+     $taxonomy->parent = Taxonomy::where('id', $parent_id)->first();
      return view('admin.templates.taxonomy-edit', compact('taxonomy', 'data'));
    }
 
@@ -89,7 +89,7 @@ class TaxonomiesController extends AdminController
        return redirect()->route('taxonomies.create', ['parent_id' => $request->parent_id])->withErrors($validator);
      } else {
        // Store the taxonomy
-       $article = Tag::create($request->all());
+       $article = Taxonomy::create($request->all());
        return redirect()->route('taxonomies.index');
      }
    }
@@ -122,7 +122,7 @@ class TaxonomiesController extends AdminController
         'page_id'    => 'taxonomies',
 
       );
-      $taxonomy = Tag::findOrFail($id);
+      $taxonomy = Taxonomy::findOrFail($id);
       return view('admin/templates/taxonomy-edit',  compact('taxonomy', 'data'));
     }
 
@@ -155,7 +155,7 @@ class TaxonomiesController extends AdminController
         ]);
       }
 
-      $taxonomy = Tag::findOrFail($id);
+      $taxonomy = Taxonomy::findOrFail($id);
       // Validator check
       if ($validator->fails()) {
         return redirect()->route('taxonomies.edit', $id)->withErrors($validator);
@@ -175,7 +175,7 @@ class TaxonomiesController extends AdminController
      */
 
     public function destroy($id){
-      $taxonomy = Tag::findOrFail($id);
+      $taxonomy = Taxonomy::findOrFail($id);
       $taxonomy->delete();
       session()->flash('flash_message', 'Deleted');
       return redirect()->route('taxonomies.index');
@@ -195,7 +195,7 @@ class TaxonomiesController extends AdminController
        $new_order   = $request->new_order;
        // Select articles by parent
        if(!empty($parent_id)){
-         $tags = Tag::where('parent_id', $parent_id)
+         $tags = Taxonomy::where('parent_id', $parent_id)
                       ->orderBy('order', 'asc')
                       ->get();
        }
