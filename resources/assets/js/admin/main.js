@@ -105,7 +105,7 @@ $(document).ready(function() {
           var new_order    = evt.newIndex;
           if (article_id && parent_id) {
             jQuery.ajax({
-              url: '/admin/articles/' + article_id + '/reorder',
+              url: '/en/admin/articles/' + article_id + '/reorder',
               data: {
                 'parent_id' : parent_id,
                 'new_order' : new_order,

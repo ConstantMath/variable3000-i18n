@@ -18,7 +18,7 @@ class AdminController extends Controller
       'page_class' => 'index-articles index-0',
       'page_title' => 'Index',
       'page_id'    => 'index-0'
-    );    
+    );
     View::share('parent_articles', $parent_articles );
   }
 }

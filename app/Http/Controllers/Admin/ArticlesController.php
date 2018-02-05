@@ -16,6 +16,7 @@ class ArticlesController extends AdminController
 {
 
   public function __construct(){
+    $parent_articles = Article::where('parent_id', 0)->get();
     Lang::setLocale(config('app.locale'));
     $this->middleware('auth');
     parent::__construct();
@@ -29,28 +30,14 @@ class ArticlesController extends AdminController
    */
 
   public function index($parent_id = 0){
-    if($parent_id > 0){
-      $articles = Article::where('id', $parent_id)
-                    ->orderBy('order', 'asc')
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-      $data = array(
-        'page_class' => 'index-'.$parent_id,
-        'page_title' => 'Index',
-        'page_id'    => 'index-'.$parent_id,
-      );
-    }else{
-      $articles = Article::where('parent_id', $parent_id)
-                    ->orderBy('order', 'asc')
-                    ->orderBy('created_at', 'desc')
-                    ->get();
-      $data = array(
-        'page_class' => 'index-articles index-'.$parent_id,
-        'page_title' => 'Index',
-        'page_id'    => 'index-'.$parent_id,
-
-      );
-    }
+    $articles = Article::orderBy('order', 'asc')
+                  ->orderBy('created_at', 'desc')
+                  ->get();
+    $data = array(
+      'page_class' => 'index',
+      'page_title' => 'Articles',
+      'page_id'    => 'index-articles',
+    );
     return view('admin/templates/articles-index', compact('articles', 'data'));
   }
 
@@ -62,7 +49,7 @@ class ArticlesController extends AdminController
    * @return \Illuminate\Http\Response
    */
 
-  public function edit($parent_id, $id){
+  public function edit($parent_id = 0, $id){
     $article = Article::findOrFail($id);
     $data = array(
       'page_class' => 'article',
@@ -80,14 +67,16 @@ class ArticlesController extends AdminController
    * @return \Illuminate\Http\Response
    */
 
-  public function create($parent_id){
+  public function create($parent_id = 0){
     $data = array(
       'page_class' => 'article create',
       'page_title' => 'Article create',
       'page_id'    => 'index-'.$parent_id,
     );
     $article = new Article;
-    $article->parent = Article::where('id', $parent_id)->first();
+    $article->parent = new Article;
+
+    $article->parent->id = $parent_id != 0 ? Article::where('id', $parent_id)->pluck('id') : 0;
     return view('admin.templates.article-edit', compact('article', 'data'));
   }
 

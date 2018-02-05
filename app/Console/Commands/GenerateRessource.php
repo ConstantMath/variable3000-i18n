@@ -42,5 +42,7 @@ class GenerateRessource extends Command
       list($resource, $table) = [$r = ucfirst($this->argument('resource')), snake_case(str_plural($r))];
       $this->call('make:model', ['name' => $resource]);
       $this->call('make:migration', ['name' => 'create_' . $table . '_table']);
+      $this->call('make:controller', ['name' => 'Admin/'. $resource . 'Controller']);
+      $this->call('make:controller', ['name' => ''. $resource . 'Controller']);
     }
 }

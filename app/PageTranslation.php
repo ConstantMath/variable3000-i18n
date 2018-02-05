@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class ArticleTranslation extends Model{
+class PageTranslation extends Model{
   use Sluggable;
   public $timestamps = false;
   protected $fillable = ['title', 'slug', 'intro', 'text',];
@@ -34,7 +34,7 @@ class ArticleTranslation extends Model{
 
    public function setTitleAttribute($value){
      if(!isset($value) or $value == ''):
-      $this->attributes['title'] = null;
+       $this->attributes['title'] = null;
      else:
        $this->attributes['title'] = $value;
      endif;

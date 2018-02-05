@@ -15,18 +15,11 @@ class CreatePages extends Migration
       Schema::create('pages', function(Blueprint $table) {
         $table->increments('id');
         $table->boolean('published')->default(false);
-        // These columns are needed for Baum's Nested Set implementation to work.
-        // Column names may be changed, but they *must* all exist and be modified
-        // in the model.
-        // Take a look at the model scaffold comments for details.
-        // We add indexes on parent_id, lft, rgt columns by default.
         $table->integer('parent_id')->nullable()->index();
-        $table->integer('lft')->nullable()->index();
-        $table->integer('rgt')->nullable()->index();
-        $table->integer('depth')->nullable();
+        $table->integer('order');
         $table->timestamps();
       });
-      
+
       Schema::create('page_translations', function (Blueprint $table) {
         $table->increments('id');
         $table->integer('page_id')->unsigned();

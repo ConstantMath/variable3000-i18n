@@ -80,7 +80,8 @@ $(document).ready(function() {
 // ----- Mixins ----- //
 
 /* manage data list */
-function getMedias(media_type, mediatable_type='articles') {
+function getMedias(media_type, mediatable_type) {
+  mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
   var main_form_id = 'main-form';
   // Hack for settings many forms single page
   if(mediatable_type == 'settings'){
@@ -107,7 +108,7 @@ function getMedias(media_type, mediatable_type='articles') {
     $.ajax({
         type: 'POST',
         url: url+'/medias/get',
-        data: {medias}
+        data: medias
     }).done(function(data){
       if(data.success == true){
         printList(data.medias, media_type, mediatable_type);
@@ -120,7 +121,8 @@ function getMedias(media_type, mediatable_type='articles') {
 }
 
 /* manage data list */
-function printList(medias, media_type, mediatable_type = 'articles') {
+function printList(medias, media_type, mediatable_type) {
+  mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
   if(medias && media_type){
     var ul = $('#panel-'+media_type+' .media-list');
     var	li = '';
@@ -148,7 +150,8 @@ function printList(medias, media_type, mediatable_type = 'articles') {
 }
 
 /* Update hidden medias inputs */
-function addMediaInput(media_id, media_type, mediatable_type = 'articles') {
+function addMediaInput(media_id, media_type, mediatable_type) {
+  mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
   var main_form_id = 'main-form';
   // Hack for settings many forms single page
   if(mediatable_type == 'settings'){

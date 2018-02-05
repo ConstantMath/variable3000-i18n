@@ -15,8 +15,7 @@
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "~5.0",
         "spatie/laravel-sitemap": "^3.2",
-        "variablebxl/laravel-markdown": "2.0.x-dev",
-        "kalnoy/nestedset": "^4.3"
+        "variablebxl/laravel-markdown": "2.0.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

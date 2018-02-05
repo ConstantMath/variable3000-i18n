@@ -15,7 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
-
+    protected $adminNamespace = 'App\Http\Controllers\Admin';
     /**
      * Define your route model bindings, pattern filters, etc.
      *
@@ -35,11 +35,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
-        //
+      $this->mapAdminRoutes();
+      $this->mapApiRoutes();
+      $this->mapWebRoutes();
     }
 
     /**
@@ -78,5 +76,33 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapAdminRoutes()
+    {
+        // If there is more than one language defined
+        if(count(config('translatable.locales')) > 1 ){
+          $locale = Request::segment(1);
+          Route::middleware('admin')
+              ->as('admin.')
+              ->namespace($this->adminNamespace)
+              ->prefix($locale.'/admin')
+              ->group(base_path('routes/admin.php'));
+        }else{
+            Route::middleware('admin')
+                ->as('admin.')
+                ->namespace($this->adminNamespace)
+                ->prefix('admin')
+                ->group(base_path('routes/admin.php'));
+        }
+
     }
 }
