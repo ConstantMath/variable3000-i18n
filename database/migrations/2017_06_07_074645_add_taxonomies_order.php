@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddTagsOrder extends Migration
+class AddTaxonomiesOrder extends Migration
 {
   /**
    * Run the migrations.
@@ -13,7 +13,7 @@ class AddTagsOrder extends Migration
    */
    public function up()
    {
-     Schema::table('tags', function(Blueprint $table){
+     Schema::table('taxonomies', function(Blueprint $table){
        $table->integer('order');
   		});
    }
@@ -24,7 +24,7 @@ class AddTagsOrder extends Migration
     * @return void
     */
     public function down(){
-     Schema::table('tags', function(Blueprint $table){
+     Schema::table('taxonomies', function(Blueprint $table){
       $table->dropColumn('order');
      });
     }

@@ -5,11 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Tag extends Model{
+class Taxonomy extends Model{
 
   use \Dimsav\Translatable\Translatable;
 
-  protected $table = 'tags';
+  protected $table = 'taxonomies';
   public $translatedAttributes = ['name', 'slug'];
   protected $fillable = ['parent_id', 'order',];
 
@@ -36,18 +36,18 @@ class Tag extends Model{
   public static function detachOldAddNew($taxonomies_input, $taxonomy_parent_id, $article_id){
     if(!empty($taxonomies_input)){
       // Add new taxonomies
-      $new_taxonomies = Tag::processTags($taxonomies_input, $taxonomy_parent_id);
+      $new_taxonomies = Taxonomy::processtaxonomys($taxonomies_input, $taxonomy_parent_id);
     }else{
       $new_taxonomies = "";
     }
     $article = Article::findOrFail($article_id);
-    $all_tags = Tag::where('parent_id', $taxonomy_parent_id)->get();
-    if(!$all_tags->isEmpty()){
-      $article->tags()->detach($all_tags);
+    $all_taxonomies = Taxonomy::where('parent_id', $taxonomy_parent_id)->get();
+    if(!$all_taxonomies->isEmpty()){
+      $article->taxonomies()->detach($all_taxonomies);
     }
     if($new_taxonomies && !empty($new_taxonomies[0])){
       //dd($new_taxonomies);
-      $article->tags()->syncWithoutDetaching($new_taxonomies);
+      $article->taxonomies()->syncWithoutDetaching($new_taxonomies);
     }
   }
 
@@ -59,30 +59,29 @@ class Tag extends Model{
    * @return Aray
    */
 
-  public static function processTags($tags, $tag_parent_id){
+  public static function processTaxonomies($taxonomies, $taxonomy_parent_id){
     // sépare le tableau retourné en numeric (tags existant) et string (nouveaux tags)
-    $currentTags = array_filter($tags, 'is_numeric');
-    $newTags = array_filter($tags, 'is_string');
-
+    $currentTaxonomies = array_filter($taxonomies, 'is_numeric');
+    $newTaxonomies = array_filter($taxonomies, 'is_string');
     // crée un nouveau tag pour chaque string retournée et l'ajoute au tableau ‘tags' courant
-    foreach ($newTags as $newTag):
+    foreach ($newTaxonomies as $newTaxonomy):
       // check si le tag n'est pas déjà dans les tags existants
-      if(in_array($newTag, $currentTags)):
+      if(in_array($newTaxonomy, $currentTaxonomy)):
         continue;
       endif;
       // check si le tag existe déjà
-      $tag = Tag::whereTranslation("name", "=", $newTag)->first();
+      $taxonomy = Taxonomy::whereTranslation("name", "=", $newTaxonomy)->first();
       // sinon, création du nouveau tag
-      if(!$tag):
-        $tag = Tag::create([
-          'name' => $newTag,
-          'parent_id' => $tag_parent_id,
+      if(!$taxonomy):
+        $taxonomy = Taxonomy::create([
+          'name' => $newTaxonomy,
+          'parent_id' => $taxonomy_parent_id,
         ]);
       endif;
       // et ajoute le nouvel ID au tableau
-      $currentTags[] = $tag->id;
+      $currentTaxonomies[] = $taxonomy->id;
     endforeach;
-    return $currentTags;
+    return $currentTaxonomies;
   }
 
 
@@ -91,7 +90,7 @@ class Tag extends Model{
    *
    */
   public function children(){
-    return $this->hasMany('App\tag', 'parent_id')->orderBy('order', 'asc');
+    return $this->hasMany('App\Taxonomy', 'parent_id')->orderBy('order', 'asc');
   }
 
 
@@ -102,7 +101,7 @@ class Tag extends Model{
    */
 
    public function parent(){
-     return $this->belongsTo('App\Tag', 'parent_id');
+     return $this->belongsTo('App\Taxonomy', 'parent_id');
    }
 
 }

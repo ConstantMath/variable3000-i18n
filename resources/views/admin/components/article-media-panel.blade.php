@@ -19,3 +19,10 @@
     {!! Form::close() !!}
   </div>
 </div>
+<script type="text/javascript">
+  @if(config('translatable.locales') > 1)
+    var url = '/{{config('translatable.locales')[0]}}/admin';
+  @else
+    var url = '/admin';
+  @endif
+</script>

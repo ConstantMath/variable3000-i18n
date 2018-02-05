@@ -4,14 +4,15 @@
       Content
 
       <ul>
-        @if(!empty($parent_articles))
-        @foreach ($parent_articles as $parent_article)
-        <li class="nav-item">
-          <?php $index_active = ($data['page_id'] == 'index-'.$parent_article->id) ? 'active' : '';?>
-          {!! link_to_route('admin.index', $parent_article->title , $parent_article->id, ['class' => $index_active]) !!}
-        </li>
-        @endforeach
-        @endif
+
+        {{-- @if(!empty($parent_articles)) --}}
+        {{-- @foreach ($parent_articles as $parent_article) --}}
+        {{-- <li class="nav-item"> --}}
+          <?php /*$index_active = ($data['page_id'] == 'index-'.$parent_article->id) ? 'active' : '';*/ ?>
+          {{-- {!! link_to_route('admin.index', $parent_article->title , $parent_article->id, ['class' => $index_active]) !!} --}}
+        {{-- </li> --}}
+        {{-- @endforeach --}}
+        {{-- @endif --}}
         <li>{!! link_to_route('admin.articles.index', 'Articles') !!}</li>
         <li>{!! link_to_route('admin.pages.index', 'Pages') !!}</li>
       </ul>

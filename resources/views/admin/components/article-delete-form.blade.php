@@ -1,5 +1,5 @@
 <a href="#" class="" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> delete</a>
-{!! Form::model($article, ['route' => ['articles.destroy', $article->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
+{!! Form::model($article, ['route' => ['admin.articles.destroy', $article->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
   {{ Form::hidden('_method', 'DELETE') }}
   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">

@@ -22,7 +22,7 @@
             >
             <td>
               <i class="fa fa-circle"></i>
-              {!! link_to_route('admin.articles.edit', $node->title, [$node->parent_id, $node->id], ['class' => '']) !!}
+              {!! link_to_route('admin.articles.edit', $node->title, [$node->id], ['class' => '']) !!}
             </td>
             <td class="attribute time">{{ $node->created_at }}</td>
           </tr>

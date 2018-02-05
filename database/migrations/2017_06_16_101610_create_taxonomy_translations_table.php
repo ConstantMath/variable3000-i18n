@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagTranslationsTable extends Migration
+class CreateTaxonomyTranslationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateTagTranslationsTable extends Migration
      */
     public function up()
     {
-      Schema::create('tag_translations', function (Blueprint $table) {
+      Schema::create('taxonomy_translations', function (Blueprint $table) {
         $table->increments('id');
-        $table->integer('tag_id')->unsigned();
+        $table->integer('taxonomy_id')->unsigned();
         $table->string('locale')->index();
         $table->string('name');
         $table->string('slug');
-        $table->unique(['tag_id','locale', 'slug']);
-        $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+        $table->unique(['taxonomy_id','locale', 'slug']);
+        $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onDelete('cascade');
       });
 
-      // Remove translated fields in the main tags table
-      Schema::table('tags', function(Blueprint $table){
+      // Remove translated fields in the main taxonomies table
+      Schema::table('taxonomies', function(Blueprint $table){
        $table->dropColumn('name');
        $table->dropColumn('slug');
      });
@@ -38,6 +38,6 @@ class CreateTagTranslationsTable extends Migration
      */
     public function down()
     {
-      Schema::dropIfExists('tag_translations');
+      Schema::dropIfExists('taxonomy_translations');
     }
 }

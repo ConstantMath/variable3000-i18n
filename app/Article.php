@@ -94,7 +94,7 @@ class Article extends Model{
   */
 
   public function category(){
-    return $this->belongsToMany('App\Tag')->where('parent_id', 1)->withTimestamps();
+    return $this->belongsToMany('App\Taxonomy')->where('parent_id', 1)->withTimestamps();
   }
 
 
@@ -103,8 +103,8 @@ class Article extends Model{
    *
    */
 
-  public function tags(){
-    return $this->belongsToMany('App\Tag')->withTimestamps();
+  public function taxonmies(){
+    return $this->belongsToMany('App\Taxonomy')->withTimestamps();
   }
 
 
@@ -113,8 +113,8 @@ class Article extends Model{
    *
    */
 
-  public function theTags(){
-    return $this->belongsToMany('App\Tag')->where('parent_id', 2)->withTimestamps();
+  public function theTaxonmies(){
+    return $this->belongsToMany('App\Taxonomy')->where('parent_id', 2)->withTimestamps();
   }
 
 
@@ -125,9 +125,9 @@ class Article extends Model{
 
   public function taxonomiesDropdown($parent_id, $appendEmpty=0){
     if($appendEmpty){
-      return Tag::where('parent_id', $parent_id)->get()->pluck('name', 'id')->prepend('', '');
+      return Taxonomy::where('parent_id', $parent_id)->get()->pluck('name', 'id')->prepend('', '');
     }else{
-      return Tag::where('parent_id', $parent_id)->get()->pluck('name', 'id');
+      return Taxonomy::where('parent_id', $parent_id)->get()->pluck('name', 'id');
     }
   }
 
@@ -170,7 +170,7 @@ class Article extends Model{
    */
 
    public function getCategoriesAttribute() {
-    return $this->tags->pluck('id')->all();
+    return $this->taxonmies->pluck('id')->all();
  	}
 
   /**
@@ -179,8 +179,8 @@ class Article extends Model{
    *
    */
 
-    public function getTagListAttribute() {
-     return $this->tags->pluck('id')->all();
+    public function getTaxonomiesListAttribute() {
+     return $this->taxonmies->pluck('id')->all();
   	}
 
     /**

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTagsTable extends Migration
+class CreateTaxonomiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
+        Schema::create('taxonomies', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('parent_id')->nullable();
           $table->string('name');
@@ -21,11 +21,11 @@ class CreateTagsTable extends Migration
         });
 
         // Table de pivot
-        Schema::create('article_tag', function (Blueprint $table) {
+        Schema::create('article_taxonomy', function (Blueprint $table) {
           $table->integer('article_id')->unsigned()->index();
           $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
-          $table->integer('tag_id')->unsigned()->index();
-          $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
+          $table->integer('taxonomy_id')->unsigned()->index();
+          $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onDelete('cascade');
           $table->timestamps();
         });
     }
@@ -37,7 +37,7 @@ class CreateTagsTable extends Migration
      */
     public function down()
     {
-      Schema::drop('article_tag');
-      Schema::drop('tags');
+      Schema::drop('article_taxonomy');
+      Schema::drop('taxonomies');
     }
 }

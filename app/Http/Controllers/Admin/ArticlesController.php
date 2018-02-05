@@ -49,12 +49,12 @@ class ArticlesController extends AdminController
    * @return \Illuminate\Http\Response
    */
 
-  public function edit($parent_id = 0, $id){
+  public function edit($id){
     $article = Article::findOrFail($id);
     $data = array(
       'page_class' => 'article',
       'page_title' => 'Article edit',
-      'page_id'    => 'index-'.$parent_id,
+      'page_id'    => 'index-',
     );
   	return view('admin/templates/article-edit',  compact('article', 'data'));
   }
@@ -75,8 +75,6 @@ class ArticlesController extends AdminController
     );
     $article = new Article;
     $article->parent = new Article;
-
-    $article->parent->id = $parent_id != 0 ? Article::where('id', $parent_id)->pluck('id') : 0;
     return view('admin.templates.article-edit', compact('article', 'data'));
   }
 
@@ -103,26 +101,7 @@ class ArticlesController extends AdminController
     if (isset($validator) && $validator->fails()) {
       return redirect()->route('admin.articles.edit', ['parent_slug' => $article->parent_id, 'id' => $id])->withErrors($validator)->withInput();
     } else {
-      $request['created_at'] = Carbon::createFromFormat('d.m.Y', $request->input('created_at'))->format('Y-m-d H:i:s');
-      // Checkbox update
-      $request['published'] = (($request->published) ? 1 : 0);
-      // ----- Taxonomies ----- //
-      // Categories
-      $categories_parent_id = 1;
-      $categories_input = $request->input('categories');
-      Tag::detachOldAddNew($categories_input, $categories_parent_id, $id);
-      // Tags
-      $tags_parent_id = 2;
-      $tags_input = $request->input('tag_list');
-      Tag::detachOldAddNew($tags_input, $tags_parent_id, $id);
-      // Article update
-      $article->update($request->all());
-      $data = $request->all();
-      if(isset($data['finish'])){
-        return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
-      }else{
-        return redirect()->route('admin.articles.edit', ['parent_id' => $article->parent_id, 'articles' => $id]);
-      }
+      $this->saveObject(Article::class, $request);
     }
   }
 
@@ -184,7 +163,7 @@ class ArticlesController extends AdminController
           }
         }
       }
-      return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
+      return redirect()->route('admin.articles.index', ['parent_id' => $article->parent_id]);
     }
   }
 
@@ -205,7 +184,7 @@ class ArticlesController extends AdminController
     }
     $article -> delete();
     session()->flash('flash_message', 'Deleted');
-    return redirect()->route('admin.index', ['parent_id' => $article->parent_id]);
+    return redirect()->route('admin.articles.index');
   }
 
 

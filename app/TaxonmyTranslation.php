@@ -4,7 +4,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class TagTranslation extends Model{
+class TaxonomyTranslation extends Model{
 
   use Sluggable;
   public $timestamps = false;

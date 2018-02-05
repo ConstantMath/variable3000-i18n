@@ -1,5 +1,3 @@
-var url = '/admin';
-
 $(document).ready(function() {
 
   $.ajaxSetup({

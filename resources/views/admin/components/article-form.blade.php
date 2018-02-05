@@ -1,5 +1,5 @@
 {!! Form::hidden('id', (!empty($article->id))? $article->id : '') !!}
-{!! Form::hidden('parent_id', $article->parent->id) !!}
+{!! Form::hidden('parent_id', (!empty($article->parent_id) ? $article->parent_id : 0)) !!}
 {!! Form::hidden('order', (!empty($article->order))? $article->order : 0) !!}
 {!! Form::hidden('une[]', null, ['id' => 'une']) !!}
 {!! Form::hidden('gallery[]', null, ['id' => 'gallery']) !!}
@@ -56,13 +56,13 @@
 {{-- Taxonomy: category --}}
 <div class="form-group">
   <label for="category">Category</label>
-  {!! Form::select('categories[]', $article->taxonomiesDropdown(1,1), null, ['class' => 'form-control select2', 'id' => '']) !!}
+  {!! Form::select('taxonomies.1[]', $article->taxonomiesDropdown(1,1), null, ['class' => 'form-control select2', 'id' => '']) !!}
 </div>
 
 {{-- Taxonomy: tags --}}
 <div class="form-group">
   <label for="tags_general">Tags</label>
-  {!! Form::select('tag_list[]', $article->taxonomiesDropdown(2), null, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
+  {!! Form::select('taxonomies.2[]', $article->taxonomiesDropdown(2), null, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
 </div>
 
 {{-- Submit buttons --}}

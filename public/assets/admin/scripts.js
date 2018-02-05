@@ -20570,8 +20570,6 @@ $(document).ready(function() {
     });
 });
 
-var url = '/admin';
-
 $(document).ready(function() {
 
     $.ajaxSetup({
