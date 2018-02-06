@@ -35,24 +35,22 @@ class AdminController extends Controller{
 
 
   /**
-   * Create, flash success or error then redirect
+   * Update // save an object
    *
-   * @param $class
+   * @param $model
    * @param $request
-   * @param bool|false $imageColumn
-   * @param string $path
    * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    */
 
-  public function saveObject($model, $request, $imageColumn = false){
+  public function saveObject($model, $request){
     $class = get_class($model);
     $collection = $class::findOrFail($model->id);
     $request['created_at'] = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
     // Checkbox update
     $request['published'] = (($model->published) ? 1 : 0);
-    // ----- Taxonomies ----- //
-    // dd($model->taxonomies);
+    // Taxonomies
     if(!empty($model->taxonomies)):
+      // Loop inside all taxonomies model's attributes to delete the existing ones first
       foreach ($model->taxonomies as $key => $val):
         $new_taxonomies_array = !empty($request->taxonomies[$val->parent_id]) ? $request->taxonomies[$val->parent_id] : null;
         Taxonomy::detachOldAddNew($new_taxonomies_array, $val->parent_id, $request['id']);
@@ -60,8 +58,26 @@ class AdminController extends Controller{
     endif;
     // Do update
     $collection->update($request->all());
+    // Redirect
+    if(isset($request['finish'])){
+      return redirect()->route('admin.' . snake_case($this->model) . '.index');
+    }else{
+      return redirect()->route('admin.' . snake_case($this->model) . '.edit', $request->id);
+    }
   }
 
+
+  /**
+   * Update // save an object
+   *
+   * @param $model
+   * @param $request
+   * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+   */
+
+  public function createObject($model, $request){
+
+  }
 
   /**
   * Get model name, if isset the model parameter, then get it, if not then get the class name, strip "Controller" out

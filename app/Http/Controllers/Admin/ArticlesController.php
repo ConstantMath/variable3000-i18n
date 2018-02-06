@@ -11,6 +11,7 @@ use App\Taxonomy;
 use DB;
 use Carbon\Carbon;
 use Lang;
+use App\Http\Requests\Admin\ArticleRequest;
 
 class ArticlesController extends AdminController
 {
@@ -86,28 +87,9 @@ class ArticlesController extends AdminController
    * @param  int  $id
    */
 
-  public function update(Article $article, Request $request){
-    // Validator test by lang
-    foreach (config('translatable.locales') as $lang){
-      if(empty($request->input($lang.'.title'))){
-        $validator = Validator::make($request->all(), [
-          'title' => 'required|max:400',
-        ]);
-      }
-    }
-    // Validator check
-    if (isset($validator) && $validator->fails()) {
-      return redirect()->route('admin.articles.edit', ['id' => $request->id])->withErrors($validator)->withInput();
-    } else {
-      // Admin save article
-      $this->saveObject($article, $request);
-      // Redirect
-      if(isset($request['finish'])){
-        return redirect()->route('admin.articles.index');
-      }else{
-        return redirect()->route('admin.articles.edit', $article->id);
-      }
-    }
+  public function update(Article $article, ArticleRequest $request){
+    // Save article
+    return $this->saveObject($article, $request);
   }
 
 

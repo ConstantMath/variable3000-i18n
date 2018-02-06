@@ -44,5 +44,6 @@ class GenerateRessource extends Command
       $this->call('make:migration', ['name' => 'create_' . $table . '_table']);
       $this->call('make:controller', ['name' => 'Admin/'. $resource . 'Controller']);
       $this->call('make:controller', ['name' => ''. $resource . 'Controller']);
+      $this->call('make:request', ['name' => 'Admin/' . $resource . 'Request']);
     }
 }
