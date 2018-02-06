@@ -100,20 +100,7 @@ class ArticlesController extends AdminController
    * @return \Illuminate\Http\Response
    */
 
-  public function store(Request $request){
-    // Validator test
-    // if(empty($request->input(Lang::getLocale().'.title'))){
-    foreach (config('translatable.locales') as $lang){
-      if(empty($request->input($lang.'.title'))){
-        $validator = Validator::make($request->all(), [
-          'title' => 'required|max:400',
-        ]);
-      }
-    }
-    // Validation test
-    if (isset($validator) && $validator->fails()) {
-      return redirect()->route('admin.articles.create', ['parent_id' => $request->input('parent_id')])->withErrors($validator)->withInput();
-    } else {
+  public function store(ArticleRequest $request){
       // Increment order of all articles
       DB::table('articles')
             ->where('parent_id', $request->input('parent_id'))
@@ -151,7 +138,7 @@ class ArticlesController extends AdminController
         }
       }
       return redirect()->route('admin.articles.index', ['parent_id' => $article->parent_id]);
-    }
+
   }
 
 

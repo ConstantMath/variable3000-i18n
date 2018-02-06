@@ -5,7 +5,9 @@
 {!! Form::hidden('gallery[]', null, ['id' => 'gallery']) !!}
 
 <input type="hidden" id="une" name="une[]">
-{!! $errors->first('title', '<span class="help-block">:message</span>') !!}
+@foreach ($errors->all() as $error)
+    <span class="help-block">{{ $error }}</span>
+@endforeach
 
 {{-- Is published ? --}}
 <div class="form-group">
