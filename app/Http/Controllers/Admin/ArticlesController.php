@@ -7,7 +7,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Article;
 use App\Media;
-use App\Tag;
+use App\Taxonomy;
 use DB;
 use Carbon\Carbon;
 use Lang;
@@ -99,8 +99,14 @@ class ArticlesController extends AdminController
     if (isset($validator) && $validator->fails()) {
       return redirect()->route('admin.articles.edit', ['id' => $request->id])->withErrors($validator)->withInput();
     } else {
+      // Admin save article
       $this->saveObject($article, $request);
-      return redirect()->route('admin.articles.index');
+      // Redirect
+      if(isset($request['finish'])){
+        return redirect()->route('admin.articles.index');
+      }else{
+        return redirect()->route('admin.articles.edit', $article->id);
+      }
     }
   }
 

@@ -33,20 +33,19 @@ class Taxonomy extends Model{
 	 *
    */
 
-  public static function detachOldAddNew($taxonomies_input, $taxonomy_parent_id, $article_id){
+  public static function detachOldAddNew($taxonomies_input, $taxonomy_parent_id, $article_id, $model = 'App\Article'){
     if(!empty($taxonomies_input)){
       // Add new taxonomies
       $new_taxonomies = Taxonomy::processTaxonomies($taxonomies_input, $taxonomy_parent_id);
     }else{
       $new_taxonomies = "";
     }
-    $article = Article::findOrFail($article_id);
+    $article = $model::findOrFail($article_id);
     $all_taxonomies = Taxonomy::where('parent_id', $taxonomy_parent_id)->get();
     if(!$all_taxonomies->isEmpty()){
       $article->taxonomies()->detach($all_taxonomies);
     }
     if($new_taxonomies && !empty($new_taxonomies[0])){
-      //dd($new_taxonomies);
       $article->taxonomies()->syncWithoutDetaching($new_taxonomies);
     }
   }
@@ -63,6 +62,7 @@ class Taxonomy extends Model{
     // sépare le tableau retourné en numeric (tags existant) et string (nouveaux tags)
     $currentTaxonomies = array_filter($taxonomies, 'is_numeric');
     $newTaxonomies = array_filter($taxonomies, 'is_string');
+    //dd($newTaxonomies);
     // crée un nouveau tag pour chaque string retournée et l'ajoute au tableau ‘tags' courant
     foreach ($newTaxonomies as $newTaxonomy):
       // check si le tag n'est pas déjà dans les tags existants

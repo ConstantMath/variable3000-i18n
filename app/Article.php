@@ -113,7 +113,7 @@ class Article extends Model{
    *
    */
 
-  public function theTaxonomies(){
+  public function tags(){
     return $this->belongsToMany('App\Taxonomy')->where('parent_id', 2)->withTimestamps();
   }
 
@@ -170,7 +170,7 @@ class Article extends Model{
    */
 
    public function getCategoriesAttribute() {
-    return $this->taxonmies->pluck('id')->all();
+    return $this->taxonomies->pluck('id')->all();
  	}
 
   /**
@@ -179,8 +179,8 @@ class Article extends Model{
    *
    */
 
-    public function getTaxonomiesListAttribute() {
-     return $this->taxonmies->pluck('id')->all();
+    public function getTagsAttribute() {
+     return $this->taxonomies->pluck('id')->all();
   	}
 
     /**

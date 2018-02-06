@@ -1,15 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use Validator;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Http\Controllers\Controller;
+use App\Article;
 use App\Taxonomy;
-use View;
+use DB;
 use Carbon\Carbon;
+use Lang;
 
-class AdminController extends Controller
-{
+class AdminController extends Controller{
 
   /**
    * Model name
@@ -43,34 +45,30 @@ class AdminController extends Controller
    */
 
   public function saveObject($model, $request, $imageColumn = false){
-    $model->created_at = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
+    $class = get_class($model);
+    $collection = $class::findOrFail($model->id);
+    $request['created_at'] = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
     // Checkbox update
-    $model->published = (($model->published) ? 1 : 0);
+    $request['published'] = (($model->published) ? 1 : 0);
     // ----- Taxonomies ----- //
-    if(!empty($request->taxonomies)):
-      foreach ($request->taxonomies as $key => $val):
-        Taxonomy::detachOldAddNew($val, $key, $request['id']);
+    // dd($model->taxonomies);
+    if(!empty($model->taxonomies)):
+      foreach ($model->taxonomies as $key => $val):
+        $new_taxonomies_array = !empty($request->taxonomies[$val->parent_id]) ? $request->taxonomies[$val->parent_id] : null;
+        Taxonomy::detachOldAddNew($new_taxonomies_array, $val->parent_id, $request['id']);
       endforeach;
     endif;
-    // Article update
-    dd($model);
-    $model->save() ? $request->session()->flash('status', 'Task was successful!') : $request->session()->flash('status', 'Task was not successful!');
-    if(isset($request->finish)){
-      dd('fin');
-      return redirect()->route('admin.' . snake_case($this->model) . '.index');
-    }else{
-      // return redirect($this->urlRoutePath($path));
-      // route($this->routePath($path));
-      return redirect(route('admin.articles.edit', 2));
-    }
+    // Do update
+    $collection->update($request->all());
   }
 
 
   /**
-   * Get model name, if isset the model parameter, then get it, if not then get the class name, strip "Controller" out
-   *
-   * @return string
-   */
+  * Get model name, if isset the model parameter, then get it, if not then get the class name, strip "Controller" out
+  *
+  * @return string
+  */
+
   protected function getModel(){
     return empty($this->model) ?
       explode('Controller', substr(strrchr(get_class($this), '\\'), 1))[0]  :
