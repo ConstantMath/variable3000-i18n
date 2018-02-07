@@ -46,7 +46,9 @@ class AdminController extends Controller{
   public function saveObject($model, $request){
     $class = get_class($model);
     $collection = $class::findOrFail($model->id);
-    $request['created_at'] = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
+    if($request['created_at']){
+      $request['created_at'] = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
+    }
     // Checkbox update
     $request['published'] = (($model->published) ? 1 : 0);
     // Taxonomies

@@ -9,6 +9,13 @@ textarea{
 
 label{
   font-size: $font-size-sm;
+  .description{
+    display: block;
+    margin-top: 3px;
+    font-weight: 400;
+    font-size: $font-size-xs;
+    color: $greyDarker;
+  }
 }
 
 .main-form{
@@ -33,9 +40,10 @@ label{
     padding: 0;
     border: none;
   }
-
+  input[type="submit"]{
+    margin-top: $spacing-regular;
+  }
 }
-
 
 .form-group{
   &:not(.submit) {

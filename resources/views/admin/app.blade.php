@@ -8,7 +8,7 @@
   <title>@yield('page_title')</title>
   <!-- Styles -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link href="{{ url('/css/admin/main.css') }}" rel="stylesheet">
+  <link href="{{ url('/assets/admin/main.css') }}" rel="stylesheet">
 </head>
 <body  class="admin @yield('page_class')">
   @if (Auth::check())  @include('admin.components.navigation-primary') @endif

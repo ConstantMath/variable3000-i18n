@@ -115,7 +115,6 @@ class ArticlesController extends AdminController
 
   public function destroy($id){
     $article = Article::findOrFail($id);
-
     // cascade delete medias
     foreach ($article->medias as $media) {
       Media::deleteMediaFile($media->id);

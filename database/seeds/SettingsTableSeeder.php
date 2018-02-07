@@ -18,5 +18,11 @@ class SettingsTableSeeder extends Seeder
         'order' => 0,
       ]);
 
+      Setting::create([
+        'en'  => ['name' => 'Google analytics', 'description' => 'Enter a valid tracking ID. It should look like: UA-XXXXXX-X.'],
+        'order' => 0,
+      ]);
+
+
     }
 }
