@@ -11,14 +11,8 @@ class Article extends Model{
   use Mediatable;
   use \Dimsav\Translatable\Translatable;
   protected $table = 'articles';
-
   public $translatedAttributes = ['title', 'intro', 'text', 'slug'];
-  protected $fillable = [
-    'created_at',
-    'order',
-    'parent_id',
-    'published',
-  ];
+  protected $fillable = ['created_at', 'order', 'parent_id', 'published'];
 
 
   /**

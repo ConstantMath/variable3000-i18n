@@ -10,12 +10,7 @@ class Page extends Model{
   protected $table = 'pages';
   use \Dimsav\Translatable\Translatable;
   public $translatedAttributes = ['title', 'intro', 'text', 'slug'];
-  protected $fillable = [
-    'created_at',
-    'order',
-    'published',
-  ];
-
+  protected $fillable = ['created_at', 'order', 'published'];
 
   /**
    * Get children articles

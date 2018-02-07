@@ -8,16 +8,7 @@ use Config;
 
 class Media extends Model{
   protected $table = 'medias';
-  protected $fillable = [
-      'name',
-      'alt',
-      'description',
-      'type',
-      'background_color',
-      'background_image',
-      'width',
-      'height',
-  ];
+  protected $fillable = ['name', 'alt', 'description', 'type', 'width', 'height'];
 
 
   /**

@@ -14,7 +14,6 @@ class Taxonomy extends Model{
   protected $fillable = ['parent_id', 'order',];
 
 
-
   /**
    * Retourne les articles associés au tag
    *
