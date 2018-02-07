@@ -116,6 +116,43 @@ class AdminController extends Controller{
     return redirect()->route('admin.articles.index', ['parent_id' => $article->parent_id]);
   }
 
+
+
+  /**
+   * Reorder an object
+   *
+   * @param $model
+   * @param $request
+   * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+   */
+
+  public function orderObject($class, $request){
+    $id          = $request->id;
+    $new_order   = $request->new_order;
+    // Select articles by parent
+    $articles = $class::orderBy('order', 'asc')->get();
+    if(isset($articles) && !empty($id)){
+      $v = 0;
+      // Articles loop
+      foreach ($articles as $article) {
+        if($v == $new_order){$v++;}
+        if($article->id == $id){
+          $n_order = $new_order;
+        }else{
+          $n_order = $v;
+          $v++;
+        }
+        $article->timestamps = false;
+        // Update article with new order
+        $article->update(['order' => $n_order]);
+      }
+    }
+    return response()->json([
+     'status' => 'success',
+    ]);
+  }
+
+
   /**
   * Get model name, if isset the model parameter, then get it, if not then get the class name, strip "Controller" out
   *

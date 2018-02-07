@@ -62,7 +62,7 @@ function getMedias(media_type, mediatable_type) {
   if(article_id){
     $.ajax({
         dataType: 'json',
-        url: url+'/' + mediatable_type + '/' + article_id + '/getmedias/'+ media_type
+        url: admin_url+'/' + mediatable_type + '/' + article_id + '/getmedias/'+ media_type
     }).done(function(data){
       if(data.success == true){
         printList(data.medias, media_type, mediatable_type);
@@ -75,7 +75,7 @@ function getMedias(media_type, mediatable_type) {
     medias = medias.concat(current_medias);
     $.ajax({
         type: 'POST',
-        url: url+'/medias/get',
+        url: admin_url+'/medias/get',
         data: {medias}
     }).done(function(data){
       if(data.success == true){

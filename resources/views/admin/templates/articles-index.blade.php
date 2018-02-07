@@ -17,7 +17,6 @@
             @foreach ($articles as $node)
             <tr
               class="published published-{!! $node->published !!}"
-              data-parent-id="@if(!empty($node->parent_id)){{$node->parent_id}}@endif"
               data-article-id="@if(!empty($node->id)){{$node->id}}@endif"
             >
             <td>

@@ -133,34 +133,7 @@ class ArticlesController extends AdminController
    * @return Json response
    */
 
-   public function reorder(Request $request, $id){
-     $parent_id   = $request->parent_id;
-     $new_order   = $request->new_order;
-     // Select articles by parent
-     if(!empty($parent_id)){
-       $articles = Article::where('parent_id', $parent_id)
-                    ->orderBy('order', 'asc')
-                    ->get();
-     }
-     if(isset($articles)){
-       $v = 0;
-       // Articles loop
-       foreach ($articles as $article) {
-         if($v == $new_order){$v++;}
-         if($article->id == $id){
-           $n_order = $new_order;
-         }else{
-           $n_order = $v;
-           $v++;
-         }
-         $article->timestamps = false;
-         // Update article with new order
-         $article->update(['order' => $n_order]);
-       }
-     }
-     return response()->json([
-      'status' => 'success',
-     ]);
+   public function reorder(Request $request){
+     return $this->orderObject(Article::class, $request);
    }
-
 }

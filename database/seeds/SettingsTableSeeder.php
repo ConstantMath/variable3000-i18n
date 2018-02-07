@@ -23,6 +23,5 @@ class SettingsTableSeeder extends Seeder
         'order' => 0,
       ]);
 
-
     }
 }

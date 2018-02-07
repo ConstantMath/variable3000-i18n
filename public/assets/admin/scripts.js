@@ -20409,7 +20409,7 @@ function getMedias(media_type, mediatable_type) {
     if (article_id) {
         $.ajax({
             dataType: 'json',
-            url: url + '/' + mediatable_type + '/' + article_id + '/getmedias/' + media_type
+            url: admin_url + '/' + mediatable_type + '/' + article_id + '/getmedias/' + media_type
         }).done(function(data) {
             if (data.success == true) {
                 printList(data.medias, media_type, mediatable_type);
@@ -20422,7 +20422,7 @@ function getMedias(media_type, mediatable_type) {
         medias = medias.concat(current_medias);
         $.ajax({
             type: 'POST',
-            url: url + '/medias/get',
+            url: admin_url + '/medias/get',
             data: {
                 medias
             }
@@ -20574,6 +20574,40 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
+    // ----- Sortable indexes----- //
+    if ($('table .sortable').length) {
+        // Get sortables elements
+        var elements = document.getElementsByClassName("sortable");
+        // Loop sortable elements
+        for (var i = 0; i < elements.length; i++) {
+            Sortable.create(elements.item(i), {
+                onUpdate: function(evt) {
+                    var article_id = evt.item.getAttribute('data-article-id');
+                    var parent_id = evt.item.getAttribute('data-parent-id');
+                    var new_order = evt.newIndex;
+                    if (article_id) {
+                        jQuery.ajax({
+                            url: admin_url + '/articles/reorder',
+                            data: {
+                                'id': article_id,
+                                'parent_id': parent_id,
+                                'new_order': new_order,
+                            },
+                            type: 'POST',
+                            success: function(response) {
+                                if (response.status == 'success') {
+                                    //$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    }
+});
+
+$(document).ready(function() {
 
     $.ajaxSetup({
         headers: {
@@ -20615,7 +20649,7 @@ $(document).ready(function() {
             // simplemde.render();
 
             inlineAttachment.editors.codemirror4.attach(simplemde.codemirror, {
-                uploadUrl: '/en/admin/fileupload',
+                uploadUrl: admin_url + '/fileupload',
                 allowedTypes: ['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'application/pdf'],
                 extraHeaders: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -20666,38 +20700,6 @@ $(document).ready(function() {
     }
 
 
-    // ----- Sortable indexes----- //
-
-    if ($('table .sortable').length) {
-        // Get sortables elements
-        var elements = document.getElementsByClassName("sortable");
-        // Loop sortable elements
-        for (var i = 0; i < elements.length; i++) {
-            Sortable.create(elements.item(i), {
-                onUpdate: function(evt) {
-                    var article_id = evt.item.getAttribute('data-article-id');
-                    var parent_id = evt.item.getAttribute('data-parent-id');
-                    var new_order = evt.newIndex;
-                    if (article_id && parent_id) {
-                        jQuery.ajax({
-                            url: '/en/admin/articles/' + article_id + '/reorder',
-                            data: {
-                                'parent_id': parent_id,
-                                'new_order': new_order,
-                            },
-                            type: 'POST',
-                            success: function(response) {
-                                if (response.status == 'success') {
-                                    //$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
-                                }
-                            }
-                        });
-                    }
-                }
-            });
-        }
-    }
-
     // ----- Display created at ----- //
     $('.tip.created_at').on('click', function() {
         $(this).addClass('show');
@@ -20708,7 +20710,6 @@ $(document).ready(function() {
     if ($('.sortable').length) {
         $('.color-picker').colorpicker({ /*options...*/ });
     }
-
 
     // ----- Hide index alerts ----- //
     $("main .alert").delay(2000).fadeOut(300);

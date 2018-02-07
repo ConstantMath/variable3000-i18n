@@ -43,8 +43,6 @@ Auth::routes();
 // Route::get('/admin/{parent_id}/articles/create', 'Admin\ArticlesController@create')->name('admin.articles.create')->middleware('auth');
 // // Articles : edit
 // Route::get('/admin/{parent_slug}/articles/{articles}/edit/', 'Admin\ArticlesController@edit')->name('admin.articles.edit')->middleware('auth');
-// // Articles : reorder
-// Route::post('/admin/articles/{id}/reorder', 'Admin\ArticlesController@reorder')->name('admin.articles.reorder');
 
 // Articles get Medias
 Route::get('/admin/articles/{id}/getmedias/{media_type}', 'Admin\ArticlesMediasController@getMedias')->name('admin.articles.getmedias');
