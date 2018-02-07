@@ -101,44 +101,8 @@ class ArticlesController extends AdminController
    */
 
   public function store(ArticleRequest $request){
-      // Increment order of all articles
-      DB::table('articles')
-            ->where('parent_id', $request->input('parent_id'))
-            ->increment('order');
-      // Article create
-      $article = Article::create($request->all());
-      // ----- Taxonomies : categories ----- //
-      $categories = $request->input('categories');
-      if(!empty($categories) && !empty($categories[0])){$article->tags()->attach($categories);}
-      // Tags
-      $tags_parent_id = 2;
-      $tags_input = $request->input('tag_list');
-      Tag::detachOldAddNew($tags_input, $tags_parent_id, $article->id);
-      if(!empty($tags) && !empty($tags[0])){$article->tags()->attach($tags);}
-      // Image une
-      if ($request->has('une') && !empty($request->une[0])) {
-        $medias = $request->get('une');
-        $medias_a = explode(",", $medias[0]);
-        if($medias_a && is_array($medias_a)){
-          foreach ($medias_a as $media) {
-            $media = Media::findOrFail($media);
-            $article->medias()->save($media);
-          }
-        }
-      }
-      // Medias gallery
-      if ($request->has('gallery') && !empty($request->gallery[0])) {
-        $medias = $request->get('gallery');
-        $medias_a = explode(",", $medias[0]);
-        if($medias_a && is_array($medias_a)){
-          foreach ($medias_a as $media) {
-            $media = Media::findOrFail($media);
-            $article->medias()->save($media);
-          }
-        }
-      }
-      return redirect()->route('admin.articles.index', ['parent_id' => $article->parent_id]);
-
+    // Create article
+    return $this->createObject(Article::class, $request);
   }
 
 

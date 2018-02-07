@@ -1,7 +1,7 @@
 var gulp = require('gulp'),
     shell = require('gulp-shell'),
     concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
+    uglify = require('gulp-uglify-es').default,
     beautify = require('gulp-beautify'),
     cssmin = require('gulp-cssmin'),
     sourcemaps = require('gulp-sourcemaps'),
@@ -41,6 +41,7 @@ gulp.task("front-sass", function(){
 ////
 // Admin Tasks
 ////
+////
 
 gulp.task('admin-js', function() {
   gulp.src([
@@ -61,6 +62,7 @@ gulp.task('admin-js', function() {
       .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
   // Sauve le fichier compressé dans public/assets
   .pipe(gulp.dest('public/assets/admin'))
+  .pipe(livereload())
 });
 
 gulp.task("admin-sass", function(){

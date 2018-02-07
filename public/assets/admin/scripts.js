@@ -20312,6 +20312,39 @@ function form_layout(el) {
     });
 }
 
+// ----- Media gallery Sortable ----- //
+
+if ($('#panel-gallery').length) {
+    console.log('3');
+    var el = document.getElementById('panel-gallery').getElementsByClassName('sortable')[0];
+    Sortable.create(el, {
+        /* options */
+        onUpdate: function(evt) {
+            var article_id = evt.item.getAttribute('data-article-id');
+            var media_id = evt.item.getAttribute('data-media-id');
+            var media_type = evt.item.getAttribute('data-media-type');
+            var new_order = evt.newIndex;
+
+            if (article_id && media_id) {
+                jQuery.ajax({
+                    url: url + '/articles/' + article_id + '/reordermedia/' + media_type,
+                    data: {
+                        'mediaId': media_id,
+                        'mediaType': media_type,
+                        'newOrder': new_order,
+                    },
+                    type: 'POST',
+                    success: function(response) {
+                        if (response.status == 'success') {
+                            $('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
+                        } else {}
+                    }
+                });
+            }
+        }
+    });
+}
+
 $(document).ready(function() {
 
     // ----- Medias panel display data----- //
@@ -20357,38 +20390,6 @@ $(document).ready(function() {
         }
     }
 
-    // ----- Sortable ----- //
-
-    // if ( $('#panel-gallery').length){
-    //   var el = document.getElementById('panel-gallery');
-    //   Sortable.create(el, {
-    //     /* options */
-    //     onUpdate: function (evt) {
-    //       var article_id = evt.item.getAttribute('data-article-id');
-    //       var media_id   = evt.item.getAttribute('data-media-id');
-    //       var media_type = evt.item.getAttribute('data-media-type');
-    //       var new_order  = evt.newIndex;
-    //
-    //       if (article_id && media_id) {
-    //         jQuery.ajax({
-    //           url: url+'/articles/' + article_id + '/reordermedia' + media_type,
-    //           data: {
-    //             'mediaId' : media_id,
-    //             'mediaType' : media_type,
-    //             'newOrder': new_order,
-    //           },
-    //           type: 'POST',
-    //           success: function(response){
-    //             if(response.status == 'success'){
-    //           		$('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
-    //           	} else {
-    //           	}
-    //           }
-    //         });
-    //       }
-    //     }
-    //   });
-    // }
 })
 
 // ----- Mixins ----- //
@@ -20398,11 +20399,11 @@ function getMedias(media_type, mediatable_type) {
     mediatable_type = typeof mediatable_type === 'undefined' ? 'articles' : mediatable_type;
     var main_form_id = 'main-form';
     // Hack for settings many forms single page
-    if (mediatable_type == 'settings') {
-        main_form_id = media_type + '-' + main_form_id;
-    }
+    // if(mediatable_type == 'settings'){
+    //   main_form_id =  media_type + '-' + main_form_id;
+    // }
     var article_id = $('#' + main_form_id + ' input[name=id]').val();
-    var current_medias = $('#' + main_form_id + '#' + media_type).val();
+    var current_medias = $('#' + main_form_id + ' #' + media_type).val();
     var panel = $("#panel-" + media_type);
     // Get from DB
     if (article_id) {
@@ -20422,7 +20423,9 @@ function getMedias(media_type, mediatable_type) {
         $.ajax({
             type: 'POST',
             url: url + '/medias/get',
-            data: medias
+            data: {
+                medias
+            }
         }).done(function(data) {
             if (data.success == true) {
                 printList(data.medias, media_type, mediatable_type);
@@ -20468,11 +20471,11 @@ function addMediaInput(media_id, media_type, mediatable_type) {
     mediatable_type = typeof mediatable_type === 'undefined' ? 'articles' : mediatable_type;
     var main_form_id = 'main-form';
     // Hack for settings many forms single page
-    if (mediatable_type == 'settings') {
-        main_form_id = media_type + '-' + main_form_id;
-    }
+    // if(mediatable_type == 'settings'){
+    //   main_form_id =  media_type + '-' + main_form_id;
+    // }
     var medias = [];
-    var inputField = $('#' + main_form_id + '#' + media_type);
+    var inputField = $('#' + main_form_id + ' #' + media_type);
     var current_medias = inputField.val();
     if (current_medias) {
         medias = medias.concat(current_medias)
