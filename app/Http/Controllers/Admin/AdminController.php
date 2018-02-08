@@ -80,7 +80,13 @@ class AdminController extends Controller{
 
   public function createObject($class, $request){
     // Increment order of all articles
-    $incremented = $class::where('parent_id', $request->parent_id)->increment('order');
+    if(isset($request->order)):
+      if(empty($request->parent_id)):
+        $incremented = $class::increment('order');
+      else:
+        $incremented = $class::where('parent_id', $request->parent_id)->increment('order');
+      endif;
+    endif;
     // Article create
     $article = $class::create($request->all());
 
@@ -113,7 +119,7 @@ class AdminController extends Controller{
         }
       }
     }
-    return redirect()->route('admin.articles.index', ['parent_id' => $article->parent_id]);
+    return redirect()->route('admin.' . snake_case($this->model) . '.index');
   }
 
 

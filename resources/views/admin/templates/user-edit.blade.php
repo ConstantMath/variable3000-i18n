@@ -5,9 +5,9 @@
 
 @section('content')
   @if(isset($user->id))
-    {!! Form::model($user, ['route' => ['users.update', $user->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+    {!! Form::model($user, ['route' => ['admin.users.update', $user->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
   @else
-    {!! Form::model($user, ['route' => ['users.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
+    {!! Form::model($user, ['route' => ['admin.users.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
   @endif
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -30,26 +30,26 @@
         </div>
         {{-- Password --}}
         <div class="pw-change-container">
-          <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
+          <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
             <label for="password">Password</label>
-            {!! Form::password('password', array('id' => 'password', 'class' => 'form-control ', 'placeholder' => 'Password')) !!}
+            {!! Form::password('password', array('id' => 'password', 'class' => 'form-control ')) !!}
             {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
           </div>
-          <div class="form-group {!! $errors->has('email') ? 'has-error' : '' !!}">
+          <div class="form-group {!! $errors->has('password_confirmation') ? 'has-error' : '' !!}">
             <label for="password">Password confirmation</label>
-            {!! Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control', 'placeholder' => 'Password confirmation')) !!}
+            {!! Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control')) !!}
           </div>
         </div>
         {{-- Submit buttons --}}
         <div class="form-group submit">
-          {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'save']) !!}
+          {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'finish']) !!}
         </div>
       </div>
     </div>
   </div>
   {!! Form::close() !!}
   @if(isset($user->id))
-    {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
+    {!! Form::model($user, ['route' => ['admin.users.destroy', $user->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
       {{ Form::hidden('_method', 'DELETE') }}
       <a href="#" class="" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> delete</a>
       <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -8,7 +8,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <h3>Users</h3>
-          <a href="{{ route('users.create') }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
+          <a href="{{ route('admin.users.create') }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
         </div>
         <div class="panel-body table-responsive">
           <table class="table">
@@ -17,7 +17,7 @@
               <tr>
                 <td>
                   <i class="fa fa-smile-o"></i>
-                  {!! link_to_route('users.edit', $user->name, $user->id, ['class' => '']) !!}
+                  {!! link_to_route('admin.users.edit', $user->name, $user->id, ['class' => '']) !!}
                 </td>
                 <td class="attribute">{{ $user->email }}</td>
               </tr>

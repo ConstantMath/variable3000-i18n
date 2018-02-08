@@ -18,7 +18,7 @@
         </li>
         <li class="nav-item">
           <?php $users_active = (strpos($data['page_id'], 'users') !== false) ? 'active' : ''; ?>
-          {!! link_to_route('users.index', 'Users', '', ['class' => $users_active] ) !!}
+          {!! link_to_route('admin.users.index', 'Users', '', ['class' => $users_active] ) !!}
         </li>
         <li class="nav-item">
           <?php $settings_active = (strpos($data['page_id'], 'settings') !== false) ? 'active' : ''; ?>

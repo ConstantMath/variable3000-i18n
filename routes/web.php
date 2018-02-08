@@ -69,9 +69,6 @@ Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => 
 // Taxonomies : reorder
 Route::post('/admin/taxonomies/reorder/{id}', 'Admin\TaxonomiesController@reorder')->name('taxonomies.reorder');
 
-// Users : ressources
-Route::resource('/admin/users', 'Admin\UsersController')->middleware('auth');
-
 
 /*
 |--------------------------------------------------------------------------
