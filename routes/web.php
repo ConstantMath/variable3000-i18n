@@ -30,20 +30,6 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 
-// Articles : all
-// Route::get('/admin', 'Admin\ArticlesController@index')->name('admin.index.all')->middleware('auth');
-// // Articles : all by parent
-// Route::get('/admin/{parent_id}/articles', 'Admin\ArticlesController@index')->name('admin.index')->middleware('auth');
-// // Articles : ressources
-// Route::resource('/admin/articles', 'Admin\ArticlesController', ['except' => [
-//     'create',
-//     'edit'
-// ]]);
-// // Articles : create
-// Route::get('/admin/{parent_id}/articles/create', 'Admin\ArticlesController@create')->name('admin.articles.create')->middleware('auth');
-// // Articles : edit
-// Route::get('/admin/{parent_slug}/articles/{articles}/edit/', 'Admin\ArticlesController@edit')->name('admin.articles.edit')->middleware('auth');
-
 // Articles get Medias
 Route::get('/admin/articles/{id}/getmedias/{media_type}', 'Admin\ArticlesMediasController@getMedias')->name('admin.articles.getmedias');
 // Medias add // Single

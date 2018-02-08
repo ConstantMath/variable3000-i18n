@@ -15,12 +15,17 @@
   }
 }
 
+.panel-title{
+  font-size: 14px;
+  padding: 10px 15px;
+  margin-bottom: 3px;
+  background-color: $white;
+}
 
 .panel-heading{
   h3{
     display: inline;
     font-size: 14px;
-    padding: 0;
     margin: 0;
     font-weight: 400;
   }

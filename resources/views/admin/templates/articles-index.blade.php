@@ -13,18 +13,8 @@
     <div class="panel-body table-responsive">
       <table class="table">
         <tbody id="index" class="sortable">
-          @if($articles)
-            @foreach ($articles as $node)
-            <tr
-              class="published published-{!! $node->published !!}"
-              data-article-id="@if(!empty($node->id)){{$node->id}}@endif"
-            >
-            <td>
-              <i class="fa fa-circle"></i>
-              {!! link_to_route('admin.articles.edit', $node->title, [$node->id], ['class' => '']) !!}
-            </td>
-            <td class="attribute time">{{ $node->created_at }}</td>
-          </tr>
+          @if($articles) @foreach ($articles as $node)
+            @include('admin.components.table-row')
           @endforeach @endif
         </tbody>
       </table>

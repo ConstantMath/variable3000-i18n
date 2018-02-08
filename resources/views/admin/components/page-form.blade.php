@@ -52,21 +52,4 @@
     @endforeach
   </div>
 </div>
-
-<hr>
-
-{{-- Taxonomy: tags --}}
-<div class="form-group">
-  <label for="tags_general">Tags</label>
-  {{-- [2] = parent_id --}}
-  {!! Form::select('taxonomies[2][]', $article->taxonomiesDropdown(2), $article->tags, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
-</div>
-
-{{-- Taxonomy: category --}}
-<div class="form-group">
-  <label for="category">Category</label>
-  {{-- [1] = parent_id --}}
-  {!! Form::select('taxonomies[1][]', $article->taxonomiesDropdown(1,1), $article->category, ['class' => 'form-control select2', 'id' => '']) !!}
-</div>
-
 @include('admin.components.form-submit')

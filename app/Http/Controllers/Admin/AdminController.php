@@ -89,7 +89,6 @@ class AdminController extends Controller{
     endif;
     // Article create
     $article = $class::create($request->all());
-
     // Taxonomies
     if(!empty($request->taxonomies)):
       // Loop inside all taxonomies requests
@@ -119,9 +118,8 @@ class AdminController extends Controller{
         }
       }
     }
-    return redirect()->route('admin.' . snake_case($this->model) . '.index');
+    return redirect()->route('admin.' . snake_case($this->getModel()) . '.index', $request->parent_id);
   }
-
 
 
   /**

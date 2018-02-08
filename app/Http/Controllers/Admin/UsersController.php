@@ -86,7 +86,6 @@ class UsersController extends AdminController
         'page_id'    => 'users',
       );
       $user = User::findOrFail($id);
-
       return view('admin/templates/user-edit', compact('user', 'data'));
     }
 

@@ -5,21 +5,21 @@
 
 @section('content')
   @include('admin.components.flash-message')
-
-  <div class="panel panel-default">
-    <div class="panel-body table-responsive">
-      {{-- level 1 --}}
-      @if($articles)
-        <div class="dd">
-          <ol class="dd-list">
-            @foreach ($articles as $node)
-              @include('admin.components.nestedset-node', compact('node'))
-            @endforeach
-          </ol>
-        </div>
-      @endif
-    </div>
-  </div>
+ <div class="panel panel-default">
+   <div class="panel-heading">
+     <h3>{{ $data['page_title'] }}</h3>
+     <a href="{{ route('admin.pages.create', 0) }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
+   </div>
+   <div class="panel-body table-responsive">
+     <table class="table">
+       <tbody id="index" class="sortable">
+         @if($articles) @foreach ($articles as $node)
+           @include('admin.components.table-row')
+         @endforeach @endif
+       </tbody>
+     </table>
+   </div>
+ </div>
 
 @endsection
 
