@@ -64,7 +64,7 @@ class AdminController extends Controller{
     $collection->update($request->all());
     // Redirect
     if(isset($request['finish'])){
-      return redirect()->route('admin.' . snake_case($this->model) . '.index');
+      return redirect()->route('admin.' . snake_case($this->model) . '.index', $request->parent_id);
     }else{
       return redirect()->route('admin.' . snake_case($this->model) . '.edit', $request->id);
     }
@@ -169,4 +169,18 @@ class AdminController extends Controller{
       explode('Controller', substr(strrchr(get_class($this), '\\'), 1))[0]  :
       $this->model;
   }
+
+
+  /**
+  * Get the class from table name
+  *
+  * @return string
+  */
+
+  public function getClass($table_name){
+    return !empty($table_name) ?
+      'App\\' . studly_case(str_singular($table_name)) :
+      null;
+  }
+
 }

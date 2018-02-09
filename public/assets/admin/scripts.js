@@ -20315,7 +20315,6 @@ function form_layout(el) {
 // ----- Media gallery Sortable ----- //
 
 if ($('#panel-gallery').length) {
-    console.log('3');
     var el = document.getElementById('panel-gallery').getElementsByClassName('sortable')[0];
     Sortable.create(el, {
         /* options */
@@ -20398,18 +20397,15 @@ $(document).ready(function() {
 function getMedias(media_type, mediatable_type) {
     mediatable_type = typeof mediatable_type === 'undefined' ? 'articles' : mediatable_type;
     var main_form_id = 'main-form';
-    // Hack for settings many forms single page
-    // if(mediatable_type == 'settings'){
-    //   main_form_id =  media_type + '-' + main_form_id;
-    // }
+    console.log('1');
     var article_id = $('#' + main_form_id + ' input[name=id]').val();
     var current_medias = $('#' + main_form_id + ' #' + media_type).val();
     var panel = $("#panel-" + media_type);
     // Get from DB
     if (article_id) {
         $.ajax({
-            dataType: 'json',
-            url: admin_url + '/' + mediatable_type + '/' + article_id + '/getmedias/' + media_type
+            dataType: 'JSON',
+            url: admin_url + '/medias/index/' + media_type + '/' + mediatable_type + '/' + article_id
         }).done(function(data) {
             if (data.success == true) {
                 printList(data.medias, media_type, mediatable_type);

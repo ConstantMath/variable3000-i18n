@@ -30,10 +30,7 @@ Auth::routes();
 |--------------------------------------------------------------------------
 */
 
-// Articles get Medias
-Route::get('/admin/articles/{id}/getmedias/{media_type}', 'Admin\ArticlesMediasController@getMedias')->name('admin.articles.getmedias');
-// Medias add // Single
-Route::post('/admin/articles/{id?}/addsinglemedia', 'Admin\ArticlesMediasController@addSingleMedia')->name('admin.articles.addsinglemedia');
+
 // Medias delete
 Route::post('/admin/articles/{id}/deletemedia', 'Admin\ArticlesMediasController@deleteMedia')->name('admin.articles.deleteMedia');
 // Medias add // Many(Gallery)

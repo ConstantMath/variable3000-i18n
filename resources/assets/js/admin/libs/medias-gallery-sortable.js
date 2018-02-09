@@ -1,7 +1,6 @@
 // ----- Media gallery Sortable ----- //
 
 if ( $('#panel-gallery').length){
-  console.log('3');
   var el = document.getElementById('panel-gallery').getElementsByClassName('sortable')[0];
   Sortable.create(el, {
     /* options */
