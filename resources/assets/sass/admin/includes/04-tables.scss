@@ -37,13 +37,13 @@ tbody{
     margin-right: $spacing-xsmall;
 
   }
-  .published .fa{
+  .published .fa-published{
     position: relative;
     top: -1px;
     color: $red;
     font-size: 10px;
   }
-  .published-1 .fa{
+  .published-1 .fa-published{
     color: $green;
   }
   a{

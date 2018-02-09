@@ -17,6 +17,8 @@ use View;
 class PagesController extends AdminController
 {
 
+  protected $model = 'pages';
+
   public function __construct(){
     // Header share : get all parent articles
     $parent_pages = Page::where('parent_id', 0)->get();
@@ -34,12 +36,18 @@ class PagesController extends AdminController
      $articles = Page::where('parent_id', $parent_id)
                    ->orderBy('order', 'asc')
                    ->get();
+     if($parent_id != 0){
+       $parent_article = Page::findOrFail($parent_id);
+     }else{
+       $parent_article = null;
+     }
+     $parent =
      $data = array(
        'page_class' => 'pages',
        'page_title' => 'Pages',
        'page_id'    => 'index-pages',
      );
-     return view('admin/templates/nestedset-index', compact('articles', 'data'));
+     return view('admin/templates/nestedset-index', compact('articles', 'parent_article', 'data'));
    }
 
 
