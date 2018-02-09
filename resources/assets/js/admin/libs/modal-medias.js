@@ -15,7 +15,7 @@ $('#modal-media-edit').on('show.bs.modal', function (event) {
   var pic_container     = modal.find('#pic');
   var vid_container     = modal.find('#vid');
   var vid_source        = modal.find('#vid > source');
-  modal.find('.media-delete').attr("href", url+'/' + media_table_type + '/'+media_id+'/deletemedia');
+  modal.find('.media-delete').attr("href", admin_url + '/' + media_table_type + '/'+media_id+'/deletemedia');
   modal.find('.media-delete').attr("column_name", column_name);
   modal.find('.media-delete').attr("media_id", media_id);
   modal.find('.media-delete').attr("media_type", media_type);
