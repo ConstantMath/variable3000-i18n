@@ -76,14 +76,15 @@ class PagesController extends AdminController
    * @return \Illuminate\Http\Response
    */
 
-  public function create($parent_id){
+  public function create($parent_id = 0){
     $data = array(
       'page_class' => 'pages',
       'page_title' => 'Page create',
       'page_id'    => 'create-page-'.$parent_id,
     );
     $article = new Page;
-    $article->parent = new Page;
+    // $article->parent_id = $parent_id;
+    $article->parent = Page::where('id', $parent_id)->first();
     return view('admin/templates/page-edit', compact('article', 'data'));
   }
 
@@ -109,5 +110,18 @@ class PagesController extends AdminController
 
   public function store(PageRequest $request){
     return $this->createObject(Page::class, $request);
+  }
+
+
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+
+  public function destroy(Page $page){
+    return $this->destroyObject($page);
   }
 }

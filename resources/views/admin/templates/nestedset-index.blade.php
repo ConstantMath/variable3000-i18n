@@ -6,8 +6,7 @@
   else:
     $parent_id = 0;
     $page_title = $data['page_title'];
-    $bt_add_label = __('admin.add_parentpage');
-
+    $bt_add_label = __('admin.add');
   endif;
 ?>
 

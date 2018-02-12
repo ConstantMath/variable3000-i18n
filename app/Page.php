@@ -47,6 +47,8 @@ class Page extends Model{
   public function setParentIdAttribute($parent_id){
     if (empty($parent_id)){
       $this->attributes['parent_id'] = 0;
+    }else{
+      $this->attributes['parent_id'] = $parent_id;
     }
   }
 }
