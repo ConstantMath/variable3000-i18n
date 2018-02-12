@@ -26,7 +26,10 @@ class MediasController extends AdminController {
   public function index($media_type, $mediatable_type, $article_id){
     $class = $this->getClass($mediatable_type);
     $article = $class::findOrFail($article_id);
-    $medias = $article->medias->where('type', $media_type);
+    $medias = null;
+    if($article->medias):
+      $medias = $article->medias->where('type', $media_type);
+    endif;
     return response()->json([
       'success' => true,
       'medias' => $medias,
@@ -63,8 +66,9 @@ class MediasController extends AdminController {
       $media->type       = $request->input('type');
       $media->width      = $width;
       $media->height     = $height;
+
       /// If Media unique (not gallery) > Delete current before saving,
-      if(($media->type == 'une' or $media->type == 'home_media') && isset($article)){
+      if(($media->type == 'une') && isset($article) && !empty($article->medias)){
         $current_media = $article->medias->where('type', $media->type)->first();
         if(!empty($current_media)):
           Media::deleteMediaFile($current_media->id);
@@ -81,15 +85,15 @@ class MediasController extends AdminController {
         $article->medias()->save($media);
       }
       return response()->json([
-        'success'     => true,
-        'alt'         => $media->alt,
-        'name'        => $media->name,
-        'ext'         => $media->ext,
-        'type'        => $media->type,
-        'mediatable_type'  => 'articles',
-        'article_id'  => $article_id,
-        'id'          => $media->id,
-        'description' => $media->description,
+        'success'          => true,
+        'alt'              => $media->alt,
+        'name'             => $media->name,
+        'ext'              => $media->ext,
+        'type'             => $media->type,
+        'mediatable_type'  => $mediatable_type,
+        'article_id'       => $article_id,
+        'id'               => $media->id,
+        'description'      => $media->description,
       ]);
     }
   }

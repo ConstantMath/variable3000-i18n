@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 
 class Page extends Model{
+  use Mediatable;
   protected $table = 'pages';
   use \Dimsav\Translatable\Translatable;
   public $translatedAttributes = ['title', 'intro', 'text', 'slug'];

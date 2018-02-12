@@ -20397,7 +20397,6 @@ $(document).ready(function() {
 function getMedias(media_type, mediatable_type) {
     mediatable_type = typeof mediatable_type === 'undefined' ? 'articles' : mediatable_type;
     var main_form_id = 'main-form';
-    console.log('1');
     var article_id = $('#' + main_form_id + ' input[name=id]').val();
     var current_medias = $('#' + main_form_id + ' #' + media_type).val();
     var panel = $("#panel-" + media_type);
@@ -20466,10 +20465,6 @@ function printList(medias, media_type, mediatable_type) {
 function addMediaInput(media_id, media_type, mediatable_type) {
     mediatable_type = typeof mediatable_type === 'undefined' ? 'articles' : mediatable_type;
     var main_form_id = 'main-form';
-    // Hack for settings many forms single page
-    // if(mediatable_type == 'settings'){
-    //   main_form_id =  media_type + '-' + main_form_id;
-    // }
     var medias = [];
     var inputField = $('#' + main_form_id + ' #' + media_type);
     var current_medias = inputField.val();
