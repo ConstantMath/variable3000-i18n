@@ -20322,11 +20322,11 @@ if ($('#panel-gallery').length) {
             var article_id = evt.item.getAttribute('data-article-id');
             var media_id = evt.item.getAttribute('data-media-id');
             var media_type = evt.item.getAttribute('data-media-type');
+            var mediatable_type = evt.item.getAttribute('data-media-table-type');
             var new_order = evt.newIndex;
-
             if (article_id && media_id) {
                 jQuery.ajax({
-                    url: url + '/articles/' + article_id + '/reordermedia/' + media_type,
+                    url: admin_url + '/medias/reorder/' + media_type + '/' + mediatable_type + '/' + article_id,
                     data: {
                         'mediaId': media_id,
                         'mediaType': media_type,
@@ -20441,7 +20441,7 @@ function printList(medias, media_type, mediatable_type) {
         // Json Medias loop
         $.each(medias, function(key, value) {
             // Build <li>
-            li = li + '<li class="list-group-item" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
+            li = li + '<li class="list-group-item" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
             // Icon
             if (value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg') {
                 li = li + '<i class="fa fa-image"></i>';

@@ -8,11 +8,11 @@ if ( $('#panel-gallery').length){
       var article_id = evt.item.getAttribute('data-article-id');
       var media_id   = evt.item.getAttribute('data-media-id');
       var media_type = evt.item.getAttribute('data-media-type');
+      var mediatable_type = evt.item.getAttribute('data-media-table-type');
       var new_order  = evt.newIndex;
-
       if (article_id && media_id) {
         jQuery.ajax({
-          url: url+'/articles/' + article_id + '/reordermedia/' + media_type,
+          url: admin_url + '/medias/reorder/' + media_type + '/' + mediatable_type + '/' + article_id,
           data: {
             'mediaId' : media_id,
             'mediaType' : media_type,

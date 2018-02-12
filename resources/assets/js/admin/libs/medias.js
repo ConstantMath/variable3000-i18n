@@ -93,7 +93,7 @@ function printList(medias, media_type, mediatable_type) {
     // Json Medias loop
     $.each( medias, function( key, value ) {
       // Build <li>
-      li = li + '<li class="list-group-item" data-media-id="'+value.id+'" data-article-id="'+value.mediatable_id+'" data-media-type="'+value.type+'">';
+      li = li + '<li class="list-group-item" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
       // Icon
       if(value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg'){
         li = li + '<i class="fa fa-image"></i>';

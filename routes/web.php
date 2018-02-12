@@ -35,8 +35,6 @@ Auth::routes();
 //Route::post('/admin/articles/{id}/deletemedia', 'Admin\ArticlesMediasController@deleteMedia')->name('admin.articles.deleteMedia');
 // Medias add // Many(Gallery)
 //Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
-// Medias reorder
-//Route::post('/admin/articles/{id}/reordermedia/{type}', 'Admin\ArticlesMediasController@reorderMedia')->name('admin.articles.reordermedia');
 // Medias get from array
 Route::post('/admin/medias/get', 'Admin\MediasController@getFromArray')->middleware('auth');
 // Medias edit

@@ -11,3 +11,4 @@ Route::post('{mediatable_type}/reorder', 'AdminController@orderObject')->name('r
 // Medias management
 Route::get('medias/index/{media_type}/{mediatable_type}/{article_id}', 'mediasController@index')->name('medias.index');
 Route::post('medias/store/{mediatable_type}/{article_id?}', 'mediasController@store')->name('medias.store');
+Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'mediasController@reorder')->name('medias.reorder');

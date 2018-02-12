@@ -127,15 +127,15 @@ class MediasController extends AdminController {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-
-     public function reorderMedia(Request $request, $id){
-       $article = Article::findOrFail($id);
+     public function reorder(Request $request, $media_type, $mediatable_type, $article_id){
+       $class = $this->getClass($mediatable_type);
+       $article = $class::findOrFail($article_id);
        $media_id  = $request->mediaId;
        $media_type  = $request->mediaType;
        $new_order = $request->newOrder;
        $v = 1;
        $medias = $article->medias->where('type', $media_type);
-       // loop dans les médias liés
+       // loop in related medias
        foreach ($medias as $media) {
          if($v == $new_order){$v++;}
          $media = Media::findOrFail($media->id);
