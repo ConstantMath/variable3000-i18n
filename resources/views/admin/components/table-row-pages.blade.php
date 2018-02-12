@@ -1,5 +1,7 @@
 <tr
   class="published published-{!! $node->published !!}"
+  data-mediatable-type="{!! snake_case(str_plural(class_basename($node))) !!}"
+  data-parent-id="{!! $node->parent_id !!}"
   data-article-id="@if(!empty($node->id)){{$node->id}}@endif"
 >
   <td>

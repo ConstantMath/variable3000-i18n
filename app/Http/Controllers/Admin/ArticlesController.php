@@ -113,15 +113,8 @@ class ArticlesController extends AdminController
    * @return \Illuminate\Http\Response
    */
 
-  public function destroy($id){
-    $article = Article::findOrFail($id);
-    // cascade delete medias
-    foreach ($article->medias as $media) {
-      Media::deleteMediaFile($media->id);
-    }
-    $article -> delete();
-    session()->flash('flash_message', 'Deleted');
-    return redirect()->route('admin.articles.index');
+  public function destroy(Article $article){
+    return $this->destroyObject($article);
   }
 
 

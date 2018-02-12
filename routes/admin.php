@@ -7,7 +7,7 @@ Route::get('pages/{parent_id}/index', 'PagesController@index')->name('pages.inde
 Route::resource('settings', 'SettingsController');
 Route::resource('users', 'UsersController');
 // // Articles : reorder
-Route::post('articles/reorder', 'ArticlesController@reorder')->name('articles.reorder');
+Route::post('{mediatable_type}/reorder', 'AdminController@orderObject')->name('reorder');
 // Medias management
 Route::get('medias/index/{media_type}/{mediatable_type}/{article_id}', 'mediasController@index')->name('medias.index');
 Route::post('medias/store/{mediatable_type}/{article_id?}', 'mediasController@store')->name('medias.store');

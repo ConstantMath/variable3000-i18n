@@ -1,6 +1,7 @@
 <tr
   class="published published-{!! $node->published !!}"
-  data-article-id="@if(!empty($node->id)){{$node->id}}@endif"
+  data-mediatable-type="{!! snake_case(str_plural(class_basename($node))) !!}"
+  data-article-id="@if(!empty($node->id)){{$node->id}}@endif"  
 >
 <td>
   <i class="fa fa-circle fa-published"></i>

@@ -113,7 +113,6 @@ class PagesController extends AdminController
   }
 
 
-
   /**
    * Remove the specified resource from storage.
    *
@@ -124,4 +123,5 @@ class PagesController extends AdminController
   public function destroy(Page $page){
     return $this->destroyObject($page);
   }
+
 }

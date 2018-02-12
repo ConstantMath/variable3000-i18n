@@ -7,12 +7,13 @@ $(document).ready(function() {
     for(var i = 0; i < elements.length; i++){
       Sortable.create(elements.item(i), {
         onUpdate: function (evt) {
-          var article_id   = evt.item.getAttribute('data-article-id');
-          var parent_id    = evt.item.getAttribute('data-parent-id');
-          var new_order    = evt.newIndex;
-          if (article_id) {
+          var mediatable_type = evt.item.getAttribute('data-mediatable-type');
+          var article_id      = evt.item.getAttribute('data-article-id');
+          var parent_id       = evt.item.getAttribute('data-parent-id');
+          var new_order       = evt.newIndex;
+          if (article_id && mediatable_type) {
             jQuery.ajax({
-              url: admin_url + '/articles/reorder',
+              url: admin_url + '/' + mediatable_type + '/reorder',
               data: {
                 'id'        : article_id,
                 'parent_id' : parent_id,

@@ -145,17 +145,21 @@ class AdminController extends Controller{
   /**
    * Reorder an object
    *
-   * @param $model
-   * @param $request
+   * @param $class
    * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    */
 
-  public function orderObject($class, $request){
+  public function orderObject(Request $request, $mediatable_type){
+    $class       = $this->getClass($mediatable_type);
     $id          = $request->id;
+    $parent_id   = !empty($request->parent_id) ? $request->parent_id : 0;
     $new_order   = $request->new_order;
     // Select articles by parent
-    $articles = $class::orderBy('order', 'asc')->get();
-    if(isset($articles) && !empty($id)){
+    $articles = $class::where('parent_id', $parent_id)
+                 ->orderBy('order', 'asc')
+                 ->get();
+    // Reorder
+    if(isset($articles)){
       $v = 0;
       // Articles loop
       foreach ($articles as $article) {
