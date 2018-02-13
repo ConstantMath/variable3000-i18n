@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Media;
+use App\DB;
 
 class MediasController extends AdminController {
 
@@ -135,22 +136,29 @@ class MediasController extends AdminController {
        $new_order = $request->newOrder;
        $v = 1;
        $medias = $article->medias->where('type', $media_type);
-       // loop in related medias
-       foreach ($medias as $media) {
-         if($v == $new_order){$v++;}
-         $media = Media::findOrFail($media->id);
-         if($media->id == $media_id){
-           $media->order = $new_order;
-         }else{
-           $media->order = $v;
-           $v++;
+       if(isset($medias)){
+         $v = 0;
+         // loop in related medias
+         foreach ($medias as $media) {
+           $media = Media::findOrFail($media->id);
+           if($v == $new_order){$v++;}
+           if($media->id == $media_id){
+             $media->order = $new_order;
+           }else{
+             $media->order = $v;
+             $v++;
+           }
+           $media->timestamps = false;
+           // Update Media with new order
+           $media->update();
          }
-         $media->update();
        }
        return response()->json([
-         'status'        => 'success',
+         'status' => 'success',
        ]);
      }
+
+
 
   /**
    * Upload de fichier simple (pour les champs texte)
