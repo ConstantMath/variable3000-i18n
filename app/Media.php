@@ -12,6 +12,15 @@ class Media extends Model{
 
 
   /**
+   * Get all of the owning articletable models.
+   */
+  
+  public function articletable(){
+    return $this->morphTo();
+  }
+
+
+  /**
    * Upload fichier media
    * @param  file  $file
    * @return string name

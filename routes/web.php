@@ -31,8 +31,6 @@ Auth::routes();
 */
 
 
-// Medias delete
-//Route::post('/admin/articles/{id}/deletemedia', 'Admin\ArticlesMediasController@deleteMedia')->name('admin.articles.deleteMedia');
 // Medias add // Many(Gallery)
 //Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
 // Medias get from array

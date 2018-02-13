@@ -38,7 +38,6 @@ class MediasController extends AdminController {
   }
 
 
-
   /**
    * Store media related to an article
    *
@@ -67,8 +66,7 @@ class MediasController extends AdminController {
       $media->type       = $request->input('type');
       $media->width      = $width;
       $media->height     = $height;
-
-      /// If Media unique (not gallery) > Delete current before saving,
+      // If Media unique (not gallery) > Delete current before saving,
       if(($media->type == 'une') && isset($article) && !empty($article->medias)){
         $current_media = $article->medias->where('type', $media->type)->first();
         if(!empty($current_media)):
@@ -100,63 +98,63 @@ class MediasController extends AdminController {
   }
 
 
-    /**
-     * Supprime un media de l'article courant
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+  /**
+  * Destroy
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @return \Illuminate\Http\Response
+  */
 
-    public function deleteMedia(Request $request, $id){
-      // $article = Article::findOrFail($id);
-      $media_type = $request->media_type;
-      $media_id   = $request->media_id;
-      Media::deleteMediaFile($media_id);
-      return response()->json([
-        'success'    => true,
-        'media_type' => $media_type,
-        'media_id'   => $media_id,
-      ]);
-    }
+  public function destroy(Request $request, $mediatable_type){
+    $media_type = $request->media_type;
+    $media_id   = $request->media_id;
+    Media::deleteMediaFile($media_id);
+    return response()->json([
+      'success'         => true,
+      'media_type'      => $media_type,
+      'media_id'        => $media_id,
+      'mediatable_type' => $mediatable_type,
+    ]);
+  }
 
 
-    /**
-     * Réordonne les médias liés à l'article
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-     public function reorder(Request $request, $media_type, $mediatable_type, $article_id){
-       $class = $this->getClass($mediatable_type);
-       $article = $class::findOrFail($article_id);
-       $media_id  = $request->mediaId;
-       $media_type  = $request->mediaType;
-       $new_order = $request->newOrder;
-       $v = 1;
-       $medias = $article->medias->where('type', $media_type);
-       if(isset($medias)){
-         $v = 0;
-         // loop in related medias
-         foreach ($medias as $media) {
-           $media = Media::findOrFail($media->id);
-           if($v == $new_order){$v++;}
-           if($media->id == $media_id){
-             $media->order = $new_order;
-           }else{
-             $media->order = $v;
-             $v++;
-           }
-           $media->timestamps = false;
-           // Update Media with new order
-           $media->update();
+  /**
+   * Reorder medais related to an article
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  int  $id
+   * @return \Illuminate\Http\Response
+   */
+
+   public function reorder(Request $request, $media_type, $mediatable_type, $article_id){
+     $class = $this->getClass($mediatable_type);
+     $article = $class::findOrFail($article_id);
+     $media_id  = $request->mediaId;
+     $media_type  = $request->mediaType;
+     $new_order = $request->newOrder;
+     $v = 1;
+     $medias = $article->medias->where('type', $media_type);
+     if(isset($medias)){
+       $v = 0;
+       // loop in related medias
+       foreach ($medias as $media) {
+         $media = Media::findOrFail($media->id);
+         if($v == $new_order){$v++;}
+         if($media->id == $media_id){
+           $media->order = $new_order;
+         }else{
+           $media->order = $v;
+           $v++;
          }
+         $media->timestamps = false;
+         // Update Media with new order
+         $media->update();
        }
-       return response()->json([
-         'status' => 'success',
-       ]);
      }
+     return response()->json([
+       'status' => 'success',
+     ]);
+   }
 
 
 
@@ -228,6 +226,7 @@ class MediasController extends AdminController {
       'media_type'              => $media->type,
     ]);
   }
+
 
   /**
    * GEt all medias from id array

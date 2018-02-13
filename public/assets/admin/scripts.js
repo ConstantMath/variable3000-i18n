@@ -20493,7 +20493,7 @@ $('#modal-media-edit').on('show.bs.modal', function(event) {
     var pic_container = modal.find('#pic');
     var vid_container = modal.find('#vid');
     var vid_source = modal.find('#vid > source');
-    modal.find('.media-delete').attr("href", admin_url + '/' + media_table_type + '/' + media_id + '/deletemedia');
+    modal.find('.media-delete').attr("href", admin_url + '/medias/destroy/' + media_table_type + '/' + media_id);
     modal.find('.media-delete').attr("column_name", column_name);
     modal.find('.media-delete').attr("media_id", media_id);
     modal.find('.media-delete').attr("media_type", media_type);
@@ -20517,10 +20517,7 @@ $('#modal-media-edit').on('show.bs.modal', function(event) {
 
 
 $(document).ready(function() {
-
-
-    // ----- Edit media ----- //
-
+    // Edit media
     var media_edit_options = {
         success: mediaEditResponse,
         dataType: 'json'

@@ -1,6 +1,4 @@
-<?php
-  $medias = ($article->medias) ? $article->medias->where('type', $media_type) :'' ;
-?>
+<?php $medias = ($article->medias) ? $article->medias->where('type', $media_type) :'' ;?>
 <div
   class="panel panel-default media-panel loading"
   id="panel-{{ $media_type }}"
@@ -18,7 +16,7 @@
       {!! Form::model($article, ['route' => ['admin.medias.store', 'null'], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @endif
     {!! Form::hidden('type', $media_type) !!}
-      {{-- Toujours placer le champs file avant le submit  --}}
+      {{-- Always put file form before submit bt  --}}
       <input type="file" name="image" class="input-single-media-upload" />
       <a href="#" class="media-add"><i class="fa fa-btn fa-plus-circle"></i> Add</a>
     {!! Form::close() !!}
