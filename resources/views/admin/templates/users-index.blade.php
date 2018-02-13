@@ -19,6 +19,8 @@
                   <i class="fa fa-smile-o"></i>
                   {!! link_to_route('admin.users.edit', $user->name, $user->id, ['class' => '']) !!}
                 </td>
+                {{-- Retrieve array of roles associated to a user and convert to string --}}
+                <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>
                 <td class="attribute">{{ $user->email }}</td>
               </tr>
               @endforeach @endif

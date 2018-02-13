@@ -1,11 +1,13 @@
 <?php
+Route::resource('users', 'UsersController');
+Route::resource('roles', 'RoleController');
+Route::resource('permissions', 'PermissionController');
 Route::get('/', ['as' => 'root', 'uses' => 'ArticlesController@index']);
 Route::resource('articles', 'ArticlesController');
 Route::resource('pages', 'PagesController', ['except' => ['create', 'index']]);
 Route::get('pages/{parent_id}/create', 'PagesController@create')->name('pages.create');
 Route::get('pages/{parent_id}/index', 'PagesController@index')->name('pages.index');
 Route::resource('settings', 'SettingsController');
-Route::resource('users', 'UsersController');
 Route::resource('taxonomies', 'TaxonomiesController', ['except' => ['create']]);
 Route::get('taxonomies/create/{parent_id}', 'TaxonomiesController@create')->name('taxonomies.create');
 Route::post('taxonomies/reorder/{id}', 'TaxonomiesController@reorder')->name('taxonomies.reorder');

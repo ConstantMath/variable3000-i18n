@@ -9,6 +9,9 @@ use App\User;
 use Validator;
 use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Support\Facades\Hash;
+//Importing laravel-permission models
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UsersController extends AdminController
 {
@@ -43,7 +46,8 @@ class UsersController extends AdminController
         'page_id'    => 'users',
       );
       $user = collect(new User);
-      return view('admin/templates/user-edit', compact('data', 'user'));
+      $roles = Role::get();
+      return view('admin/templates/user-edit', compact('data', 'user', 'roles'));
     }
 
 
@@ -86,7 +90,8 @@ class UsersController extends AdminController
         'page_id'    => 'users',
       );
       $user = User::findOrFail($id);
-      return view('admin/templates/user-edit', compact('user', 'data'));
+      $roles = Role::get();
+      return view('admin/templates/user-edit', compact('user', 'data', 'roles'));
     }
 
 

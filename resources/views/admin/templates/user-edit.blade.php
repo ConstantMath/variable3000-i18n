@@ -39,6 +39,13 @@
             <label for="password">Password confirmation</label>
             {!! Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control')) !!}
           </div>
+          <div class='form-group'>
+            <label for="roles">Role</label>
+            @foreach ($roles as $role)
+              {{ Form::checkbox('roles[]',  $role->id ) }}
+              {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+            @endforeach
+          </div>
         </div>
         {{-- Submit buttons --}}
         <div class="form-group submit">
