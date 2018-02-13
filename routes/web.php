@@ -11,49 +11,8 @@
 |
 */
 
-/*
-|--------------------------------------------------------------------------
-| Auth
-|--------------------------------------------------------------------------
-*/
-
+// Auth
 Auth::routes();
-
-
-// Route::auth(
-//   ['except' => ['register']] // désactive register
-// );
-
-/*
-|--------------------------------------------------------------------------
-| Admin
-|--------------------------------------------------------------------------
-*/
-
-
-// Medias add // Many(Gallery)
-//Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
-// Medias get from array
-Route::post('/admin/medias/get', 'Admin\MediasController@getFromArray')->middleware('auth');
-// Medias edit
-Route::post('/admin/medias/update', 'Admin\MediasController@update')->name('admin.medias.update')->middleware('auth');
-// Generic file upload
-Route::post('/admin/fileupload', 'Admin\MediasController@fileUpload')->name('admin.fileupload')->middleware('auth');
-
-
-// Taxonomies : create
-Route::get('/admin/taxonomies/create/{parent_id}', 'Admin\TaxonomiesController@create')->name('taxonomies.create')->middleware('auth');
-// Taxonomies : ressources
-Route::resource('/admin/taxonomies', 'Admin\TaxonomiesController', ['except' => ['create']]);
-// Taxonomies : reorder
-Route::post('/admin/taxonomies/reorder/{id}', 'Admin\TaxonomiesController@reorder')->name('taxonomies.reorder');
-
-
-/*
-|--------------------------------------------------------------------------
-| Front
-|--------------------------------------------------------------------------
-*/
 
 // Language switcher
 Route::get('lang/{language}', ['as' => 'lang.switch', 'uses' => 'LanguageController@switchLang']);

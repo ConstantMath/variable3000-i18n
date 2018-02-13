@@ -3,10 +3,9 @@
 {!! Form::hidden('order', (!empty($article->order))? $article->order : 0) !!}
 {!! Form::hidden('une[]', null, ['id' => 'une']) !!}
 {!! Form::hidden('gallery[]', null, ['id' => 'gallery']) !!}
-
-<input type="hidden" id="une" name="une[]">
+{{-- Validation errors --}}
 @foreach ($errors->all() as $error)
-    <span class="help-block">{{ $error }}</span>
+  <span class="help-block">{{ $error }}</span>
 @endforeach
 
 {{-- Is published ? --}}
