@@ -18,7 +18,11 @@ label{
   }
 }
 
-.main-form{
+main > form{
+  h3{
+    font-size: $font-size-md;
+    margin-top: 0;
+  }
   hr{
     margin: $spacing-large -30px;
     border-top: 2px solid $grey;

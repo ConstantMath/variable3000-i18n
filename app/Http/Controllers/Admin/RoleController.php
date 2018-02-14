@@ -57,31 +57,26 @@ class RoleController extends AdminController{
    */
 
   public function store(Request $request) {
-  //Validate name and permissions field
-      $this->validate($request, [
-          'name'=>'required|unique:roles|max:10',
-          'permissions' =>'required',
-          ]
-      );
+    //Validate name and permissions field
+    $this->validate($request, [
+        'name'=>'required|unique:roles|max:10',
+        'permissions' =>'required',
+        ]
+    );
 
-      $name = $request['name'];
-      $role = new Role();
-      $role->name = $name;
-
-      $permissions = $request['permissions'];
-
-      $role->save();
-  //Looping thru selected permissions
-      foreach ($permissions as $permission) {
-          $p = Permission::where('id', '=', $permission)->firstOrFail();
-       //Fetch the newly created role and assign permission
-          $role = Role::where('name', '=', $name)->first();
-          $role->givePermissionTo($p);
-      }
-
-      return redirect()->route('roles.index')
-          ->with('flash_message',
-           'Role'. $role->name.' added!');
+    $name = $request['name'];
+    $role = new Role();
+    $role->name = $name;
+    $permissions = $request['permissions'];
+    $role->save();
+    //Looping thru selected permissions
+    foreach ($permissions as $permission) {
+      $p = Permission::where('id', '=', $permission)->firstOrFail();
+      //Fetch the newly created role and assign permission
+      $role = Role::where('name', '=', $name)->first();
+      $role->givePermissionTo($p);
+    }
+    return redirect()->route('admin.roles.index')->with('created');
   }
 
   /**
@@ -101,10 +96,14 @@ class RoleController extends AdminController{
    * @return \Illuminate\Http\Response
    */
   public function edit($id) {
-      $role = Role::findOrFail($id);
-      $permissions = Permission::all();
-
-      return view('roles.edit', compact('role', 'permissions'));
+    $data = array(
+      'page_class' => 'roles-edit',
+      'page_title' => 'Create a role',
+      'page_id'    => 'roles',
+    );
+    $role = Role::findOrFail($id);
+    $permissions = Permission::all();
+    return view('admin.templates.roles-edit', compact('role', 'permissions', 'data'));
   }
 
   /**
@@ -138,9 +137,7 @@ class RoleController extends AdminController{
           $role->givePermissionTo($p);  //Assign permission to role
       }
 
-      return redirect()->route('roles.index')
-          ->with('flash_message',
-           'Role'. $role->name.' updated!');
+      return redirect()->route('admin.roles.index')->with('flash_message', 'updated!');
   }
 
   /**

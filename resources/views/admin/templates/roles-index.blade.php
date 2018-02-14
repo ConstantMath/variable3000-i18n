@@ -16,7 +16,7 @@
           @foreach ($roles as $role)
           <tr>
             <td>
-              <i class="fa fa-smile-o"></i>
+              <i class="fa fa-pencil"></i>
               {!! link_to_route('admin.roles.edit', $role->name, $role->id, ['class' => '']) !!}
             </td>
           </tr>

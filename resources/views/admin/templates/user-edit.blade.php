@@ -40,11 +40,13 @@
             {!! Form::password('password_confirmation', array('id' => 'password_confirmation', 'class' => 'form-control')) !!}
           </div>
           <div class='form-group'>
-            <label for="roles">Role</label>
+            <label for="roles">Roles</label>
+            <div>
             @foreach ($roles as $role)
               {{ Form::checkbox('roles[]',  $role->id ) }}
               {{ Form::label($role->name, ucfirst($role->name)) }}<br>
             @endforeach
+            </div>
           </div>
         </div>
         {{-- Submit buttons --}}

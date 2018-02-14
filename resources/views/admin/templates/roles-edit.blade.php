@@ -5,9 +5,9 @@
 
 @section('content')
   @if(isset($role->id))
-    {!! Form::model($role, ['route' => ['admin.permissions.update', $role->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+    {!! Form::model($role, ['route' => ['admin.roles.update', $role->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
   @else
-    {!! Form::model($role, ['route' => ['admin.permissions.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
+    {!! Form::model($role, ['route' => ['admin.roles.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
   @endif
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -15,27 +15,30 @@
     </div>
     <div class="panel-body">
       <div class="col-sm-12">
+        <div id="validation"></div>
         <div class="form-group">
           {{ Form::label('name', 'Name') }}
           {{ Form::text('name', null, array('class' => 'form-control')) }}
+          {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
         </div>
-        <h5><b>Assign Permissions</b></h5>
         <div class='form-group'>
+          <h3>Assign Permissions</h3>
           @foreach ($permissions as $permission)
             {{ Form::checkbox('permissions[]',  $permission->id ) }}
             {{ Form::label($permission->name, ucfirst($permission->name)) }}<br>
           @endforeach
+          {!! $errors->first('permissions', '<span class="help-block">:message</span>') !!}
         </div>
         {{-- Submit buttons --}}
         <div class="form-group submit">
-          {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'finish']) !!}
+          {!! Form::submit('save', ['class' => 'btn btn-invert']) !!}
         </div>
       </div>
     </div>
   </div>
   {!! Form::close() !!}
-  @if(isset($permission->id))
-    @include('admin.components.delete-form', ['model' => 'permissions'])
+  @if(isset($role->id))
+    @include('admin.components.delete-form', ['model' => $role, 'model_name' => 'roles'])
   @endif
 @endsection
 

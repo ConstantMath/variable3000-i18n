@@ -123,7 +123,15 @@ class PermissionController extends AdminController{
     ]);
     $input = $request->all();
     $permission->fill($input)->save();
+    $roles = $request['roles'];
 
+    if (!empty($request['roles'])) { //If one or more role is selected
+      foreach ($roles as $role) {
+        $r = Role::where('id', '=', $role)->firstOrFail(); //Match input role to db record
+        $permission = Permission::where('name', '=', $name)->first(); //Match input //permission to db record
+        $r->givePermissionTo($permission);
+      }
+    }
     return redirect()->route('admin.permissions.index')
         ->with('flash_message','updated');
   }

@@ -59,6 +59,14 @@ class UsersController extends AdminController
      */
 
     public function store(UserRequest $request){
+      $roles = $request['roles']; //Retrieving the roles field
+      //Checking if a role was selected
+      if (isset($roles)) {
+        foreach ($roles as $role) {
+          $role_r = Role::where('id', '=', $role)->firstOrFail();
+          $user->assignRole($role_r); //Assigning role to user
+        }
+      }
       return $this->createObject(User::class, $request);
     }
 
@@ -104,6 +112,13 @@ class UsersController extends AdminController
      */
 
     public function update(User $user, UserRequest $request){
+      $roles = $request['roles']; //Retreive all roles
+      if (isset($roles)) {
+        $user->roles()->sync($roles);  //If one or more role is selected associate user to roles
+      }
+      else {
+        $user->roles()->detach(); //If no role is selected remove exisiting role associated to a user
+      }
       return $this->saveObject($user, $request);
     }
 

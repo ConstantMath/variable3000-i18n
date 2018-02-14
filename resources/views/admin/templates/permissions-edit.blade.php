@@ -15,17 +15,23 @@
     </div>
     <div class="panel-body">
       <div class="col-sm-12">
+        <div id="validation"></div>
         {{-- Name --}}
         <div class="form-group">
            {{ Form::label('name', 'Name') }}
            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
+           {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
         </div>
         <div class='form-group'>
-          <label for="roles">Role</label>
-          @foreach ($roles as $role)
-            {{ Form::checkbox('roles[]',  $role->id ) }}
-            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
-          @endforeach
+          @if($roles)
+            <label for="roles">Role</label>
+            <div>
+            @foreach ($roles as $role)
+              {{ Form::checkbox('roles[]',  $role->id ) }}
+              {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+            @endforeach
+            </div>
+          @endif
         </div>
         {{-- Submit buttons --}}
         <div class="form-group submit">
