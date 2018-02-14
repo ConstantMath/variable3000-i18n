@@ -33,6 +33,10 @@
           {!! link_to_route('admin.users.index', 'Users', '', ['class' => $users_active] ) !!}
         </li>
         <li class="nav-item">
+          <?php $permission_active = (strpos($data['page_id'], 'permissions') !== false) ? 'active' : ''; ?>
+          {!! link_to_route('admin.permissions.index', 'Permissions', '', ['class' => $permission_active] ) !!}
+        </li>
+        <li class="nav-item">
           <?php $settings_active = (strpos($data['page_id'], 'settings') !== false) ? 'active' : ''; ?>
           {!! link_to_route('admin.settings.index', 'Settings', '', ['class' => $settings_active] ) !!}
         </li>
