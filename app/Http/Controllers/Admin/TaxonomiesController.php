@@ -121,8 +121,8 @@ class TaxonomiesController extends AdminController
   * @return \Illuminate\Http\Response
   */
 
-  public function destroy(Page $page){
-    return $this->destroyObject($page);
+  public function destroy(Taxonomy $taxonomy){
+    return $this->destroyObject($taxonomy);
   }
 
 

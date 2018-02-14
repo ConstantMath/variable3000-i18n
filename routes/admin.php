@@ -4,6 +4,7 @@ Route::get('/', ['as' => 'root', 'uses' => 'ArticlesController@index']);
 Route::resource('users', 'UsersController');
 Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
+Route::resource('roles', 'RoleController');
 Route::resource('articles', 'ArticlesController');
 Route::resource('pages', 'PagesController', ['except' => ['create', 'index']]);
 Route::get('pages/{parent_id}/create', 'PagesController@create')->name('pages.create');

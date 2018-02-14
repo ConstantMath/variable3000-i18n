@@ -25,8 +25,18 @@
 }
 
 
-.alert-success {
-  color: $black;
+.alert{
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
   background-color: $yellowLight;
-  border: none;
+  z-index: 99;
+  border: 0;
+
+}
+
+.alert-success {
+  background-color: $blue;
 }

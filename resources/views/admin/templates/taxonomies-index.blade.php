@@ -5,7 +5,6 @@
 
 
 @section('content')
-  @include('admin.components.flash-message')
   @if($taxonomies) @foreach ($taxonomies as $taxonomy)
   <div class="panel panel-default panel-index">
     <div class="panel-heading">

@@ -40,7 +40,7 @@ $(document).ready(function() {
   }
 
   // ----- Hide index alerts ----- //
-  $("main .alert").delay(2000).fadeOut(300);
+  $(".alert").delay(2000).fadeOut(300);
 
 
   // ----- Login logo  ----- //

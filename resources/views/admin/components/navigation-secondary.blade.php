@@ -37,6 +37,10 @@
           {!! link_to_route('admin.permissions.index', 'Permissions', '', ['class' => $permission_active] ) !!}
         </li>
         <li class="nav-item">
+          <?php $role_active = (strpos($data['page_id'], 'roles') !== false) ? 'active' : ''; ?>
+          {!! link_to_route('admin.roles.index', 'Roles', '', ['class' => $role_active] ) !!}
+        </li>
+        <li class="nav-item">
           <?php $settings_active = (strpos($data['page_id'], 'settings') !== false) ? 'active' : ''; ?>
           {!! link_to_route('admin.settings.index', 'Settings', '', ['class' => $settings_active] ) !!}
         </li>

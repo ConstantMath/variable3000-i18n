@@ -18,7 +18,7 @@
         {{-- Name --}}
         <div class="form-group">
            {{ Form::label('name', 'Name') }}
-           {{ Form::text('name', '', array('class' => 'form-control')) }}
+           {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
         </div>
         <div class='form-group'>
           <label for="roles">Role</label>
@@ -29,14 +29,14 @@
         </div>
         {{-- Submit buttons --}}
         <div class="form-group submit">
-          {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'finish']) !!}
+          {!! Form::submit('save', ['class' => 'btn btn-invert']) !!}
         </div>
       </div>
     </div>
   </div>
   {!! Form::close() !!}
-  @if(isset($user->id))
-    @include('admin.components.delete-form', ['model' => 'permissions'])
+  @if(isset($permission->id))
+    @include('admin.components.delete-form', ['model' => $permission, 'model_name' => 'permissions'])
   @endif
 @endsection
 

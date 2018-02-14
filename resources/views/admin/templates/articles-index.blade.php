@@ -4,7 +4,6 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-  @include('admin.components.flash-message')
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3>{{ $data['page_title'] }}</h3>

@@ -30,7 +30,7 @@
       @if(isset($article->id))
         <ul class="nav navbar-nav">
           <li>
-            @include('admin.components.delete-form', array('model'=>'pages'))
+            @include('admin.components.delete-form', ['model' => $article, 'model_name' => 'pages'])
           </li>
           <li>
             <a href="{{ url('/') }}/{{ $article->slug }}" target="_blank"><i class="fa fa-eye"></i> preview</a>

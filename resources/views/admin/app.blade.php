@@ -11,6 +11,7 @@
   <link href="{{ url('/assets/admin/main.css') }}" rel="stylesheet">
 </head>
 <body  class="admin @yield('page_class')">
+  @include('admin.components.flash-message')
   @if (Auth::check())  @include('admin.components.navigation-primary') @endif
   <div class="container-fluid">
     <div class="row">

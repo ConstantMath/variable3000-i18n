@@ -25,7 +25,7 @@ class UserRequest extends FormRequest
         case 'POST':{ // create
           return [
             'name'                  => 'required|max:255|unique:users',
-            'email'                 => 'required|email|max:255|unique:users',
+            'email'                 => 'sometimes|required|email|max:255|unique:users',
             'password'              => 'sometimes|required|alpha_num|between:6,20|confirmed'
           ];
         }
@@ -34,12 +34,12 @@ class UserRequest extends FormRequest
             if($this->get('password') == null){
               return [
                 'name'                  => 'required|max:255|unique:users,id,'.$this->get('id'),
-                'email'                 => 'required|email|unique:users,email,'.$this->get('id'),
+                'email'                 => 'sometimes|required|email',
               ];
           }else{
               return [
                 'name'                  => 'required|max:255|unique:users,id,'.$this->get('id'),
-                'email'                 => 'required|email|unique:users,id,'.$this->get('id'),
+                'email'                 => 'sometimes|required|email',
                 'password'              => 'sometimes|alpha_num|between:6,20|confirmed'
               ];
           }

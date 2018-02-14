@@ -51,7 +51,9 @@ class AdminController extends Controller{
       $request['created_at'] = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
     }
     // Checkbox update
-    $request['published'] = (($model->published) ? 1 : 0);
+    if($request['published']):
+      $request['published'] = (($model->published) ? 1 : 0);
+    endif;
     // Taxonomies
     if(!empty($model->taxonomies)):
       // Loop inside all taxonomies model's attributes to delete the existing ones first
@@ -63,6 +65,7 @@ class AdminController extends Controller{
     // Do update
     $collection->update($request->all());
     // Redirect
+    session()->flash('flash_message', 'Updated');
     if(isset($request['finish'])){
       return redirect()->route('admin.' . snake_case($this->model) . '.index', $request->parent_id);
     }else{
@@ -119,6 +122,7 @@ class AdminController extends Controller{
         }
       }
     }
+    session()->flash('flash_message', 'Created');
     return redirect()->route('admin.' . snake_case($this->getModel()) . '.index', $request->parent_id);
   }
 
