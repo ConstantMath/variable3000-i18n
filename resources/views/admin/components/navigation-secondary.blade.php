@@ -31,14 +31,18 @@
         <li class="nav-item">
           <?php $users_active = (strpos($data['page_id'], 'users') !== false) ? 'active' : ''; ?>
           {!! link_to_route('admin.users.index', 'Users', '', ['class' => $users_active] ) !!}
-        </li>
-        <li class="nav-item">
-          <?php $role_active = (strpos($data['page_id'], 'roles') !== false) ? 'active' : ''; ?>
-          {!! link_to_route('admin.roles.index', 'Roles', '', ['class' => $role_active] ) !!}
-        </li>
-        <li class="nav-item">
-          <?php $permission_active = (strpos($data['page_id'], 'permissions') !== false) ? 'active' : ''; ?>
-          {!! link_to_route('admin.permissions.index', 'Permissions', '', ['class' => $permission_active] ) !!}
+          @if(!empty($data['page_type']) && $data['page_type'] == 'users')
+          <ul>
+            <li class="nav-item">
+              <?php $role_active = (strpos($data['page_id'], 'roles') !== false) ? 'active' : ''; ?>
+              {!! link_to_route('admin.roles.index', 'Roles', '', ['class' => $role_active] ) !!}
+            </li>
+            <li class="nav-item">
+              <?php $permission_active = (strpos($data['page_id'], 'permissions') !== false) ? 'active' : ''; ?>
+              {!! link_to_route('admin.permissions.index', 'Permissions', '', ['class' => $permission_active] ) !!}
+            </li>
+          </ul>
+          @endif
         </li>
         <li class="nav-item">
           <?php $settings_active = (strpos($data['page_id'], 'settings') !== false) ? 'active' : ''; ?>

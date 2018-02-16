@@ -27,6 +27,7 @@ class PermissionController extends AdminController{
       'page_class' => 'permissions-index',
       'page_title' => 'Permissions index',
       'page_id'    => 'permissions',
+      'page_type'  => 'users',
     );
     $permissions = Permission::all(); //Get all permissions
     return view('admin.templates.permissions-index', compact('permissions', 'data'));
@@ -44,11 +45,13 @@ class PermissionController extends AdminController{
       'page_class' => 'permissions-edit',
       'page_title' => 'Create',
       'page_id'    => 'permissions',
+      'page_type'  => 'users',
     );
     $permission = collect(new Permission);
     $roles = Role::get(); //Get all roles
     return view('admin.templates.permissions-edit', compact('roles', 'permission', 'data'));
   }
+
 
   /**
   * Store a newly created resource in storage.
@@ -56,6 +59,7 @@ class PermissionController extends AdminController{
   * @param  \Illuminate\Http\Request  $request
   * @return \Illuminate\Http\Response
   */
+
   public function store(Request $request) {
     $this->validate($request, [
         'name'=>'required|max:40',
@@ -76,15 +80,18 @@ class PermissionController extends AdminController{
     return redirect()->route('admin.permissions.index')->with('flash_message', 'Created');
   }
 
+
   /**
   * Display the specified resource.
   *
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
+
   public function show($id) {
       return redirect('permissions');
   }
+
 
   /**
   * Show the form for editing the specified resource.
@@ -92,15 +99,18 @@ class PermissionController extends AdminController{
   * @param  int  $id
   * @return \Illuminate\Http\Response
   */
+
   public function edit($id) {
     $data = array(
       'page_class' => 'permissions-edit',
       'page_title' => 'Create',
       'page_id'    => 'permissions',
+      'page_type'  => 'users',
     );
     $permission = Permission::findOrFail($id);
     return view('admin.templates.permissions-edit', compact('data', 'permission'));
   }
+
 
   /**
   * Update the specified resource in storage.

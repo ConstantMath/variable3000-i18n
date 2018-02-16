@@ -26,6 +26,7 @@ class UsersController extends AdminController
         'page_class' => 'users-index',
         'page_title' => 'Users index',
         'page_id'    => 'users',
+        'page_type'  => 'users',
       );
       $users = User::all();
       return view('admin/templates/users-index', compact('users', 'data'));
@@ -44,6 +45,7 @@ class UsersController extends AdminController
         'page_class' => 'users-edit',
         'page_title' => 'Create a user',
         'page_id'    => 'users',
+        'page_type'  => 'users',
       );
       $user = collect(new User);
       $roles = Role::get();
@@ -97,6 +99,7 @@ class UsersController extends AdminController
         'page_class' => 'users-edit',
         'page_title' => 'Edit a user',
         'page_id'    => 'users',
+        'page_type'  => 'users',
       );
       $user = User::findOrFail($id);
       $roles = Role::get();

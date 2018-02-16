@@ -25,6 +25,8 @@ class RoleController extends AdminController{
       'page_class' => 'roles-index',
       'page_title' => 'Roles index',
       'page_id'    => 'roles',
+      'page_type'  => 'users',
+
     );
     $roles = Role::all();
     return view('admin.templates.roles-index', compact('roles', 'data'));
@@ -42,6 +44,8 @@ class RoleController extends AdminController{
       'page_class' => 'roles-edit',
       'page_title' => 'Create a role',
       'page_id'    => 'roles',
+      'page_type'  => 'users',
+
     );
     $role = collect(new Permission);
     $permissions = Permission::all();
@@ -100,6 +104,8 @@ class RoleController extends AdminController{
       'page_class' => 'roles-edit',
       'page_title' => 'Create a role',
       'page_id'    => 'roles',
+      'page_type'  => 'users',
+
     );
     $role = Role::findOrFail($id);
     $permissions = Permission::all();
@@ -136,7 +142,6 @@ class RoleController extends AdminController{
           $p = Permission::where('id', '=', $permission)->firstOrFail(); //Get corresponding form //permission in db
           $role->givePermissionTo($p);  //Assign permission to role
       }
-
       return redirect()->route('admin.roles.index')->with('flash_message', 'updated!');
   }
 
@@ -150,7 +155,6 @@ class RoleController extends AdminController{
   {
       $role = Role::findOrFail($id);
       $role->delete();
-
       return redirect()->route('admin.roles.index')->with('flash_message','Role deleted');
 
   }
