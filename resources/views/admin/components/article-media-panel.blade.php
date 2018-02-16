@@ -13,7 +13,7 @@
     @if (isset($article->id))
       {!! Form::model($article, ['route' => ['admin.medias.store', $article->getTable(), $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else
-      {!! Form::model($article, ['route' => ['admin.medias.store', 'null'], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
+      {!! Form::model($article, ['route' => ['admin.medias.store', $article->getTable(), 'null'], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @endif
     {!! Form::hidden('type', $media_type) !!}
       {{-- Always put file form before submit bt  --}}
