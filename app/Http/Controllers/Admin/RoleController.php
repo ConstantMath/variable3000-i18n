@@ -151,9 +151,7 @@ class RoleController extends AdminController{
       $role = Role::findOrFail($id);
       $role->delete();
 
-      return redirect()->route('roles.index')
-          ->with('flash_message',
-           'Role deleted!');
+      return redirect()->route('admin.roles.index')->with('flash_message','Role deleted');
 
   }
 }

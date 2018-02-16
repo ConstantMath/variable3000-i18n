@@ -22,17 +22,17 @@
            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
            {!! $errors->first('name', '<span class="help-block">:message</span>') !!}
         </div>
+        @if(!empty($roles) && !isset($permission->id))
         <div class='form-group'>
-          @if($roles)
-            <label for="roles">Role</label>
-            <div>
-            @foreach ($roles as $role)
-              {{ Form::checkbox('roles[]',  $role->id ) }}
-              {{ Form::label($role->name, ucfirst($role->name)) }}<br>
-            @endforeach
-            </div>
-          @endif
+          <label for="roles">Assign Permission to Roles</label>
+          <div>
+          @foreach ($roles as $role)
+            {{ Form::checkbox('roles[]',  $role->id ) }}
+            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+          @endforeach
+          </div>
         </div>
+        @endif
         {{-- Submit buttons --}}
         <div class="form-group submit">
           {!! Form::submit('save', ['class' => 'btn btn-invert']) !!}

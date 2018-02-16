@@ -15,7 +15,7 @@
           @foreach ($permissions as $permission)
           <tr>
             <td>
-              <i class="fa fa-smile-o"></i>
+              <span>&rarr;</span>
               {!! link_to_route('admin.permissions.edit', $permission->name, $permission->id, ['class' => '']) !!}
             </td>
           </tr>

@@ -60,6 +60,7 @@ class UsersController extends AdminController
 
     public function store(UserRequest $request){
       $roles = $request['roles']; //Retrieving the roles field
+      $user = $this->createObject(User::class, $request, 'object');
       //Checking if a role was selected
       if (isset($roles)) {
         foreach ($roles as $role) {
@@ -67,7 +68,7 @@ class UsersController extends AdminController
           $user->assignRole($role_r); //Assigning role to user
         }
       }
-      return $this->createObject(User::class, $request);
+      return redirect()->route('admin.users.index', $request->parent_id);
     }
 
 

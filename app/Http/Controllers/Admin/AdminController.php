@@ -82,7 +82,7 @@ class AdminController extends Controller{
    * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    */
 
-  public function createObject($class, $request){
+  public function createObject($class, $request, $return_type = 'redirect'){
     // Increment order of all articles
     if(isset($request->order)):
       if(empty($request->parent_id)):
@@ -123,7 +123,11 @@ class AdminController extends Controller{
       }
     }
     session()->flash('flash_message', 'Created');
-    return redirect()->route('admin.' . snake_case($this->getModel()) . '.index', $request->parent_id);
+    if($return_type == 'redirect'){
+      return redirect()->route('admin.' . snake_case($this->getModel()) . '.index', $request->parent_id);
+    }else{
+      return $article;
+    }
   }
 
 

@@ -60,25 +60,20 @@ class PermissionController extends AdminController{
     $this->validate($request, [
         'name'=>'required|max:40',
     ]);
-
     $name = $request['name'];
     $permission = new Permission();
     $permission->name = $name;
-
     $roles = $request['roles'];
-
     $permission->save();
-
-    if (!empty($request['roles'])) { //If one or more role is selected
+    //If one or more role is selected
+    if (!empty($request['roles'])) {
       foreach ($roles as $role) {
         $r = Role::where('id', '=', $role)->firstOrFail(); //Match input role to db record
         $permission = Permission::where('name', '=', $name)->first(); //Match input //permission to db record
         $r->givePermissionTo($permission);
       }
     }
-
-    return redirect()->route('admin.permissions.index')
-        ->with('flash_message', 'Created');
+    return redirect()->route('admin.permissions.index')->with('flash_message', 'Created');
   }
 
   /**
@@ -104,8 +99,7 @@ class PermissionController extends AdminController{
       'page_id'    => 'permissions',
     );
     $permission = Permission::findOrFail($id);
-    $roles = Role::get(); //Get all roles
-    return view('admin.templates.permissions-edit', compact('roles', 'permission', 'data'));
+    return view('admin.templates.permissions-edit', compact('data', 'permission'));
   }
 
   /**
@@ -117,23 +111,15 @@ class PermissionController extends AdminController{
   */
 
   public function update(Request $request, $id) {
-    $permission = Permission::findOrFail($id);
-    $this->validate($request, [
-        'name'=>'required|max:40',
-    ]);
-    $input = $request->all();
-    $permission->fill($input)->save();
-    $roles = $request['roles'];
+      $permission = Permission::findOrFail($id);
+      $this->validate($request, [
+          'name'=>'required|max:40',
+      ]);
+      $input = $request->all();
+      $permission->fill($input)->save();
 
-    if (!empty($request['roles'])) { //If one or more role is selected
-      foreach ($roles as $role) {
-        $r = Role::where('id', '=', $role)->firstOrFail(); //Match input role to db record
-        $permission = Permission::where('name', '=', $name)->first(); //Match input //permission to db record
-        $r->givePermissionTo($permission);
-      }
-    }
-    return redirect()->route('admin.permissions.index')
-        ->with('flash_message','updated');
+      return redirect()->route('admin.permissions.index')->with('flash_message', 'updated!');
+
   }
 
 

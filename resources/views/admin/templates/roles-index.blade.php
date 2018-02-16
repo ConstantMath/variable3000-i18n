@@ -15,10 +15,9 @@
         <tbody>
           @foreach ($roles as $role)
           <tr>
-            <td>
-              <i class="fa fa-pencil"></i>
-              {!! link_to_route('admin.roles.edit', $role->name, $role->id, ['class' => '']) !!}
-            </td>
+            <td><span>&rarr;</span>&nbsp;{!! link_to_route('admin.roles.edit', $role->name, $role->id, ['class' => '']) !!}</td>
+            <td class="small attribute">{{ str_replace(array('[', ']', '"'),'', $role->permissions()->pluck('name')) }}</td>
+            <td></td>
           </tr>
           @endforeach
         </tbody>
