@@ -11,7 +11,7 @@ use App\DB;
 class MediasController extends AdminController {
 
   public function __construct(){
-    $this->middleware('auth');
+    $this->middleware(['auth', 'permissions'])->except('index');
   }
 
 

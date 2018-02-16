@@ -31,7 +31,7 @@ class AdminController extends Controller{
    */
 
   public function __construct(){
-    $this->middleware('auth');
+    $this->middleware(['auth', 'permissions'])->except('index');
     $this->model = $this->getModel();
   }
 
