@@ -13,7 +13,7 @@ use Lang;
 class TaxonomiesController extends AdminController
 {
   public function __construct(){
-    $this->middleware('auth');
+    $this->middleware(['auth', 'permissions'])->except('index');
     // Construct admin controller
     parent::__construct();
   }

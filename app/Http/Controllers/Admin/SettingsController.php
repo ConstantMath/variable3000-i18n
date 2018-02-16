@@ -7,6 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Setting;
 class SettingsController extends AdminController
 {
+  public function __construct(){
+    $this->middleware(['auth', 'permissions'])->except('index');
+    // Construct admin controller
+    parent::__construct();
+  }
+
   /**
    * Display a listing of the resource.
    *

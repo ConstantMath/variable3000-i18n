@@ -11,7 +11,7 @@ use Session;
 class RoleController extends AdminController{
 
   public function __construct() {
-    $this->middleware(['auth']);//isAdmin middleware lets only users with a //specific permission permission to access these resources
+    $this->middleware(['auth', 'permissions'])->except('index');
   }
 
   /**
@@ -63,7 +63,7 @@ class RoleController extends AdminController{
   public function store(Request $request) {
     //Validate name and permissions field
     $this->validate($request, [
-        'name'=>'required|unique:roles|max:10',
+        'name'=>'required|unique:roles|max:20',
         'permissions' =>'required',
         ]
     );
@@ -124,7 +124,7 @@ class RoleController extends AdminController{
       $role = Role::findOrFail($id);//Get role with the given id
   //Validate name and permission fields
       $this->validate($request, [
-          'name'=>'required|max:10|unique:roles,name,'.$id,
+          'name'=>'required|max:20|unique:roles,name,'.$id,
           'permissions' =>'required',
       ]);
 
@@ -151,11 +151,13 @@ class RoleController extends AdminController{
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
-  {
-      $role = Role::findOrFail($id);
+  public function destroy($id){
+    $role = Role::findOrFail($id);
+    if($role->id == 1){
+      abort('401');
+    }else{
       $role->delete();
       return redirect()->route('admin.roles.index')->with('flash_message','Role deleted');
-
+    }
   }
 }

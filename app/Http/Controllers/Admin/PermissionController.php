@@ -13,7 +13,7 @@ use Session;
 class PermissionController extends AdminController{
 
   public function __construct() {
-      $this->middleware(['auth']); //isAdmin middleware lets only users with a //specific permission permission to access these resources
+    $this->middleware(['auth', 'permissions'])->except('index');
   }
 
   /**

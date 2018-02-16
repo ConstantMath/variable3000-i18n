@@ -19,7 +19,7 @@ class ArticlesController extends AdminController
   public function __construct(){
     $parent_articles = Article::where('parent_id', 0)->get();
     Lang::setLocale(config('app.locale'));
-    $this->middleware('auth');
+    $this->middleware(['auth', 'permissions'])->except('index');    
     parent::__construct();
   }
 

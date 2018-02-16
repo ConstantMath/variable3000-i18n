@@ -32,11 +32,6 @@ class UsersTableSeeder extends Seeder
       ]);
 
       DB::table('permissions')->insert([
-        'name' => 'Admin roles & permissions',
-        'guard_name' => 'web',
-      ]);
-
-      DB::table('permissions')->insert([
         'name' => 'Admin settings',
         'guard_name' => 'web',
       ]);
@@ -48,6 +43,11 @@ class UsersTableSeeder extends Seeder
 
       DB::table('permissions')->insert([
         'name' => 'Delete users',
+        'guard_name' => 'web',
+      ]);
+
+      DB::table('permissions')->insert([
+        'name' => 'Admin roles & permissions',
         'guard_name' => 'web',
       ]);
 
