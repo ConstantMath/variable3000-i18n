@@ -45,5 +45,7 @@ class GenerateRessource extends Command
       $this->call('make:controller', ['name' => 'Admin/'. $resource . 'Controller']);
       $this->call('make:controller', ['name' => ''. $resource . 'Controller']);
       $this->call('make:request', ['name' => 'Admin/' . $resource . 'Request']);
+      $this->info('New resource generated successfully');
+
     }
 }

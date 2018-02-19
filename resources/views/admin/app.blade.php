@@ -27,7 +27,7 @@
   </div>
   <!-- JavaScripts -->
   <script type="text/javascript">
-    @if(config('translatable.locales') > 1)
+  @if(!empty(config('translatable.locales')) && count(config('translatable.locales')) > 1)
       var admin_url = '/{{config('translatable.locales')[0]}}/admin';
     @else
       var admin_url = '/admin';

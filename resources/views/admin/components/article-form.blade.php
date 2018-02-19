@@ -4,7 +4,6 @@
 {!! Form::hidden('une[]', null, ['id' => 'une']) !!}
 {!! Form::hidden('gallery[]', null, ['id' => 'gallery']) !!}
 
-<input type="hidden" id="une" name="une[]">
 @foreach ($errors->all() as $error)
     <span class="help-block">{{ $error }}</span>
 @endforeach

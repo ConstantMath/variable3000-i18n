@@ -29,6 +29,7 @@ class Articles extends Seeder
           'slug' => str_slug($title_fr),
           'text' => $faker->text($maxNbChars = 800)
         ],
+        'parent_id' => 0,
         'published' => 1,
         'order' => 0,
       ]);

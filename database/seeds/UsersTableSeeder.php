@@ -94,7 +94,7 @@ class UsersTableSeeder extends Seeder
      $variable = User::create([
          'name' => 'Variable',
          'email'  => 'bonjour@variable.club',
-         'password' => bcrypt('000000'),
+         'password' => '000000',
       ]);
 
       $variable->assignRole('Super admin');
