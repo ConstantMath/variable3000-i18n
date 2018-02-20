@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Article;
 
-class ArticlesController extends Controller{
+class ArticlesController extends FrontController{
 
   /**
    * Create a new controller instance.

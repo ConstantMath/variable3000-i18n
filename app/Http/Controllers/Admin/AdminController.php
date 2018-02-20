@@ -51,8 +51,8 @@ class AdminController extends Controller{
       $request['created_at'] = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
     }
     // Checkbox update
-    if($request['published']):
-      $request['published'] = (($model->published) ? 1 : 0);
+    if($model->published):
+      $request['published'] = (($request['published']) ? 1 : 0);
     endif;
     // Taxonomies
     if(!empty($model->taxonomies)):

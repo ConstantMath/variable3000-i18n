@@ -5,16 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('page_title')</title>
-  <meta name="description" content="Alice Gallery Brussels">
-  <meta name="keywords" content="Alice gallery Brussels Bruxelles Brussel Belgium">
+  <meta name="description" content="@yield('website_description')">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta property="fb:admins" content="569403070">
   <meta property="fb:app_id" content="307156226006266">
-  <meta name="apple-mobile-web-app-title" content="Alice Gallery Brussels">
-  <meta name="application-name" content="Alice Gallery Brussels">
+  <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
+  <meta name="application-name" content="{{ config('app.name') }}">
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta property="og:title" content="@yield('page_title')">
-  <meta property="og:description" content="Alice Gallery Brussels">
+  <meta property="og:description" content="@yield('website_description')">
   <meta property="og:image" content="">
   <meta property="og:url" content="">
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicon/apple-touch-icon-57x57.png">
@@ -41,6 +40,17 @@
     <link href="{{ url('/assets/screen.css') }}" rel="stylesheet">
   @else
     <link href="{{ url('/assets/screen.min.css') }}" rel="stylesheet">
+  @endif
+
+  @if($google_analytics)
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108373952-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '{{ $google_analytics }}');
+    </script>
   @endif
 </head>
 <body>
