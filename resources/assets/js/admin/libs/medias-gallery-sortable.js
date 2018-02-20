@@ -20,7 +20,7 @@ if ( $('#panel-gallery').length ){
           type: 'POST',
           success: function(response){
             if(response.status == 'success'){
-              $('<span class="message pull-right">Updated !</span>').appendTo(".panel-mediagallery .panel-heading").fadeOut(3000);
+              $('<span class="message pull-right">Updated !</span>').appendTo("#panel-gallery .panel-heading").fadeOut(3000);
             } else {
             }
           }

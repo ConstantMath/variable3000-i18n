@@ -40,6 +40,11 @@ $(document).ready(function() {
   function mediaResponse(response, statusText, xhr, $form){
     if(response.success == true){
       addMediaInput(response.id, response.type, response.mediatable_type);
+    }else{
+      var panel = $('#panel-' + response.type);
+      var message_field = $('#panel-' + response.type + ' .message');
+      panel.removeClass('loading');
+      message_field.html(response.error).fadeOut(6000);
     }
   }
 

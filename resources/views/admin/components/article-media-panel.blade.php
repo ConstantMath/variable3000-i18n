@@ -10,6 +10,7 @@
     <ul class="list-group sortable media-list">
     </ul>
     <i class="fa fa-ellipsis-h blink"></i>
+    <span class="message" class="hidden"></span>
     @if (isset($article->id))
       {!! Form::model($article, ['route' => ['admin.medias.store', $article->getTable(), $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else

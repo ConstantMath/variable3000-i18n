@@ -48,52 +48,67 @@ class MediasController extends AdminController {
    */
 
   public function store(Request $request, $mediatable_type, $article_id){
-    $class = $this->getClass($mediatable_type);
-    if(!empty($article_id) && $article_id != 'null'){
-      $article = $class::findOrFail($article_id);
-    }
-    // Champs requests
-    $file        = $request->file('image');
-    if($file){
-      list($width, $height) = getimagesize($file);
-      // Upload
-      $media_file = Media::uploadMediaFile($file);
-      // Media store
-      $media = New media;
-      $media->name       = $media_file['name'];
-      $media->alt        = $media_file['orig_name'];
-      $media->ext        = $file->getClientOriginalExtension();
-      $media->type       = $request->input('type');
-      $media->width      = $width;
-      $media->height     = $height;
-      // If Media unique (not gallery) > Delete current before saving,
-      if(($media->type == 'une') && isset($article) && !empty($article->medias)){
-        $current_media = $article->medias->where('type', $media->type)->first();
-        if(!empty($current_media)):
-          Media::deleteMediaFile($current_media->id);
-        endif;
-      }
-      $media->save();
-      // Link media to article
-      if(isset($article)){
-        // retourne le dernier media
-        $next_media_order = $article->lastMediaId($media->type);
-        $next_media_order += 1;
-        // Article -> media
-        $media->order = $next_media_order;
-        $article->medias()->save($media);
-      }
+    // Validator conditions
+    $validator = Validator::make($request->all(), [
+      'image' => 'required|mimes:jpeg,jpg,png,gif,pdf,mp4|max:3000',
+    ]);
+    // Validator test
+    if ($validator->fails()) {
       return response()->json([
-        'success'          => true,
-        'alt'              => $media->alt,
-        'name'             => $media->name,
-        'ext'              => $media->ext,
-        'type'             => $media->type,
-        'mediatable_type'  => $mediatable_type,
+        'status' => 'error',
+        'error'    =>  'Error while uploading file, please check file format and size.',
+        'type'             => $request->input('type'),
         'article_id'       => $article_id,
-        'id'               => $media->id,
-        'description'      => $media->description,
       ]);
+    }else{
+
+      $class = $this->getClass($mediatable_type);
+      if(!empty($article_id) && $article_id != 'null'){
+        $article = $class::findOrFail($article_id);
+      }
+      // Champs requests
+      $file        = $request->file('image');
+      if($file){
+        list($width, $height) = getimagesize($file);
+        // Upload
+        $media_file = Media::uploadMediaFile($file);
+        // Media store
+        $media = New media;
+        $media->name       = $media_file['name'];
+        $media->alt        = $media_file['orig_name'];
+        $media->ext        = $file->getClientOriginalExtension();
+        $media->type       = $request->input('type');
+        $media->width      = $width;
+        $media->height     = $height;
+        // If Media unique (not gallery) > Delete current before saving,
+        if(($media->type == 'une') && isset($article) && !empty($article->medias)){
+          $current_media = $article->medias->where('type', $media->type)->first();
+          if(!empty($current_media)):
+            Media::deleteMediaFile($current_media->id);
+          endif;
+        }
+        $media->save();
+        // Link media to article
+        if(isset($article)){
+          // retourne le dernier media
+          $next_media_order = $article->lastMediaId($media->type);
+          $next_media_order += 1;
+          // Article -> media
+          $media->order = $next_media_order;
+          $article->medias()->save($media);
+        }
+        return response()->json([
+          'success'          => true,
+          'alt'              => $media->alt,
+          'name'             => $media->name,
+          'ext'              => $media->ext,
+          'type'             => $media->type,
+          'mediatable_type'  => $mediatable_type,
+          'article_id'       => $article_id,
+          'id'               => $media->id,
+          'description'      => $media->description,
+        ]);
+      }
     }
   }
 
