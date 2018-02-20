@@ -15,10 +15,10 @@ Route::get('taxonomies/create/{parent_id}', 'TaxonomiesController@create')->name
 Route::post('taxonomies/reorder/{id}', 'TaxonomiesController@reorder')->name('taxonomies.reorder');
 Route::post('{mediatable_type}/reorder', 'AdminController@orderObject')->name('reorder');
 // Medias
-Route::get('medias/index/{media_type}/{mediatable_type}/{article_id}', 'mediasController@index')->name('medias.index');
-Route::post('medias/store/{mediatable_type}/{article_id?}', 'mediasController@store')->name('medias.store');
-Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'mediasController@reorder')->name('medias.reorder');
-Route::post('medias/destroy/{mediatable_type}/{media_id}', 'mediasController@destroy')->name('medias.destroy');
+Route::get('medias/index/{media_type}/{mediatable_type}/{article_id}', 'MediasController@index')->name('medias.index');
+Route::post('medias/store/{mediatable_type}/{article_id?}', 'MediasController@store')->name('medias.store');
+Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'MediasController@reorder')->name('medias.reorder');
+Route::post('medias/destroy/{mediatable_type}/{media_id}', 'MediasController@destroy')->name('medias.destroy');
 //Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
 Route::post('medias/get', 'MediasController@getFromArray');
 Route::post('medias/update', 'MediasController@update')->name('medias.update');
