@@ -21,5 +21,5 @@ Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'Media
 Route::post('medias/destroy/{mediatable_type}/{media_id}', 'MediasController@destroy')->name('medias.destroy');
 //Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
 Route::post('medias/get', 'MediasController@getFromArray');
-Route::post('medias/update', 'MediasController@update')->name('medias.update');
+Route::post('medias/update/{mediatable_type}', 'MediasController@update')->name('medias.update');
 Route::post('fileupload', 'MediasController@fileUpload')->name('fileupload');

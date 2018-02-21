@@ -21641,7 +21641,7 @@ $(document).ready(function() {
 
     function mediaEditResponse(response, statusText, xhr, $form) {
         if (response.status == 'success') {
-            getMedias(response.media_type);
+            getMedias(response.media_type, response.mediatable_type);
         }
     }
 
