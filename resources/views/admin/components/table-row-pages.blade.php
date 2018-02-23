@@ -15,4 +15,11 @@
   @else
   <td class="attribute time">{{ $node->created_at }}</td>
   @endif
+  {{-- @if(count($node->children) > 0)
+    <table>
+    @foreach ($node->children  as $node)
+      @include('admin.components.table-row-pages')
+    @endforeach
+    </table>
+  @endif --}}
 </tr>

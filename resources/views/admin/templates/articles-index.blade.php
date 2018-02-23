@@ -11,7 +11,7 @@
     </div>
     <div class="panel-body table-responsive">
       <table class="table">
-        <tbody id="sortable">
+        <tbody id="sortable"  class="sortable">
           @if($articles) @foreach ($articles as $node)
             @include('admin.components.table-row')
           @endforeach @endif
