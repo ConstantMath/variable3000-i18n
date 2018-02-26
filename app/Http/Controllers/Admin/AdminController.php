@@ -44,7 +44,7 @@ class AdminController extends Controller{
    * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    */
 
-  public function saveObject($model, $request){
+  public function saveObject($model, $request, $taxonomies = false){
     $class = get_class($model);
     $collection = $class::findOrFail($model->id);
     if($request['created_at']){
@@ -54,13 +54,25 @@ class AdminController extends Controller{
     if($model->published):
       $request['published'] = (($request['published']) ? 1 : 0);
     endif;
+
     // Taxonomies
-    if(!empty($model->taxonomies)):
-      // Loop inside all taxonomies model's attributes to delete the existing ones first
-      foreach ($model->taxonomies as $key => $val):
-        $new_taxonomies_array = !empty($request->taxonomies[$val->parent_id]) ? $request->taxonomies[$val->parent_id] : null;
-        Taxonomy::detachOldAddNew($new_taxonomies_array, $val->parent_id, $request['id']);
+    if(!empty($taxonomies)):
+      // Loop through all model's taxonomies
+      foreach ($taxonomies as $key => $val):
+        $taxonomy_parent_id = $val;
+        // Get the taxonmies request input
+        $taxonomy_input = (!empty($request->taxonomies[$taxonomy_parent_id])) ? $request->taxonomies[$taxonomy_parent_id] : '' ;
+        dd($taxonomy_input);
+        if(!empty($taxonomy_input)){
+          $new_taxonomies = Taxonomy::processTaxonomies($taxonomy_input, $taxonomy_parent_id);
+        }else{
+          $new_taxonomies = '';
+        }
+        dd($model->id);
+        // Link the taxonomies
+        Taxonomy::detachOldAddNew($new_taxonomies, $taxonomy_parent_id, $model->id);
       endforeach;
+
     endif;
     // Do update
     $collection->update($request->all());

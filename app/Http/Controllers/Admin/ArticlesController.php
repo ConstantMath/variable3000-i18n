@@ -19,7 +19,8 @@ class ArticlesController extends AdminController
   public function __construct(){
     $parent_articles = Article::where('parent_id', 0)->get();
     Lang::setLocale(config('app.locale'));
-    $this->middleware(['auth', 'permissions'])->except('index');    
+    $this->middleware(['auth', 'permissions'])->except('index');
+    $this->taxonomies = [1,2];
     parent::__construct();
   }
 
@@ -89,7 +90,7 @@ class ArticlesController extends AdminController
 
   public function update(Article $article, ArticleRequest $request){
     // Save article
-    return $this->saveObject($article, $request);
+    return $this->saveObject($article, $request, $this->taxonomies);
   }
 
 
