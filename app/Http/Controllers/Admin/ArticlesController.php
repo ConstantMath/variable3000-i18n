@@ -104,7 +104,7 @@ class ArticlesController extends AdminController
 
   public function store(ArticleRequest $request){
     // Create article
-    return $this->createObject(Article::class, $request, $this->taxonomies);
+    return $this->createObject(Article::class, $request, 'redirect', $this->taxonomies);
   }
 
 

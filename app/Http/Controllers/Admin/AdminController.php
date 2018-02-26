@@ -56,7 +56,7 @@ class AdminController extends Controller{
     endif;
     // Taxonomies
     if(!empty($taxonomies)):
-      $this->manageTaxonomies($taxonomies, $request, $collection->id);
+      $this->manageTaxonomies($taxonomies, $request, $collection->id, $class);
     endif;
     // Do update
     $collection->update($request->all());
@@ -91,7 +91,7 @@ class AdminController extends Controller{
     $article = $class::create($request->all());
     // Taxonomies
     if(!empty($taxonomies)):
-      $this->manageTaxonomies($taxonomies, $request, $article->id);
+      $this->manageTaxonomies($taxonomies, $request, $article->id, $class);
     endif;
     // Image une
     if ($request->has('une') && !empty($request->une[0])) {
@@ -216,7 +216,7 @@ class AdminController extends Controller{
   * @return string
   */
 
-  public function manageTaxonomies($model_taxonomies, $request, $article_id){
+  public function manageTaxonomies($model_taxonomies, $request, $article_id, $class){
     // Loop through all model s taxonomies
     foreach ($model_taxonomies as $key => $val):
       $taxonomy_parent_id = $val;
@@ -228,7 +228,7 @@ class AdminController extends Controller{
         $new_taxonomies = '';
       }
       // Link the taxonomies
-      Taxonomy::detachOldAddNew($new_taxonomies, $taxonomy_parent_id, $article_id);
+      Taxonomy::detachOldAddNew($new_taxonomies, $taxonomy_parent_id, $article_id, $class);
     endforeach;
   }
 

@@ -61,7 +61,6 @@ class Taxonomy extends Model{
     // sépare le tableau retourné en numeric (tags existant) et string (nouveaux tags)
     $currentTaxonomies = array_filter($taxonomies, 'is_numeric');
     $newTaxonomies = array_filter($taxonomies, 'is_string');
-    //dd($newTaxonomies);
     // crée un nouveau tag pour chaque string retournée et l'ajoute au tableau ‘tags' courant
     foreach ($newTaxonomies as $newTaxonomy):
       // check si le tag n'est pas déjà dans les tags existants
