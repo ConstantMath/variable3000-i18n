@@ -20,6 +20,7 @@ class ArticlesController extends AdminController
     $parent_articles = Article::where('parent_id', 0)->get();
     Lang::setLocale(config('app.locale'));
     $this->middleware(['auth', 'permissions'])->except('index');
+    // Define an array of all related taxonomie's parents
     $this->taxonomies = [1,2];
     parent::__construct();
   }
@@ -103,7 +104,7 @@ class ArticlesController extends AdminController
 
   public function store(ArticleRequest $request){
     // Create article
-    return $this->createObject(Article::class, $request);
+    return $this->createObject(Article::class, $request, $this->taxonomies);
   }
 
 

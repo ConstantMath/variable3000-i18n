@@ -54,25 +54,9 @@ class AdminController extends Controller{
     if($model->published):
       $request['published'] = (($request['published']) ? 1 : 0);
     endif;
-
     // Taxonomies
     if(!empty($taxonomies)):
-      // Loop through all model's taxonomies
-      foreach ($taxonomies as $key => $val):
-        $taxonomy_parent_id = $val;
-        // Get the taxonmies request input
-        $taxonomy_input = (!empty($request->taxonomies[$taxonomy_parent_id])) ? $request->taxonomies[$taxonomy_parent_id] : '' ;
-        dd($taxonomy_input);
-        if(!empty($taxonomy_input)){
-          $new_taxonomies = Taxonomy::processTaxonomies($taxonomy_input, $taxonomy_parent_id);
-        }else{
-          $new_taxonomies = '';
-        }
-        dd($model->id);
-        // Link the taxonomies
-        Taxonomy::detachOldAddNew($new_taxonomies, $taxonomy_parent_id, $model->id);
-      endforeach;
-
+      $this->manageTaxonomies($taxonomies, $request, $collection->id);
     endif;
     // Do update
     $collection->update($request->all());
@@ -94,7 +78,7 @@ class AdminController extends Controller{
    * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    */
 
-  public function createObject($class, $request, $return_type = 'redirect'){
+  public function createObject($class, $request, $return_type = 'redirect', $taxonomies = false){
     // Increment order of all articles
     if(isset($request->order)):
       if(empty($request->parent_id)):
@@ -106,11 +90,8 @@ class AdminController extends Controller{
     // Article create
     $article = $class::create($request->all());
     // Taxonomies
-    if(!empty($request->taxonomies)):
-      // Loop inside all taxonomies requests
-      foreach ($request->taxonomies as $key => $val):
-        Taxonomy::detachOldAddNew($val, $key, $article->id);
-      endforeach;
+    if(!empty($taxonomies)):
+      $this->manageTaxonomies($taxonomies, $request, $article->id);
     endif;
     // Image une
     if ($request->has('une') && !empty($request->une[0])) {
@@ -225,5 +206,31 @@ class AdminController extends Controller{
       'App\\' . studly_case(str_singular($table_name)) :
       null;
   }
+
+
+  /**
+  * Manage relationsips
+  *
+  * @param $model taxonomies
+  * @param $request
+  * @return string
+  */
+
+  public function manageTaxonomies($model_taxonomies, $request, $article_id){
+    // Loop through all model s taxonomies
+    foreach ($model_taxonomies as $key => $val):
+      $taxonomy_parent_id = $val;
+      // Get the taxonmies request input
+      $taxonomy_input = (!empty($request->taxonomies[$taxonomy_parent_id])) ? $request->taxonomies[$taxonomy_parent_id] : '' ;
+      if(!empty($taxonomy_input) && !empty($taxonomy_input[0])){
+        $new_taxonomies = Taxonomy::processTaxonomies($taxonomy_input, $taxonomy_parent_id);
+      }else{
+        $new_taxonomies = '';
+      }
+      // Link the taxonomies
+      Taxonomy::detachOldAddNew($new_taxonomies, $taxonomy_parent_id, $article_id);
+    endforeach;
+  }
+
 
 }
