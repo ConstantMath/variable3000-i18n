@@ -9,6 +9,7 @@ class FrontController extends Controller
 {
   public function __construct(){
     $google_analytics = Setting::find(2);
-    View::share('google_analytics', $google_analytics->content);
+    $google_analytics_content = (!empty($google_analytics->content)) ? $google_analytics->content : '' ;
+    View::share('google_analytics', $google_analytics_content);
   }
 }

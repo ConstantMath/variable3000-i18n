@@ -48,7 +48,7 @@ class AdminController extends Controller{
     $class = get_class($model);
     $collection = $class::findOrFail($model->id);
     if($request['created_at']){
-      $request['created_at'] = Carbon::createFromFormat('d.m.Y', $model->created_at )->format('Y-m-d H:i:s');
+      $request['created_at'] = Carbon::createFromFormat('d.m.Y', $request->created_at )->format('Y-m-d H:i:s');
     }
     // Checkbox update
     if($model->published):
