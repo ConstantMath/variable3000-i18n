@@ -1,11 +1,11 @@
 <?php $medias = ($article->medias) ? $article->medias->where('type', $media_type) :'' ;?>
 <div
-  class="panel panel-default media-panel loading"
+class="panel panel-default media-panel loading {{ $panel_type }}"
   id="panel-{{ $media_type }}"
   data-media-type="{{ $media_type }}"
   data-media-table-type="{{ $article->getTable() }}"
   >
-  <div class="panel-heading">{{  $panel_title }}</div>
+  <div class="panel-heading">{{ $panel_title }}</div>
   <div class="panel-body">
     <ul class="list-group sortable media-list">
     </ul>

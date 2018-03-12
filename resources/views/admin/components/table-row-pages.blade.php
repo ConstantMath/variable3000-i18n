@@ -11,7 +11,7 @@
   </td>
   @if($parent_id == 0)
     <td class="attribute">
-      <a href="{{ route('admin.pages.index', $node->id) }}">&darr; </td>
+      <a href="{{ route('admin.pages.index', $node->id) }}">&darr; </a></td>
   @else
   <td class="attribute time">{{ $node->created_at }}</td>
   @endif
