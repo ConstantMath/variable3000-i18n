@@ -5,10 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>@yield('page_title')</title>
+  <?php // TODO: page_description ?>
   <meta name="description" content="@yield('website_description')">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta property="fb:admins" content="569403070">
-  <meta property="fb:app_id" content="307156226006266">
+  <?php // TODO: fb:admins ?>
+  <meta property="fb:admins" content="">
+  <?php // TODO: fb:app_id ?>
+  <meta property="fb:app_id" content="">
   <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
   <meta name="application-name" content="{{ config('app.name') }}">
   <meta name="msapplication-TileColor" content="#ffffff">
@@ -44,7 +47,7 @@
 
   @if($google_analytics)
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-108373952-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ $google_analytics }}"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
