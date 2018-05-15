@@ -65,8 +65,9 @@ class Variable3000Install extends Command
       // Ask for database name
       $this->info('Setting up database...');
       $dbName = $this->ask('Enter the database name', $this->guessDatabaseName());
-      $dbUserName = $this->ask('What is the MySQL username?', 'root');
-      $dbPassword = $this->secret('What is the MySQL password?');
+      $dbUserName = $this->ask('What is the MySQL username ?', 'root');
+      $dbPassword = $this->secret('What is the MySQL password ? (type null if empty)', 'false');
+      $dbPassword = ($dbPassword !== 'null') ? $dbPassword : '';
       // Update DB credentials in .env file.
       $search = [
         '/('.preg_quote('DB_DATABASE=').')(.*)/',
@@ -81,8 +82,13 @@ class Variable3000Install extends Command
       $contents = preg_replace($search, $replace, $contents);
       if (!$contents) {
         throw new Exception('Error while writing credentials to .env file.');
-      }
+    }else{
+        // Write to .env
+        $this->files->put('.env', $contents);
+        $this->line('Environement file updated');
+    }
       $this->line('Creating database…');
+      $this->line($dbPassword);
       // Set DB username and password in config
       $this->laravel['config']['database.connections.mysql.username'] = $dbUserName;
       $this->laravel['config']['database.connections.mysql.password'] = $dbPassword;
