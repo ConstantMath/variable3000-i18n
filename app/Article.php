@@ -4,10 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
+class Article extends Model implements HasMedia{
 
-class Article extends Model{
-
+  use HasMediaTrait;
   use Mediatable;
   use \Dimsav\Translatable\Translatable;
   protected $table = 'articles';

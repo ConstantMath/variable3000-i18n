@@ -7,8 +7,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Media;
 use App\DB;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
 class MediasController extends AdminController {
+
+  use HasMediaTrait;
 
   public function __construct(){
     $this->middleware(['auth', 'permissions'])->except('index');
@@ -65,9 +69,12 @@ class MediasController extends AdminController {
       $class = $this->getClass($mediatable_type);
       if(!empty($article_id) && $article_id != 'null'){
         $article = $class::findOrFail($article_id);
+        $url = 'http://www.variable.club/assets/dist/images/netwerkaalst-variable-2-800px.jpg';
+        $article->addMediaFromUrl($url)->withCustomProperties(['width' => '640', 'height' => '480'])->toMediaCollection();
+        dd($article->getMedia());
       }
       // Champs requests
-      $file        = $request->file('image');
+      $file = $request->file('image');
       if($file){
         list($width, $height) = getimagesize($file);
         // Upload

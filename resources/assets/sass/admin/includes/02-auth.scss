@@ -15,15 +15,18 @@
       width: 350px;
     }
   }
-  .form__body{
-    background-color: white;
-    padding: $spacing-regular;
-  }
   label{
     display: none;
   }
   .form-control{
     height: 40px;
+    border-bottom: 0;
+    border-top: 0;
+    border-left: 2px solid $blue;
+    border-right: 2px solid $blue;
+  }
+  .form__body{
+    background-color: white;
   }
   input[type='password'] {
     border-top: 0;
@@ -36,6 +39,16 @@
   }
   .remember{
     display: none;
+  }
+  .login__btn .btn{
+    border: 0;
+    width: 100%;
+    text-align: left;
+    height: 40px;
+    &:hover{
+      color: white;
+      background-color: $blue;
+    }
   }
   .fantom{
     position: absolute;
@@ -51,6 +64,7 @@
   padding: 1px;
   background-color: $blue;
 }
+
 .login__title{
   text-align: center;
   font-size: $font-size-regular;
@@ -58,12 +72,7 @@
   font-weight: 400;
   margin: 15px;
 }
-.login__footer{
-  margin-top: $spacing-regular;
-}
-.login__btn{
-  text-align: right;
-}
+
 .login__password{
   line-height: 40px;
   a{
