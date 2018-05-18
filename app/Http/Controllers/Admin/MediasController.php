@@ -9,6 +9,7 @@ use App\Media;
 use App\DB;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Illuminate\Support\Facades\Storage;
 
 class MediasController extends AdminController {
 
@@ -65,55 +66,23 @@ class MediasController extends AdminController {
         'article_id'       => $article_id,
       ]);
     }else{
-
       $class = $this->getClass($mediatable_type);
-      if(!empty($article_id) && $article_id != 'null'){
-        $article = $class::findOrFail($article_id);
-        $url = 'http://www.variable.club/assets/dist/images/netwerkaalst-variable-2-800px.jpg';
-        $article->addMediaFromUrl($url)->withCustomProperties(['width' => '640', 'height' => '480'])->toMediaCollection();
-        dd($article->getMedia());
-      }
+      $article = $class::findOrFail($article_id);
       // Champs requests
       $file = $request->file('image');
-      if($file){
+      if($file && !empty($article_id) && $article_id != 'null'){
         list($width, $height) = getimagesize($file);
-        // Upload
-        $media_file = Media::uploadMediaFile($file);
-        // Media store
-        $media = New media;
-        $media->name       = $media_file['name'];
-        $media->alt        = $media_file['orig_name'];
-        $media->ext        = $file->getClientOriginalExtension();
-        $media->type       = $request->input('type');
-        $media->width      = $width;
-        $media->height     = $height;
-        // If Media unique (not gallery) > Delete current before saving,
-        if(($media->type == 'une') && isset($article) && !empty($article->medias)){
-          $current_media = $article->medias->where('type', $media->type)->first();
-          if(!empty($current_media)):
-            Media::deleteMediaFile($current_media->id);
-          endif;
-        }
-        $media->save();
-        // Link media to article
-        if(isset($article)){
-          // retourne le dernier media
-          $next_media_order = $article->lastMediaId($media->type);
-          $next_media_order += 1;
-          // Article -> media
-          $media->order = $next_media_order;
-          $article->medias()->save($media);
-        }
+        $file_name = $file->getClientOriginalName();
+        $orig_name = pathinfo($file_name, PATHINFO_FILENAME);
+        $extension = $file->getClientOriginalExtension();
+        $name = str_slug($orig_name).'.'.$extension;
+        // $article->addMediaFromRequest('image')->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection($request->mediaType);
+        $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection('une');
+        $media = $article;
+        dd($media);
         return response()->json([
           'success'          => true,
-          'alt'              => $media->alt,
-          'name'             => $media->name,
-          'ext'              => $media->ext,
-          'type'             => $media->type,
-          'mediatable_type'  => $mediatable_type,
-          'article_id'       => $article_id,
-          'id'               => $media->id,
-          'description'      => $media->description,
+          'media'            => $media,
         ]);
       }
     }
