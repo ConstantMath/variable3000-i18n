@@ -1,0 +1,138 @@
+/*------------------------------------*\
+  #COLORS
+\*------------------------------------*/
+
+// Main colour palette
+$white            : #FFFFFF;
+$black            : #000000;
+$blue             : #0000FF;
+$lightgray        : #efefef;
+$gray             : #888888;
+
+// Assign colours to variable roles
+$body-color       : $white;
+$base-color       : $black;
+$action           : $black;
+$action-response  : $blue;
+
+
+
+/*------------------------------------*\
+  #BREAKPOINTS
+\*------------------------------------*/
+
+$breakpoints: (
+  xs  : 320px,
+  sm  : 768px,
+  md  : 1024px,
+  lg  : 1280px,
+  xl  : 1440px,
+  xxl : 1920px
+);
+
+$grid-gutter-width: 30px !default;
+
+
+
+/*------------------------------------*\
+  #FONTS
+\*------------------------------------*/
+
+%font-body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+%font-body-italic {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic;
+}
+
+%font-body-bold {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+%font-body-bold-italic {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-weight: 700;
+}
+
+%font-var {
+  font-family: "Times New Roman", Times, Georgia, serif;
+}
+
+
+
+/*------------------------------------*\
+    #TYPESIZE/SCALE
+\*------------------------------------*/
+
+$font-base         : 1rem;
+$line-height       : 1.5;
+$line-height-var   : 1.3;
+
+$font-size-xs      : $font-base * 0.667; // 12
+$font-size-sm      : $font-base * 0.778; // 14
+$font-size-md      : $font-base * 1.000; // 18
+$font-size-lg      : $font-base * 1.222; // 22
+$font-size-xl      : $font-base * 2.000; // 36
+$font-size-xxl     : $font-base * 2.667; // 48
+
+html {
+  font-size: 16px;
+  @include media("<sm") {
+    font-size: 14px;
+  }
+}
+
+%font-size-xs {
+  font-size: $font-size-xs;
+  line-height: $line-height;
+}
+%font-size-sm {
+  font-size: $font-size-sm;
+  line-height: $line-height;
+}
+%font-size-md {
+  font-size: $font-size-md;
+  line-height: $line-height;
+}
+%font-size-lg {
+  font-size: $font-size-lg;
+  line-height: $line-height;
+}
+%font-size-xl {
+  font-size: $font-size-xl;
+  line-height: $line-height-var;
+}
+%font-size-xxl {
+  font-size: $font-size-xxl;
+  line-height: $line-height-var;
+}
+
+
+
+/*------------------------------------*\
+  #SPACING
+\*------------------------------------*/
+
+$spacing-base     : 1rem;
+
+$spacing-xxxl     : $spacing-base * 6.667; // 120
+$spacing-xxl      : $spacing-base * 4.444; // 80
+$spacing-xl       : $spacing-base * 3.333; // 60
+$spacing-lg       : $spacing-base * 2.222; // 40
+$spacing-md       : $spacing-base * 1.667; // 30
+$spacing-sm       : $spacing-base * 1.111; // 20
+$spacing-xs       : $spacing-base * 0.556; // 10
+$spacing-xxs      : $spacing-base * 0.278; // 5
+
+
+
+/*------------------------------------*\
+  #BORDERS WIDTH
+\*------------------------------------*/
+
+$border-width-sm         : 1px;
+$border-width-md         : $border-width-sm*2;

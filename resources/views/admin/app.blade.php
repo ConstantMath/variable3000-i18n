@@ -7,26 +7,15 @@
   @yield('meta')
   <title>@yield('page_title')</title>
   <!-- Styles -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link href="{{ url('/assets/admin/main.css') }}" rel="stylesheet">
-  <link href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" rel="stylesheet">
 
 </head>
 <body  class="admin @yield('page_class')">
   @include('admin.components.flash-message')
   @if (Auth::check())  @include('admin.components.navigation-primary') @endif
-  <div class="container-fluid">
-    <div class="row">
-      @if(Auth::check())
-        @include('admin.components.navigation-secondary')
-        <main class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      @else
-        <main>
-      @endif
+  <main class="main-content wrapper">
       @yield('content')
-      </main>
-    </div>
-  </div>
+  </main>
   <!-- JavaScripts -->
   <script type="text/javascript">
   @if(!empty(config('translatable.locales')) && count(config('translatable.locales')) > 1)
