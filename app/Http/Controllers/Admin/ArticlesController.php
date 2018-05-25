@@ -12,6 +12,7 @@ use DB;
 use Carbon\Carbon;
 use Lang;
 use App\Http\Requests\Admin\ArticleRequest;
+use Yajra\Datatables\Datatables;
 
 class ArticlesController extends AdminController
 {
@@ -42,6 +43,24 @@ class ArticlesController extends AdminController
       'page_id'    => 'index-articles',
     );
     return view('admin/templates/articles-index', compact('articles', 'data'));
+  }
+
+  /**
+   * Display the specified resource.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function show($id){
+    $data = array(
+      'page_class' => 'article create',
+      'page_title' => 'Article create',
+      'page_id'    => 'show',
+    );
+    // get the nerd
+    $article = Article::find($id);
+    // show the view and pass the nerd to it
+    return view('admin/templates/article-edit',  compact('article', 'data'));
   }
 
 
