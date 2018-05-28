@@ -5,6 +5,7 @@ Route::resource('users', 'UsersController');
 Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
+Route::get('articles/getdata', 'ArticlesController@getDataTable')->name('articles.getdata');
 Route::resource('articles', 'ArticlesController');
 
 Route::resource('pages', 'PagesController', ['except' => ['create', 'index']]);
@@ -24,7 +25,6 @@ Route::post('medias/destroy/{mediatable_type}/{media_id}', 'MediasController@des
 Route::post('medias/get', 'MediasController@getFromArray');
 Route::post('medias/update/{mediatable_type}', 'MediasController@update')->name('medias.update');
 Route::post('fileupload', 'MediasController@fileUpload')->name('fileupload');
-
+// Datatables
 Route::get('datatable', 'DataTablesController@datatable');
-// Get Data
 Route::get('datatable/getArticles', 'DataTablesController@getArticles')->name('datatable/getdata');

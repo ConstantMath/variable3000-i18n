@@ -16,8 +16,7 @@ class DatatablesController extends Controller
       return view('datatable');
   }
 
-  public function getArticles()
-  {
-      return \DataTables::of(Article::withTranslation()->get())->make(true);
+  public function getArticles(){
+    return \DataTables::of(Article::withTranslation()->get())->make(true);
   }
 }
