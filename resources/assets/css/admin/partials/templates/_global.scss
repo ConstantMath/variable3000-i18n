@@ -1,0 +1,19 @@
+/*------------------------------------*\
+  #GLOBAL
+\*------------------------------------*/
+
+.main-content {
+  margin-top: $spacing-lg !important;
+  background-color: $white;
+  padding: $spacing-md calc(#{$grid-gutter-width} / 2)
+}
+
+.wrapper {
+  margin:0 auto;
+  width: 90%;
+  max-width: 1600px;
+  @include media(">=xl") {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+}

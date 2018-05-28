@@ -46,7 +46,7 @@ gulp.task("front-sass", function(){
 gulp.task('admin-js', function() {
   gulp.src([
     'resources/assets/js/admin/vendor/*.js',
-    'resources/assets/js/admin/libs/*.js',
+    'resources/assets/js/admin/modules/*.js',
     'resources/assets/js/admin/*.js'
   ])
   // Concatène tous les fichiers js en 1
@@ -66,7 +66,7 @@ gulp.task('admin-js', function() {
 });
 
 gulp.task("admin-sass", function(){
-  gulp.src('resources/assets/sass/admin/*.scss')
+  gulp.src('resources/assets/css/admin/*.scss')
   .pipe(sourcemaps.init())
   // Compile sass avec les commentaires dans la source
   .pipe(sass({
@@ -91,5 +91,5 @@ gulp.task("admin-sass", function(){
 gulp.task('admin', function() {
   livereload.listen();
   gulp.watch('resources/assets/js/admin/**/*.js',['admin-js']);
-  gulp.watch('resources/assets/sass/admin/**/*.scss',['admin-sass']);
+  gulp.watch('resources/assets/css/admin/**/*.scss',['admin-sass']);
 });
