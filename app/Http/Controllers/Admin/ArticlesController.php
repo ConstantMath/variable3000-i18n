@@ -59,27 +59,9 @@ class ArticlesController extends AdminController
     return \DataTables::of(Article::withTranslation()
                         ->get())
                         ->addColumn('action', function ($article) {
-                          return '<a href="#edit-'.$article->id.'" class="btn btn-xs btn-primary">Edit</a>';
+                          return '<a href="' . route('admin.articles.edit', $article->id) . '" class="btn btn-xs btn-primary">Edit</a>';
                         })
                         ->make(true);
-  }
-
-  /**
-   * Display the specified resource.
-   *
-   * @param  int  $id
-   * @return Response
-   */
-  public function show($id){
-    $data = array(
-      'page_class' => 'article create',
-      'page_title' => 'Article create',
-      'page_id'    => 'show',
-    );
-    // get the nerd
-    $article = Article::find($id);
-    // show the view and pass the nerd to it
-    return view('admin/templates/article-edit',  compact('article', 'data'));
   }
 
 
