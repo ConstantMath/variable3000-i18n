@@ -12,6 +12,9 @@ use DB;
 use Carbon\Carbon;
 use Lang;
 use App\Http\Requests\Admin\ArticleRequest;
+use DataTables;
+use Illuminate\Support\Facades\Input;
+
 
 class ArticlesController extends AdminController
 {
@@ -33,7 +36,8 @@ class ArticlesController extends AdminController
    */
 
   public function index($parent_id = 0){
-    $articles = Article::orderBy('order', 'asc')
+    $articles = Article::where('id', $parent_id)
+                  ->orderBy('order', 'asc')
                   ->orderBy('created_at', 'desc')
                   ->get();
     $data = array(
@@ -42,6 +46,22 @@ class ArticlesController extends AdminController
       'page_id'    => 'index-articles',
     );
     return view('admin/templates/articles-index', compact('articles', 'data'));
+  }
+
+
+  /**
+   * Get articles for datatables (ajax)
+   *
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getDataTable(){
+    return \DataTables::of(Article::withTranslation()
+                        ->get())
+                        ->addColumn('action', function ($article) {
+                          return '<a href="' . route('admin.articles.edit', $article->id) . '" class="btn btn-xs btn-primary">Edit</a>';
+                        })
+                        ->make(true);
   }
 
 
