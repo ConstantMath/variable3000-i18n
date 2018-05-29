@@ -1,7 +1,17 @@
 
 .js-dropdown {
+  position: relative;
 }
 
-.js-dropdown-menu{
+.js-dropdown-content,
+.js-dropdown-menu {
   display:none;
+}
+
+.js-dropdown-toggle{
+  &.js-dropdown-active {
+    .js-dropdown-icon {
+      transform:rotate(180deg);
+    }
+  }
 }

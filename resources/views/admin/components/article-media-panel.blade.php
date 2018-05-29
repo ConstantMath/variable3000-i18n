@@ -11,6 +11,8 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     </ul>
     <i class="fa fa-ellipsis-h blink"></i>
     <span class="message" class="hidden"></span>
+  </div>
+  <div class="panel-action">
     @if (isset($article->id))
       {!! Form::model($article, ['route' => ['admin.medias.store', $article->getTable(), $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else
@@ -19,7 +21,7 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     {!! Form::hidden('type', $media_type) !!}
       {{-- Always put file form before submit bt  --}}
       <input type="file" name="image" class="input-single-media-upload" />
-      <a href="#" class="media-add"><i class="fa fa-btn fa-plus-circle"></i> Add</a>
+      <a href="#" class="media-add btn btn-primary"> Add</a>
     {!! Form::close() !!}
   </div>
 </div>

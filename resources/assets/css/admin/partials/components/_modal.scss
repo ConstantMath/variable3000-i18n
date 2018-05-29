@@ -1,0 +1,35 @@
+.modal {
+  display: none;
+  z-index: 3;
+  position: fixed;
+  left: 0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.4);
+  .modal-dialog {
+    background-color: $white;
+    position:absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    width:60%;
+    max-width: 1000px;
+  }
+  .modal-body {
+    padding:calc(#{$grid-gutter-width} / 2);
+    display:flex;
+  }
+  .modal-media {
+    margin-right:calc(#{$grid-gutter-width} / 2);
+    img {
+      max-width: 300px;
+      max-height: 300px;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
+  .modal-desc {
+    flex:1;
+  }
+}

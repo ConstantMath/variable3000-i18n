@@ -98,20 +98,25 @@ function printList(medias, media_type, mediatable_type) {
     // Json Medias loop
     $.each( medias, function( key, value ) {
       // Build <li>
-      li = li + '<li class="list-group-item" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
-      // Icon
+      li = li + '<li class="list-group-item media-list__item" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
+
+      li = li + '<div class="media__infos"><p class="media__title">'+value.alt+'</p>';
+
+
+      li = li + '<a href="" class="" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-table-type="'+mediatable_type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">edit</a>';
+
+      li = li + '<a href="' + admin_url + '/medias/destroy/' + mediatable_type + '/' + value.id + '" class="">delete</a></div>';
+
+      //media preview
       if(value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg'){
-        li = li + '<i class="fa fa-image"></i>';
+        li = li + '<div class="media__preview" style="background-image:url(\'/imagecache/thumb/' + value.name + '\')"></div>';
       }else if(value.ext == 'pdf'){
-        li = li + '<i class="fa fa-file-pdf-o"></i>';
+        li = li + '<div class="media__preview"><span>PDF</span></div>';
       }else if(value.ext == 'mp4'){
-        li = li + '<i class="fa fa-video-camera"></i>';
+        li = li + '<div class="media__preview"><span>VIDEO</span></div>';
       }else{
-        li = li + '<i class="fa fa-file"></i>';
+        li = li + '<div class="media__preview">FILE</div>';
       }
-      li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-table-type="'+mediatable_type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">';
-      li = li + '<span>'+value.alt+'</span>';
-      li = li + '</a>';
       li = li + '</li>';
     });
     ul.html(li);

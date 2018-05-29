@@ -56,6 +56,15 @@ return array(
         // 'medium' => 'Intervention\Image\Templates\Medium',
         // 'large' => 'Intervention\Image\Templates\Large',
 
+        'thumb' => function ($image) {
+          $image->resize(300, null, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+          });
+          $image->encode('jpg', 60);
+          return $image;
+        },
+
         'small' => function ($image) {
           $image->resize(800, 800, function ($constraint) {
             $constraint->aspectRatio();

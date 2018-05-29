@@ -9,16 +9,6 @@
         @can('Admin pages')
         <li>
           {!! link_to_route('admin.pages.index', 'Pages', 0) !!}
-          @if(!empty($parent_pages))
-          <ul>
-            @foreach ($parent_pages as $node)
-            <li class="nav-item">
-              <?php $index_active = ($data['page_id'] == 'index-'.$node->id) ? 'active' : '';?>
-              {!! link_to_route('admin.pages.index', $node->title , [$node->id], ['class' => $index_active]) !!}
-            </li>
-            @endforeach
-          </ul>
-          @endif
         </li>
         @endcan
       </ul>

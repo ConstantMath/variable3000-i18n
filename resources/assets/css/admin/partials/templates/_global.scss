@@ -3,17 +3,74 @@
 \*------------------------------------*/
 
 .main-content {
-  margin-top: $spacing-lg !important;
-  background-color: $white;
-  padding: $spacing-md calc(#{$grid-gutter-width} / 2)
+  margin-top: $spacing-sm !important;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .wrapper {
   margin:0 auto;
   width: 90%;
   max-width: 1600px;
-  @include media(">=xl") {
-    padding-left: 12%;
-    padding-right: 12%;
+  &.wrapper--small {
+    width: 50%;
+    max-width: 1000px;
   }
+}
+
+.panel-heading,
+.panel-body,
+.form__content {
+  padding-left :calc(#{$grid-gutter-width} / 2);
+  padding-right :calc(#{$grid-gutter-width} / 2);
+}
+
+.panel {
+  padding-top: $spacing-sm;
+  background-color: $white;
+  &.panel-edit {
+    width: 66%;
+    display: inline-block;
+    margin-right: $grid-gutter-width;
+  }
+}
+
+
+.panel-heading {
+  padding-bottom: $spacing-xs;
+  border-bottom: $border-width-sm solid $lightgray;
+  margin-bottom: $spacing-md;
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    display:inline;
+  }
+}
+
+.panel-body {
+  padding-bottom: $spacing-xs;
+  &.panel-body:last-child{
+    padding-bottom: $spacing-md;
+  }
+}
+
+
+.form-group {
+  margin: $spacing-sm 0;
+}
+.form-control {
+  display:block;
+  width:100%;
+  resize:none;
+  border: $border-width-sm solid $gray;
+  padding: $spacing-xs $spacing-xs;
+}
+
+input::placeholder, textarea::placeholder {
+    color: #DDD !important;
 }
