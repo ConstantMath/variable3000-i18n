@@ -38,14 +38,17 @@ $(document).ready(function() {
       serverSide: true,
       rowReorder: true,
       colReorder: false,
-        dom       : '<"search"f> <"panel-body"t> <"panel-footer"lip>',
-        ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
-        columns: [
-          {data: 'order', name: 'order', searchable: false, width: '5%'},
-          {data: 'title', name: 'title', orderable: false, width: '70%'},
-          {data: 'updated_at', name: 'title', searchable: false, orderable: false},
-          {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
-        ]
+      dom       : '<"search"f> <"panel-body"t> <"panel-footer"lip>',
+      ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
+      language: {
+        "search": ''
+      },
+      columns: [
+        {data: 'order', name: 'order', searchable: false, width: '5%'},
+        {data: 'title', name: 'title', orderable: false, width: '70%'},
+        {data: 'updated_at', name: 'title', searchable: false, orderable: false},
+        {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
+      ]
     });
 
     table.on( 'row-reorder', function ( e, diff, edit ) {
