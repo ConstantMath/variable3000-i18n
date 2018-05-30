@@ -33,12 +33,12 @@
 <script type="text/javascript">
 $(document).ready(function() {
     var table = $('#datatable').DataTable({
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        rowReorder: true,
-        colReorder: false,
-        dom       : '< <"search"f> <"panel-body"t> <"panel-footer"lip>',
+      responsive: true,
+      processing: true,
+      serverSide: true,
+      rowReorder: true,
+      colReorder: false,
+        dom       : '<"search"f> <"panel-body"t> <"panel-footer"lip>',
         ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
         columns: [
           {data: 'order', name: 'order', searchable: false, width: '5%'},
