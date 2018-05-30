@@ -25,7 +25,6 @@
     }
     line-height: 1;
     display: block;
-    height:100%;
     @extend %font-size-md;
   }
   &.nav--secondary {
@@ -58,11 +57,15 @@
 }
 
 .navbar__brand {
+  width: 30px;
+  display: block;
   margin-right: $grid-gutter-width;
-  width:100%;
-  img {
-    padding-top: $spacing-sm;
-    padding-bottom: $spacing-sm;
+  background-image: url('/assets/admin/images/fantom.gif');
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-shrink: 0;
+  &:hover{
+    background-image: url('/assets/admin/images/fantom_.gif');
   }
 }
 

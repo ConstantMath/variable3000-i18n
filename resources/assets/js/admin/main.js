@@ -40,9 +40,23 @@ $(document).ready(function() {
   }
 
   // ----- Hide index alerts ----- //
-  $(".alert").delay(2000).fadeOut(300);
 
+  window.setTimeout(function(){
+    $(".alert").fadeOut(600);
+    $(".help-block").fadeOut(600);
+  }, 3000);
 
+  $("body").on({
+      mouseenter: function() {
+        $('.help-block').fadeOut(300);
+      }
+  }, ".help-block");
+
+  $("body").on({
+      mouseenter: function() {
+        $('.alert').fadeOut(300);
+      }
+  }, ".alert");
   // ----- Login logo  ----- //
 
   // var top = Math.floor(Math.random() * (90 - 2 + 1)) + 2;
