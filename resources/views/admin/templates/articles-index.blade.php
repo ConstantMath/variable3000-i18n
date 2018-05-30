@@ -8,20 +8,6 @@
   <div class="table-responsive">
     <a href="{{ route('admin.articles.create') }}" class="pull-right"> Add</a>
 
-<<<<<<< HEAD
-      <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Order</th>
-              <th>Title</th>
-              <th>Updated</th>
-              <th></th>
-            </tr>
-          </thead>
-      </table>
-    </div>
-=======
     <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
         <thead>
           <tr>
@@ -32,7 +18,6 @@
           </tr>
         </thead>
     </table>
->>>>>>> cf24d658eab725a1d5e7991f2ae1948c7ed59f6c
   </div>
 </div>
 @endsection
@@ -48,47 +33,40 @@
 <script type="text/javascript">
 $(document).ready(function() {
     var table = $('#datatable').DataTable({
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        rowReorder: true,
-<<<<<<< HEAD
-        order: [ [1, 'asc'] ],
-        ajax: '{{ route('admin.articles.getdata') }}',
-=======
-        colReorder: false,
-        dom       : '< <"search"f> <"panel-body"t> <"panel-footer"lip>',
+      responsive: true,
+      processing: true,
+      serverSide: true,
+      rowReorder: true,
+      colReorder: false,
+        dom       : '<"search"f> <"panel-body"t> <"panel-footer"lip>',
         ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
->>>>>>> cf24d658eab725a1d5e7991f2ae1948c7ed59f6c
         columns: [
-          {data: 'id', name: 'id', searchable: false},
-          {data: 'order', name: 'order', searchable: false},
-          {data: 'title', name: 'title'},
-          {data: 'updated_at', name: 'title', searchable: false},
-          {data: 'action', name: 'action', orderable: false, searchable: false}
+          {data: 'order', name: 'order', searchable: false, width: '5%'},
+          {data: 'title', name: 'title', orderable: false, width: '70%'},
+          {data: 'updated_at', name: 'title', searchable: false, orderable: false},
+          {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
         ]
     });
 
     table.on( 'row-reorder', function ( e, diff, edit ) {
-      var myArray = [];
+      var articlesArray = [];
       for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
 
         var rowData = table.row( diff[i].node ).data();
         var newOrder = diff[i].newPosition;
-        myArray.push({
+        articlesArray.push({
           id: rowData.id,
           position: newOrder
         });
       }
-      var jsonString = JSON.stringify(myArray);
-      console.log(myArray);
+      var jsonString = JSON.stringify(articlesArray);
       $.ajax({
-        url     : '{{ URL::to('myurl/reorder') }}',
+        url     : '{{ route('admin.reorder', ['table_type' => $data['table_type']]) }}',
         type    : 'POST',
         data    : jsonString,
         dataType: 'json',
         success : function ( json ) {
-          $('#dataTableBuilder').DataTable().ajax.reload(); // refresh datatable
+          $('#datatable').DataTable().ajax.reload(); // refresh datatable
             $.each(json, function (key, msg) {
         	  // handle json response
           });
