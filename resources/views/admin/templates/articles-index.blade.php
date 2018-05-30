@@ -11,8 +11,7 @@
       <table class="table table-hover table-bordered table-striped" id="datatable" style="width:100%">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Order</th>
+              <th>#</th>
               <th>Title</th>
               <th>Updated</th>
               <th></th>
@@ -38,37 +37,35 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         rowReorder: true,
-        order: [ [1, 'asc'] ],
-        ajax: '{{ route('admin.articles.getdata') }}',
+        colReorder: false,
+        ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
         columns: [
-          {data: 'id', name: 'id', searchable: false},
-          {data: 'order', name: 'order', searchable: false},
-          {data: 'title', name: 'title'},
-          {data: 'updated_at', name: 'title', searchable: false},
-          {data: 'action', name: 'action', orderable: false, searchable: false}
+          {data: 'order', name: 'order', searchable: false, width: '5%'},
+          {data: 'title', name: 'title', orderable: false, width: '70%'},
+          {data: 'updated_at', name: 'title', searchable: false, orderable: false},
+          {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
         ]
     });
 
     table.on( 'row-reorder', function ( e, diff, edit ) {
-      var myArray = [];
+      var articlesArray = [];
       for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
 
         var rowData = table.row( diff[i].node ).data();
         var newOrder = diff[i].newPosition;
-        myArray.push({
+        articlesArray.push({
           id: rowData.id,
           position: newOrder
         });
       }
-      var jsonString = JSON.stringify(myArray);
-      console.log(myArray);
+      var jsonString = JSON.stringify(articlesArray);
       $.ajax({
-        url     : '{{ URL::to('myurl/reorder') }}',
+        url     : '{{ route('admin.reorder', ['table_type' => $data['table_type']]) }}',
         type    : 'POST',
         data    : jsonString,
         dataType: 'json',
         success : function ( json ) {
-          $('#dataTableBuilder').DataTable().ajax.reload(); // refresh datatable
+          $('#datatable').DataTable().ajax.reload(); // refresh datatable
             $.each(json, function (key, msg) {
         	  // handle json response
           });

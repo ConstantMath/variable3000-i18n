@@ -20,6 +20,7 @@ class ArticlesController extends AdminController
 {
 
   public function __construct(){
+    $this->table_type = 'articles';
     $parent_articles = Article::where('parent_id', 0)->get();
     Lang::setLocale(config('app.locale'));
     $this->middleware(['auth', 'permissions'])->except('index');
@@ -44,6 +45,7 @@ class ArticlesController extends AdminController
       'page_class' => 'index',
       'page_title' => 'Articles',
       'page_id'    => 'index-articles',
+      'table_type' => $this->table_type,
     );
     return view('admin/templates/articles-index', compact('articles', 'data'));
   }

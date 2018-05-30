@@ -15,7 +15,7 @@ Route::resource('settings', 'SettingsController');
 Route::resource('taxonomies', 'TaxonomiesController', ['except' => ['create']]);
 Route::get('taxonomies/create/{parent_id}', 'TaxonomiesController@create')->name('taxonomies.create');
 Route::post('taxonomies/reorder/{id}', 'TaxonomiesController@reorder')->name('taxonomies.reorder');
-Route::post('{mediatable_type}/reorder', 'AdminController@orderObject')->name('reorder');
+Route::post('{table_type}/reorder', 'AdminController@orderObject')->name('reorder');
 // Medias
 Route::get('medias/index/{media_type}/{mediatable_type}/{article_id}', 'MediasController@index')->name('medias.index');
 Route::post('medias/store/{mediatable_type}/{article_id?}', 'MediasController@store')->name('medias.store');

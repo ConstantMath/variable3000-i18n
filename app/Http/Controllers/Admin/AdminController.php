@@ -151,34 +151,28 @@ class AdminController extends Controller{
    */
 
   public function orderObject(Request $request, $mediatable_type){
-    $class       = $this->getClass($mediatable_type);
-    $id          = $request->id;
-    $parent_id   = !empty($request->parent_id) ? $request->parent_id : 0;
-    $new_order   = $request->new_order;
-    // Select articles by parent
-    $articles = $class::where('parent_id', $parent_id)
-                 ->orderBy('order', 'asc')
-                 ->get();
-    // Reorder
-    if(isset($articles)){
-      $v = 0;
-      // Articles loop
-      foreach ($articles as $article) {
-        if($v == $new_order){$v++;}
-        if($article->id == $id){
-          $n_order = $new_order;
-        }else{
-          $n_order = $v;
-          $v++;
+
+    $count = 0;
+    $class = $this->getClass($mediatable_type);
+
+    if (count($request->json()->all())) {
+      $ids = $request->json()->all();
+      // Loop through update positions
+      foreach($ids as $i => $key){
+        $id = $key['id'];
+        $position = $key['position'];
+        $article = $class::find($id);
+        $article->order = $position;
+        if($article->save(['timestamps' => false])){ // Db update
+          $count++;
         }
-        $article->timestamps = false;
-        // Update article with new order
-        $article->update(['order' => $n_order]);
       }
+      $response = 'Articles ordered';
+      return response()->json( $response );
+    } else {
+      $response = 'Nothing to order';
+      return response()->json( $response );
     }
-    return response()->json([
-     'status' => 'success',
-    ]);
   }
 
 
