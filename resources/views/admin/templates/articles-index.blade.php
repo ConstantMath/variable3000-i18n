@@ -4,10 +4,11 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-  <div class="panel panel-default">
-    <div class="table-responsive">
-      <a href="{{ route('admin.articles.create') }}" class="pull-right"> Add</a>
+<div class="panel panel-default">
+  <div class="table-responsive">
+    <a href="{{ route('admin.articles.create') }}" class="pull-right"> Add</a>
 
+<<<<<<< HEAD
       <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
           <thead>
             <tr>
@@ -20,7 +21,20 @@
           </thead>
       </table>
     </div>
+=======
+    <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Updated</th>
+            <th><a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs">Add</a></th>
+          </tr>
+        </thead>
+    </table>
+>>>>>>> cf24d658eab725a1d5e7991f2ae1948c7ed59f6c
   </div>
+</div>
 @endsection
 
 @section('meta')
@@ -38,8 +52,14 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         rowReorder: true,
+<<<<<<< HEAD
         order: [ [1, 'asc'] ],
         ajax: '{{ route('admin.articles.getdata') }}',
+=======
+        colReorder: false,
+        dom       : '< <"search"f> <"panel-body"t> <"panel-footer"lip>',
+        ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
+>>>>>>> cf24d658eab725a1d5e7991f2ae1948c7ed59f6c
         columns: [
           {data: 'id', name: 'id', searchable: false},
           {data: 'order', name: 'order', searchable: false},
