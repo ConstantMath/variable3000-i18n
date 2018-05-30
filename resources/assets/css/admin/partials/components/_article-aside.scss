@@ -18,34 +18,32 @@
     }
     @extend %font-size-sm;
     display: flex;
-    border-bottom: $border-width-sm solid $lightgray
+    border-bottom: $border-width-sm solid $lightgray;
+    justify-content: space-between;
   }
   .media__infos{
-    width:70%;
+    width: calc(100% - 150px);
     padding: $spacing-sm 0;
-    display: flex;
     justify-content: space-between;
     flex-direction: column;
   }
   .media__title {
-    width: 90%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .media__preview {
-    background-color: $lightgray;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
-    width:30%;
+    background-size: contain;
+    width:150px;
     display: flex;
     span {
       @extend %font-size-lg;
       margin: auto;
       text-transform: uppercase;
       font-weight: 600;
-      color:white;
+      color:$gray;
     }
   }
 }

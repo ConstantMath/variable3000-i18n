@@ -13,28 +13,25 @@
           {{$parent->title or 'Edit' }}
           @if(isset($article->id))
           <div class="tip pull-right created_at">
-            <span>{{ $article->created_at }}</span>
-            {!! Form::text('created_at', null, ['class' => 'form-control']) !!}
+            {!! Form::text('created_at', null, ['class' => 'form-control created_at']) !!}
           </div>
           @endif
         </div>
-        <div class="panel-body">
-          <div id="validation"></div>
-          @include('admin.components.article-form', ['submitButtonText' => 'Save'])
-        </div>
-      {!! Form::close() !!}
+        <div id="validation"></div>
+        @include('admin.components.article-form', ['submitButtonText' => 'Save'])
+    {!! Form::close() !!}
     </div>
     <div class="article-aside">
       @include('admin.components.article-aside')
     </div>
 
     @if(isset($article->id))
-      <ul class="nav navbar-nav">
+      <ul class="article-options">
         <li>
           @include('admin.components.delete-form', ['model' => $article, 'model_name' => 'articles'])
         </li>
         <li>
-          <a href="{{ url('/') }}/{{ $article->slug }}" target="_blank"><i class="fa fa-eye"></i> preview</a>
+          <a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank"> preview</a>
         </li>
       </ul>
     @endif

@@ -8,12 +8,14 @@ $black            : #000000;
 $blue             : #0066ff;
 $lightgray        : #efefef;
 $gray             : #888888;
+$red              : #FF0000;
 
 // Assign colours to variable roles
 $body-color       : $white;
 $base-color       : $black;
-$action           : $black;
+$action           : $gray;
 $action-response  : $blue;
+$action-important : $red;
 
 
 

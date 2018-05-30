@@ -13,8 +13,20 @@
     left: 50%;
     transform: translate(-50%, -50%);
     top: 50%;
-    width:60%;
+    min-width: 200px;
     max-width: 1000px;
+  }
+  .modal-header {
+    padding:calc(#{$grid-gutter-width} / 2);
+    border-bottom: $border-width-sm solid $lightgray;
+    .close {
+      position:absolute;
+      top:0;
+      right:0;
+      border:none;
+      background-image:none;
+      background-color:transparent;
+    }
   }
   .modal-body {
     padding:calc(#{$grid-gutter-width} / 2);
@@ -22,14 +34,17 @@
   }
   .modal-media {
     margin-right:calc(#{$grid-gutter-width} / 2);
+    height:500px;
+    width:500px;
     img {
-      max-width: 300px;
-      max-height: 300px;
+      height:100%;
+      width:100%;
       object-fit: contain;
       object-position: center;
     }
   }
   .modal-desc {
     flex:1;
+    min-width: 300px;
   }
 }

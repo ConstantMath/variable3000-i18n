@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="login__footer">
-      <button type="submit" class="btn btn-invert">Login</button>
+      <button type="submit" class="btn btn-primary">Login</button>
     </div>
   </form>
 </div>

@@ -103,9 +103,9 @@ function printList(medias, media_type, mediatable_type) {
       li = li + '<div class="media__infos"><p class="media__title">'+value.alt+'</p>';
 
 
-      li = li + '<a href="" class="" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-table-type="'+mediatable_type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">edit</a>';
+      li = li + '<p><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-table-type="'+mediatable_type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">edit</a></p>';
 
-      li = li + '<a href="' + admin_url + '/medias/destroy/' + mediatable_type + '/' + value.id + '" class="">delete</a></div>';
+      li = li + '<p><a href="' + admin_url + '/medias/destroy/' + mediatable_type + '/' + value.id + '" class="link link--delete">delete</a></p></div>';
 
       //media preview
       if(value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg'){

@@ -59,7 +59,7 @@ class ArticlesController extends AdminController
     return \DataTables::of(Article::withTranslation()
                         ->get())
                         ->addColumn('action', function ($article) {
-                          return '<a href="' . route('admin.articles.edit', $article->id) . '" class="btn btn-xs btn-primary">Edit</a>';
+                          return '<a href="' . route('admin.articles.edit', $article->id) . '" class="link">Edit</a>';
                         })
                         ->make(true);
   }

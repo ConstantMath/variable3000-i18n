@@ -17,7 +17,12 @@
     top:0;
   }
   a {
-    @extend .ts-link;
+    color: $black;
+    text-decoration: none;
+    &:hover {
+      color: $action-response;
+      text-decoration: none;
+    }
     line-height: 1;
     display: block;
     height:100%;

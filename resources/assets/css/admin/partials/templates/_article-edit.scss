@@ -1,0 +1,9 @@
+.article-options {
+  list-style: none;
+  margin-top: $spacing-xs;
+  margin-bottom: $spacing-md;
+  li {
+    display: inline-block;
+    margin-right: $spacing-sm;
+  }
+}

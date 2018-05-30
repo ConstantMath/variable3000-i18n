@@ -1,0 +1,31 @@
+.tab-pane{
+  display:none;
+  &.active {
+    display:block;
+  }
+}
+
+.tab-select {
+  list-style: none;
+  margin-bottom: -1px;
+  li {
+    display: inline-block;
+    padding: $spacing-xxs $spacing-xs;
+    a {
+      @extend .ts-link;
+    }
+    &.active {
+      border: $border-width-sm solid $lightgray;
+      border-bottom: none;
+      background-color: $body-color;
+      a {
+        color: $black;
+      }
+    }
+  }
+}
+
+.tab-content {
+  border-top: $border-width-sm solid $lightgray;
+  padding-top: $spacing-sm;
+}

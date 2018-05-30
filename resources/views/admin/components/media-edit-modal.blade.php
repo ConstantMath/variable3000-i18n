@@ -11,7 +11,7 @@
       !!}
         <div class="modal-body">
           <div class="modal-media">
-            <figure><img src="" id="pic"></figure>
+            <img src="" id="pic">
             <video width="320" height="240" controls id="vid">
               <source src="" type="video/mp4">
             </video>
@@ -25,13 +25,15 @@
               <label for="description">Description</label>
               <textarea class="form-control" placeholder="Intro" rows="5" name="description" id="input_media_description"></textarea>
             </div>
+            <div class="form-group">
+                <a href="#" class="media-delete link link--delete" data-dismiss="modal" media_type="" media_id=""> delete</a>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
-          <a href="#" class="media-delete btn btn-tr" data-dismiss="modal" media_type="" media_id=""> delete</a>
           <div class="btn-container">
-            <button type="button" class="btn btn-primary media-edit-save" data-dismiss="modal">Save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary media-edit-save" data-dismiss="modal">Save</button>
           </div>
         </div>
       {{ Form::close() }}

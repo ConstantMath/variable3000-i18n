@@ -16,9 +16,19 @@ a {
   width: 90%;
   max-width: 1600px;
   &.wrapper--small {
-    width: 50%;
+    width: 60%;
     max-width: 1000px;
   }
+}
+
+.fantom{
+  background-image: url('/assets/admin/images/fantom.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height:22px;
+  width:28px;
+  position:absolute;
+  z-index:-1;
 }
 
 .panel-heading,
@@ -40,9 +50,9 @@ a {
 
 
 .panel-heading {
-  padding-bottom: $spacing-xs;
+  padding-bottom: $spacing-sm;
   border-bottom: $border-width-sm solid $lightgray;
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
   h2,
   h3,
   h4,
@@ -59,18 +69,39 @@ a {
   }
 }
 
+label {
+  display:inline-block;
+}
 
 .form-group {
   margin: $spacing-sm 0;
+  &:first-of-type{
+    margin-top:0;
+  }
+  label {
+    margin-bottom: $spacing-xxs;
+  }
 }
 .form-control {
   display:block;
   width:100%;
   resize:none;
   border: $border-width-sm solid $gray;
-  padding: $spacing-xs $spacing-xs;
+  padding: $spacing-xxs $spacing-xs;
 }
 
+input[type="checkbox"]{
+  margin-right: $spacing-xxs;
+}
 input::placeholder, textarea::placeholder {
     color: #DDD !important;
+}
+input.created_at {
+  border: none;
+  padding: 0;
+  text-align: right;
+  color:$lightgray;
+  &:focus{
+    color:gray;
+  }
 }

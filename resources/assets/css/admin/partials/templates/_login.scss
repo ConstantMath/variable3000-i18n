@@ -1,24 +1,26 @@
-.login .wrapper,
-.reset_mail .wrapper {
-  @extend .wrapper--small;
+.login .main-content,
+.reset_mail .main-content {
+    width: 50%;
+    max-width: 1000px;
 }
 
 .login__header {
   @extend .panel-heading;
 }
 .remember {
-  margin-left: 33%;
+  margin-left: 30%;
 }
 
-.login {
+.login, .reset_mail {
   .form-group {
     > label {
-      width: 33%;
+      width: 30%;
       text-align: right;
       display:inline-block;
       margin-right: calc(#{$grid-gutter-width} / 2);
     }
     > input {
+      display:inline-block;
       padding: $spacing-xs $spacing-xxs;
       width: 50%;
     }
