@@ -10,30 +10,28 @@
         {!! Form::hidden('media_id', '', ['id' => 'input_media_id'])
       !!}
         <div class="modal-body">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-6">
-                <figure><img src="" id="pic"></figure>
-                <video width="320" height="240" controls id="vid">
-                  <source src="" type="video/mp4">
-                </video>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label for="alt">Title</label>
-                  <input class="form-control" name="alt" type="text" value="" id="input_media_alt">
-                </div>
-                <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea class="form-control" placeholder="Intro" rows="5" name="description" id="input_media_description"></textarea>
-                </div>
-              </div>
+          <div class="modal-media">
+            <img src="" id="pic">
+            <video width="320" height="240" controls id="vid">
+              <source src="" type="video/mp4">
+            </video>
+          </div>
+          <div class="modal-desc">
+            <div class="form-group">
+              <label for="alt">Title</label>
+              <input class="form-control" name="alt" type="text" value="" id="input_media_alt">
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" placeholder="Intro" rows="5" name="description" id="input_media_description"></textarea>
+            </div>
+            <div class="form-group">
+                <a href="#" class="media-delete link link--delete" data-dismiss="modal" media_type="" media_id=""> delete</a>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <a href="#" class="media-delete btn" data-dismiss="modal" media_type="" media_id=""><i class="fa fa-trash"></i> delete</a>
-          <div class="pull-right">
+          <div class="btn-container">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary media-edit-save" data-dismiss="modal">Save</button>
           </div>

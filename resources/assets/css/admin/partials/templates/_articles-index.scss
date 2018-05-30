@@ -1,0 +1,12 @@
+.table {
+  border:none;
+  tr {
+    th,
+    td {
+      padding: $spacing-xs $spacing-xxs;
+      &:last-child {
+        text-align:right;
+      }
+    }
+  }
+}

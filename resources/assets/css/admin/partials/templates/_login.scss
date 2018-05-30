@@ -1,0 +1,36 @@
+.login .main-content,
+.reset_mail .main-content {
+    width: 50%;
+    max-width: 1000px;
+    @include media("<sm") {
+      width:80%;
+    }
+}
+
+.login__header {
+  @extend .panel-heading;
+}
+.remember {
+  @include media(">=sm") {
+    margin-left:30%;
+  }
+}
+
+.login, .reset_mail {
+  .form-group {
+    margin-top: $spacing-sm;
+    @include media(">=sm") {
+      > label {
+        width: 30%;
+        text-align: right;
+        display:inline-block;
+        margin-right: calc(#{$grid-gutter-width} / 2);
+      }
+      > input {
+        display:inline-block;
+        padding: $spacing-xs $spacing-xxs;
+        width: 50%;
+      }
+    }
+  }
+}

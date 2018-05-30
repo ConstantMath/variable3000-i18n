@@ -1,0 +1,17 @@
+.link {
+  color: $action;
+  text-decoration: none;
+  border-bottom: $border-width-sm solid;
+  &:hover {
+    color: $action-response;
+    border-color: $action-response;
+    text-decoration: none;
+  }
+  &.link--delete {
+    &:hover {
+      color: $action-important;
+      border-color: $action-important;
+      text-decoration: none;
+    }
+  }
+}

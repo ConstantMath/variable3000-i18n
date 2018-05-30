@@ -21353,6 +21353,20 @@ function form_layout(el) {
     });
 }
 
+$('nav .js-dropdown-toggle').click(function(e) {
+    e.preventDefault;
+    if ($(this).find('.js-dropdown-content').html() == $('.js-dropdown-menu').html()) {
+        $(this).removeClass('js-dropdown-active');
+        $('.nav--secondary').slideUp(100);
+        $('.js-dropdown-menu').empty();
+    } else {
+        $('.js-dropdown-toggle').removeClass('js-dropdown-active');
+        $('.js-dropdown-menu').html($(this).find('.js-dropdown-content').html());
+        $('.nav--secondary').slideDown(100);
+        $(this).addClass('js-dropdown-active');
+    }
+});
+
 $(document).ready(function() {
 
     // ----- Markdown editor ----- //
@@ -21409,7 +21423,7 @@ $(document).ready(function() {
                 }
             });
             // Relaunch simplemde on tab change
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+            $('.tab-select li').click(function(e) {
                 setTimeout(function() {
                     simplemde.codemirror.refresh();
                 }, 10);
@@ -21557,20 +21571,25 @@ function printList(medias, media_type, mediatable_type) {
         // Json Medias loop
         $.each(medias, function(key, value) {
             // Build <li>
-            li = li + '<li class="list-group-item" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
-            // Icon
+            li = li + '<li class="list-group-item media-list__item" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
+
+            li = li + '<div class="media__infos"><p class="media__title">' + value.alt + '</p>';
+
+
+            li = li + '<p><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-type="' + value.type + '" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-media-description="' + value.description + '" data-media-ext="' + value.ext + '" data-media-alt="' + value.alt + '" data-media-name="' + value.name + '">edit</a></p>';
+
+            li = li + '<p><a href="' + admin_url + '/medias/destroy/' + mediatable_type + '/' + value.id + '" class="link link--delete">delete</a></p></div>';
+
+            //media preview
             if (value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg') {
-                li = li + '<i class="fa fa-image"></i>';
+                li = li + '<div class="media__preview" style="background-image:url(\'/imagecache/thumb/' + value.name + '\')"></div>';
             } else if (value.ext == 'pdf') {
-                li = li + '<i class="fa fa-file-pdf-o"></i>';
+                li = li + '<div class="media__preview"><span>PDF</span></div>';
             } else if (value.ext == 'mp4') {
-                li = li + '<i class="fa fa-video-camera"></i>';
+                li = li + '<div class="media__preview"><span>VIDEO</span></div>';
             } else {
-                li = li + '<i class="fa fa-file"></i>';
+                li = li + '<div class="media__preview">FILE</div>';
             }
-            li = li + '<a href="" class="column-title" data-toggle="modal" data-target="#modal-media-edit" data-media-type="' + value.type + '" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-media-description="' + value.description + '" data-media-ext="' + value.ext + '" data-media-alt="' + value.alt + '" data-media-name="' + value.name + '">';
-            li = li + '<span>' + value.alt + '</span>';
-            li = li + '</a>';
             li = li + '</li>';
         });
         ul.html(li);
@@ -21593,9 +21612,9 @@ function addMediaInput(media_id, media_type, mediatable_type) {
 }
 
 // ----- Declare modal ----- //
-
-$('#modal-media-edit').on('show.bs.modal', function(event) {
-    var button = $(event.relatedTarget);
+$('.media-list').on('click', 'a[data-toggle="modal"]', function(e) {
+    e.preventDefault();
+    var button = $(e.currentTarget);
     var article_id = button.data('article_id');
     var column_name = button.data('column-name');
     var media_id = button.data('media-id');
@@ -21605,7 +21624,7 @@ $('#modal-media-edit').on('show.bs.modal', function(event) {
     var media_ext = button.data('media-ext');
     var media_type = button.data('media-type');
     var media_table_type = button.data('media-table-type');
-    var modal = $(this);
+    var modal = $('#modal-media-edit');
     var pic_container = modal.find('#pic');
     var vid_container = modal.find('#vid');
     var vid_source = modal.find('#vid > source');
@@ -21629,8 +21648,7 @@ $('#modal-media-edit').on('show.bs.modal', function(event) {
         pic_container.attr('src', '/imagecache/large/' + media_name);
     }
     $("#modalButton").off('click');
-})
-
+});
 
 $(document).ready(function() {
     // Edit media
@@ -21677,6 +21695,22 @@ $(document).ready(function() {
     });
 });
 
+$(document).on('click', 'a[data-toggle="modal"]', function(e) {
+    e.preventDefault();
+    $($(this).attr('data-target')).fadeIn(250);
+});
+
+$(document).on('click', '*[data-dismiss="modal"]', function(e) {
+    e.preventDefault();
+    $(this).parents('.modal').fadeOut(250);
+});
+
+$(document).keyup(function(e) {
+    if (e.keyCode == 27) { // escape key maps to keycode `27`
+        $(".modal").fadeOut(250);
+    }
+});
+
 if ($('table #sortable').length) {
 
     var list = document.getElementById("sortable");
@@ -21705,6 +21739,14 @@ if ($('table #sortable').length) {
         }
     });
 }
+
+$('.tab-select li').click(function(e) {
+    $('.tab-select li').removeClass('active');
+    $('.tab-content .tab-pane').removeClass('active');
+    var selected_tab = $(this).data('tab');
+    $(this).addClass('active');
+    $('.tab-content').find('#tab' + selected_tab).addClass('active');
+});
 
 $(document).ready(function() {
 

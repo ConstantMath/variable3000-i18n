@@ -17,22 +17,17 @@ The [Variable](http://www.variable.club) multilingual admintool build on Laravel
 
 ### Installation
 
+Variable3000 utilizes [Composer](https://getcomposer.org/) to manage its dependencies.
+
+After cloning this repo, you can laucnh a `composer install`.
+
 To start a new project and generate the environement file (experimental).
 
       $ php artisan variable3000:install
 
-### Generate a sitemap
-Generate a .xml sitemap inside the `public` folder.  
-Edit recipes in : `App/Console/commands/GenerateSitemap`.  
-Thanks [Spatie.be](https://spatie.be/en), more info here : [laravel-sitemap](https://github.com/spatie/laravel-sitemap)
-
-
-      $ php artisan sitemap:GenerateSitemap
-
-
 ### Generate a ressource
 
-The project comes with 2 resources : projects & pages, use this to create a new resource ans his dependencies.
+The initial project comes with 2 resources : projects & pages, use this to create a new resource ans his dependencies.
 
 
       $ php artisan variable3000:generate resource
@@ -114,3 +109,13 @@ class Page extends GenericRessource{
     //
 }
 ```
+
+
+### Generate a sitemap
+
+Generate a .xml sitemap inside the `public` folder.  
+Edit recipes in : `App/Console/commands/GenerateSitemap`.  
+Thanks [Spatie.be](https://spatie.be/en), more info here : [laravel-sitemap](https://github.com/spatie/laravel-sitemap)
+
+
+      $ php artisan sitemap:GenerateSitemap

@@ -1,0 +1,94 @@
+/*------------------------------------*\
+  #GLOBAL
+\*------------------------------------*/
+
+.main-content {
+  margin-top: $spacing-sm !important;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.wrapper {
+  margin:0 auto;
+  width: 90%;
+  max-width: 1600px;
+  &.wrapper--small {
+    width: 60%;
+    max-width: 1000px;
+  }
+}
+
+.fantom{
+  background-image: url('/assets/admin/images/fantom.gif');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height:22px;
+  width:28px;
+  position:absolute;
+  z-index:-1;
+}
+
+
+.panel-body {
+  padding-left :calc(#{$grid-gutter-width} / 2);
+  padding-right :calc(#{$grid-gutter-width} / 2);
+}
+
+.panel {
+  position:relative;
+}
+.panel-heading {
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-xs;
+  border-bottom: $border-width-sm solid $lightgray;
+  color: $gray;
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    display:inline;
+  }
+}
+
+.panel-body {
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-sm;
+  background-color: $white;
+}
+
+.panel-action {
+  padding-top: $spacing-sm;
+  background-color: $white;
+}
+
+label {
+  display:inline-block;
+}
+
+.form-group {
+  margin-top: $spacing-sm;
+  &:first-of-type{
+    margin-top:0;
+  }
+  label {
+    margin-bottom: $spacing-xxs;
+  }
+}
+.form-control {
+  display:block;
+  width:100%;
+  resize:none;
+  border: $border-width-sm solid $gray;
+  padding: $spacing-xxs $spacing-xs;
+}
+
+input[type="checkbox"]{
+  margin-right: $spacing-xxs;
+}
+input::placeholder, textarea::placeholder {
+  color: #DDD !important;
+}

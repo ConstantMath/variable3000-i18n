@@ -1,7 +1,7 @@
 // ----- Declare modal ----- //
-
-$('#modal-media-edit').on('show.bs.modal', function (event) {
-  var button            = $(event.relatedTarget);
+$('.media-list').on('click', 'a[data-toggle="modal"]', function(e) {
+  e.preventDefault();
+  var button            = $(e.currentTarget);
   var article_id        = button.data('article_id');
   var column_name       = button.data('column-name');
   var media_id          = button.data('media-id');
@@ -11,7 +11,7 @@ $('#modal-media-edit').on('show.bs.modal', function (event) {
   var media_ext         = button.data('media-ext');
   var media_type        = button.data('media-type');
   var media_table_type  = button.data('media-table-type');
-  var modal             = $(this);
+  var modal             = $('#modal-media-edit');
   var pic_container     = modal.find('#pic');
   var vid_container     = modal.find('#vid');
   var vid_source        = modal.find('#vid > source');
@@ -35,8 +35,7 @@ $('#modal-media-edit').on('show.bs.modal', function (event) {
     pic_container.attr('src', '/imagecache/large/'+media_name);
   }
   $("#modalButton").off('click');
-})
-
+});
 
 $(document).ready(function() {
   // Edit media

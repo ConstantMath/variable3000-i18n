@@ -1,37 +1,68 @@
-<nav class="navbar navbar-fixed-top nav-primary">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <!-- Collapsed Hamburger -->
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-        <span class="sr-only">Toggle Navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="{{ url('/admin') }}">admin variable</a>
+<nav class="navbar navbar--fixed-top nav--primary">
+    <div class="navbar__header">
+      <a class="navbar__brand" href="{{ url('/admin') }}">
+        <img src="{{ url('/assets/admin/images/fantom.gif') }}" alt="Admin">
+      </a>
     </div>
-    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+    <div class="navbar__nav">
+      <ul class="navbar__list navbar__list--left">
+        @can('Admin articles')
+        <li>{!! link_to_route('admin.articles.index', 'Articles') !!}</li>
+        @endcan
+        @can('Admin pages')
+        <li>
+          {!! link_to_route('admin.pages.index', 'Pages', 0) !!}
+        </li>
+        @endcan
+      </ul>
       <!-- Right Side Of Navbar -->
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="navbar__list navbar__list--right">
         {{-- <!-- Authentication Links --> --}}
         @if (Auth::guest())
           <li><a href="{{ url('/login') }}">Login</a></li>
           <li><a href="{{ url('/register') }}">Register</a></li>
         @else
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              {{ Auth::user()->name }}&nbsp;<i class="fa fa-angle-down"></i>
+          <li class="js-dropdown-toggle">
+            <a role="button">
+              Admin&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
-            <ul class="dropdown-menu" role="menu">
+            <ul class="js-dropdown-content" role="menu">
+              @can('Admin categories')
+              <li class="nav-item">
+                <?php $categories_active = (strpos($data['page_id'], 'taxonomies') !== false) ? 'active' : ''; ?>
+                {!! link_to_route('admin.taxonomies.index', 'Categories', '', ['class' => $categories_active] ) !!}
+              </li>
+              @endcan
+
+              @can('Admin users')
+              <li class="nav-item">
+                <?php $users_active = (strpos($data['page_id'], 'users') !== false) ? 'active' : ''; ?>
+                {!! link_to_route('admin.users.index', 'Users', '', ['class' => $users_active] ) !!}
+              </li>
+              @endcan
+              @can('Admin settings')
+              <li class="nav-item">
+                <?php $settings_active = (strpos($data['page_id'], 'settings') !== false) ? 'active' : ''; ?>
+                {!! link_to_route('admin.settings.index', 'Settings', '', ['class' => $settings_active] ) !!}
+              </li>
+              @endcan
+            </ul>
+          </li>
+          <li class="js-dropdown-toggle">
+            <a role="button">
+              {{ Auth::user()->name }}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
+            </a>
+            <ul class="js-dropdown-content" role="menu">
               <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
             </ul>
           </li>
           {{-- lang dropdown --}}
           @if(count(config('translatable.locales')) > 1 )
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-              {{app()->getLocale()}}&nbsp;<i class="fa fa-angle-down"></i>
+          <li class="js-dropdown-toggle">
+            <a role="button">
+              {{app()->getLocale()}}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
-            <ul class="dropdown-menu" role="menu">
+            <ul class="js-dropdown-content" role="menu">
             @foreach (config('translatable.locales') as $lang)
               <li class="lang__item @if (app()->getLocale() ==  $lang) active @endif"><a href="{{ route('lang.switch', $lang) }}" class="lang__link">{{ $lang }}</a></li>
             @endforeach
@@ -41,6 +72,10 @@
         @endif
       </ul>
     </div>
+</nav>
+<nav class="navbar nav--secondary">
+  <div class="js-dropdown-menu">
+
   </div>
 </nav>
 {{-- Logout form since Lrvl 5.3 arr This prevents other web applications from logging your users out of your application. --}}

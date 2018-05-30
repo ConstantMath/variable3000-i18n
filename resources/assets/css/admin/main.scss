@@ -1,0 +1,87 @@
+/*------------------------------------*\
+  #MODULES
+\*------------------------------------*/
+
+@import "vendors/02-simplemde.scss";
+@import "vendors/03-select2.min.scss";
+@import "vendors/04-datepicker.scss";
+@import "vendors/05-colorpicker.scss";
+@import "vendors/99-fontawesome/variables";
+@import "vendors/99-fontawesome/mixins";
+@import "vendors/99-fontawesome/path";
+@import "vendors/99-fontawesome/core";
+@import "vendors/99-fontawesome/larger";
+@import "vendors/99-fontawesome/fixed-width";
+@import "vendors/99-fontawesome/list";
+@import "vendors/99-fontawesome/bordered-pulled";
+@import "vendors/99-fontawesome/animated";
+@import "vendors/99-fontawesome/rotated-flipped";
+@import "vendors/99-fontawesome/stacked";
+@import "vendors/99-fontawesome/icons";
+@import "vendors/99-fontawesome/screen-reader";
+
+@import "modules/_reset.scss";
+@import "modules/_include-media.scss";
+@import "modules/_fonts.scss";
+@import "modules/_variables.scss";
+@import "modules/_mixins.scss";
+@import "modules/_typography.scss";
+// @import "modules/_medias.scss";
+@import "modules/_misc.scss";
+
+
+/*------------------------------------*\
+  #PARTIALS
+\*------------------------------------*/
+
+
+// @import "partials/components/_buttons.scss";
+@import "partials/components/_navbar.scss";
+@import "partials/components/_dropdown-menu.scss";
+@import "partials/components/_article-aside.scss";
+@import "partials/components/_btn.scss";
+@import "partials/components/_links.scss";
+@import "partials/components/_modal.scss";
+@import "partials/components/_tabs.scss";
+@import "partials/templates/_global.scss";
+@import "partials/templates/_login.scss";
+@import "partials/templates/_article-edit.scss";
+@import "partials/templates/_articles-index.scss";
+
+
+/*------------------------------------*\
+  #VENDOR
+\*------------------------------------*/
+
+// @import "vendor/_vendor.scss";
+
+
+
+/*------------------------------------*\
+  #BASE-STYLES
+\*------------------------------------*/
+
+
+body {
+  @extend %font-body;
+  background:$lightgray;
+  color: $base-color;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  ::-moz-selection { background-color: rgba($base-color, .2); color: $base-color; }
+  ::selection { background-color: rgba($base-color, .2); color: $base-color; }
+}
+
+
+
+/* ----- Loading ----- */
+
+@keyframes blink {
+  50% {opacity: 0.0}
+}
+
+.fa.blink {
+  display: none;
+  animation: blink .5s step-start 0s infinite;
+  .loading &{display: inline}
+}

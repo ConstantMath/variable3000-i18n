@@ -1,0 +1,114 @@
+/*------------------------------------*\
+  #PRINT STYLE
+\*------------------------------------*/
+
+
+@mixin print-style {
+  @page {
+    margin: 2cm 2.5cm;
+  }
+  body {
+    font-family: Georgia, Times, Times New Roman, serif;
+    font-size: 16pt;
+    line-height: 22pt;
+    color: #000000;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ul,
+  ol {
+    font-family: Georgia, Times, Times New Roman, serif;
+    font-style: normal;
+  	font-variant: normal;
+  	font-weight: 400;
+  }
+  h1 {
+  	font-size: 32pt;
+  	line-height: 40pt;
+  }
+  h2 {
+  	font-size: 24pt;
+  	line-height: 30pt;
+  }
+  h3 {
+  	font-size: 20pt;
+  	line-height: 26pt;
+  }
+  h4 {
+  	font-size: 14pt;
+  	line-height: 20pt;
+  }
+  p,
+  ul,
+  ol,
+  blockquote {
+  	font-size: 11pt;
+  	line-height: 16pt;
+  }
+  blockquote {
+    text-align: center;
+  }
+  small {
+    font-size: 9pt;
+    line-height: 14pt;
+  }
+  p {
+    page-break-inside: avoid;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6{
+    page-break-after: avoid;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background-color: $base-color;
+    margin: .3cm 0;
+  }
+  .article {
+    width: 100%;
+    height: auto !important;
+    margin: 0;
+    display: block;
+    padding: 0;
+    overflow: visible;
+    box-shadow: none;
+  }
+  .header,
+  .footer,
+  .section.print {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000;
+  }
+  .body {
+    p {widows :3 ; orphans : 3 ; }
+    a {page-break-inside:avoid}
+    blockquote {page-break-inside: avoid;}
+    h1, h2, h3, h4, h5, h6 { page-break-after:avoid; page-break-inside:avoid }
+    img { page-break-inside:avoid; page-break-after:avoid; }
+    table, pre { page-break-inside:avoid }
+    ul, ol, dl  { page-break-before:avoid }
+    a:link, a:visited, a {
+      background: transparent;
+      color: #2C51DF;
+      font-weight: bold;
+      text-decoration: underline;
+      text-align: left;
+    }
+    a[href^=http]:after {content:" <" attr(href) "> ";}
+    article a[href^="#"]:after { content: "";}
+    a:not(:local-link):after {content:" <" attr(href) "> ";}
+  }
+}

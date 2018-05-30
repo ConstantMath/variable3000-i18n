@@ -12,11 +12,15 @@ use DB;
 use Carbon\Carbon;
 use Lang;
 use App\Http\Requests\Admin\ArticleRequest;
+use DataTables;
+use Illuminate\Support\Facades\Input;
+
 
 class ArticlesController extends AdminController
 {
 
   public function __construct(){
+    $this->table_type = 'articles';
     $parent_articles = Article::where('parent_id', 0)->get();
     Lang::setLocale(config('app.locale'));
     $this->middleware(['auth', 'permissions'])->except('index');
@@ -33,15 +37,33 @@ class ArticlesController extends AdminController
    */
 
   public function index($parent_id = 0){
-    $articles = Article::orderBy('order', 'asc')
+    $articles = Article::where('id', $parent_id)
+                  ->orderBy('order', 'asc')
                   ->orderBy('created_at', 'desc')
                   ->get();
     $data = array(
       'page_class' => 'index',
       'page_title' => 'Articles',
       'page_id'    => 'index-articles',
+      'table_type' => $this->table_type,
     );
     return view('admin/templates/articles-index', compact('articles', 'data'));
+  }
+
+
+  /**
+   * Get articles for datatables (ajax)
+   *
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getDataTable(){
+    return \DataTables::of(Article::withTranslation()
+                        ->get())
+                        ->addColumn('action', function ($article) {
+                          return '<a href="' . route('admin.articles.edit', $article->id) . '" class="link">Edit</a>';
+                        })
+                        ->make(true);
   }
 
 

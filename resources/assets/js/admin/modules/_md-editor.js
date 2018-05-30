@@ -54,7 +54,7 @@ $(document).ready(function() {
         }
       });
       // Relaunch simplemde on tab change
-      $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+      $('.tab-select li').click(function(e){
       	setTimeout(function() { simplemde.codemirror.refresh(); }, 10);
       });
     })

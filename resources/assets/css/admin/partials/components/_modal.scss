@@ -1,0 +1,50 @@
+.modal {
+  display: none;
+  z-index: 3;
+  position: fixed;
+  left: 0;
+  top:0;
+  width:100%;
+  height:100%;
+  background-color: rgba(0,0,0,0.4);
+  .modal-dialog {
+    background-color: $white;
+    position:absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    min-width: 200px;
+    max-width: 1000px;
+  }
+  .modal-header {
+    padding:calc(#{$grid-gutter-width} / 2);
+    border-bottom: $border-width-sm solid $lightgray;
+    .close {
+      position:absolute;
+      top:0;
+      right:0;
+      border:none;
+      background-image:none;
+      background-color:transparent;
+    }
+  }
+  .modal-body {
+    padding:calc(#{$grid-gutter-width} / 2);
+    display:flex;
+  }
+  .modal-media {
+    margin-right:calc(#{$grid-gutter-width} / 2);
+    height:500px;
+    width:500px;
+    img {
+      height:100%;
+      width:100%;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
+  .modal-desc {
+    flex:1;
+    min-width: 300px;
+  }
+}
