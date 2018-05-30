@@ -3,10 +3,12 @@
   tr {
     th,
     td {
-      padding: $spacing-xs $spacing-xxs;
       &:last-child {
         text-align:right;
       }
+    }
+    th {
+      font-weight: bold;
     }
   }
 }

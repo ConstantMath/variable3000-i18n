@@ -11,10 +11,11 @@
       <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
           <thead>
             <tr>
-              <th>#</th>
+              <th>Id</th>
+              <th>Order</th>
               <th>Title</th>
               <th>Updated</th>
-              <th><a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs">Add</a></th>
+              <th></th>
             </tr>
           </thead>
       </table>
@@ -37,35 +38,37 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         rowReorder: true,
-        colReorder: false,
-        ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
+        order: [ [1, 'asc'] ],
+        ajax: '{{ route('admin.articles.getdata') }}',
         columns: [
-          {data: 'order', name: 'order', searchable: false, width: '5%'},
-          {data: 'title', name: 'title', orderable: false, width: '70%'},
-          {data: 'updated_at', name: 'title', searchable: false, orderable: false},
-          {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
+          {data: 'id', name: 'id', searchable: false},
+          {data: 'order', name: 'order', searchable: false},
+          {data: 'title', name: 'title'},
+          {data: 'updated_at', name: 'title', searchable: false},
+          {data: 'action', name: 'action', orderable: false, searchable: false}
         ]
     });
 
     table.on( 'row-reorder', function ( e, diff, edit ) {
-      var articlesArray = [];
+      var myArray = [];
       for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
 
         var rowData = table.row( diff[i].node ).data();
         var newOrder = diff[i].newPosition;
-        articlesArray.push({
+        myArray.push({
           id: rowData.id,
           position: newOrder
         });
       }
-      var jsonString = JSON.stringify(articlesArray);
+      var jsonString = JSON.stringify(myArray);
+      console.log(myArray);
       $.ajax({
-        url     : '{{ route('admin.reorder', ['table_type' => $data['table_type']]) }}',
+        url     : '{{ URL::to('myurl/reorder') }}',
         type    : 'POST',
         data    : jsonString,
         dataType: 'json',
         success : function ( json ) {
-          $('#datatable').DataTable().ajax.reload(); // refresh datatable
+          $('#dataTableBuilder').DataTable().ajax.reload(); // refresh datatable
             $.each(json, function (key, msg) {
         	  // handle json response
           });
