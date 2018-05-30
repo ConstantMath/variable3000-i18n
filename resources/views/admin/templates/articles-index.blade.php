@@ -5,17 +5,17 @@
 
 @section('content')
   <div class="panel panel-default">
-    <div class="panel-body table-responsive">
-      <a href="{{ route('admin.articles.create') }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
+    <div class="table-responsive">
+      <a href="{{ route('admin.articles.create') }}" class="pull-right"> Add</a>
 
-      <table class="table table-hover table-bordered table-striped" id="datatable" style="width:100%">
+      <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
           <thead>
             <tr>
               <th>Id</th>
               <th>Order</th>
               <th>Title</th>
               <th>Updated</th>
-              <th></th>
+              <th><a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs">Add</a></th>
             </tr>
           </thead>
       </table>

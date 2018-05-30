@@ -9,7 +9,7 @@
   </header>
   <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
-    <div class="form__content">
+    <div class="form__content panel-body">
       <div class="login__body form__body">
         <div class="form-group">
           <label for="email" class="control-label">E-Mail Address</label>

@@ -9,8 +9,7 @@
 @endforeach
 
 {{-- Is published ? --}}
-<div class="panel-body">
-  <div class="form-group">
+  <div class=".form-group form-group--published">
     <div class="checkbox">
       <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
     </div>
@@ -23,6 +22,7 @@
       @endforeach
     </ul>
     @endif
+    <div class="panel-body">
     <div class="tab-content">
       {{-- lang panels  --}}
       @foreach (config('translatable.locales') as $lang)
@@ -50,9 +50,8 @@
       </div>
       @endforeach
     </div>
-
-
-  <hr>
+</div>
+<div class="panel-body">
 
   {{-- Taxonomy: tags --}}
   <div class="form-group">

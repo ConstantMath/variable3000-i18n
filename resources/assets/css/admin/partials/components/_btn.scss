@@ -8,21 +8,33 @@
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+  font-weight: normal;
+  text-decoration: none;
   text-align: left;
   text-decoration: none;
   &::-moz-focus-inner {
     border: 0;
     padding: 0;
   }
-  margin-top: $spacing-sm;
   padding: $spacing-sm calc(#{$grid-gutter-width} / 2);
   &.btn-primary {
     background-color:$blue;
-    color: white;
+    color: $white;
+    border-color: $white;
   }
   &.btn-default {
     background-color: $white;
     color:$blue;
+    border-color: $blue;
+  }
+  &.btn-small {
+    padding: $spacing-xs calc(#{$grid-gutter-width} / 2);
+  }
+  &.btn-xs {
+    padding: $spacing-xxs calc(#{$grid-gutter-width} / 2);
+    width:auto;
+    display: inline-block;
+    text-align: center;
   }
 }
 
@@ -30,6 +42,8 @@
   display:flex;
   flex-direction: row;
   .btn {
+    box-sizing: border-box;
     flex:1;
+    border-right: 5px solid;
   }
 }

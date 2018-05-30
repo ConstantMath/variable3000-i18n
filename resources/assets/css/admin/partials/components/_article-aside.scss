@@ -1,9 +1,18 @@
 .article-aside {
   vertical-align: top;
-  width: calc(33% - #{$grid-gutter-width});
-  display: inline-block;
+  @include media(">=sm") {
+    width: calc(33% - #{$grid-gutter-width});
+    display: inline-block;
+    margin-left: $grid-gutter-width;
+  }
+  @include media("<sm") {
+    margin: $spacing-sm 0;
+  }
   .panel:not(:first-child){
-    margin-top: $spacing-md;
+    margin-top: $spacing-sm;
+  }
+  .panel-action {
+    padding-top:0;
   }
 }
 .input-single-media-upload {
@@ -13,8 +22,8 @@
 .media-list {
   list-style: none;
   .media-list__item {
-    &:first-child{
-      border-top: $border-width-sm solid $lightgray
+    &:last-child{
+      border-bottom:none;
     }
     @extend %font-size-sm;
     display: flex;

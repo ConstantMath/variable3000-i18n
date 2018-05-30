@@ -6,16 +6,18 @@
 }
 
 .tab-select {
+  @extend %font-size-sm;
   list-style: none;
   margin-bottom: -1px;
   li {
     display: inline-block;
-    padding: $spacing-xxs $spacing-xs;
+    text-align: center;
+    text-transform: uppercase;
+    padding: $spacing-xs $spacing-sm;
     a {
       @extend .ts-link;
     }
     &.active {
-      border: $border-width-sm solid $lightgray;
       border-bottom: none;
       background-color: $body-color;
       a {
@@ -26,6 +28,4 @@
 }
 
 .tab-content {
-  border-top: $border-width-sm solid $lightgray;
-  padding-top: $spacing-sm;
 }

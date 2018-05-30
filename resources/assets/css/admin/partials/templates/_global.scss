@@ -31,28 +31,20 @@ a {
   z-index:-1;
 }
 
-.panel-heading,
-.panel-body,
-.form__content {
+
+.panel-body {
   padding-left :calc(#{$grid-gutter-width} / 2);
   padding-right :calc(#{$grid-gutter-width} / 2);
 }
 
 .panel {
-  padding-top: $spacing-sm;
-  background-color: $white;
-  &.panel-edit {
-    width: 66%;
-    display: inline-block;
-    margin-right: $grid-gutter-width;
-  }
+  position:relative;
 }
-
-
 .panel-heading {
-  padding-bottom: $spacing-sm;
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-xs;
   border-bottom: $border-width-sm solid $lightgray;
-  margin-bottom: $spacing-sm;
+  color: $gray;
   h2,
   h3,
   h4,
@@ -63,10 +55,14 @@ a {
 }
 
 .panel-body {
-  padding-bottom: $spacing-xs;
-  &.panel-body:last-child{
-    padding-bottom: $spacing-md;
-  }
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-sm;
+  background-color: $white;
+}
+
+.panel-action {
+  padding-top: $spacing-sm;
+  background-color: $white;
 }
 
 label {
@@ -74,7 +70,7 @@ label {
 }
 
 .form-group {
-  margin: $spacing-sm 0;
+  margin-top: $spacing-sm;
   &:first-of-type{
     margin-top:0;
   }
@@ -94,14 +90,5 @@ input[type="checkbox"]{
   margin-right: $spacing-xxs;
 }
 input::placeholder, textarea::placeholder {
-    color: #DDD !important;
-}
-input.created_at {
-  border: none;
-  padding: 0;
-  text-align: right;
-  color:$lightgray;
-  &:focus{
-    color:gray;
-  }
+  color: #DDD !important;
 }
