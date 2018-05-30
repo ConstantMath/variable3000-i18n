@@ -65,6 +65,17 @@ a {
   background-color: $white;
 }
 
+.panel-footer {
+  list-style: none;
+  margin-top: $spacing-sm;
+  margin-bottom: $spacing-md;
+  color: $gray;
+  li {
+    display: inline-block;
+    margin-right: $spacing-sm;
+  }
+}
+
 label {
   display:inline-block;
 }

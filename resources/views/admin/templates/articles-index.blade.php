@@ -6,7 +6,7 @@
 @section('content')
 <div class="panel panel-default">
   <div class="table-responsive">
-    <a href="{{ route('admin.articles.create') }}" class="pull-right"> Add</a>
+    <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
 
     <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
         <thead>
@@ -14,7 +14,7 @@
             <th>#</th>
             <th>Title</th>
             <th>Updated</th>
-            <th><a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs">Add</a></th>
+            <th></th>
           </tr>
         </thead>
     </table>
@@ -38,14 +38,19 @@ $(document).ready(function() {
       serverSide: true,
       rowReorder: true,
       colReorder: false,
-      dom       : '<"search"f> <"panel-body"t> <"panel-footer"lip>',
+      dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
-        "search": ''
+        "search": '',
+        searchPlaceholder: "Search",
+        "paginate": {
+          "previous": '🡐',
+          "next": '🡒'
+        },
       },
       columns: [
         {data: 'order', name: 'order', searchable: false, width: '5%'},
-        {data: 'title', name: 'title', orderable: false, width: '70%'},
+        {data: 'title', name: 'title', orderable: false, width: '60%'},
         {data: 'updated_at', name: 'title', searchable: false, orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
@@ -76,6 +81,7 @@ $(document).ready(function() {
         }
       });
     });
+    $.fn.dataTable.ext.errMode = 'throw';
 
 });
 </script>

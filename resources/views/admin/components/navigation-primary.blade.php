@@ -1,7 +1,7 @@
 <nav class="navbar navbar--fixed-top nav--primary">
     <div class="navbar__header">
       <a class="navbar__brand" href="{{ url('/admin') }}">
-        <img src="{{ url('/assets/admin/images/fantom.gif') }}" alt="Admin">
+        <img src="{{ url('/assets/admin/images/fantom.gif') }}" alt="">
       </a>
     </div>
     <div class="navbar__nav">
