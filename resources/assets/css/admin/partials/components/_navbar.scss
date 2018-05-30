@@ -47,8 +47,8 @@
       color: $gray;
       padding-left: calc(#{$grid-gutter-width} / 3 );
       padding-right: calc(#{$grid-gutter-width} / 3 );
-      padding-top: $spacing-xs;
-      padding-bottom: $spacing-xs;
+      padding-top: $spacing-sm;
+      padding-bottom: $spacing-sm;
       &:hover,
       &.active {
         color:black;
@@ -61,8 +61,8 @@
   margin-right: $grid-gutter-width;
   width:100%;
   img {
-    padding-top: $spacing-xs;
-    padding-bottom: $spacing-xs;
+    padding-top: $spacing-sm;
+    padding-bottom: $spacing-sm;
   }
 }
 
@@ -85,8 +85,8 @@
     list-style: none;
   }
   a {
-    padding-top: $spacing-xs;
-    padding-bottom: $spacing-xs;
+    padding-top: $spacing-sm;
+    padding-bottom: $spacing-sm;
     padding-left: calc(#{$grid-gutter-width} / 3 );
     padding-right: calc(#{$grid-gutter-width} / 3 );
   }
