@@ -58,7 +58,7 @@
 
 .navbar__brand {
   position: absolute;
-  left:calc(-30px - #{$spacing-sm});
+  left:calc(-30px - calc(#{$grid-gutter-width} / 3));
   width: 30px;
   height: 30px;
   display: block;
