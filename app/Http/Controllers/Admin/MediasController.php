@@ -30,11 +30,11 @@ class MediasController extends AdminController {
    */
 
   public function mediasArticle($model_type, $article_id, $collection_name){
-    $class = $this->getClass($mediatable_type);
+    $class = $this->getClass($model_type);
     $article = $class::findOrFail($article_id);
     $medias = null;
     if($article->medias):
-      $medias = $article->medias->where('type', $media_type);
+      $medias = $article->medias->where('type', $collection_name);
     endif;
     return response()->json([
       'success' => true,

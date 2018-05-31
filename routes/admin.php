@@ -17,7 +17,7 @@ Route::get('taxonomies/create/{parent_id}', 'TaxonomiesController@create')->name
 Route::post('taxonomies/reorder/{id}', 'TaxonomiesController@reorder')->name('taxonomies.reorder');
 Route::post('{table_type}/reorder', 'AdminController@orderObject')->name('reorder');
 // Medias
-Route::get('medias/mediasArticle/{model_type}/{article_id}/{collection_name}', 'MediasController@index')->name('medias.article');
+Route::get('mediasArticle/{model_type}/{article_id}/{collection_name}', 'MediasController@mediasArticle')->name('medias.article');
 Route::post('medias/storeandlink/{mediatable_type}/{article_id?}', 'MediasController@storeAndLink')->name('medias.storeandlink');
 Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'MediasController@reorder')->name('medias.reorder');
 Route::post('medias/destroy/{mediatable_type}/{media_id}', 'MediasController@destroy')->name('medias.destroy');
