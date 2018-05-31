@@ -1,4 +1,3 @@
-.navbar,
 .navbar__nav,
 .navbar__list {
   display:flex;
@@ -8,7 +7,6 @@
   z-index: 2;
   background-color: $white;
   width:100%;
-  padding: 0 $grid-gutter-width;
   overflow-x: auto;
   height:auto;
   border-bottom: $border-width-sm solid $lightgray;
@@ -35,6 +33,8 @@
     display:none;
     .js-dropdown-menu {
       display:flex;
+      @extend .wrapper;
+      width: calc(90% + (#{$grid-gutter-width} / 1.5 )) !important;
       @include media(">=sm") {
         justify-content: flex-end;
       }
@@ -58,12 +58,11 @@
 
 .navbar__brand {
   position: absolute;
-  left: 17px;
+  left:calc(-30px - #{$spacing-sm});
   width: 30px;
   height: 30px;
   display: block;
   top: $spacing-xs;
-  margin-right: $grid-gutter-width;
   background-image: url('/assets/admin/images/fantom.gif');
   background-repeat: no-repeat;
   background-position: center;
@@ -74,8 +73,11 @@
 }
 
 .navbar__nav {
+  position: relative;
   justify-content: space-between;
   flex:1;
+  @extend .wrapper;
+  width: calc(90% + (#{$grid-gutter-width} / 1.5 )) !important;
 }
 
 .navbar__list {

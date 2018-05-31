@@ -1,7 +1,7 @@
 <nav class="navbar navbar--fixed-top nav--primary">
-    <a class="navbar__brand" href="{{ url('/admin') }}">
-    </a>
     <div class="navbar__nav">
+      <a class="navbar__brand" href="{{ url('/admin') }}">
+      </a>
       <ul class="navbar__list navbar__list--left">
         @can('Admin articles')
         <li>{!! link_to_route('admin.articles.index', 'Articles') !!}</li>

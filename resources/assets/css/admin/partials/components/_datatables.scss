@@ -6,6 +6,7 @@ table.dt-rowReorder-float {
     outline-offset: -1px;
     z-index: 2001;
     max-height:32px;
+    cursor:grabbing; 
 }
 
 tr.dt-rowReorder-moving {
