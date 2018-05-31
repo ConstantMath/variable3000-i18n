@@ -20,13 +20,12 @@
         <div id="validation"></div>
         @include('admin.components.article-form', ['submitButtonText' => 'Save'])
     {!! Form::close() !!}
-    </div>
     <div class="article-aside">
       @include('admin.components.article-aside')
     </div>
 
     @if(isset($article->id))
-      <ul class="article-options">
+      <ul class="panel-footer">
         <li>
           @include('admin.components.delete-form', ['model' => $article, 'model_name' => 'articles'])
         </li>

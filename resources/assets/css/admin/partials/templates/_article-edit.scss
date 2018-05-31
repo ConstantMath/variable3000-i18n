@@ -57,14 +57,3 @@ input{
   border-radius: 0;
   background-color: $lightgray;
 }
-
-
-.article-options {
-  list-style: none;
-  margin-top: $spacing-sm;
-  margin-bottom: $spacing-md;
-  li {
-    display: inline-block;
-    margin-right: $spacing-sm;
-  }
-}
