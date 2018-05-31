@@ -123,7 +123,12 @@ label {
   resize:none;
   border: $border-width-sm solid $gray;
   padding: $spacing-xxs $spacing-xs;
+  &:focus{
+    border-color: $blue !important;
+  }
 }
+
+
 
 input[type="checkbox"]{
   margin-right: $spacing-xxs;

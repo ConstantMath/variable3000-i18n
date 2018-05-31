@@ -27,6 +27,11 @@
       right:0;
     }
   }
+  .message {
+    position:absolute;
+    top:$spacing-sm;
+    left:50%;
+  }
 }
 
 
