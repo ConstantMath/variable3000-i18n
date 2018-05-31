@@ -57,8 +57,12 @@
 }
 
 .navbar__brand {
+  position: absolute;
+  left: 17px;
   width: 30px;
+  height: 30px;
   display: block;
+  top: $spacing-xs;
   margin-right: $grid-gutter-width;
   background-image: url('/assets/admin/images/fantom.gif');
   background-repeat: no-repeat;
