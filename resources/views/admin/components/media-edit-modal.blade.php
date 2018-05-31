@@ -9,6 +9,13 @@
         'enctype' => 'multipart/form-data']) !!}
         {!! Form::hidden('media_id', '', ['id' => 'input_media_id'])
       !!}
+        <div class="modal-header">
+          <h4 class"modal-title">Edit media</h4>
+          <div class="modal-btn">
+            <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary btn-xs media-edit-save" data-dismiss="modal">Save</button>
+          </div>
+        </div>
         <div class="modal-body">
           <div class="modal-media">
             <img src="" id="pic">
@@ -25,15 +32,6 @@
               <label for="description">Description</label>
               <textarea class="form-control" placeholder="Intro" rows="5" name="description" id="input_media_description"></textarea>
             </div>
-            <div class="form-group">
-                <a href="#" class="media-delete link link--delete" data-dismiss="modal" media_type="" media_id=""> delete</a>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <div class="btn-container">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary media-edit-save" data-dismiss="modal">Save</button>
           </div>
         </div>
       {{ Form::close() }}

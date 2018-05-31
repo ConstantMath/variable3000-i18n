@@ -7,19 +7,21 @@
     .panel-heading {
       padding-top: $spacing-xs;
       padding-bottom: 0;
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
       .tab-select {
-        display: inline-block;
-        width: 50%;
+        flex-shrink: 0;
       }
       .edit-details {
-        width:49%;
-        display: inline-block;
         text-align: right;
         > * {
           display: inline-block;
           &:not(:first-child) {
             margin-left:$spacing-xs;
           }
+        }
+        .created_at{
         }
         input {
           line-height:1;

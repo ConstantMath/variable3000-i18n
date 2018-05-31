@@ -20,20 +20,19 @@ a {
   left:0;
   top: 0;
   z-index: 5;
-  padding-left: calc(#{$grid-gutter-width} + 30px + #{$spacing-xs} );
-  padding-right: calc(#{$grid-gutter-width} / 3 );
+  padding-left: 5%;
+  padding-right: 5%;
   padding-top: 1rem;
   padding-bottom: 1rem;
   width: 100%;
   &:before {
     content:"";
     width: 30px;
-    height:100%;
+    height:30px;
     position:absolute;
-    top:0;
-    left: $grid-gutter-width;
+    top: $spacing-xs;
+    left:calc(5% - 50px);
     display: block;
-    margin-right: $grid-gutter-width;
     background-image: url('/assets/admin/images/fantom_.gif');
     background-repeat: no-repeat;
     background-position: center;

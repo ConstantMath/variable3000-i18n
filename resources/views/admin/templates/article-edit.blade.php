@@ -22,7 +22,7 @@
           @include('admin.components.delete-form', ['model' => $article, 'model_name' => 'articles'])
         </li>
         <li>
-          <a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank"> preview</a>
+          <a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank">preview</a>
         </li>
       </ul>
     @endif

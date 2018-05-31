@@ -58,7 +58,7 @@
 
 .navbar__brand {
   position: absolute;
-  left:calc(-30px - calc(#{$grid-gutter-width} / 3));
+  left:calc(-30px - calc(#{$grid-gutter-width} * 0.67));
   width: 30px;
   height: 30px;
   display: block;
@@ -77,13 +77,17 @@
   justify-content: space-between;
   flex:1;
   @extend .wrapper;
-  width: calc(90% + (#{$grid-gutter-width} / 1.5 )) !important;
 }
 
 .navbar__list {
   align-items: center;
   &.navbar__list--left {
     padding-right: $spacing-sm;
+    li:first-child{
+      a {
+        padding-left: 0;
+      }
+    }
   }
   &.navbar__list--right {
     border-left: $border-width-md solid $lightgray;

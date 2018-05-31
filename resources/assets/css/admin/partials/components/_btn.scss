@@ -23,8 +23,8 @@
     border-color: $white;
   }
   &.btn-default {
-    background-color: $white;
-    color:$blue;
+    background-color: $lightgray;
+    color:$black;
     border-color: $blue;
   }
   &.btn-small {
@@ -44,6 +44,5 @@
   .btn {
     box-sizing: border-box;
     flex:1;
-    border-right: 5px solid;
   }
 }
