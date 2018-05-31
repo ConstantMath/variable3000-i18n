@@ -21793,8 +21793,11 @@ $(document).ready(function() {
 
     window.setTimeout(function() {
         $(".alert").fadeOut(600);
+    }, 2000);
+
+    window.setTimeout(function() {
         $(".help-block").fadeOut(600);
-    }, 3000);
+    }, 5000);
 
     $("body").on({
         mouseenter: function() {

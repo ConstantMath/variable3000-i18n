@@ -27,7 +27,6 @@
 @endsection
 
 @section('scripts')
-<link href="https://cdn.datatables.net/rowreorder/1.2.3/css/rowReorder.dataTables.min.css" rel="stylesheet">
 <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/rowreorder/1.2.3/js/dataTables.rowReorder.min.js"></script>
 <script type="text/javascript">
@@ -44,12 +43,12 @@ $(document).ready(function() {
         "search": '',
         searchPlaceholder: "Search",
         "paginate": {
-          "previous": '🡐',
-          "next": '🡒'
+          "previous": '&larr;',
+          "next": '&rarr;'
         },
       },
       columns: [
-        {data: 'order', name: 'order', searchable: false, width: '5%'},
+        {data: 'order', name: 'order', searchable: false, width: '7%'},
         {data: 'title', name: 'title', orderable: false, width: '60%'},
         {data: 'updated_at', name: 'title', searchable: false, orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
