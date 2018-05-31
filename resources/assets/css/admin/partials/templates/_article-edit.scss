@@ -4,13 +4,35 @@
       width: 66%;
       display: inline-block;
     }
+    .panel-heading {
+      padding-top: $spacing-xs;
+      padding-bottom: 0;
+      .tab-select {
+        display: inline-block;
+        width: 50%;
+      }
+      .edit-details {
+        width:49%;
+        display: inline-block;
+        text-align: right;
+        > * {
+          display: inline-block;
+          &:not(:first-child) {
+            margin-left:$spacing-xs;
+          }
+        }
+        input {
+          line-height:1;
+        }
+      }
+    }
   }
   .panel-body + .panel-body {
     margin-top: $spacing-sm;
   }
 }
 
-input.created_at {
+.created_at input {
   border: none;
   padding: 0;
   text-align: right;
@@ -22,10 +44,6 @@ input.created_at {
 }
 
 .form-group--published {
-  position:absolute;
-  right:0;
-  margin: $spacing-xs 0;
-  color: $gray;
 }
 
 .form-group {

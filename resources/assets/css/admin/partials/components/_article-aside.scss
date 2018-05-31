@@ -19,6 +19,17 @@
   display:none;
 }
 
+.media-panel {
+  .btn {
+    &.media-add {
+      position:absolute;
+      top:$spacing-xs;
+      right:0;
+    }
+  }
+}
+
+
 .media-list {
   list-style: none;
   .media-list__item {

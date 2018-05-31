@@ -18,7 +18,6 @@
       @extend .ts-link;
     }
     &.active {
-      border-bottom: none;
       background-color: $body-color;
       a {
         color: $black;

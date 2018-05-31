@@ -9,18 +9,28 @@
 @endforeach
 
 {{-- Is published ? --}}
-  <div class=".form-group form-group--published">
-    <div class="checkbox">
-      <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
-    </div>
-  </div>
+
     {{-- tabs --}}
-    @if(count(config('translatable.locales')) > 1 )
-    <ul class="tab-select">
-      @foreach (config('translatable.locales') as $lang)
-        <li role="presentation" data-tab="{{$lang}}" @if(App::getLocale() == $lang) class="active" @endif><a href="#" role="tab">{{ $lang }}</a></li>
-      @endforeach
-    </ul>
+    <div class="panel-heading">
+      @if(count(config('translatable.locales')) > 1 )
+      <ul class="tab-select">
+        @foreach (config('translatable.locales') as $lang)
+          <li role="presentation" data-tab="{{$lang}}" @if(App::getLocale() == $lang) class="active" @endif><a href="#" role="tab">{{ $lang }}</a></li>
+        @endforeach
+      </ul>
+      <div class="edit-details">
+        @if(isset($article->id))
+        <div class="created_at">
+          {!! Form::text('created_at', null, ['class' => 'form-control']) !!}
+        </div>
+        @endif
+        <div class="is-published">
+          <div class="checkbox">
+            <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
+          </div>
+        </div>
+      </div>
+    </div>
     @endif
     <div class="panel-body">
     <div class="tab-content">

@@ -11,6 +11,35 @@ a {
   text-decoration: none;
 }
 
+.help-block,
+.alert  {
+  display: inline-block;
+  text-align: left;
+  background-color: #ffd000;
+  position: fixed;
+  left:0;
+  top: 0;
+  z-index: 5;
+  padding-left: calc(#{$grid-gutter-width} + 30px + #{$spacing-xs} );
+  padding-right: calc(#{$grid-gutter-width} / 3 );
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  &:before {
+    content:"";
+    width: 30px;
+    height:100%;
+    position:absolute;
+    top:0;
+    left: $grid-gutter-width;
+    display: block;
+    margin-right: $grid-gutter-width;
+    background-image: url('/assets/admin/images/fantom_.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
 .wrapper {
   margin:0 auto;
   width: 90%;
@@ -43,7 +72,6 @@ a {
 .panel-heading {
   padding-top: $spacing-sm;
   padding-bottom: $spacing-xs;
-  border-bottom: $border-width-sm solid $lightgray;
   color: $gray;
   h2,
   h3,

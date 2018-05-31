@@ -21649,9 +21649,26 @@ $(document).ready(function() {
     }
 
     // ----- Hide index alerts ----- //
-    $(".alert").delay(2000).fadeOut(300);
 
+    window.setTimeout(function() {
+        $(".alert").fadeOut(600);
+    }, 2000);
 
+    window.setTimeout(function() {
+        $(".help-block").fadeOut(600);
+    }, 5000);
+
+    $("body").on({
+        mouseenter: function() {
+            $('.help-block').fadeOut(300);
+        }
+    }, ".help-block");
+
+    $("body").on({
+        mouseenter: function() {
+            $('.alert').fadeOut(300);
+        }
+    }, ".alert");
     // ----- Login logo  ----- //
 
     // var top = Math.floor(Math.random() * (90 - 2 + 1)) + 2;

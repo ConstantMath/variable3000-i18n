@@ -9,14 +9,6 @@
       @else
         {!! Form::model($article, ['route' => ['admin.articles.store'], 'method' => 'post', 'class' => 'panel panel-edit main-form', 'id' => 'main-form', 'files' => true]) !!}
       @endif
-        <div class="panel-heading">
-          {{$parent->title or 'Edit' }}
-          @if(isset($article->id))
-          <div class="tip pull-right created_at">
-            {!! Form::text('created_at', null, ['class' => 'form-control created_at']) !!}
-          </div>
-          @endif
-        </div>
         <div id="validation"></div>
         @include('admin.components.article-form', ['submitButtonText' => 'Save'])
     {!! Form::close() !!}
