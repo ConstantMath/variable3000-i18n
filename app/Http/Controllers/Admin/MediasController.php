@@ -29,7 +29,7 @@ class MediasController extends AdminController {
    * @return \Json\Response
    */
 
-  public function index($media_type, $mediatable_type, $article_id){
+  public function mediasArticle($model_type, $article_id, $collection_name){
     $class = $this->getClass($mediatable_type);
     $article = $class::findOrFail($article_id);
     $medias = null;
@@ -52,7 +52,7 @@ class MediasController extends AdminController {
    * @return JSON\Response
    */
 
-  public function store(Request $request, $mediatable_type, $article_id){
+  public function storeAndLink(Request $request, $mediatable_type, $article_id){
     // Validator conditions
     $validator = Validator::make($request->all(), [
       'image' => 'required|mimes:jpeg,jpg,png,gif,pdf,mp4|max:3000',
@@ -76,10 +76,8 @@ class MediasController extends AdminController {
         $orig_name = pathinfo($file_name, PATHINFO_FILENAME);
         $extension = $file->getClientOriginalExtension();
         $name = str_slug($orig_name).'.'.$extension;
-        // $article->addMediaFromRequest('image')->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection($request->mediaType);
-        $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection('une');
-        $media = $article;
-        dd($media);
+        $media = $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection('une');
+
         return response()->json([
           'success'          => true,
           'media'            => $media,

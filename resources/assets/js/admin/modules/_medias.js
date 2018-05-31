@@ -4,10 +4,10 @@ $(document).ready(function() {
 
   if( $('.media-panel').length ){
     $('.media-panel').each(function( index ) {
-      var media_type = $(this).attr('data-media-type');
-      var media_table_type = $(this).attr('data-media-table-type');
+      var media_collection_name = $(this).attr('data-media-collection-name');
+      var article_model_type = $(this).attr('data-article-model_type');
       // Build media list
-      getMedias(media_type, media_table_type);
+      getMedias(media_collection_name, article_model_type);
     });
   }
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
 
   function mediaResponse(response, statusText, xhr, $form){
     if(response.success == true){
-      addMediaInput(response.id, response.type, response.mediatable_type);
+      addMediaInput(response.media);
     }else{
       var panel = $('#panel-' + response.type);
       var message_field = $('#panel-' + response.type + ' .message');
@@ -53,17 +53,17 @@ $(document).ready(function() {
 // ----- Mixins ----- //
 
 /* manage data list */
-function getMedias(media_type, mediatable_type) {
-  mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
+function getMedias(media_collection_name, article_model_type) {
+  // mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
   var main_form_id = 'main-form';
   var article_id = $('#' + main_form_id + ' input[name=id]').val();
   var current_medias = $('#' + main_form_id + ' #' + media_type).val();
-  var panel = $("#panel-"+media_type);
+  var panel = $("#panel-" + media_collection_name);
   // Get from DB
   if(article_id){
     $.ajax({
         dataType: 'JSON',
-        url: admin_url+'/medias/index/' + media_type + '/' + mediatable_type + '/' + article_id
+        url: admin_url+'/medias/mediasArticle/' + article_model_type + '/' + article_id + '/' + media_collection_name
     }).done(function(data){
       if(data.success == true){
         printList(data.medias, media_type, mediatable_type);
@@ -89,6 +89,7 @@ function getMedias(media_type, mediatable_type) {
   }
 }
 
+
 /* manage data list */
 function printList(medias, media_type, mediatable_type) {
   mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
@@ -99,14 +100,9 @@ function printList(medias, media_type, mediatable_type) {
     $.each( medias, function( key, value ) {
       // Build <li>
       li = li + '<li class="list-group-item media-list__item" data-media-table-type="' + mediatable_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
-
       li = li + '<div class="media__infos"><p class="media__title">'+value.alt+'</p>';
-
-
       li = li + '<p><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-type="'+value.type+'" data-media-table-type="'+mediatable_type+'" data-media-id="'+value.id+'" data-media-description="'+value.description+'" data-media-ext="'+value.ext+'" data-media-alt="'+value.alt+'" data-media-name="'+value.name+'">edit</a></p>';
-
       li = li + '<p><a href="' + admin_url + '/medias/destroy/' + mediatable_type + '/' + value.id + '" class="link link--delete">delete</a></p></div>';
-
       //media preview
       if(value.ext == 'jpg' || value.ext == 'png' || value.ext == 'gif' || value.ext == 'svg' || value.ext == 'jpeg'){
         li = li + '<div class="media__preview" style="background-image:url(\'/imagecache/thumb/' + value.name + '\')"></div>';
@@ -123,15 +119,15 @@ function printList(medias, media_type, mediatable_type) {
   }
 }
 
+
 /* Update hidden medias inputs */
-function addMediaInput(media_id, media_type, mediatable_type) {
-  mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
+function addMediaInput(media) {
   var main_form_id = 'main-form';
   var medias = [];
-  var inputField = $('#' + main_form_id + ' #' + media_type);
+  var inputField = $('#' + main_form_id + ' #' + media.collection_name);
   var current_medias = inputField.val();
   if(current_medias){medias = medias.concat(current_medias)}
-  medias.push(media_id);
+  medias.push(media.id);
   inputField.val(medias);
-  getMedias(media_type, mediatable_type);
+  getMedias(media.collection_name, media.model_type);
 }
