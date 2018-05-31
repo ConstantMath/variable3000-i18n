@@ -69,8 +69,8 @@ body {
   color: $base-color;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  ::-moz-selection { background-color: rgba($base-color, .2); color: $base-color; }
-  ::selection { background-color: rgba($base-color, .2); color: $base-color; }
+  ::-moz-selection { background-color: $lightyellow; color: $base-color; }
+  ::selection { background-color: $lightyellow; color: $base-color; }
 }
 
 

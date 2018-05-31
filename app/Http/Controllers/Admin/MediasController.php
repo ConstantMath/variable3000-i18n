@@ -7,8 +7,13 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Media;
 use App\DB;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Illuminate\Support\Facades\Storage;
 
 class MediasController extends AdminController {
+
+  use HasMediaTrait;
 
   public function __construct(){
     $this->middleware(['auth', 'permissions'])->except('index');
@@ -24,12 +29,12 @@ class MediasController extends AdminController {
    * @return \Json\Response
    */
 
-  public function index($media_type, $mediatable_type, $article_id){
-    $class = $this->getClass($mediatable_type);
+  public function mediasArticle($model_type, $article_id, $collection_name){
+    $class = $this->getClass($model_type);
     $article = $class::findOrFail($article_id);
     $medias = null;
     if($article->medias):
-      $medias = $article->medias->where('type', $media_type);
+      $medias = $article->medias->where('type', $collection_name);
     endif;
     return response()->json([
       'success' => true,
@@ -47,7 +52,7 @@ class MediasController extends AdminController {
    * @return JSON\Response
    */
 
-  public function store(Request $request, $mediatable_type, $article_id){
+  public function storeAndLink(Request $request, $mediatable_type, $article_id){
     // Validator conditions
     $validator = Validator::make($request->all(), [
       'image' => 'required|mimes:jpeg,jpg,png,gif,pdf,mp4|max:3000',
@@ -61,52 +66,21 @@ class MediasController extends AdminController {
         'article_id'       => $article_id,
       ]);
     }else{
-
       $class = $this->getClass($mediatable_type);
-      if(!empty($article_id) && $article_id != 'null'){
-        $article = $class::findOrFail($article_id);
-      }
+      $article = $class::findOrFail($article_id);
       // Champs requests
-      $file        = $request->file('image');
-      if($file){
+      $file = $request->file('image');
+      if($file && !empty($article_id) && $article_id != 'null'){
         list($width, $height) = getimagesize($file);
-        // Upload
-        $media_file = Media::uploadMediaFile($file);
-        // Media store
-        $media = New media;
-        $media->name       = $media_file['name'];
-        $media->alt        = $media_file['orig_name'];
-        $media->ext        = $file->getClientOriginalExtension();
-        $media->type       = $request->input('type');
-        $media->width      = $width;
-        $media->height     = $height;
-        // If Media unique (not gallery) > Delete current before saving,
-        if(($media->type == 'une') && isset($article) && !empty($article->medias)){
-          $current_media = $article->medias->where('type', $media->type)->first();
-          if(!empty($current_media)):
-            Media::deleteMediaFile($current_media->id);
-          endif;
-        }
-        $media->save();
-        // Link media to article
-        if(isset($article)){
-          // retourne le dernier media
-          $next_media_order = $article->lastMediaId($media->type);
-          $next_media_order += 1;
-          // Article -> media
-          $media->order = $next_media_order;
-          $article->medias()->save($media);
-        }
+        $file_name = $file->getClientOriginalName();
+        $orig_name = pathinfo($file_name, PATHINFO_FILENAME);
+        $extension = $file->getClientOriginalExtension();
+        $name = str_slug($orig_name).'.'.$extension;
+        $media = $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection('une');
+
         return response()->json([
           'success'          => true,
-          'alt'              => $media->alt,
-          'name'             => $media->name,
-          'ext'              => $media->ext,
-          'type'             => $media->type,
-          'mediatable_type'  => $mediatable_type,
-          'article_id'       => $article_id,
-          'id'               => $media->id,
-          'description'      => $media->description,
+          'media'            => $media,
         ]);
       }
     }

@@ -4,16 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
+class Article extends Model implements HasMedia{
 
-class Article extends Model{
-
+  use HasMediaTrait;
   use Mediatable;
   use \Dimsav\Translatable\Translatable;
   protected $table = 'articles';
   public $translatedAttributes = ['title', 'intro', 'text', 'slug'];
   protected $fillable = ['created_at', 'order', 'parent_id', 'published'];
 
+  // Medialibrary collections define
+  public function registerMediaCollections(){
+    $this->addMediaCollection('une')->singleFile();
+    $this->addMediaCollection('gallery');
+  }
 
   /**
    * Construct : default Locale

@@ -1,18 +1,18 @@
-<?php $medias = ($article->medias) ? $article->medias->where('type', $media_type) :'' ;?>
+
 <div
 class="panel panel-default media-panel loading {{ $panel_type }}"
-  id="panel-{{ $media_type }}"
-  data-media-type="{{ $media_type }}"
-  data-media-table-type="{{ $article->getTable() }}"
+  id="panel-{{ $collection_name }}"
+  data-media-collection-name="{{ $collection_name}}"
+  data-article-model_type="App\Article"
   >
   <div class="panel-heading">
     {{ $panel_title }}
     @if (isset($article->id))
-      {!! Form::model($article, ['route' => ['admin.medias.store', $article->getTable(), $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
+      {!! Form::model($article, ['route' => ['admin.medias.storeandlink', $article->getTable(), $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else
-      {!! Form::model($article, ['route' => ['admin.medias.store', $article->getTable(), 'null'], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
+      {!! Form::model($article, ['route' => ['admin.medias.storeandlink', $article->getTable(), 'null'], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @endif
-    {!! Form::hidden('type', $media_type) !!}
+    {!! Form::hidden('collection_name', $collection_name) !!}
       {{-- Always put file form before submit bt  --}}
       <input type="file" name="image" class="input-single-media-upload" />
       <a href="#" class="media-add btn btn-primary btn-xs"> Add</a>
