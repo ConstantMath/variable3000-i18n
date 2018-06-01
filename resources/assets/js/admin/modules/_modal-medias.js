@@ -54,30 +54,4 @@ $(document).ready(function() {
       getMedias(response.media_type, response.mediatable_type);
     }
   }
-
-  // ----- Delete a media ----- //
-
-  // click sur les descendants de media panel
-  $('.modal').on('click', '.media-delete', function(e){
-    e.preventDefault();
-    var url         = $(this).attr('href')
-    var media_type  = $(this).attr('media_type');
-    var media_id    = $(this).attr('media_id');
-
-    if (url && media_id) {
-      jQuery.ajax({
-        url: url,
-        data: {
-          'media_type' : media_type,
-          'media_id'   : media_id,
-        },
-        type: 'POST',
-        success: function(response){
-          if(response.success == true){
-            getMedias(response.media_type, response.mediatable_type);
-          }
-        }
-      });
-    }
-  });
 });

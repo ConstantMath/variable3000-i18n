@@ -32,10 +32,7 @@ class MediasController extends AdminController {
   public function mediasArticle($model_type, $article_id, $collection_name){
     $class = $this->getClass($model_type);
     $article = $class::findOrFail($article_id);
-    $medias = null;
-    if($article->medias):
-      $medias = $article->medias->where('type', $collection_name);
-    endif;
+    $medias = $article->getMedia($collection_name);
     return response()->json([
       'success' => true,
       'medias' => $medias,
@@ -94,15 +91,10 @@ class MediasController extends AdminController {
   * @return \Illuminate\Http\Response
   */
 
-  public function destroy(Request $request, $mediatable_type){
-    $media_type = $request->media_type;
-    $media_id   = $request->media_id;
-    Media::deleteMediaFile($media_id);
+  public function destroy($id){
+    Media::deleteMediaFile($id);
     return response()->json([
       'success'         => true,
-      'media_type'      => $media_type,
-      'media_id'        => $media_id,
-      'mediatable_type' => $mediatable_type,
     ]);
   }
 

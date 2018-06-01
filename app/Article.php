@@ -10,7 +10,6 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
 class Article extends Model implements HasMedia{
 
   use HasMediaTrait;
-  use Mediatable;
   use \Dimsav\Translatable\Translatable;
   protected $table = 'articles';
   public $translatedAttributes = ['title', 'intro', 'text', 'slug'];
