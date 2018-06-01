@@ -14,12 +14,21 @@
 
   .panel-heading {
     padding-top:$spacing-xs;
-    padding-bottom: $spacing-xxs;
-    .dataTables_filter input {
-      @extend .form-control;
-      border-top: 0;
-      border-left: 0;
-      border-right: 0;
+    padding-bottom: $spacing-xs;
+    .dataTables_filter {
+      label{
+        width: 30%;
+        @include media("<sm") {
+          width: calc(100% - 70px);
+        }
+      }
+      input {
+        @extend .form-control;
+        border: 0;
+        padding-top: 0.42rem;
+        padding-bottom: 0.42rem;
+        width: 100%;
+      }
     }
   }
 

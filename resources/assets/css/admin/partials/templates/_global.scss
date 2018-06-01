@@ -4,6 +4,8 @@
 
 .main-content {
   margin-top: $spacing-sm !important;
+  min-height: calc(100vh - 195px);
+
 }
 
 a {
@@ -89,7 +91,6 @@ a {
 
 .panel-action {
   padding-top: $spacing-sm;
-  background-color: $white;
 }
 
 .panel-footer {
