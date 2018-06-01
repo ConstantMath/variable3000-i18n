@@ -7,6 +7,9 @@
   width:100%;
   height:100%;
   background-color: $lightgray;
+  .modal-title{
+    color: $black;
+  }
   .modal-header{
     @extend .alert;
     position:sticky !important;

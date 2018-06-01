@@ -15,6 +15,7 @@
   <main class="main-content wrapper">
       @yield('content')
   </main>
+  @include('admin.components.footer')
   <!-- JavaScripts -->
   <script type="text/javascript">
   @if(!empty(config('translatable.locales')) && count(config('translatable.locales')) > 1)

@@ -32,7 +32,7 @@ return array(
 
     'paths' => array(
         // public_path('upload'),
-        public_path('medias')
+        public_path('storage')
     ),
 
     /*

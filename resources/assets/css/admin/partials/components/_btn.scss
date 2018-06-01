@@ -45,4 +45,7 @@
     box-sizing: border-box;
     flex:1;
   }
+  .btn:first-of-type{
+    border-right: 1px dotted white;
+  }
 }

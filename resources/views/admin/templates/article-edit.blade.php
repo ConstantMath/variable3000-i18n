@@ -13,17 +13,13 @@
         @include('admin.components.article-form', ['submitButtonText' => 'Save'])
     {!! Form::close() !!}
     <div class="article-aside">
-      @include('admin.components.section-medias')
+      @include('admin.components.aside-medias')
     </div>
 
     @if(isset($article->id))
       <ul class="panel-footer">
-        <li>
-          @include('admin.components.delete-form', ['model' => $article, 'model_name' => 'articles'])
-        </li>
-        <li>
-          <a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank">preview</a>
-        </li>
+        <li>@include('admin.components.delete-form', ['model' => $article, 'model_name' => 'articles'])</li>
+        <li><a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank">{{ __('admin.preview') }}</a> {{ __('admin.on_website') }}</li>
       </ul>
     @endif
   </div>

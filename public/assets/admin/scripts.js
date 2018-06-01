@@ -21487,22 +21487,17 @@ $('.media-list').on('click', 'a[data-toggle="modal"]', function(e) {
     var pic_container = modal.find('#pic');
     var vid_container = modal.find('#vid');
     var vid_source = modal.find('#vid > source');
-    modal.find('.media-delete').attr("href", admin_url + '/medias/destroy/' + media_table_type + '/' + media_id);
-    modal.find('.media-delete').attr("column_name", column_name);
-    modal.find('.media-delete').attr("media_id", media_id);
-    modal.find('.media-delete').attr("media_type", media_type);
     modal.find('#input_media_id').val(media_id);
     modal.find('#input_media_alt').val(media_alt);
     modal.find('#input_media_description').val(media_description);
+    pic_container.attr('src', '').hide();
+    vid_source.attr('src', '').hide();
 
     if (media_ext == 'mp4') {
-        pic_container.attr('src', '').hide();
         vid_container.show();
         vid_source.attr('src', '/medias/' + media_name);
         vid_container.load();
     } else {
-        vid_container.hide();
-        vid_source.attr('src', '');
         pic_container.show();
         pic_container.attr('src', '/imagecache/large/' + media_name);
     }
@@ -21526,32 +21521,6 @@ $(document).ready(function() {
             getMedias(response.media_type, response.mediatable_type);
         }
     }
-
-    // ----- Delete a media ----- //
-
-    // click sur les descendants de media panel
-    $('.modal').on('click', '.media-delete', function(e) {
-        e.preventDefault();
-        var url = $(this).attr('href')
-        var media_type = $(this).attr('media_type');
-        var media_id = $(this).attr('media_id');
-
-        if (url && media_id) {
-            jQuery.ajax({
-                url: url,
-                data: {
-                    'media_type': media_type,
-                    'media_id': media_id,
-                },
-                type: 'POST',
-                success: function(response) {
-                    if (response.success == true) {
-                        getMedias(response.media_type, response.mediatable_type);
-                    }
-                }
-            });
-        }
-    });
 });
 
 $(document).on('click', 'a[data-toggle="modal"]', function(e) {

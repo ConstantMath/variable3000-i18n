@@ -1,0 +1,12 @@
+.footer__main{
+  margin-top: $spacing-xxl;
+  border-top: 1px solid $bordergray;
+  ul{
+    display: flex;
+    justify-content: space-between;
+    padding: $spacing-sm;
+  }
+  li{
+    list-style-type: none;
+  }
+}
