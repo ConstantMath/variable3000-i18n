@@ -163,9 +163,9 @@ class AdminController extends Controller{
         $position = $key['position'];
         $article = $class::find($id);
         $article->order = $position;
-        if($article->save(['timestamps' => false])){ // Db update
-          $count++;
-        }
+        $article->timestamps = false;
+        $article->save();
+        $count++;
       }
       $response = 'Articles ordered';
       return response()->json( $response );
