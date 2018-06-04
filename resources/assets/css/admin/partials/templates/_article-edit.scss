@@ -4,6 +4,13 @@
       width: 66%;
       display: inline-block;
     }
+    &.panel-edit--single{
+      display:block;
+      margin: 0 auto;
+      .panel-heading{
+        padding-bottom: $spacing-xs;
+      }
+    }
     .panel-heading {
       padding-top: $spacing-xs;
       padding-bottom: 0;
