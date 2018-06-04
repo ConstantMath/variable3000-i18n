@@ -4,45 +4,24 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-  <div class="row">
-    <div class="col-sm-12 col-md-9">
-      @if(isset($article->id))
-        {!! Form::model($article, ['route' => ['admin.pages.update', $article->id], 'method' => 'put', 'class' => 'panel main-form', 'id' => 'main-form', 'files' => true]) !!}
-      @else
-        {!! Form::model($article, ['route' => ['admin.pages.store'], 'method' => 'post', 'class' => 'panel main-form', 'id' => 'main-form', 'files' => true]) !!}
-      @endif
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          {{$parent->title or 'Edit' }}
-          @if(isset($article->id))
-          <div class="tip pull-right created_at">
-            <span>{{ $article->created_at }}</span>
-            {!! Form::text('created_at', null, ['class' => 'form-control']) !!}
-          </div>
-          @endif
+    @if(isset($article->id))
+      {!! Form::model($article, ['route' => ['admin.pages.update', $article->id], 'method' => 'put', 'class' => 'panel panel-edit main-form', 'id' => 'main-form', 'files' => true]) !!}
+    @else
+      {!! Form::model($article, ['route' => ['admin.pages.store'], 'method' => 'post', 'class' => 'panel panel-edit main-form', 'id' => 'main-form', 'files' => true]) !!}
+    @endif
+        <div id="validation"></div>
+        @include('admin.components.page-form', ['submitButtonText' => 'Save'])
+        {!! Form::close() !!}
+        <div class="article-aside">
+          @include('admin.components.aside-medias')
         </div>
-        <div class="panel-body">
-          <div id="validation"></div>
-          @include('admin.components.page-form', ['submitButtonText' => 'Save'])
-        </div>
-      </div>
-      {!! Form::close() !!}
-      @if(isset($article->id))
-        <ul class="nav navbar-nav">
-          <li>
-            @include('admin.components.delete-form', ['model' => $article, 'model_name' => 'pages'])
-          </li>
-          <li>
-            <a href="{{ url('/') }}/{{ $article->slug }}" target="_blank"><i class="fa fa-eye"></i> preview</a>
-          </li>
-        </ul>
-      @endif
-    </div>
-    <div class="col-sm-12 col-md-3 article-aside">
-      @include('admin.components.article-aside')
-    </div>
-  </div>
-@endsection
+        @if(isset($article->id))
+          <ul class="panel-footer">
+            <li>@include('admin.components.delete-form', ['model' => $article, 'model_name' => 'articles'])</li>
+            <li><a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank">{{ __('admin.preview') }}</a> {{ __('admin.on_website') }}</li>
+          </ul>
+        @endif
+    @endsection
 
 @section('meta')
   <meta name="csrf-token" content="{{ csrf_token() }}" />
