@@ -8,7 +8,7 @@
   <div class="table-responsive">
     <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
 
-    <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
+    <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
         <thead>
           <tr>
             <th>#</th>

@@ -13,6 +13,7 @@ use Lang;
 class TaxonomiesController extends AdminController
 {
   public function __construct(){
+    $this->table_type = 'taxonomies';
     $this->middleware(['auth', 'permissions'])->except('index');
     // Construct admin controller
     parent::__construct();
@@ -30,6 +31,7 @@ class TaxonomiesController extends AdminController
      'page_class' => 'taxonomies-index',
      'page_title' => 'Taxonomies',
      'page_id'    => 'taxonomies',
+     'table_type' => $this->table_type,
    );
    $taxonomies = Taxonomy::where('parent_id', 0)->orderBy('order', 'asc')->get();
    // Add children
@@ -68,6 +70,21 @@ class TaxonomiesController extends AdminController
   public function store(TaxonomyRequest $request){
     return $this->createObject(Taxonomy::class, $request);
   }
+
+  /**
+   * Get articles for datatables (ajax)
+   *
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getDataTable(){
+    return \DataTables::of(Taxonomy::get())
+                        ->addColumn('action', function ($article) {
+                          return '<a href="' . route('admin.taxonomies.edit', $article->id) . '" class="link">Edit</a>';
+                        })
+                        ->make(true);
+  }
+
 
 
   /**

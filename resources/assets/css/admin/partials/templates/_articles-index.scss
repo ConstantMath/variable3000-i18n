@@ -61,22 +61,6 @@
         font-weight: bold;
       }
     }
-    tbody {
-      tr td:first-of-type {
-        position: relative;
-        &:hover{
-          cursor:grab;
-          &:before{
-            content:'\f0dc';
-            font-family: 'FontAwesome';
-            color:$gray;
-            position: absolute;
-            left: calc( -#{$grid-gutter-width} / 2);
-            top:$spacing-xs;
-          }
-        }
-      }
-    }
   }
 
   .panel-footer {
