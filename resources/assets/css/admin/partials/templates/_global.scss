@@ -110,7 +110,7 @@ label {
 
 .form-group {
   margin-top: $spacing-sm;
-  &:first-of-type{
+  &:first-child{
     margin-top:0;
   }
   label {

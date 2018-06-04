@@ -1,0 +1,6 @@
+.settings-index {
+  .panel-body ~ .panel-body,
+  .form-horizontal + .form-horizontal {
+    margin-top: $spacing-sm;
+  }
+}

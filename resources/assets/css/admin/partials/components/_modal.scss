@@ -14,8 +14,12 @@
     @extend .alert;
     position:sticky !important;
   }
+  .modal-content{
+    position:relative;
+  }
   .modal-btn {
     position:absolute;
+    z-index: 5;
     right:5%;
     top:50%;
     transform: translateY(-50%);

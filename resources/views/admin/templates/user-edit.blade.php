@@ -9,13 +9,12 @@
   @else
     {!! Form::model($user, ['route' => ['admin.users.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
   @endif
-  <div class="panel panel-default">
+  <div class="panel panel-edit panel-edit--single panel-default">
     <div class="panel-heading">
       Edit user
     </div>
+    <div id="validation"></div>
     <div class="panel-body">
-      <div class="col-sm-12">
-        <div id="validation"></div>
         {{-- Name --}}
         <div class="form-group {!! $errors->has('name') ? 'has-error' : '' !!}">
           <label for="name">Title</label>
@@ -29,7 +28,7 @@
           {!! $errors->first('email', '<span class="help-block">:message</span>') !!}
         </div>
         {{-- Password --}}
-        <div class="pw-change-container">
+        <div class="pw-change-container form-group">
           <div class="form-group {!! $errors->has('password') ? 'has-error' : '' !!}">
             <label for="password">Password</label>
             {!! Form::password('password', array('id' => 'password', 'class' => 'form-control ')) !!}
@@ -49,34 +48,32 @@
             </div>
           </div>
         </div>
-        {{-- Submit buttons --}}
-        <div class="form-group submit">
-          {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'finish']) !!}
-        </div>
-      </div>
     </div>
-  </div>
-  {!! Form::close() !!}
-  @if(isset($user->id))
-    {!! Form::model($user, ['route' => ['admin.users.destroy', $user->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
-      {{ Form::hidden('_method', 'DELETE') }}
-      <a href="#" class="" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash"></i> delete</a>
-      <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title" id="myModalLabel">Are you sure ?</h4>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="document.forms['delete-form'].submit();">Delete</button>
+    {{-- Submit buttons --}}
+    <div class="submit">
+      {!! Form::submit('save', ['class' => 'btn btn-primary', 'name' => 'finish']) !!}
+    </div>
+    {!! Form::close() !!}
+    @if(isset($user->id))
+      {!! Form::model($user, ['route' => ['admin.users.destroy', $user->id], 'method' => 'post', 'class' => 'form-horizontal panel-footer', 'name' => 'delete-form']) !!}
+        {{ Form::hidden('_method', 'DELETE') }}
+        <a href="#" class="link" data-toggle="modal" data-target="#confirm-delete">delete</a>
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Are you sure ?</h4>
+              </div>
+              <div class="modal-btn">
+                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary btn-xs" onclick="document.forms['delete-form'].submit();">Delete</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    {{ Form::close() }}
-  @endif
+      {{ Form::close() }}
+    @endif
+  </div>
 @endsection
 
 @section('meta')
