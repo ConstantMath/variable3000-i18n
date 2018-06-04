@@ -22,7 +22,6 @@
         <li><a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank">{{ __('admin.preview') }}</a> {{ __('admin.on_website') }}</li>
       </ul>
     @endif
-  </div>
 @endsection
 
 @section('meta')

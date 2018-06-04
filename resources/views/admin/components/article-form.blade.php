@@ -8,8 +8,6 @@
     <span class="help-block">{{ $error }}</span>
 @endforeach
 
-{{-- Is published ? --}}
-
     {{-- tabs --}}
     <div class="panel-heading">
       @if(count(config('translatable.locales')) > 1 )
@@ -24,6 +22,7 @@
           {!! Form::text('created_at', null, ['class' => 'form-control']) !!}
         </div>
         @endif
+        {{-- Is published ? --}}
         <div class="is-published">
           <div class="checkbox">
             <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
