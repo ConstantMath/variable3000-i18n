@@ -4,6 +4,7 @@
       </a>
       <ul class="navbar__list navbar__list--left">
         @can('Admin articles')
+          <?php // TODO: Navigation hightlights ?>
         <li>{!! link_to_route('admin.articles.index', 'Articles') !!}</li>
         @endcan
         @can('Admin pages')
