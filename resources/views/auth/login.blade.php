@@ -4,15 +4,11 @@
 
 @section('content')
 <div class="form__container panel panel-default ">
-  <header class="login__header">
-    <h2 class="login__title">admin variable</h2>
-  </header>
   <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
     {{ csrf_field() }}
     <div class="form__content panel-body">
       <div class="login__body form__body">
         <div class="form-group">
-          <label for="email" class="control-label">E-Mail Address</label>
           <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus placeholder="Email">
         </div>
           @if ($errors->has('email'))
@@ -21,7 +17,6 @@
             </span>
           @endif
         <div class="form-group">
-          <label for="password">Password</label>
           <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
         </div>
           @if ($errors->has('password'))
@@ -31,7 +26,7 @@
           <label>
             <input type="checkbox" name="remember" checked > Remember Me
           </label>
-          <a class="" href="{{ route('password.request') }}">Forgot password ?</a>
+          <a class="link" href="{{ route('password.request') }}">Forgot password ?</a>
         </div>
       </div>
     </div>
