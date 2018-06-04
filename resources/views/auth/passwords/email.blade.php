@@ -8,15 +8,11 @@
     </div>
 @endif
 <div class="panel panel-default">
-  <header class="login__header">
-    <h2 class="login__title">Reset Password</h2>
-  </header>
   <form class="form-horizontal" role="form" method="POST" action="{{ route('password.email') }}">
       {{ csrf_field() }}
       <div class="form__content">
         <div class="form__body">
           <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-              <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
               <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="Email">
 
@@ -28,7 +24,7 @@
           </div>
         </div>
       </div>
-    <button type="submit" class="btn btn-invert">
+    <button type="submit" class="btn btn-primary">
         Send Password Reset Link
     </button>
   </form>

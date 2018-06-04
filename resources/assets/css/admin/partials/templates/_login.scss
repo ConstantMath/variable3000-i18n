@@ -8,9 +8,12 @@
     }
 }
 
-.login {
+.login, .reset_mail {
   .panel {
-    width:540px;
+    width:350px;
+    @include media("<sm") {
+      width:80%;
+    }
     position:absolute;
     top:50%;
     left:50%;
@@ -27,14 +30,13 @@
 
 .login, .reset_mail {
   .form-group {
-    margin-top: $spacing-sm;
-    @include media(">=sm") {
-      > input {
-        display:block;
-        padding: $spacing-xs $spacing-xxs;
-        width: 62%;
-        margin:0 auto;
-      }
+    margin-top: 0;
+    > input {
+      padding: $spacing-xs $spacing-xxs;
+      width: 100%;
+      margin:0 auto;
+      border-right: $border-width-md solid $blue !important;
+      border-left:$border-width-md solid $blue !important;
     }
   }
 }
