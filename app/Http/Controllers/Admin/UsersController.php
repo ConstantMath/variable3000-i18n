@@ -11,12 +11,14 @@ use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Support\Facades\Hash;
 //Importing laravel-permission models
 use Spatie\Permission\Models\Role;
+use DataTables;
 use Spatie\Permission\Models\Permission;
 
 class UsersController extends AdminController
 {
 
   public function __construct(){
+    $this->table_type = 'users';
     $this->middleware(['auth', 'permissions'])->except('index');
     // Construct admin controller
     parent::__construct();
@@ -34,7 +36,7 @@ class UsersController extends AdminController
       'page_class' => 'users-index',
       'page_title' => 'Users index',
       'page_id'    => 'users',
-      'page_type'  => 'users',
+      'table_type' => $this->table_type,
     );
     $users = User::all();
     return view('admin/templates/users-index', compact('users', 'data'));
@@ -81,6 +83,17 @@ class UsersController extends AdminController
     return redirect()->route('admin.users.index', $request->parent_id);
   }
 
+
+  /**
+   * Get articles for datatables (ajax)
+   *
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getDataTable(){
+    return \DataTables::of(User::get())
+                        ->make(true);
+  }
 
   /**
    * Display the specified resource.

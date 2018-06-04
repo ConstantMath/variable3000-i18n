@@ -5,25 +5,16 @@
 
 @section('content')
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <h3>Users</h3>
-      <a href="{{ route('admin.users.create') }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
-    </div>
-    <div class="panel-body table-responsive">
-      <table class="table">
-        <tbody>
-          @if($users) @foreach ($users as $user)
-          <tr>
-            <td>
-              <i class="fa fa-smile-o"></i>
-              {!! link_to_route('admin.users.edit', $user->name, $user->id, ['class' => '']) !!}
-            </td>
-            {{-- Retrieve array of roles associated to a user and convert to string --}}
-            <td>{{  $user->roles()->pluck('name')->implode(' ') }}</td>
-            <td class="attribute">{{ $user->email }}</td>
-          </tr>
-          @endforeach @endif
-        </tbody>
+    <div class="table-responsive">
+      <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
+
+      <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
       </table>
     </div>
   </div>
@@ -31,4 +22,38 @@
 
 @section('meta')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+@endsection
+
+
+@section('scripts')
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/rowreorder/1.2.3/js/dataTables.rowReorder.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var table = $('#datatable').DataTable({
+      responsive: true,
+      processing: true,
+      serverSide: true,
+      rowReorder: false,
+      colReorder: false,
+      dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
+      ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
+      language: {
+        "search": '',
+        searchPlaceholder: "Search",
+        "paginate": {
+          "previous": '&larr;',
+          "next": '&rarr;'
+        },
+      },
+      columns: [
+        {data: 'name', name: 'name', orderable: false, width: '60%'},
+        {data: 'email', name: 'email', searchable: false, orderable: false}
+      ]
+    });
+
+    $.fn.dataTable.ext.errMode = 'throw';
+
+});
+</script>
 @endsection
