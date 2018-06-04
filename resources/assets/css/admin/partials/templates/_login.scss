@@ -1,5 +1,6 @@
 .login .main-content,
-.reset_mail .main-content {
+.reset_mail .main-content,
+.reset_password .main-content {
     width: 50%;
     max-width: 1000px;
     min-height: calc(100vh - #{$spacing-sm});
@@ -8,7 +9,7 @@
     }
 }
 
-.login, .reset_mail {
+.login, .reset_mail, .reset_password {
   .panel {
     width:350px;
     @include media("<sm") {
@@ -28,7 +29,7 @@
   }
 }
 
-.login, .reset_mail {
+.login, .reset_mail, .reset_password {
   .form-group {
     margin-top: 0;
     > input {
