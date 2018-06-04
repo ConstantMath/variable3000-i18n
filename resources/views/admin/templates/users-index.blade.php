@@ -13,6 +13,7 @@
             <tr>
               <th>Name</th>
               <th>Email</th>
+              <th></th>
             </tr>
           </thead>
       </table>
@@ -48,7 +49,8 @@ $(document).ready(function() {
       },
       columns: [
         {data: 'name', name: 'name', orderable: false, width: '60%'},
-        {data: 'email', name: 'email', searchable: false, orderable: false}
+        {data: 'email', name: 'email', searchable: false, orderable: false},
+        {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
 

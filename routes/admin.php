@@ -1,8 +1,8 @@
 <?php
 // Admin specific routes
 Route::get('/', ['as' => 'root', 'uses' => 'ArticlesController@index']);
-Route::resource('users', 'UsersController');
 Route::get('users/getdata', 'UsersController@getDataTable')->name('users.getdata');
+Route::resource('users', 'UsersController');
 Route::resource('roles', 'RoleController');
 Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
