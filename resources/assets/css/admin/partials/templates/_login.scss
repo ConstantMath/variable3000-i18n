@@ -35,8 +35,12 @@
       padding: $spacing-xs $spacing-xxs;
       width: 100%;
       margin:0 auto;
+      border-bottom:none;
+      border-top: $border-width-sm solid $lightgray !important;
       border-right: $border-width-md solid $blue !important;
       border-left:$border-width-md solid $blue !important;
+    }
+    input + input {
     }
   }
 }

@@ -16,7 +16,7 @@
     border: 0;
     padding: 0;
   }
-  padding: $spacing-sm calc(#{$grid-gutter-width} / 2);
+  padding: calc(#{$spacing-sm} * 0.67) calc(#{$grid-gutter-width} / 2);
   &.btn-primary {
     background-color:$blue;
     color: $white;
