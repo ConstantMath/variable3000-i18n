@@ -11,9 +11,7 @@
     <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Updated</th>
+            <th>Name</th>
             <th></th>
           </tr>
         </thead>
@@ -35,7 +33,7 @@ $(document).ready(function() {
       responsive: true,
       processing: true,
       serverSide: true,
-      rowReorder: true,
+      rowReorder: false,
       colReorder: false,
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
@@ -48,9 +46,7 @@ $(document).ready(function() {
         },
       },
       columns: [
-        {data: 'order', name: 'order', searchable: false, width: '7%'},
         {data: 'name', name: 'name', orderable: false, width: '60%'},
-        {data: 'file_name', name: 'file_name', searchable: false, orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
