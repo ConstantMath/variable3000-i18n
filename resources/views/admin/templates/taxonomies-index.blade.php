@@ -5,38 +5,18 @@
 
 
 @section('content')
-  {{-- @if($taxonomies) @foreach ($taxonomies as $taxonomy)
-  <div class="panel panel-default panel-index">
-    <div class="panel-heading">
-      <h3>{{ $taxonomy->name }}</h3>
-      <a href="{{ route('admin.taxonomies.create', $taxonomy->id) }}" class="pull-right"><i class="fa fa-plus-circle"></i> Add</a>
-    </div>
-    <div class="panel-body table-responsive">
-      <table class="table">
-        <tbody id="index" class="sortable">
-          @if($taxonomy->children)
-            @foreach ($taxonomy->children as $child)
-          <tr url="{{ route('admin.taxonomies.reorder', $child->id) }}" parent_id="{{$child->parent_id}}">
-            <td><i class="fa fa-tag" aria-hidden="true"></i> {!! link_to_route('admin.taxonomies.edit', $child->name, $child->id, ['class' => '']) !!}</td>
-          </tr>
-          @endforeach @endif
-        </tbody>
-      </table>
-    </div>
-  </div> --}}
   @if($taxonomies) @foreach ($taxonomies as $taxonomy)
   <div class="panel panel-default">
     <div class="table-responsive">
       <a href="{{ route('admin.taxonomies.create', $taxonomy->id) }}" class="btn btn-primary btn-xs"> Add</a>
-
-      <table class="panel-body table table-hover table-bordered table-striped" style="width:100%">
-          <thead>
-            <tr>
-              <th>{{ $taxonomy->name }}</th>
-              <th>Updated</th>
-              <th></th>
-            </tr>
-          </thead>
+      <table class="panel-body table table-hover table-bordered table-striped" style="width:100%" id="datatable-{{$taxonomy->id}}">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>{{ $taxonomy->name }}</th>
+            <th></th>
+          </tr>
+        </thead>
       </table>
     </div>
   </div>
@@ -52,31 +32,65 @@
 <script src="https://cdn.datatables.net/rowreorder/1.2.3/js/dataTables.rowReorder.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-    var table = $('.table').DataTable({
-      responsive: true,
-      processing: true,
-      serverSide: true,
-      rowReorder: false,
-      colReorder: false,
-      "paging":   false,
-      dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
-      ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
-      language: {
-        "search": '',
-        searchPlaceholder: "Search",
-        "paginate": {
-          "previous": '&larr;',
-          "next": '&rarr;'
+    @if($taxonomies) @foreach ($taxonomies as $taxonomy)
+      var table_{{$taxonomy->id}} = $('#datatable-{{$taxonomy->id}}').DataTable({
+        'responsive': true,
+        'processing': true,
+        'serverSide': true,
+        'rowReorder': true,
+        'colReorder': false,
+        'paging':   false,
+        'dom'       : '<"panel-heading"f> <"panel-body"t> <"panel-footer">',
+        'ajax': {
+          'url': '{{ route('admin.' .$data['table_type']. '.getdata') }}',
+          'data': function ( d ) {
+              d.parent_id = {{$taxonomy->id}};
+          }
         },
-      },
-      columns: [
-        {data: 'name', name: 'name', orderable: false, width: '60%'},
-        {data: 'updated_at', name: 'title', searchable: false, orderable: false},
-        {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
-      ]
-    });
+        language: {
+          'search': '',
+          'searchPlaceholder': 'Search',
+          'paginate': {
+            'previous': '&larr;',
+            'next': '&rarr;'
+          },
+        },
+        columns: [
+          {data: 'order', name: 'order', searchable: false, width: '5%'},
+          {data: 'name', name: 'name', orderable: false, width: '80%'},
+          {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
+        ]
+      });
 
-    $.fn.dataTable.ext.errMode = 'throw';
+      $.fn.dataTable.ext.errMode = 'throw';
+
+      table_{{$taxonomy->id}}.on( 'row-reorder', function ( e, diff, edit ) {
+        var articlesArray = [];
+        for ( var i=0, ien=diff.length ; i<ien ; i++ ) {
+
+          var rowData = table_{{$taxonomy->id}}.row( diff[i].node ).data();
+          var newOrder = diff[i].newPosition;
+          articlesArray.push({
+            id: rowData.id,
+            position: newOrder
+          });
+        }
+        var jsonString = JSON.stringify(articlesArray);
+        $.ajax({
+          url     : '{{ route('admin.reorder', ['table_type' => $data['table_type']]) }}',
+          type    : 'POST',
+          data    : jsonString,
+          dataType: 'json',
+          success : function ( json ) {
+            $('#datatable-{{$taxonomy->id}}').DataTable().ajax.reload(); // refresh datatable
+              $.each(json, function (key, msg) {
+              // handle json response
+            });
+          }
+        });
+      });
+      $.fn.dataTable.ext.errMode = 'throw';
+    @endforeach @endif
 });
 </script>
 @endsection

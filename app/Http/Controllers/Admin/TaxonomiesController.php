@@ -26,7 +26,7 @@ class TaxonomiesController extends AdminController
   * @return \Illuminate\Http\Response
   */
 
-  public function index($parent_slug = null){
+  public function index(){
    $data = array(
      'page_class' => 'taxonomies-index',
      'page_title' => 'Taxonomies',
@@ -34,10 +34,6 @@ class TaxonomiesController extends AdminController
      'table_type' => $this->table_type,
    );
    $taxonomies = Taxonomy::where('parent_id', 0)->orderBy('order', 'asc')->get();
-   // Add children
-   foreach ($taxonomies as $t) {
-     $t->children = $t->children;
-   }
    return view('admin/templates/taxonomies-index', compact('taxonomies', 'data'));
   }
 
@@ -78,7 +74,8 @@ class TaxonomiesController extends AdminController
    */
 
   public function getDataTable(){
-    return \DataTables::of(Taxonomy::get())
+    $parent_id = (!empty($_GET['parent_id'])) ? $_GET['parent_id'] : 0;
+    return \DataTables::of(Taxonomy::where('parent_id', $parent_id)->get())
                         ->addColumn('action', function ($article) {
                           return '<a href="' . route('admin.taxonomies.edit', $article->id) . '" class="link">Edit</a>';
                         })
