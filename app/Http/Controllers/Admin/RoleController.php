@@ -11,6 +11,7 @@ use Session;
 class RoleController extends AdminController{
 
   public function __construct() {
+    $this->table_type = 'roles';
     $this->middleware(['auth', 'permissions'])->except('index');
   }
 
@@ -26,7 +27,7 @@ class RoleController extends AdminController{
       'page_title' => 'Roles index',
       'page_id'    => 'roles',
       'page_type'  => 'users',
-
+      'table_type' => $this->table_type,
     );
     $roles = Role::all();
     return view('admin.templates.roles-index', compact('roles', 'data'));
@@ -81,6 +82,21 @@ class RoleController extends AdminController{
       $role->givePermissionTo($p);
     }
     return redirect()->route('admin.roles.index')->with('created');
+  }
+
+
+  /**
+   * Get articles for datatables (ajax)
+   *
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getDataTable(){
+    return \DataTables::of(Role::get())
+                        ->addColumn('action', function ($article) {
+                          return '<a href="' . route('admin.roles.edit', $article->id) . '" class="link">Edit</a>';
+                        })
+                        ->make(true);
   }
 
   /**

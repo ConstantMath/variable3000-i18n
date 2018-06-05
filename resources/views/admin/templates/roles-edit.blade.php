@@ -9,13 +9,12 @@
   @else
     {!! Form::model($role, ['route' => ['admin.roles.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
   @endif
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-edit panel-edit--single panel-settings">
     <div class="panel-heading">
       Edit role
     </div>
+    <div id="validation"></div>
     <div class="panel-body">
-      <div class="col-sm-12">
-        <div id="validation"></div>
         <div class="form-group">
           {{ Form::label('name', 'Name') }}
           {{ Form::text('name', null, array('class' => 'form-control')) }}
@@ -30,16 +29,18 @@
           {!! $errors->first('permissions', '<span class="help-block">:message</span>') !!}
         </div>
         {{-- Submit buttons --}}
-        <div class="form-group submit">
-          {!! Form::submit('save', ['class' => 'btn btn-invert']) !!}
-        </div>
       </div>
+      <div class="submit">
+        {!! Form::submit('save', ['class' => 'btn btn-primary']) !!}
+      </div>
+      <div class="panel-footer">
+      {!! Form::close() !!}
+      @if(isset($role->id))
+          @include('admin.components.delete-form', ['model' => $role, 'model_name' => 'roles'])
+      @endif
     </div>
   </div>
-  {!! Form::close() !!}
-  @if(isset($role->id))
-    @include('admin.components.delete-form', ['model' => $role, 'model_name' => 'roles'])
-  @endif
+
 @endsection
 
 @section('meta')

@@ -3,7 +3,9 @@
 Route::get('/', ['as' => 'root', 'uses' => 'ArticlesController@index']);
 Route::get('users/getdata', 'UsersController@getDataTable')->name('users.getdata');
 Route::resource('users', 'UsersController');
+Route::get('roles/getdata', 'RoleController@getDataTable')->name('roles.getdata');
 Route::resource('roles', 'RoleController');
+Route::get('permissions/getdata', 'PermissionController@getDataTable')->name('permissions.getdata');
 Route::resource('permissions', 'PermissionController');
 Route::resource('roles', 'RoleController');
 Route::get('articles/getdata', 'ArticlesController@getDataTable')->name('articles.getdata');

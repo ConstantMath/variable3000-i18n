@@ -13,6 +13,7 @@ use Session;
 class PermissionController extends AdminController{
 
   public function __construct() {
+    $this->table_type = 'permissions';
     $this->middleware(['auth', 'permissions'])->except('index');
   }
 
@@ -28,6 +29,7 @@ class PermissionController extends AdminController{
       'page_title' => 'Permissions index',
       'page_id'    => 'permissions',
       'page_type'  => 'users',
+      'table_type' => $this->table_type,
     );
     $permissions = Permission::all(); //Get all permissions
     return view('admin.templates.permissions-index', compact('permissions', 'data'));
@@ -52,6 +54,19 @@ class PermissionController extends AdminController{
     return view('admin.templates.permissions-edit', compact('roles', 'permission', 'data'));
   }
 
+  /**
+   * Get articles for datatables (ajax)
+   *
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getDataTable(){
+    return \DataTables::of(Permission::get())
+                        ->addColumn('action', function ($article) {
+                          return '<a href="' . route('admin.permissions.edit', $article->id) . '" class="link">Edit</a>';
+                        })
+                        ->make(true);
+  }
 
   /**
   * Store a newly created resource in storage.

@@ -9,14 +9,12 @@
   @else
     {!! Form::model($permission, ['route' => ['admin.permissions.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
   @endif
-  <div class="panel panel-default">
+  <div class="panel panel-default panel-edit panel-edit--single panel-settings">
     <div class="panel-heading">
       Edit permission
     </div>
+    <div id="validation"></div>
     <div class="panel-body">
-      <div class="col-sm-12">
-        <div id="validation"></div>
-        {{-- Name --}}
         <div class="form-group">
            {{ Form::label('name', 'Name') }}
            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Name']) !!}
@@ -33,17 +31,16 @@
           </div>
         </div>
         @endif
-        {{-- Submit buttons --}}
-        <div class="form-group submit">
-          {!! Form::submit('save', ['class' => 'btn btn-invert']) !!}
-        </div>
       </div>
-    </div>
+      {{-- Submit buttons --}}
+        {!! Form::submit('save', ['class' => 'btn btn-primary']) !!}
+      <div class="panel-footer">
+        {!! Form::close() !!}
+        @if(isset($permission->id))
+          @include('admin.components.delete-form', ['model' => $permission, 'model_name' => 'permissions'])
+        @endif
+      </div>
   </div>
-  {!! Form::close() !!}
-  @if(isset($permission->id))
-    @include('admin.components.delete-form', ['model' => $permission, 'model_name' => 'permissions'])
-  @endif
 @endsection
 
 @section('meta')
