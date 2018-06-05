@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Intervention\Image\ImageManagerStatic as Image;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Illuminate\Support\Facades\Storage;
 use Config;
 
 class Media extends Model{
@@ -14,7 +17,7 @@ class Media extends Model{
   /**
    * Get all of the owning articletable models.
    */
-  
+
   public function articletable(){
     return $this->morphTo();
   }
@@ -77,7 +80,8 @@ class Media extends Model{
    */
 
   public static function deleteMediaFile($id){
-    $media   = Media::find($id);
+    $media = Media::find($id);
+    $media->delete();
     if($media){
       if(file_exists(public_path().'/medias/'.$media->name)) @unlink('medias/'.$media->name);
       $media->delete();

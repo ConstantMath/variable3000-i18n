@@ -73,7 +73,7 @@ class MediasController extends AdminController {
         $orig_name = pathinfo($file_name, PATHINFO_FILENAME);
         $extension = $file->getClientOriginalExtension();
         $name = str_slug($orig_name).'.'.$extension;
-        $media = $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection('une');
+        $media = $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection($request->collection_name);
 
         return response()->json([
           'success'          => true,
@@ -92,7 +92,9 @@ class MediasController extends AdminController {
   */
 
   public function destroy($id){
-    Media::deleteMediaFile($id);
+    // Media::deleteMediaFile($id);
+    $media = \App\Media::find($id)->delete();
+    $media->delete();
     return response()->json([
       'success'         => true,
     ]);
