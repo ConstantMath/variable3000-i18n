@@ -124,6 +124,7 @@ label {
   border: $border-width-sm solid $gray;
   padding: $spacing-xxs $spacing-xs;
   &:focus{
+    outline:none;
     border-color: $blue !important;
   }
 }
