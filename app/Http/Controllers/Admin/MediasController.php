@@ -16,8 +16,42 @@ class MediasController extends AdminController {
   use HasMediaTrait;
 
   public function __construct(){
+    $this->table_type = 'medias';
     $this->middleware(['auth', 'permissions'])->except('index');
   }
+
+
+    /**
+     * List all medias by parent
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function index(){
+      $data = array(
+        'page_class' => 'medias',
+        'page_title' => 'Medias',
+        'page_id'    => 'index-medias',
+        'table_type' => $this->table_type,
+      );
+      $medias = Media::all();
+      return view('admin/templates/medias-index', compact('medias', 'data'));
+    }
+
+
+    /**
+     * Get articles for datatables (ajax)
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function getDataTable(){
+      return \DataTables::of(Media::get())
+                          ->addColumn('action', function ($article) {
+                            return '<a href="' . route('admin.medias.edit', $article->id) . '" class="link">Edit</a>';
+                          })
+                          ->make(true);
+    }
 
 
   /**

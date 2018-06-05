@@ -29,6 +29,12 @@ class PermissionsMiddleware{
             abort('401');
           }
         }
+        // Medias
+        if ($request->is($locale_path.'admin/medias/*')) {
+          if (!Auth::user()->hasPermissionTo('Admin medias')) {
+            abort('401');
+          }
+        }
         // Taxonomies
         if ($request->is($locale_path.'admin/taxonomies/*')) {
           if (!Auth::user()->hasPermissionTo('Admin categories')) {

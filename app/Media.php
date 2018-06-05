@@ -7,14 +7,14 @@ use Intervention\Image\ImageManagerStatic as Image;
 use Config;
 
 class Media extends Model{
-  protected $table = 'medias';
+  protected $table = 'media';
   protected $fillable = ['name', 'alt', 'description', 'type', 'width', 'height'];
 
 
   /**
    * Get all of the owning articletable models.
    */
-  
+
   public function articletable(){
     return $this->morphTo();
   }

@@ -25,13 +25,18 @@
               Admin&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
             <ul class="js-dropdown-content" role="menu">
+              @can('Admin medias')
+              <li class="nav-item">
+                <?php $medias_active = (strpos($data['page_id'], 'medias') !== false) ? 'active' : ''; ?>
+                {!! link_to_route('admin.medias.index', 'Medias', '', ['class' => $medias_active] ) !!}
+              </li>
+              @endcan
               @can('Admin categories')
               <li class="nav-item">
                 <?php $categories_active = (strpos($data['page_id'], 'taxonomies') !== false) ? 'active' : ''; ?>
                 {!! link_to_route('admin.taxonomies.index', 'Categories', '', ['class' => $categories_active] ) !!}
               </li>
               @endcan
-
               @can('Admin users')
               <li class="nav-item">
                 <?php $users_active = (strpos($data['page_id'], 'users') !== false) ? 'active' : ''; ?>
