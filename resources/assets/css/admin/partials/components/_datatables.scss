@@ -28,7 +28,7 @@ body.dt-rowReorder-noOverflow {
 
 .table-reorderable {
   tbody {
-    tr td:first-of-type {
+    tr td:first-of-type:not(:only-child) { 
       position: relative;
       cursor:grab;
       &:hover:before{
