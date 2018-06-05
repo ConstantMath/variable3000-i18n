@@ -105,6 +105,8 @@ a {
 }
 
 label {
+  @extend %font-size-sm;
+  color: $gray;
   display:inline-block;
 }
 

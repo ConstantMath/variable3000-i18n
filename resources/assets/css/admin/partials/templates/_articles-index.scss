@@ -86,4 +86,7 @@
       }
     }
   }
+  .dataTables_info{
+    @extend %font-size-sm;
+  }
 }

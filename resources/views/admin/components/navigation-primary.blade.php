@@ -51,22 +51,18 @@
               {{ Auth::user()->name }}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
             <ul class="js-dropdown-content" role="menu">
-              <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+              <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+              {{-- lang --}}
+              @if(count(config('translatable.locales')) > 1 )
+                @foreach (config('translatable.locales') as $lang)
+                  @if (app()->getLocale() !=  $lang)
+                  <li class="lang__item"><a href="{{ route('lang.switch', $lang) }}" class="lang__link">{{ $lang }}</a></li>
+                   @endif
+                @endforeach
+              @endif
             </ul>
           </li>
-          {{-- lang dropdown --}}
-          @if(count(config('translatable.locales')) > 1 )
-          <li class="js-dropdown-toggle">
-            <a role="button">
-              {{app()->getLocale()}}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
-            </a>
-            <ul class="js-dropdown-content" role="menu">
-            @foreach (config('translatable.locales') as $lang)
-              <li class="lang__item @if (app()->getLocale() ==  $lang) active @endif"><a href="{{ route('lang.switch', $lang) }}" class="lang__link">{{ $lang }}</a></li>
-            @endforeach
-            </ul>
-          </li>
-          @endif
+
         @endif
       </ul>
     </div>

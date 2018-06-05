@@ -89,10 +89,7 @@
       }
     }
   }
-  &.navbar__list--right {
-    border-left: $border-width-md solid $lightgray;
-    padding-left: $spacing-sm;
-  }
+
   &, & li {
     flex-shrink: 0;
     list-style: none;

@@ -39,6 +39,21 @@ class TaxonomiesController extends AdminController
 
 
   /**
+   * Get articles for datatables (ajax)
+   *
+   * @return \Illuminate\Http\Response
+   */
+
+  public function getDataTable(){
+    $parent_id = (!empty($_GET['parent_id'])) ? $_GET['parent_id'] : 0;
+    return \DataTables::of(Taxonomy::where('parent_id', $parent_id)->get())
+                        ->addColumn('action', function ($article) {
+                          return '<a href="' . route('admin.taxonomies.edit', $article->id) . '" class="link">Edit</a>';
+                        })
+                        ->make(true);
+  }
+
+  /**
   * Show the form for creating a new resource.
   * @param  int  $parent_id     *
   * @return \Illuminate\Http\Response
@@ -65,21 +80,6 @@ class TaxonomiesController extends AdminController
 
   public function store(TaxonomyRequest $request){
     return $this->createObject(Taxonomy::class, $request);
-  }
-
-  /**
-   * Get articles for datatables (ajax)
-   *
-   * @return \Illuminate\Http\Response
-   */
-
-  public function getDataTable(){
-    $parent_id = (!empty($_GET['parent_id'])) ? $_GET['parent_id'] : 0;
-    return \DataTables::of(Taxonomy::where('parent_id', $parent_id)->get())
-                        ->addColumn('action', function ($article) {
-                          return '<a href="' . route('admin.taxonomies.edit', $article->id) . '" class="link">Edit</a>';
-                        })
-                        ->make(true);
   }
 
 
