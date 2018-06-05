@@ -27,6 +27,11 @@ class UsersTableSeeder extends Seeder
       ]);
 
       DB::table('permissions')->insert([
+        'name' => 'Admin medias',
+        'guard_name' => 'web',
+      ]);
+
+      DB::table('permissions')->insert([
         'name' => 'Admin categories',
         'guard_name' => 'web',
       ]);
@@ -59,6 +64,7 @@ class UsersTableSeeder extends Seeder
       $superadmin->givePermissionTo([
         'Admin articles',
         'Admin pages',
+        'Admin medias',
         'Admin categories',
         'Admin roles & permissions',
         'Admin settings',
@@ -74,6 +80,7 @@ class UsersTableSeeder extends Seeder
       $admin->givePermissionTo([
         'Admin articles',
         'Admin pages',
+        'Admin medias',
         'Admin categories',
         'Admin roles & permissions',
         'Admin settings',
@@ -88,6 +95,7 @@ class UsersTableSeeder extends Seeder
       $editor->givePermissionTo([
         'Admin articles',
         'Admin pages',
+        'Admin medias',
         'Admin categories',
       ]);
 

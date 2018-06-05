@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Config;
 
 class Media extends Model{
-  protected $table = 'medias';
+  protected $table = 'media';
   protected $fillable = ['name', 'alt', 'description', 'type', 'width', 'height'];
 
 

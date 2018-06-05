@@ -6,38 +6,38 @@ table.dt-rowReorder-float {
     outline-offset: -1px;
     z-index: 2001;
     max-height:32px;
-    cursor:grabbing;
+    td {
+      cursor:grabbing !important;
+    }
 }
 
 tr.dt-rowReorder-moving {
     outline: 1px solid $blue;
     outline-offset: -1px;
-    height:32px;
+    max-height:32px;
 }
 
 body.dt-rowReorder-noOverflow {
     overflow-x: hidden
 }
 
-table.dataTable td.reorder {
-    text-align: center;
-    cursor: move;
-}
+// table.dataTable td.reorder {
+//     text-align: center;
+//     cursor: move;
+// }
 
 .table-reorderable {
   tbody {
-    tr td:first-of-type {
+    tr td:first-of-type:not(:only-child) { 
       position: relative;
-      &:hover{
-        cursor:grab;
-        &:before{
-          content:'\f0dc';
-          font-family: 'FontAwesome';
-          color:$gray;
-          position: absolute;
-          left: calc( -#{$grid-gutter-width} / 2);
-          top:$spacing-xs;
-        }
+      cursor:grab;
+      &:hover:before{
+        content:'\f0dc';
+        font-family: 'FontAwesome';
+        color:$gray;
+        position: absolute;
+        left: calc( -#{$grid-gutter-width} / 2);
+        top:$spacing-xs;
       }
     }
   }
