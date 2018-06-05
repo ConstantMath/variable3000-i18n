@@ -28,7 +28,7 @@
         padding-top: 0.42rem;
         padding-bottom: 0.42rem;
         width: 100%;
-        border-bottom: 1px solid $lightgray; 
+        border-bottom: 1px solid $lightgray;
       }
     }
   }
@@ -47,11 +47,6 @@
         padding: $spacing-xs 0;
         &:first-child {
           padding-left :calc(#{$grid-gutter-width} / 2);
-          @include media("<sm") {
-            &:after{
-              content:'.';
-            }
-          }
         }
         &:last-child {
           text-align:right;
