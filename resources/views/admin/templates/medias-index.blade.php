@@ -8,11 +8,12 @@
   <div class="table-responsive">
     <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
 
-    <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
+    <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
         <thead>
           <tr>
             <th></th>
             <th>Name</th>
+            <th>Dimensions</th>
             <th></th>
           </tr>
         </thead>
@@ -48,9 +49,10 @@ $(document).ready(function() {
       },
       columns: [
         {data: 'img', render: function ( data, type, row, meta ) {
-          return '<img height="75" width="75" src="'+ data +'">';
-        }, width: '130'},
+          return '<img src="'+ data +'">';
+        }, width: '10%'},
         {data: 'name', name: 'name', orderable: false, width: '60%'},
+        {data: 'custom_properties', render: function ( data, type, row, meta ) { return data.width +' &times; '+ data.height;}, name: 'custom_properties', orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });

@@ -48,7 +48,6 @@ class MediasController extends AdminController {
     public function getDataTable(){
       return \DataTables::of(Media::get())
                           ->addColumn('img', function ($article) {
-                            // return $article->getFullUrl();
                             return '/imagecache/thumb/' . $article->id . '/' . $article->file_name;
                           })
                           ->addColumn('action', function ($article) {

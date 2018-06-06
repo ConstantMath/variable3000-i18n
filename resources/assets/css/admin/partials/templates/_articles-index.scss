@@ -52,6 +52,16 @@
           text-align:right;
           padding-right :calc(#{$grid-gutter-width} / 2);
         }
+        img {
+          width:75px;
+          max-width: 100%;
+          min-width: 35px;
+          height:75px;
+          @include media("<sm") {
+            height:35px;
+          }
+          object-fit: contain;
+        }
       }
       th {
         font-weight: bold;
