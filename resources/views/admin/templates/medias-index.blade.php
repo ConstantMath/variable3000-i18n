@@ -49,10 +49,18 @@ $(document).ready(function() {
       },
       columns: [
         {data: 'img', render: function ( data, type, row, meta ) {
-          return '<img src="'+ data +'">';
+          if(row.mime_type.includes("image", 0)){
+            return '<img src="'+ data +'">';
+          }else if(row.mime_type.includes("pdf", 0)){
+            return '<div class="media__preview txt"><span>PDF</span></div>';
+          }else if(row.mime_type.includes("video", 0)){
+            return '<div class="media__preview txt"><span>VIDEO</span></div>';
+          }else{
+            return '<div class="media__preview txt"><span>FILE</span></div>';
+          }
         }, width: '10%'},
         {data: 'name', name: 'name', orderable: false, width: '60%'},
-        {data: 'custom_properties', render: function ( data, type, row, meta ) { return data.width +' &times; '+ data.height;}, name: 'custom_properties', orderable: false},
+        {data: 'custom_properties', render: function ( data, type, row, meta ) { if(data.width){return data.width +' &times; '+ data.height}else{return null}}, name: 'custom_properties', orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
