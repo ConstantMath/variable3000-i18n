@@ -3,7 +3,7 @@
   .btn-xs {
     position:absolute;
     right:0;
-    top:0.6rem;
+    top:$spacing-xs;
   }
   .panel-body {
     padding-top: 0;
@@ -25,10 +25,9 @@
       input {
         @extend .form-control;
         border: 0;
-        padding-top: 0.42rem;
-        padding-bottom: 0.42rem;
+        padding-top: $spacing-xxs;
+        padding-bottom: $spacing-xxs;
         width: 100%;
-        border-bottom: 1px solid $lightgray;
       }
     }
   }

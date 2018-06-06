@@ -20,7 +20,7 @@
           <div class="modal-media">
             <img src="" id="pic">
             <a href="" id="file" target="_blank"></a>
-            <video width="320" height="240" controls id="vid">
+            <video controls id="vid">
               <source src="" type="video/mp4">
             </video>
           </div>
@@ -32,6 +32,15 @@
             <div class="form-group">
               <label for="description">Description</label>
               <textarea class="form-control" placeholder="Intro" rows="5" name="description" id="input_media_description"></textarea>
+            </div>
+
+            <div class="form-group">
+              {{-- [2] = parent_id --}}
+              {!! Form::select('taxonomies[2][]', $article->taxonomiesDropdown(2), $article->tags, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
+            </div>
+            <div class="form-group">
+              {{-- [1] = parent_id --}}
+              {!! Form::select('taxonomies[1][]', $article->taxonomiesDropdown(1,1), $article->category, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => '']) !!}
             </div>
           </div>
         </div>
