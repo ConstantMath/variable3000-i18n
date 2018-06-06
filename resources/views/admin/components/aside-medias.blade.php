@@ -144,7 +144,7 @@ $collection_name = 'gallery';
           li = li + '<div class="media__preview" style="background-image:url(\'/imagecache/thumb/' + value.id + '/' + value.file_name + '\')"></div>';
         }else if(value.mime_type.includes("pdf", 0)){
           li = li + '<div class="media__preview txt"><span>PDF</span></div>';
-        }else if(value.mime_type.includes("mp4", 0)){
+        }else if(value.mime_type.includes("video", 0)){
           li = li + '<div class="media__preview txt"><span>VIDEO</span></div>';
         }else{
           li = li + '<div class="media__preview txt"><span>FILE</span></div>';
@@ -190,6 +190,7 @@ $collection_name = 'gallery';
     var media_table_type  = button.data('media-table-type');
     var modal             = $('#modal-media-edit');
     var pic_container     = modal.find('#pic');
+    var file_container    = modal.find('#file');
     var vid_container     = modal.find('#vid');
     var vid_source        = modal.find('#vid > source');
     modal.find('#input_media_id').val(media_id);
@@ -197,14 +198,19 @@ $collection_name = 'gallery';
     modal.find('#input_media_description').val(media_description);
     pic_container.hide();
     vid_container.hide();
+    file_container.hide();
 
     if(media_mime_type.includes("image", 0)){
       pic_container.show();
       pic_container.attr('src', '/imagecache/large/'  + media_id + '/' + media_name);
-    }else{
+    }else if(media_mime_type.includes("video", 0)){
       vid_container.show();
-      vid_source.attr('src', '/medias/' + media_name);
+      vid_source.attr('src', '/storage/' + media_id + '/' + media_name);
       vid_container.load();
+    }else{
+      file_container.show();
+      file_container.attr('href', '/storage/' + media_id + '/' + media_name);
+      file_container.text('View file');
     }
     $("#modalButton").off('click');
   });
