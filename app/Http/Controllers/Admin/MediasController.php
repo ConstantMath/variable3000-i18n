@@ -10,6 +10,7 @@ use App\DB;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Admin\MediaRequest;
 
 class MediasController extends AdminController {
 
@@ -18,6 +19,7 @@ class MediasController extends AdminController {
   public function __construct(){
     $this->table_type = 'medias';
     $this->middleware(['auth', 'permissions'])->except('index');
+    parent::__construct();
   }
 
 
@@ -54,6 +56,67 @@ class MediasController extends AdminController {
                             return '<a href="' . route('admin.medias.edit', $article->id) . '" class="link">Edit</a>';
                           })
                           ->make(true);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+
+    public function edit($id){
+      $article = Media::findOrFail($id);
+      $data = array(
+        'page_class' => 'media',
+        'page_title' => 'Media edit',
+        'page_id'    => 'index-',
+      );
+    	return view('admin/templates/medias-edit',  compact('article', 'data'));
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @param  string  $parent_slug
+     * @return \Illuminate\Http\Response
+     */
+
+    public function create($parent_id = 0){
+      $data = array(
+        'page_class' => 'media create',
+        'page_title' => 'Media create',
+        'page_id'    => 'index-'.$parent_id,
+      );
+      $article = new Media;
+      return view('admin.templates.medias-edit', compact('article', 'data'));
+    }
+
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     */
+
+    public function update(Media $media, MediaRequest $request){
+      // Save article
+      return $this->saveObject($media, $request);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+    public function store(MediaRequest $request){
+      // Create article
+      return $this->createObject(Media::class, $request, 'redirect');
     }
 
 
@@ -122,8 +185,21 @@ class MediasController extends AdminController {
    }
 
 
+
+    /**
+    * Remove the specified resource from storage.
+    *
+    * @param  int  $id
+    * @return \Illuminate\Http\Response
+    */
+
+    public function destroy(Media $media){
+     return $this->destroyObject($media);
+    }
+
+
    /**
-   * Destroy
+   * Quick Destroy (no form)
    *
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
@@ -228,7 +304,7 @@ class MediasController extends AdminController {
    * @return \Illuminate\Http\Response
    */
 
-   public function update(Request $request, $mediatable_type){
+   public function ajaxUpdate(Request $request, $mediatable_type){
      $id = $request->media_id;
      $media = Media::findOrFail($id);
      $file = $request->file('background_image_file');
