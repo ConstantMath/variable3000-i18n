@@ -76,7 +76,6 @@ $collection_name = 'gallery';
           success: function(response){
             if(response.success == true){
               getMedias(media_collection_name);
-              console.log('ok');
             }
           }
         });
