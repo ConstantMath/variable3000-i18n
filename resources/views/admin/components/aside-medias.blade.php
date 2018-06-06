@@ -67,6 +67,7 @@ $collection_name = 'gallery';
     $('.media-panel').on('click', '.link--delete', function(e) {
       e.preventDefault();
       var url = $(this).attr('href');
+      var media_collection_name = $(this).attr('data-media-collection-name');
       if (url) {
         jQuery.ajax({
           url: url,

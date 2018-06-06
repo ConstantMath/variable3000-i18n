@@ -122,19 +122,20 @@ class MediasController extends AdminController {
    }
 
 
-  /**
-  * Destroy
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @return \Illuminate\Http\Response
-  */
+   /**
+   * Destroy
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
 
-  public function destroy($id){
-    Media::deleteMediaFile($id);
-    return response()->json([
-      'success'         => true,
-    ]);
-  }
+   public function destroy($id){
+     // Media::deleteMediaFile($id);
+     $media = Media::find($id)->delete();
+     return response()->json([
+       'success'         => true,
+     ]);
+   }
 
 
   /**
