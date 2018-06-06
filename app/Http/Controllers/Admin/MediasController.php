@@ -256,14 +256,14 @@ class MediasController extends AdminController {
    * @return \Illuminate\Http\Response
    */
 
-  public function getFromArray(Request $request){
-    $medias_array = explode( ',', $request->medias[0]);
-    $medias = Media::whereIn('id', $medias_array)->get();
-    return response()->json([
-      'success' => true,
-      'medias' => $medias,
-      'medias_array' => $medias_array,
-    ]);
-  }
+  // public function getFromArray(Request $request){
+  //   $medias_array = explode( ',', $request->medias[0]);
+  //   $medias = Media::whereIn('id', $medias_array)->get();
+  //   return response()->json([
+  //     'success' => true,
+  //     'medias' => $medias,
+  //     'medias_array' => $medias_array,
+  //   ]);
+  // }
 
 }

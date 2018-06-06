@@ -23,14 +23,14 @@ Route::get('taxonomies/create/{parent_id}', 'TaxonomiesController@create')->name
 Route::post('taxonomies/reorder/{id}', 'TaxonomiesController@reorder')->name('taxonomies.reorder');
 Route::post('{table_type}/reorder', 'AdminController@orderObject')->name('reorder');
 // Medias
+Route::resource('medias', 'MediasController');
 Route::get('medias/getdata', 'MediasController@getDataTable')->name('medias.getdata');
 Route::resource('medias', 'MediasController');
 Route::get('mediasArticle/{model_type}/{article_id}/{collection_name}', 'MediasController@mediasArticle')->name('medias.article');
 Route::post('medias/storeandlink/{mediatable_type}/{article_id?}', 'MediasController@storeAndLink')->name('medias.storeandlink');
 Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'MediasController@reorder')->name('medias.reorder');
-Route::get('medias/destroy/{id}', 'MediasController@destroy')->name('medias.destroy');
 //Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
-Route::post('medias/get', 'MediasController@getFromArray');
+// Route::post('medias/get', 'MediasController@getFromArray');
 Route::post('medias/update/{mediatable_type}', 'MediasController@update')->name('medias.update');
 Route::post('fileupload', 'MediasController@fileUpload')->name('fileupload');
 // Datatables
