@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       {!! Form::model($article,
-        ['route' => ['admin.medias.update', $article->getTable()],
+        ['route' => ['admin.medias.ajaxupdate', $article->getTable()],
         'method' => 'post',
         'class' => 'form-horizontal media-edit-form',
         'name' => 'media-edit-form',

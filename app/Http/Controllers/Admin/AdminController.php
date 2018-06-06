@@ -59,11 +59,14 @@ class AdminController extends Controller{
       $this->manageTaxonomies($taxonomies, $request, $collection->id, $class);
     endif;
     // Do update
+    //       dd($request['finish']);
+    $finish = $request['finish'];
+    $request->offsetUnset('finish');
     $collection->update($request->all());
     // Redirect
     session()->flash('flash_message', 'Updated');
-    if(isset($request['finish'])){
-      return redirect()->route('admin.' . snake_case($this->model) . '.index', $request->parent_id);
+    if(!empty($finish)){
+      return redirect()->route('admin.' . snake_case($this->model) . '.index');
     }else{
       return redirect()->route('admin.' . snake_case($this->model) . '.edit', $request->id);
     }
