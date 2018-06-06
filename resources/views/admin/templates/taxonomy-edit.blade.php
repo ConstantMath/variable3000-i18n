@@ -12,12 +12,11 @@
   {!! Form::hidden('parent_id', $taxonomy->parent->id) !!}
   {!! Form::hidden('order', (!empty($taxonomy->order))? $taxonomy->order : 0) !!}
 
-  <div class="panel panel-default panel-taxonomy">
+  <div class="panel panel-edit panel-edit--single panel-default">
     <div class="panel-heading">
       {{ $taxonomy->parent->name }}
     </div>
     <div class="panel-body">
-      <div class="col-sm-12">
         {{-- Validation errors --}}
         @foreach ($errors->all() as $error)
           <span class="help-block">{{ $error }}</span>
@@ -36,16 +35,18 @@
         </div>
         @endforeach
         {{-- Submit buttons --}}
-        <div class="form-group submit">
-          {!! Form::submit('save', ['class' => 'btn btn-invert', 'name' => 'finish']) !!}
-        </div>
-      </div>
+
+    </div>
+    <div class="submit">
+      {!! Form::submit('save', ['class' => 'btn btn-primary', 'name' => 'finish']) !!}
+    </div>
+    {!! Form::close() !!}
+    <div class="panel-footer">
+      @if(isset($taxonomy->id))
+        @include('admin.components.delete-form', ['model' => $taxonomy, 'model_name' => 'taxonomies'])
+      @endif
     </div>
   </div>
-  {!! Form::close() !!}
-  @if(isset($taxonomy->id))
-    @include('admin.components.delete-form', ['model' => $taxonomy, 'model_name' => 'taxonomies'])
-  @endif
 @endsection
 
 @section('meta')
