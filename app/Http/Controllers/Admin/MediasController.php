@@ -95,10 +95,11 @@ class MediasController extends AdminController {
      // Validator test
      if ($validator->fails()) {
        return response()->json([
-         'status' => 'error',
-         'error'    =>  'Error while uploading file, please check file format and size.',
-         'type'             => $request->input('type'),
-         'article_id'       => $article_id,
+         'status'      => 'error',
+         // TODO: Trad
+         'error'       =>  'Error while uploading file, please check file format and size.',
+         'collection'  => $request->collection_name,
+         'article_id'  => $article_id,
        ]);
      }else{
        $class = $this->getClass($mediatable_type);

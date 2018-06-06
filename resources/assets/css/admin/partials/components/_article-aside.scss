@@ -63,11 +63,13 @@
     background-size: contain;
     width:150px;
     display: flex;
+    &.txt{
+      background-color: $lightyellow;
+    }
     span {
       @extend %font-size-lg;
       margin: auto;
       text-transform: uppercase;
-      font-weight: 600;
       color:$gray;
     }
   }
