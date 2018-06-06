@@ -13,6 +13,7 @@
           <tr>
             <th></th>
             <th>Name</th>
+            <th>Dimensions</th>
             <th></th>
           </tr>
         </thead>
@@ -51,6 +52,9 @@ $(document).ready(function() {
           return '<img height="75" width="75" src="'+ data +'">';
         }, width: '130'},
         {data: 'name', name: 'name', orderable: false, width: '60%'},
+        {data: 'dimensions', render: function ( data, type, row, meta ) {
+          return data.width +' &times; '+ data.height;
+        }, name: 'dimensions', orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
