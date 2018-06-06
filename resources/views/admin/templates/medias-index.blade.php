@@ -11,6 +11,7 @@
     <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th></th>
           </tr>
@@ -46,6 +47,9 @@ $(document).ready(function() {
         },
       },
       columns: [
+        {data: 'img', render: function ( data, type, row, meta ) {
+          return '<img height="75" width="75" src="'+ data +'">';
+        }, width: '130'},
         {data: 'name', name: 'name', orderable: false, width: '60%'},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
