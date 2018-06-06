@@ -22,6 +22,7 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     <ul class="list-group sortable media-list">
     </ul>
     <i class="fa fa-ellipsis-h blink"></i>
+    <?php // TODO: position du message (dans le header fantom ?) ?>
     <span class="message" class="hidden"></span>
   </div>
   <div class="panel-action">

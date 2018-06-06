@@ -86,54 +86,56 @@ class MediasController extends AdminController {
    * @return JSON\Response
    */
 
-  public function storeAndLink(Request $request, $mediatable_type, $article_id){
-    // Validator conditions
-    $validator = Validator::make($request->all(), [
-      'image' => 'required|mimes:jpeg,jpg,png,gif,pdf,mp4|max:3000',
-    ]);
-    // Validator test
-    if ($validator->fails()) {
-      return response()->json([
-        'status' => 'error',
-        'error'    =>  'Error while uploading file, please check file format and size.',
-        'type'             => $request->input('type'),
-        'article_id'       => $article_id,
-      ]);
-    }else{
-      $class = $this->getClass($mediatable_type);
-      $article = $class::findOrFail($article_id);
-      // Champs requests
-      $file = $request->file('image');
-      if($file && !empty($article_id) && $article_id != 'null'){
-        list($width, $height) = getimagesize($file);
-        $file_name = $file->getClientOriginalName();
-        $orig_name = pathinfo($file_name, PATHINFO_FILENAME);
-        $extension = $file->getClientOriginalExtension();
-        $name = str_slug($orig_name).'.'.$extension;
-        $media = $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection('une');
+   public function storeAndLink(Request $request, $mediatable_type, $article_id){
+     // Validator conditions
+     $validator = Validator::make($request->all(), [
+       'image' => 'required|mimes:jpeg,jpg,png,gif,pdf,mp4|max:3000',
+     ]);
+     // Validator test
+     if ($validator->fails()) {
+       return response()->json([
+         'status'      => 'error',
+         // TODO: Trad
+         'error'       =>  'Error while uploading file, please check file format and size.',
+         'collection'  => $request->collection_name,
+         'article_id'  => $article_id,
+       ]);
+     }else{
+       $class = $this->getClass($mediatable_type);
+       $article = $class::findOrFail($article_id);
+       // Champs requests
+       $file = $request->file('image');
+       if($file && !empty($article_id) && $article_id != 'null'){
+         list($width, $height) = getimagesize($file);
+         $file_name = $file->getClientOriginalName();
+         $orig_name = pathinfo($file_name, PATHINFO_FILENAME);
+         $extension = $file->getClientOriginalExtension();
+         $name = str_slug($orig_name).'.'.$extension;
+         $media = $article->addMediaFromRequest('image')->usingFileName($name)->withCustomProperties(['width' => $width, 'height' => $height])->toMediaCollection($request->collection_name);
 
-        return response()->json([
-          'success'          => true,
-          'media'            => $media,
-        ]);
-      }
-    }
-  }
+         return response()->json([
+           'success'          => true,
+           'media'            => $media,
+         ]);
+       }
+     }
+   }
 
 
-  /**
-  * Destroy
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @return \Illuminate\Http\Response
-  */
+   /**
+   * Destroy
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
 
-  public function destroy($id){
-    Media::deleteMediaFile($id);
-    return response()->json([
-      'success'         => true,
-    ]);
-  }
+   public function destroy($id){
+     // Media::deleteMediaFile($id);
+     $media = Media::find($id)->delete();
+     return response()->json([
+       'success'         => true,
+     ]);
+   }
 
 
   /**

@@ -19,6 +19,7 @@
         <div class="modal-body">
           <div class="modal-media">
             <img src="" id="pic">
+            <a href="" id="file" target="_blank"></a>
             <video width="320" height="240" controls id="vid">
               <source src="" type="video/mp4">
             </video>
