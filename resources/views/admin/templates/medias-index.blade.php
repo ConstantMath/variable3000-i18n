@@ -6,7 +6,7 @@
 @section('content')
 <div class="panel panel-default">
   <div class="table-responsive">
-    <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
+    <a href="{{ route('admin.medias.create') }}" class="btn btn-primary btn-xs"> Add</a>
 
     <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
         <thead>
