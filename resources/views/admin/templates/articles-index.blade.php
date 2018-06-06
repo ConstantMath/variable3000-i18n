@@ -49,7 +49,13 @@ $(document).ready(function() {
       },
       columns: [
         {data: 'order', name: 'order', searchable: false, width: '7%'},
-        {data: 'title', name: 'title', orderable: false, width: '60%'},
+        {data: 'title', render: function ( data, type, row, meta ) {
+          if(row.published == 1){
+            return '<i class="fa fa-circle icon-published"></i>' + data;
+          }else {
+            return '<i class="fa fa-circle-o icon-published"></i>' + data;
+          }
+        }, name: 'title', orderable: false, width: '60%'},
         {data: 'updated_at', name: 'title', searchable: false, orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]

@@ -95,3 +95,10 @@
     @extend %font-size-sm;
   }
 }
+
+.icon-published {
+  font-size: $font-size-xs;
+  vertical-align: middle;
+  margin-right: $spacing-xxs;
+  color: $blue;
+}

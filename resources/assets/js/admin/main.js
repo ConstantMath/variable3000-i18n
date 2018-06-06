@@ -28,12 +28,6 @@ $(document).ready(function() {
   }
 
 
-  // ----- Display created at ----- //
-  $('.tip.created_at').on('click',function(){
-    $(this).addClass('show');
-  });
-
-
   // ----- Color picker ----- //
   if ( $('.sortable').length ){
     $('.color-picker').colorpicker({ /*options...*/ });
