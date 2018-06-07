@@ -24,7 +24,6 @@
     "gulp-beautify": "^2.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.1.7",
-    "gulp-livereload": "^3.8.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-shell": "^0.6.3",

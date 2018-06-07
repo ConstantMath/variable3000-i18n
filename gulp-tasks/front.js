@@ -22,7 +22,7 @@ gulp.task('serve', ['front-sass'], function() {
     port: 8080,
     open: false
   });
-  gulp.watch("resources/assets/front/js/**/*.js", ['js-watch']);
+  gulp.watch("resources/assets/front/js/**/*.js", ['front-js-watch']);
   gulp.watch("resources/assets/front/css/**/*.scss", ['front-sass']);
   gulp.watch("resources/patternlab/**/*.mustache").on('change', browserSync.reload);
 });
@@ -74,7 +74,7 @@ gulp.task('front-js', function () {
 });
 
 // reloading browsers
-gulp.task('js-watch', ['front-js'], function (done) {
+gulp.task('front-js-watch', ['front-js'], function (done) {
   browserSync.reload();
   done();
 });
