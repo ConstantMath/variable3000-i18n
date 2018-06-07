@@ -11,9 +11,9 @@
     <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Updated</th>
+            <th class="is-published"></th>
+            <th class="main-column">Title</th>
+            <th class="hidden-small">Updated</th>
             <th></th>
           </tr>
         </thead>
@@ -33,6 +33,7 @@
 $(document).ready(function() {
     var table = $('#datatable').DataTable({
       responsive: true,
+      autoWidth: false,
       processing: true,
       serverSide: true,
       rowReorder: true,
@@ -48,15 +49,19 @@ $(document).ready(function() {
         },
       },
       columns: [
-        {data: 'order', name: 'order', searchable: false, width: '7%'},
-        {data: 'title', render: function ( data, type, row, meta ) {
+        {data: 'order', render: function ( data, type, row, meta ) {
           if(row.published == 1){
-            return '<i class="fa fa-circle icon-published"></i>' + data;
+            return '<i class="fa fa-circle icon-published"></i>';
           }else {
-            return '<i class="fa fa-circle-o icon-published"></i>' + data;
+            return '<i class="fa fa-circle-o icon-published"></i>';
           }
-        }, name: 'title', orderable: false, width: '60%'},
-        {data: 'updated_at', name: 'title', searchable: false, orderable: false},
+        }, name: 'order', searchable: false, class: 'is-published'},
+        {data: 'title', render: function ( data, type, row, meta ) {
+          return '<div class="text-content">'+ data + '</div>';
+        }, name: 'title', orderable: false, class: 'main-column'},
+        {data: 'updated_at', render: function ( data, type, row, meta ) {
+          return '<div class="text-content">'+ data + '</div>';
+        }, name: 'updated_at', searchable: false, orderable: false, class: 'hidden-small'},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });

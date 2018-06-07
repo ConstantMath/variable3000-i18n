@@ -1,0 +1,32 @@
+.table {
+  tr {
+    th,
+    td {
+      &.media-preview {
+        width:100px;
+        padding-right: 0;
+        & > div,
+        img {
+          width:75px;
+          max-width: 100%;
+          min-width: 35px;
+          height:75px;
+          object-fit: contain;
+          @include media("<sm") {
+            height:35px;
+          }
+        }
+        & > div {
+          background-color: $lightyellow;
+          position: relative;
+          span {
+            position: absolute;
+            left:50%;
+            top:50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
+  }
+}

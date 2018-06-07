@@ -11,9 +11,9 @@
     <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
         <thead>
           <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Dimensions</th>
+            <th class="media-preview"></th>
+            <th class="main-column">Name</th>
+            <th class="hidden-small">Dimensions</th>
             <th></th>
           </tr>
         </thead>
@@ -33,6 +33,7 @@
 $(document).ready(function() {
     var table = $('#datatable').DataTable({
       responsive: true,
+      autoWidth: false,
       processing: true,
       serverSide: true,
       rowReorder: false,
@@ -52,15 +53,17 @@ $(document).ready(function() {
           if(row.mime_type.includes("image", 0)){
             return '<img src="'+ data +'">';
           }else if(row.mime_type.includes("pdf", 0)){
-            return '<div class="media__preview txt"><span>PDF</span></div>';
+            return '<div><span>PDF</span></div>';
           }else if(row.mime_type.includes("video", 0)){
-            return '<div class="media__preview txt"><span>VIDEO</span></div>';
+            return '<div><span>VIDEO</span></div>';
           }else{
-            return '<div class="media__preview txt"><span>FILE</span></div>';
+            return '<div><span>FILE</span></div>';
           }
-        }, width: '10%'},
-        {data: 'name', name: 'name', orderable: false, width: '60%'},
-        {data: 'custom_properties', render: function ( data, type, row, meta ) { if(data.width){return data.width +' &times; '+ data.height}else{return null}}, name: 'custom_properties', orderable: false},
+        }, class: 'media-preview'},
+        {data: 'name', render: function ( data, type, row, meta ) {
+          return '<div class="text-content">'+ data + '</div>';
+        }, name: 'name', orderable: false, class: 'main-column'},
+        {data: 'custom_properties', render: function ( data, type, row, meta ) { if(data.width){return data.width +' &times; '+ data.height}else{return null}}, name: 'custom_properties', orderable: false, class: 'hidden-small'},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });

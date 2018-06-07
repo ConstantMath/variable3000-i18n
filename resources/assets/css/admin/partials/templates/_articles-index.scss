@@ -43,23 +43,33 @@
       position:relative;
       th,
       td {
-        padding: $spacing-xs 0;
+        padding: $spacing-xs calc(#{$grid-gutter-width} / 2);
+        max-width: 20vw;
+        &.main-column{
+          width:60%;
+          max-width: 50vw;
+        }
+        .text-content{
+          width:100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        &.is-published {
+          width:0;
+          padding-left:0;
+          text-align: center;
+          & + td,
+          & + th {
+            padding-left: 0;
+          }
+        }
         &:first-child {
           padding-left :calc(#{$grid-gutter-width} / 2);
         }
         &:last-child {
           text-align:right;
           padding-right :calc(#{$grid-gutter-width} / 2);
-        }
-        img {
-          width:75px;
-          max-width: 100%;
-          min-width: 35px;
-          height:75px;
-          @include media("<sm") {
-            height:35px;
-          }
-          object-fit: contain;
         }
       }
       th {
@@ -95,6 +105,8 @@
     @extend %font-size-sm;
   }
 }
+
+
 
 .icon-published {
   font-size: $font-size-xs;

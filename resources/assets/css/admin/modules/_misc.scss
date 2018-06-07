@@ -8,7 +8,7 @@
 }
 
 .hidden-small {
-  @include media("<md") {
+  @include media("<sm") {
     display: none !important;
   }
 }

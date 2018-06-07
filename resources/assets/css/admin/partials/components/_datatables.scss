@@ -9,6 +9,12 @@ table.dt-rowReorder-float {
     td {
       cursor:grabbing !important;
     }
+    .text-content{
+      width:100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
 }
 
 tr.dt-rowReorder-moving {
@@ -18,7 +24,7 @@ tr.dt-rowReorder-moving {
 }
 
 body.dt-rowReorder-noOverflow {
-    overflow-x: hidden
+    overflow-x: hidden;
 }
 
 // table.dataTable td.reorder {
@@ -38,7 +44,7 @@ body.dt-rowReorder-noOverflow {
         position: absolute;
         left: calc( -#{$grid-gutter-width} / 2);
         top: 50%;
-        transform: translateY(-50%); 
+        transform: translateY(-50%);
       }
     }
   }
