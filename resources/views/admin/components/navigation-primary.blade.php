@@ -46,13 +46,7 @@
               @can('Admin users')
               <li class="nav-item">
                 <?php $roles_active = (strpos($data['page_id'], 'roles') !== false) ? 'active' : ''; ?>
-                {!! link_to_route('admin.roles.index', 'Roles', '', ['class' => $roles_active] ) !!}
-              </li>
-              @endcan
-              @can('Admin users')
-              <li class="nav-item">
-                <?php $permissions_active = (strpos($data['page_id'], 'permissions') !== false) ? 'active' : ''; ?>
-                {!! link_to_route('admin.permissions.index', 'Permissions', '', ['class' => $permissions_active] ) !!}
+                {!! link_to_route('admin.roles.index', 'Roles & Permissions', '', ['class' => $roles_active] ) !!}
               </li>
               @endcan
               @can('Admin settings')

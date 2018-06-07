@@ -49,7 +49,9 @@ $(document).ready(function() {
       },
       columns: [
         {data: 'name', name: 'name', orderable: false, width: '60%'},
-        {data: 'email', name: 'email', searchable: false, orderable: false},
+        {data: 'email', render: function ( data, type, row, meta ) {
+          return '<div class="text-content">'+ data + '</div>';
+        }, name: 'email', searchable: false, orderable: false},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
