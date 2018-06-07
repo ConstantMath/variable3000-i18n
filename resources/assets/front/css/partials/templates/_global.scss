@@ -1,0 +1,14 @@
+/*------------------------------------*\
+  #GLOBAL
+\*------------------------------------*/
+
+
+.wrapper {
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  @include media(">=xl") {
+    padding-left: 12%;
+    padding-right: 12%;
+  }
+}

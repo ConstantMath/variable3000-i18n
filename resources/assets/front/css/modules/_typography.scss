@@ -1,0 +1,348 @@
+/*------------------------------------*\
+  #TEXT-STYLES
+\*------------------------------------*/
+
+.ts-title {
+  @extend %font-size-xxl;
+  @extend %font-body-bold;
+}
+.ts-subtitle {
+  @extend %font-size-xl;
+  @extend %font-body-bold;
+}
+.ts-subsubtitle {
+  @extend %font-size-lg;
+  @extend %font-body-bold;
+}
+.ts-body {
+  @extend %font-size-md;
+}
+.ts-small {
+  @extend %font-size-sm;
+}
+.ts-xsmall {
+  @extend %font-size-xs;
+}
+.ts-link {
+  color: $action;
+  border-bottom: $border-width-sm solid $action;
+  text-decoration: none;
+  &:hover {
+    color: $action-response;
+    border-color: $action-response;
+    text-decoration: none;
+  }
+}
+
+/*------------------------------------*\
+  #TITLE
+\*------------------------------------*/
+
+.body {
+  h1,
+  h2 {
+    @extend .ts-title !optional;
+  }
+  h3 {
+    @extend .ts-subtitle !optional;
+  }
+  h4,
+  h5,
+  h6 {
+    @extend .ts-subsubtitle !optional;
+  }
+  h2,
+  h3,
+  h4 {
+    margin-bottom: 1em;
+  }
+  h2 + h3,
+  h3 + h4 {
+    margin-top: 0;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #PARAGRAPH
+\*------------------------------------*/
+
+.body {
+  @extend .ts-body !optional;
+  p {
+    @extend .ts-body !optional;
+    margin-bottom: .5em;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #LINK
+\*------------------------------------*/
+
+.body a {
+  color: $action;
+  text-decoration: none;
+  &:hover {
+    color: $action-response;
+    text-decoration: underline;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #BOLD-ITALIC
+\*------------------------------------*/
+
+.body {
+  em,
+  i{
+    @extend %font-body-italic;
+  }
+  b,
+  strong{
+    @extend %font-body-bold;
+  }
+  em > b,
+  b > em,
+  i > b,
+  b > i,
+  em > strong,
+  strong > em,
+  i > strong,
+  strong > i {
+    @extend %font-body-bold-italic;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #BLOCKQUOTE
+\*------------------------------------*/
+
+.body blockquote {
+  padding-left: 1em;
+  border-left: $border-width-sm solid $base-color;
+  margin-top: 1em;
+  & > p {
+    @extend %font-body-italic;
+  }
+  & > blockquote p {
+    @extend %font-body-italic;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #DEFINITIONS
+\*------------------------------------*/
+
+.body dl {
+  @extend .ts-body !optional;
+  dt {
+    @extend %font-body-bold;
+    padding-bottom: .3em;
+    &:first-of-type {
+      padding-top: .6em;
+      border-top: $border-width-sm solid $base-color;
+    }
+  }
+  dd{
+    padding-bottom: .6em;
+    margin-bottom: .6em;
+    border-bottom: $border-width-sm $base-color solid;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #LISTS
+\*------------------------------------*/
+
+// ORDERED
+.body ol {
+  counter-reset:li;
+  li {
+    position: relative;
+    padding-left: 1.2em;
+    @extend .ts-body !optional;
+    margin-bottom: .5em;
+    &:before {
+      content:counter(li);
+      counter-increment:li;
+      position: absolute;
+      left: 0;
+      @extend .ts-body !optional;
+      color: rgba($base-color, .5);
+    }
+  }
+  ol > li:first-of-type {
+    margin-top: .5em;
+  }
+}
+
+// UNORDERED
+.body ul {
+  li {
+    position: relative;
+    padding-left: 1.2em;
+    @extend .ts-body !optional;
+    margin-bottom: .5em;
+    &:before {
+      content: "-";
+      position: absolute;
+      left: 0;
+      @extend .ts-body !optional;
+      font-size: 1em;
+    }
+  }
+  ol > li:first-of-type {
+    margin-top: .5em;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #TABLE
+\*------------------------------------*/
+
+
+.body table {
+  width: 100%;
+  thead {
+    border-bottom: $border-width-md solid $base-color;
+  }
+  th {
+    text-align: left;
+    @extend %font-body-bold;
+  }
+  tbody tr {
+    &:nth-child(odd) {
+      background-color: rgba($base-color, .1);
+    }
+  }
+  tfoot {
+    border-top: $border-width-md solid $base-color;
+  }
+  th,
+  td {
+    padding: .5em 0;
+  }
+  @include media("<sm") {
+    th,
+    td {
+      display: block;
+    }
+  }
+}
+
+
+
+/*------------------------------------*\
+  #SPACING
+\*------------------------------------*/
+
+.body {
+  p + h1,
+  ul + h1,
+  ol + h1,
+  blockquote + h1,
+  figure + h1,
+  p + h2,
+  ul + h2,
+  ol + h2,
+  blockquote + h2,
+  figure + h2,
+  p + h3,
+  ul + h3,
+  ol + h3,
+  blockquote + h3,
+  figure + h3,
+  p + h4,
+  ul + h4,
+  ol + h4,
+  blockquote + h4,
+  figure + h4,
+  p + h5,
+  ul + h5,
+  ol + h5,
+  blockquote + h5,
+  figure + h5,
+  p + h6,
+  ul + h6,
+  ol + h6,
+  blockquote + h6,
+  figure + h6 {
+    margin-top: .6em;
+  }
+  ul,
+  ol,
+  .embed-container {
+    margin-bottom: 1em;
+  }
+}
+
+
+
+/*------------------------------------*\
+  #MISC
+\*------------------------------------*/
+
+.body {
+  ol,
+  ul {
+    list-style: none;
+  }
+  sub,
+  sup {
+    font-size: .75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+  sup {
+    top: -0.5em;
+  }
+  sub {
+    bottom: -0.25em;
+  }
+  small{
+    @extend %font-size-sm;
+  }
+  abbr {
+    border-bottom: $border-width-sm dotted $base-color;
+    cursor: help;
+  }
+  q,
+  cite {
+    &:before {
+      content:'"';
+    }
+    &:after {
+      content:'"';
+    }
+  }
+  mark {
+    background-color: rgba($base-color, .6);
+    color: $base-color;
+  }
+  code,
+  samp,
+  pre {
+    font-family: monospace;
+    @extend %font-size-sm;
+  }
+  hr {
+    background: $base-color;
+    height: $border-width-md;
+    border: none;
+    margin: 0;
+  }
+}

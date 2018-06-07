@@ -1,0 +1,32 @@
+/*------------------------------------*\
+  #MISC
+\*------------------------------------*/
+
+
+.hidden {
+  display: none !important;
+}
+
+.hidden-small {
+  @include media("<md") {
+    display: none !important;
+  }
+}
+.hidden-large {
+  @include media(">=md") {
+    display: none !important;
+  }
+}
+
+.nav__list {
+  list-style: none;
+}
+
+.clear {
+  @include clearfix;
+}
+
+// patternlab
+.sg-main {
+  padding: 2rem;
+}
