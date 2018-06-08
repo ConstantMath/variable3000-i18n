@@ -23,7 +23,7 @@ class PagesController extends AdminController
     // Header share : get all parent articles
     $parent_pages = Page::where('parent_id', 0)->get();
     View::share('parent_pages', $parent_pages );
-    $this->middleware(['auth', 'permissions'])->except('index');    
+    $this->middleware(['auth', 'permissions'])->except('index');
   }
 
   /**

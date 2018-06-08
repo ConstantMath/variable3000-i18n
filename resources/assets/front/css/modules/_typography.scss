@@ -1,35 +1,16 @@
 /*------------------------------------*\
   #TEXT-STYLES
 \*------------------------------------*/
-
-.ts-title {
-  @extend %font-size-xxl;
-  @extend %font-body-bold;
-}
-.ts-subtitle {
-  @extend %font-size-xl;
-  @extend %font-body-bold;
-}
-.ts-subsubtitle {
-  @extend %font-size-lg;
-  @extend %font-body-bold;
-}
 .ts-body {
   @extend %font-size-md;
 }
-.ts-small {
-  @extend %font-size-sm;
-}
-.ts-xsmall {
-  @extend %font-size-xs;
-}
 .ts-link {
   color: $action;
-  border-bottom: $border-width-sm solid $action;
+  // border-bottom: $border-width-sm solid $action;
   text-decoration: none;
   &:hover {
     color: $action-response;
-    border-color: $action-response;
+    // border-color: $action-response;
     text-decoration: none;
   }
 }
@@ -39,18 +20,6 @@
 \*------------------------------------*/
 
 .body {
-  h1,
-  h2 {
-    @extend .ts-title !optional;
-  }
-  h3 {
-    @extend .ts-subtitle !optional;
-  }
-  h4,
-  h5,
-  h6 {
-    @extend .ts-subsubtitle !optional;
-  }
   h2,
   h3,
   h4 {

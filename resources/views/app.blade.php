@@ -57,6 +57,7 @@
   @endif
 </head>
 <body>
+  @include('components.nav')
   <div class="page @yield('page_class')">
     @include('components.header')
     @yield('content')

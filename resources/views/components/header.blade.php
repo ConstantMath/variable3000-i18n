@@ -1,5 +1,5 @@
 <!-- header -->
-<header class="primary-header">
+{{-- <header class="primary-header">
   @if(count(config('translatable.locales')) > 1 )
   <ul class="lang">
     @foreach (config('translatable.locales') as $lang)
@@ -15,4 +15,4 @@
       <li class="nav__item" id="link-next"><a href="{{ url('/') }}" class="nav__link">Home</a></li>
     </ul>
   </nav>
-</header>
+</header> --}}

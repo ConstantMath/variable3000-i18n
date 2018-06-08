@@ -2,13 +2,19 @@
   #GLOBAL
 \*------------------------------------*/
 
-
 .wrapper {
-  width: 100%;
-  padding-left: 5%;
-  padding-right: 5%;
-  @include media(">=xl") {
-    padding-left: 12%;
-    padding-right: 12%;
+  width: 40%;
+  max-width: 800px;
+  margin: 0 auto;
+  @include media("<sm"){
+    width:90%;
   }
+}
+
+.main {
+  margin-top: $spacing-xxl;
+}
+
+body {
+  min-height:200vh;
 }

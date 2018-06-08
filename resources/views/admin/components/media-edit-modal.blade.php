@@ -36,11 +36,11 @@
 
             <div class="form-group">
               {{-- [2] = parent_id --}}
-              {!! Form::select('taxonomies[2][]', $article->taxonomiesDropdown(2), $article->tags, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!}
+              {{-- {!! Form::select('taxonomies[2][]', $article->taxonomiesDropdown(2), $article->tags, ['class' => 'form-control select2', 'multiple', 'style' => 'width:100%']) !!} --}}
             </div>
             <div class="form-group">
               {{-- [1] = parent_id --}}
-              {!! Form::select('taxonomies[1][]', $article->taxonomiesDropdown(1,1), $article->category, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => '']) !!}
+              {{-- {!! Form::select('taxonomies[1][]', $article->taxonomiesDropdown(1,1), $article->category, ['class' => 'form-control select2', 'style' => 'width:100%', 'id' => '']) !!} --}}
             </div>
           </div>
         </div>

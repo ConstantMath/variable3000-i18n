@@ -30,6 +30,7 @@
     "gulp-sourcemaps": "^2.4.1",
     "gulp-uglify-es": "^1.0.0",
     "gulp-util": "^3.0.8",
+    "imagesloaded": "^4.1.4",
     "jquery": "^3.3.1",
     "laravel-elixir": "^6.0.0-9",
     "laravel-elixir-browsersync-official": "^1.0.0",
@@ -40,5 +41,8 @@
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "flickity": "^2.1.1",
+    "jquery-bridget": "^2.0.1"
+  }
 }
