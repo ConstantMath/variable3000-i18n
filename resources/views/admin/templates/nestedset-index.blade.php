@@ -25,7 +25,6 @@
             <tr>
               <th class="is-published"></th>
               <th class="main-column">Title</th>
-              <th class="hidden-small">Updated</th>
               <th></th>
             </tr>
           </thead>
@@ -117,9 +116,6 @@ $(document).ready(function() {
         {data: 'title', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';
         }, name: 'title', orderable: false, class: 'main-column'},
-        {data: 'updated_at', render: function ( data, type, row, meta ) {
-          return '<div class="text-content">'+ data + '</div>';
-        }, name: 'updated_at', searchable: false, orderable: false, class: 'hidden-small'},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
