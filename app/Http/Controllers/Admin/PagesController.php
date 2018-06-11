@@ -62,6 +62,7 @@ class PagesController extends AdminController
    public function getDataTable($parent_id = 0){
      return \DataTables::of(Page::withTranslation()
                          ->where('parent_id', $parent_id)
+                         ->orderBy('order', 'asc')
                          ->get())
                          ->addColumn('action', function ($article) {
                            if(count($article->children)) {
