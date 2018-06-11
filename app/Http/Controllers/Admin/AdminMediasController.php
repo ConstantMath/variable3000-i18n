@@ -80,4 +80,17 @@ class AdminMediasController extends Controller
     endif;
     return true;
   }
+
+
+  /**
+  * Get the class from table name
+  *
+  * @return string
+  */
+
+  public function getClass($table_name){
+    return !empty($table_name) ?
+      'App\\' . studly_case(str_singular($table_name)) :
+      null;
+  }
 }

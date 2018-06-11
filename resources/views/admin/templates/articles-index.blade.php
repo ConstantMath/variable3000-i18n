@@ -41,11 +41,11 @@ $(document).ready(function() {
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
-        "search": '',
-        searchPlaceholder: "Search",
-        "paginate": {
-          "previous": '&larr;',
-          "next": '&rarr;'
+        'search': '',
+        'searchPlaceholder': 'Search',
+        'paginate': {
+        'previous': '&larr;',
+        'next': '&rarr;'
         },
       },
       columns: [
@@ -92,7 +92,6 @@ $(document).ready(function() {
       });
     });
     $.fn.dataTable.ext.errMode = 'throw';
-
 });
 </script>
 @endsection

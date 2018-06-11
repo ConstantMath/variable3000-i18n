@@ -3,7 +3,7 @@
 class="panel panel-default media-panel loading {{ $panel_type }}"
   id="panel-{{ $collection_name }}"
   data-media-collection-name="{{ $collection_name}}"
-  data-article-model_type="get_class($article)"
+  data-article-model_type="{{ get_class($article) }}"
   >
   <div class="panel-heading">
     {{ $panel_title }}
