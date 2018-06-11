@@ -28,7 +28,7 @@ Route::resource('medias', 'MediasController');
 Route::get('medias/quickdestroy/{id}', 'MediasController@quickDestroy')->name('medias.quickdestroy');
 Route::get('mediasArticle/{model_type}/{article_id}/{collection_name}', 'MediasController@mediasArticle')->name('medias.article');
 Route::post('medias/storeandlink/{mediatable_type}/{article_id?}', 'MediasController@storeAndLink')->name('medias.storeandlink');
-Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'MediasController@reorder')->name('medias.reorder');
+Route::post('medias/reorder/{media_type}/{model_type}/{article_id}', 'MediasController@reorder')->name('medias.reorder');
 //Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
 // Route::post('medias/get', 'MediasController@getFromArray');
 Route::post('medias/ajaxUpdate/{mediatable_type}', 'MediasController@AjaxUpdate')->name('medias.ajaxupdate');

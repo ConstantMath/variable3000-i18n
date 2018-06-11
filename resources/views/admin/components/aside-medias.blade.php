@@ -88,7 +88,6 @@ $collection_name = 'gallery';
 
   /* manage data list */
   function getMedias(media_collection_name) {
-    // mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
     var main_form_id = 'main-form';
     var article_id = $('#' + main_form_id + ' input[name=id]').val();
     var current_medias = $('#' + main_form_id + ' #' + media_collection_name).val();
@@ -127,17 +126,15 @@ $collection_name = 'gallery';
 
   /* manage data list */
   function printList(medias, media_type) {
-    var article_model_type = '{{get_class($article)}}';
     if(medias && media_type){
       var ul = $('#panel-' + media_type + ' .media-list');
       var	li = '';
       // Json Medias loop
       $.each( medias, function( key, value ) {
-
         // Build <li>
-        li = li + '<li class="list-group-item media-list__item" data-media-table-type="' + article_model_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
+        li = li + '<li class="list-group-item media-list__item" data-media-id="' + value.id + '" data-article-id="' + value.model_id + '" data-media-collection-name="' + value.collection_name + '">';
         li = li + '<div class="media__infos"><p class="media__title">' + value.name + '</p>';
-        li = li + '<p><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-table-type="' + article_model_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a></p>';
+        li = li + '<p><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a></p>';
         li = li + '<p><a href="' + admin_url + '/medias/quickdestroy/' + value.id + '" class="link link--delete" data-media-collection-name="'+ media_type +'">{{ __('admin.delete') }}</a></p></div>';
         //media preview
         if(value.mime_type.includes("image", 0)){
@@ -187,7 +184,6 @@ $collection_name = 'gallery';
     var media_description = button.data('media-description');
     var media_mime_type   = button.data('mime-type');
     var media_type        = button.data('media-type');
-    var media_table_type  = button.data('media-table-type');
     var modal             = $('#modal-media-edit');
     var pic_container     = modal.find('#pic');
     var file_container    = modal.find('#file');
@@ -229,9 +225,47 @@ $collection_name = 'gallery';
 
     function mediaEditResponse(response, statusText, xhr, $form){
       if(response.status == 'success'){
-        getMedias(response.media_type, response.mediatable_type);
+        getMedias(response.media_type);
       }
     }
+
+
+    if ( $('.panel.multiple').length ){
+
+      // ----- Media gallery Sortable ----- //
+      var el = $('.multiple .sortable');
+      // var list = document.getElementById("sortable");
+      $(el).each(function (i,e) {
+        var sortable = Sortable.create(e, {
+          onUpdate: function (evt) {
+            console.log(evt.item);
+            var article_id = evt.item.getAttribute('data-article-id');
+            var media_id   = evt.item.getAttribute('data-media-id');
+            var collection_name = evt.item.getAttribute('data-media-collection-name');
+            var new_order  = evt.newIndex;
+            var model_name = '{{class_basename($article)}}';
+            if (article_id && media_id) {
+              jQuery.ajax({
+                url: admin_url + '/medias/reorder/' + collection_name + '/' + model_name + '/' + article_id,
+                data: {
+                  'mediaId' : media_id,
+                  'newOrder': new_order,
+                },
+                type: 'POST',
+                success: function(response){
+                  if(response.status == 'success'){
+                    console.log(media_type+'pp');
+                    $('<span class="message pull-right">Updated !</span>').appendTo('#panel-' + media_type  + ' .panel-heading').fadeOut(3000);
+                  } else {
+                  }
+                }
+              });
+            }
+          }
+        });
+      })
+    }
+
   });
 </script>
 

@@ -29,7 +29,7 @@ $(document).ready(function() {
 
 
   // ----- Color picker ----- //
-  if ( $('.sortable').length ){
+  if ( $('.color-picker').length ){
     $('.color-picker').colorpicker({ /*options...*/ });
   }
 

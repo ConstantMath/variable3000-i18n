@@ -60,6 +60,7 @@ class MediasController extends AdminMediasController {
                         ->make(true);
   }
 
+
   /**
   * Show the form for editing the specified resource.
   *
@@ -254,14 +255,14 @@ class MediasController extends AdminMediasController {
   * @return \Illuminate\Http\Response
   */
 
-  public function reorder(Request $request, $media_type, $mediatable_type, $article_id){
-    $class = $this->getClass($mediatable_type);
+  public function reorder(Request $request, $media_type, $model, $article_id){
+    $class = $this->getClass($model);
     $article = $class::findOrFail($article_id);
     $media_id  = $request->mediaId;
-    $media_type  = $request->mediaType;
+
     $new_order = $request->newOrder;
     $v = 1;
-    $medias = $article->medias->where('type', $media_type);
+    $medias = $article->getMedia($media_type);
     if(isset($medias)){
      $v = 0;
      // loop in related medias
@@ -269,9 +270,9 @@ class MediasController extends AdminMediasController {
        $media = Media::findOrFail($media->id);
        if($v == $new_order){$v++;}
        if($media->id == $media_id){
-         $media->order = $new_order;
+         $media->order_column = $new_order;
        }else{
-         $media->order = $v;
+         $media->order_column = $v;
          $v++;
        }
        $media->timestamps = false;
