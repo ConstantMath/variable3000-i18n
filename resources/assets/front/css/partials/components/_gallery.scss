@@ -1,0 +1,55 @@
+/*------------------------------------*\
+  #home.blade.php
+\*------------------------------------*/
+
+.gallery {
+  display: block;
+  text-align: center;
+  list-style:none;
+  @include media(">=sm") {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  a {
+    color: $black;
+    text-decoration: none;
+  }
+  .gallery__item {
+    display:inline-block;
+    max-width: 49%;
+    position: relative;
+  }
+  .item__content{
+    display: block;
+    min-width: 300px;
+    min-height: 200px;
+    background:$lightgray;
+    .item__title{
+      text-align: left;
+      position:absolute;
+      top:0;
+      width:100%;
+      background:$body-color;
+      display: none;
+    }
+    img {
+      max-height: 600px;
+    }
+    &:hover{
+      .item__title{
+        display: block;
+      }
+    }
+  }
+  @include media("<sm"){
+    margin-bottom: $spacing-md;
+    .gallery__item {
+      width:100%;
+      max-width: 100%;
+      .item__content{
+        min-width: 0;
+        min-height: 0;
+      }
+    }
+  }
+}

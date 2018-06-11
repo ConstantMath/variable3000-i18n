@@ -4,6 +4,7 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
+@include('components.nav-secondary')
   <main class="wrapper main">
     <!-- article -->
     <article>

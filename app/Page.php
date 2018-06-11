@@ -5,11 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 
-class Page extends Model{
-  use Mediatable;
-  protected $table = 'pages';
+class Page extends Model implements HasMedia{
+
+  use HasMediaTrait;
   use \Dimsav\Translatable\Translatable;
+  protected $table = 'pages';
   public $translatedAttributes = ['title', 'intro', 'text', 'slug'];
   protected $fillable = ['created_at', 'order', 'published', 'parent_id'];
 

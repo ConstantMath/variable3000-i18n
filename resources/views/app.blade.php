@@ -40,9 +40,9 @@
   <meta name="theme-color" content="#ffffff">
   <!-- Styles -->
   @if (app('env') == 'local' )
-    <link href="{{ url('/assets/screen.css') }}" rel="stylesheet">
+    <link href="{{ url('/assets/front/screen.css') }}" rel="stylesheet">
   @else
-    <link href="{{ url('/assets/screen.min.css') }}" rel="stylesheet">
+    <link href="{{ url('/assets/front/screen.min.css') }}" rel="stylesheet">
   @endif
 
   @if($google_analytics)
@@ -57,13 +57,14 @@
   @endif
 </head>
 <body>
+  @include('components.nav')
   <div class="page @yield('page_class')">
     @include('components.header')
     @yield('content')
     @if (app('env') == 'local' )
-      <script src="{{ url('/assets/scripts.js') }}"></script>
+      <script src="{{ url('/assets/front/scripts.js') }}"></script>
     @else
-      <script src="{{ url('/assets/scripts.min.js') }}"></script>
+      <script src="{{ url('/assets/front/scripts.min.js') }}"></script>
     @endif
   </div>
 </body>

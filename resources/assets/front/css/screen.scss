@@ -1,0 +1,65 @@
+/*------------------------------------*\
+  #MODULES
+\*------------------------------------*/
+
+
+@import "modules/_reset.scss";
+@import "modules/_include-media.scss";
+@import "modules/_fonts.scss";
+@import "modules/_variables.scss";
+@import "modules/_mixins.scss";
+@import "modules/_typography.scss";
+@import "modules/_medias.scss";
+@import "modules/_misc.scss";
+
+
+/*------------------------------------*\
+  #PARTIALS
+\*------------------------------------*/
+
+
+@import "partials/components/_header.scss";
+@import "partials/components/_nav.scss";
+@import "partials/components/_nav-secondary.scss";
+@import "partials/components/_gallery.scss";
+@import "partials/templates/_global.scss";
+@import "partials/templates/_article.scss";
+
+
+/*------------------------------------*\
+  #VENDORS
+\*------------------------------------*/
+
+@import "vendors/_flickity.scss";
+
+
+
+/*------------------------------------*\
+  #BASE-STYLES
+\*------------------------------------*/
+
+
+body {
+  @extend %font-body;
+  background: $body-color;
+  color: $base-color;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  ::-moz-selection { background-color: rgba($base-color, .2); color: $base-color; }
+  ::selection { background-color: rgba($base-color, .2); color: $base-color; }
+}
+
+
+
+/*------------------------------------*\
+  #PRINT
+\*------------------------------------*/
+
+
+@import "modules/_print-style.scss";
+@media print {
+  html {
+    font-size: 14px;
+  }
+  @include print-style;
+}

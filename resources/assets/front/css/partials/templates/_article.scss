@@ -1,0 +1,27 @@
+/*------------------------------------*\
+  #article.blade.php
+\*------------------------------------*/
+
+.article__title {
+  text-align: center;
+}
+
+.article__title , .article__intro {
+  margin-bottom: $spacing-lg;
+}
+
+.article__slideshow {
+  margin-bottom: $spacing-xl;
+  .slideshow__item {
+    width:100%;
+    height:400px;
+    display: flex;
+    img {
+      object-position: center;
+      max-height:100%;
+      margin: auto;
+    }
+  }
+  .flickity-prev-next-button.previous { left:-$spacing-xxl; }
+  .flickity-prev-next-button.next { right: -$spacing-xxl; }
+}

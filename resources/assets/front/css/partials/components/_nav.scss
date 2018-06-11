@@ -1,0 +1,58 @@
+/*------------------------------------*\
+  #nav.blade.php
+\*------------------------------------*/
+
+.navbar__nav,
+.navbar__list {
+  display:flex;
+  list-style: none;
+}
+
+.navbar {
+  position:fixed;
+  z-index: 2;
+  background-color: $white;
+  width:100%;
+  @include media(">=sm"){
+    width:calc(100% - #{$spacing-md} * 2);
+    left: $spacing-md;
+  }
+  overflow-x: auto;
+  height:auto;
+  border-bottom: none;
+  &.navbar--fixed-top {
+    top:0;
+  }
+  a {
+    color: $black;
+    text-decoration: none;
+    &:hover {
+      color: $action-response;
+      text-decoration: none;
+    }
+    line-height: 1;
+    display: block;
+  }
+}
+
+.navbar__nav {
+  position: relative;
+  justify-content: space-between;
+  flex:1;
+}
+
+.navbar__list {
+  align-items: center;
+  &.navbar__list--left {
+    padding-right: $spacing-sm;
+  }
+  &, & li {
+    flex-shrink: 0;
+  }
+  a {
+    padding-top: $spacing-xs;
+    padding-bottom: $spacing-xs;
+    padding-left: calc(#{$grid-gutter-width} / 2 );
+    padding-right: calc(#{$grid-gutter-width} / 2 );
+  }
+}
