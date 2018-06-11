@@ -34,7 +34,7 @@ Route::post('medias/reorder/{media_type}/{mediatable_type}/{article_id}', 'Media
 //Route::post('/admin/articles/{id?}/addmanymedia', 'Admin\ArticlesMediasController@addManyMedia')->name('admin.articles.addmanymedia');
 // Route::post('medias/get', 'MediasController@getFromArray');
 Route::post('medias/ajaxUpdate/{mediatable_type}', 'MediasController@AjaxUpdate')->name('medias.ajaxupdate');
-Route::post('fileupload', 'MediasController@fileUpload')->name('fileupload');
+// Route::post('fileupload', 'MediasController@fileUpload')->name('fileupload');
 // Datatables
 Route::get('datatable', 'DataTablesController@datatable');
 Route::get('datatable/getArticles', 'DataTablesController@getArticles')->name('datatable/getdata');

@@ -20,6 +20,7 @@ return [
     'on_website' => 'on the website',
     'are_you_sure' => 'Are you sure ?',
     'cancel' => 'Cancel',
+    'select_file' => 'Select a file to upload',
 
 
 ];

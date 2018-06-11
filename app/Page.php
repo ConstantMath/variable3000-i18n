@@ -55,4 +55,16 @@ class Page extends Model implements HasMedia{
       $this->attributes['parent_id'] = $parent_id;
     }
   }
+
+
+  /**
+   * Concact mdoel + title for related dropdown
+   * @param date  $date
+   *
+   */
+
+   public function getModelTitleAttribute(){
+     $data = get_class().', '.$this->id;
+     return $data;
+   }
 }
