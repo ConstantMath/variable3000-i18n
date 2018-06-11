@@ -20,4 +20,6 @@ return [
     'on_website' => 'sur le site',
     'are_you_sure' => 'Êtes-vous sur ?',
     'cancel' => 'Cancel',
+    'select_file' => 'Sélectionez un fichier',
+
 ];

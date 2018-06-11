@@ -33,19 +33,6 @@ class Article extends Model implements HasMedia{
 
 
   /**
-   * Fetch all medias by type for the model ordered
-   * @param string  $type
-   *
-   * @return \Illuminate\Database\Eloquent\Relations\MorphMany
-   */
-
-  public function mediasByType(){
-    return $this->morphMany(Media::class, 'mediatable')
-                ->orderBy('order', 'asc');
-  }
-
-
-  /**
    * Retourne les articles enfants
    *
    */
@@ -76,16 +63,6 @@ class Article extends Model implements HasMedia{
     return $this->hasMany('App\article', 'parent_id')
                 ->where('published', 1)
                 ->orderBy('order', 'asc');
-  }
-
-
-
-  /**
-  * Returns the featured image
-  */
-
-  public function imageUne(){
-    return $this->morphOne('App\Media', 'mediatable');
   }
 
 
@@ -209,5 +186,17 @@ class Article extends Model implements HasMedia{
         return null;
       }
     }
+
+
+    /**
+     * Concact mdoel + title for related dropdown
+     * @param date  $date
+     *
+     */
+
+     public function getModelTitleAttribute(){
+       $data = get_class().', '.$this->id;
+       return $data;
+     }
 
 }
