@@ -12,9 +12,11 @@ Route::get('articles/getdata', 'ArticlesController@getDataTable')->name('article
 Route::resource('articles', 'ArticlesController');
 
 
+Route::get('pages/{parent_id}/getdata', 'PagesController@getDataTable')->name('pages.getdata');
 Route::resource('pages', 'PagesController', ['except' => ['create', 'index']]);
 Route::get('pages/{parent_id}/create', 'PagesController@create')->name('pages.create');
 Route::get('pages/{parent_id}/index', 'PagesController@index')->name('pages.index');
+Route::post('pages/reorder/{id}', 'PagesController@reorder')->name('pages.reorder');
 Route::resource('settings', 'SettingsController');
 //taxonomies
 Route::get('taxonomies/getdata', 'TaxonomiesController@getDataTable')->name('taxonomies.getdata');

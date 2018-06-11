@@ -32,20 +32,18 @@ body.dt-rowReorder-noOverflow {
 //     cursor: move;
 // }
 
-.table-reorderable {
-  tbody {
-    tr td:first-of-type:not(:only-child) {
-      position: relative;
-      cursor:grab;
-      &:hover:before{
-        content:'\f0dc';
-        font-family: 'FontAwesome';
-        color:$gray;
-        position: absolute;
-        left: calc( -#{$grid-gutter-width} / 2);
-        top: 50%;
-        transform: translateY(-50%);
-      }
+.table-reorderable > tbody {
+  & > tr > td:first-of-type:not(:only-child) {
+    position: relative;
+    cursor:grab;
+    &:hover:before{
+      content:'\f0dc';
+      font-family: 'FontAwesome';
+      color:$gray;
+      position: absolute;
+      left: calc( -#{$grid-gutter-width} / 2);
+      top: 50%;
+      transform: translateY(-50%);
     }
   }
 }

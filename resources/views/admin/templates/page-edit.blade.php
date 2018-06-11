@@ -17,7 +17,7 @@
         </div>
         @if(isset($article->id))
           <ul class="panel-footer">
-            <li>@include('admin.components.delete-form', ['model' => $article, 'model_name' => 'articles'])</li>
+            <li>@include('admin.components.delete-form', ['model' => $article, 'model_name' => 'pages'])</li>
             <li><a href="{{ url('/') }}/{{ $article->slug }}" class="link" target="_blank">{{ __('admin.preview') }}</a> {{ __('admin.on_website') }}</li>
           </ul>
         @endif
