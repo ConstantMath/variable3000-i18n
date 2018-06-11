@@ -16,7 +16,7 @@ return [
     'preview' => 'Prévisualiser',
     'delete' => 'Supprimer',
     'edit' => 'Éditer',
-    'this_article' => 'cet article',
+    'this' => 'cet',
     'on_website' => 'sur le site',
     'are_you_sure' => 'Êtes-vous sur ?',
     'cancel' => 'Cancel',

@@ -199,4 +199,23 @@ class Article extends Model implements HasMedia{
        return $data;
      }
 
+
+     /**
+      * Loop through models that has medias related model
+      * Define in config/admin.php
+      *
+      * @return Articles collection
+      */
+
+     static function listAll(){
+       $media_models = config('admin.media_models');
+       $articles = [];
+       if($media_models){
+         foreach($media_models as $model){
+           $model_name = str_plural(str_replace('App\\','', $model));
+           $articles[$model_name] = $model::all()->pluck('title', 'model_title')->toArray();
+         }
+       }
+       return $articles;
+     }
 }

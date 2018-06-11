@@ -1,4 +1,4 @@
-<a href="#" class="link link--delete" data-toggle="modal" data-target="#confirm-delete"></i> {{ __('admin.delete') }}</a> {{ __('admin.this_article') }}
+<a href="#" class="link link--delete" data-toggle="modal" data-target="#confirm-delete"></i> {{ __('admin.delete') }}</a> {{ __('admin.this') }} {{ str_singular($model_name) }}
 {!! Form::model($model, ['route' => ['admin.'.$model_name.'.destroy', $model->id], 'method' => 'post', 'class' => 'form-horizontal', 'name' => 'delete-form']) !!}
   {{ Form::hidden('_method', 'DELETE') }}
   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

@@ -14,7 +14,7 @@ use App\Http\Requests\Admin\MediaRequest;
 use App\Article;
 use App\Media;
 
-class MediasController extends AdminController {
+class MediasController extends AdminMediasController {
 
   use HasMediaTrait;
 
@@ -72,7 +72,7 @@ class MediasController extends AdminController {
     $data = array(
       'page_class' => 'media',
       'page_title' => 'Media edit',
-      'page_id'    => 'index-',
+      'page_id'    => 'edit',
     );
     // Dropdown: Loop through models that has medias
     $media_models = config('admin.media_models');
@@ -82,8 +82,7 @@ class MediasController extends AdminController {
         $articles[$model_name] = $model::all()->pluck('title', 'model_title')->toArray();
       }
     }
-
-
+    $articles = Article::listAll();
     return view('admin/templates/medias-edit',  compact('media', 'data', 'articles'));
   }
 
@@ -96,13 +95,14 @@ class MediasController extends AdminController {
   */
 
   public function create($parent_id = 0){
+    $media = new Media;
     $data = array(
-      'page_class' => 'media create',
+      'page_class' => 'media',
       'page_title' => 'Media create',
-      'page_id'    => 'index-'.$parent_id,
+      'page_id'    => 'create'
     );
-    $article = new Media;
-    return view('admin.templates.medias-edit', compact('article', 'data'));
+    $articles = Article::listAll();
+    return view('admin.templates.medias-edit', compact('media', 'data', 'articles'));
   }
 
 
@@ -114,22 +114,27 @@ class MediasController extends AdminController {
   */
 
   public function update(Media $media, MediaRequest $request){
-    if($media->model_id && $media->model_type){
-      $article = $media->model_type::find($media->model_id);
-      dd($article);
-    };
-    $file                 = $request->file('file');
-    if(!empty($file)){
-      $fileSystem           = app(\Spatie\MediaLibrary\Filesystem\Filesystem::class);
-      $fileSystem->removeAllFiles($media);
-      $path                 = $file->path();
-      list($width, $height) = getimagesize($file);
-      // Copy the new file
-      $fileSystem->copyToMediaLibrary($path, $media, false, $media->file_name);
-    }
-    $media->name = $request['name'];
-    $media->save();
-    return redirect()->route('admin.medias.edit', $media->id);
+    // Save article
+    return $this->saveObject($media, $request);
+
+    // $this->linkRelatedArticle($request);
+    // dd($request);
+    // if($media->model_id && $media->model_type){
+    //   $article = $media->model_type::find($media->model_id);
+    //   dd($article);
+    // };
+    // $file                 = $request->file('file');
+    // if(!empty($file)){
+    //   $fileSystem           = app(\Spatie\MediaLibrary\Filesystem\Filesystem::class);
+    //   $fileSystem->removeAllFiles($media);
+    //   $path                 = $file->path();
+    //   list($width, $height) = getimagesize($file);
+    //   // Copy the new file
+    //   $fileSystem->copyToMediaLibrary($path, $media, false, $media->file_name);
+    // }
+    // $media->name = $request['name'];
+    // $media->save();
+    // return redirect()->route('admin.medias.edit', $media->id);
 
   }
 
@@ -143,7 +148,7 @@ class MediasController extends AdminController {
 
   public function store(MediaRequest $request){
     // Create article
-    return $this->createObject(Media::class, $request, 'redirect');
+    return $this->saveObject(null, $request);
   }
 
 
@@ -288,23 +293,23 @@ class MediasController extends AdminController {
   */
 
   public function ajaxUpdate(Request $request, $mediatable_type){
-  $id = $request->media_id;
-  $media = Media::findOrFail($id);
-  $file = $request->file('background_image_file');
-  if($file){
-   // Upload
-   $background_image = Media::uploadMediaFile($file);
-   $media->update(['background_image' => $background_image['name']]);
-  }
-  $media->update($request->all());
-  return response()->json([
-   'status'                  => 'success',
-   'media_id'                => $media->id,
-   'media_alt'               => $media->alt,
-   'media_description'       => $media->description,
-   'media_type'              => $media->type,
-   'mediatable_type'         => $mediatable_type,
-  ]);
+    $id = $request->media_id;
+    $media = Media::findOrFail($id);
+    $file = $request->file('background_image_file');
+    if($file){
+     // Upload
+     $background_image = Media::uploadMediaFile($file);
+     $media->update(['background_image' => $background_image['name']]);
+    }
+    $media->update($request->all());
+    return response()->json([
+     'status'                  => 'success',
+     'media_id'                => $media->id,
+     'media_alt'               => $media->alt,
+     'media_description'       => $media->description,
+     'media_type'              => $media->type,
+     'mediatable_type'         => $mediatable_type,
+    ]);
   }
 
   /**
@@ -343,6 +348,30 @@ class MediasController extends AdminController {
     $extension = $file->getClientOriginalExtension();
     $name = str_slug($orig_name).'.'.$extension;
     return $name;
+  }
+
+
+  /**
+  * Link Related Article id exists
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @return true
+  */
+
+  static function linkRelatedArticle($request){
+    if(!empty($request->associated_article)):
+      $article = explode(',', $request->associated_article);
+      $article_model = $article[0];
+      $article_id = $article[1];
+      if(!empty($article_model) && !empty($article_id) && $article_id != 'null'):
+        $request['model'] = $article_model;
+        $request['article_id'] = $article_id;
+      endif;
+    else:
+      $request['model'] = null;
+      $request['article_id'] = null;
+    endif;
+    return true;
   }
 
 }

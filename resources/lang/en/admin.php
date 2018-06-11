@@ -16,7 +16,7 @@ return [
     'preview' => 'Preview',
     'delete' => 'Delete',
     'edit' => 'Edit',
-    'this_article' => 'this article',
+    'this' => 'this',
     'on_website' => 'on the website',
     'are_you_sure' => 'Are you sure ?',
     'cancel' => 'Cancel',
