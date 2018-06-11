@@ -7,8 +7,8 @@
         'class' => 'form-horizontal media-edit-form',
         'name' => 'media-edit-form',
         'enctype' => 'multipart/form-data']) !!}
-        {!! Form::hidden('media_id', '', ['id' => 'input_media_id'])
-      !!}
+        {!! Form::hidden('media_id', '', ['id' => 'input_media_id'])!!}
+        {!! Form::hidden('article_id', $article->id)!!}
         <div class="modal-header">
           <h4 class"modal-title">Edit media</h4>
           <div class="modal-btn">
@@ -26,8 +26,8 @@
           </div>
           <div class="modal-desc">
             <div class="form-group">
-              <label for="alt">Title</label>
-              <input class="form-control" name="alt" type="text" value="" id="input_media_alt">
+              <label for="alt">Name</label>
+              <input class="form-control" name="name" type="text" value="" id="input_media_alt">
             </div>
             <div class="form-group">
               <label for="description">Description</label>

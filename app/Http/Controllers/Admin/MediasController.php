@@ -296,20 +296,16 @@ class MediasController extends AdminMediasController {
   public function ajaxUpdate(Request $request, $mediatable_type){
     $id = $request->media_id;
     $media = Media::findOrFail($id);
-    $file = $request->file('background_image_file');
-    if($file){
-     // Upload
-     $background_image = Media::uploadMediaFile($file);
-     $media->update(['background_image' => $background_image['name']]);
+    if($request->description != $media->getCustomProperty('description')){
+      $media->setCustomProperty('description', $request->description);
     }
-    $media->update($request->all());
+    $media->save();
+    // dd($request);
+    $media->update($request->except(['media_id', 'article_id', 'description']));
     return response()->json([
      'status'                  => 'success',
      'media_id'                => $media->id,
-     'media_alt'               => $media->alt,
-     'media_description'       => $media->description,
      'media_type'              => $media->type,
-     'mediatable_type'         => $mediatable_type,
     ]);
   }
 

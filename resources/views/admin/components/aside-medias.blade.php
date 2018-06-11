@@ -229,9 +229,9 @@ $collection_name = 'gallery';
       }
     }
 
+    // Reorder
 
     if ( $('.panel.multiple').length ){
-
       // ----- Media gallery Sortable ----- //
       var el = $('.multiple .sortable');
       // var list = document.getElementById("sortable");
