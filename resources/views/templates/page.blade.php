@@ -9,22 +9,12 @@
     <!-- article -->
     <article>
       <h1 class="article__title">{{ $article->title }}</h1>
-      <div class="article__slideshow">
         @if($article->getMedia('une')->first())
-          <div class="slideshow__item featured">
+          <div class="featured">
             <img src="{{ url('/imagecache/large') }}/{{ $article->getMedia('une')->first()->id }}/{{ $article->getMedia('une')->first()->file_name }}">
           </div>
         @endif
-        @if ($article->getMedia('gallery'))
-          @foreach($article->getMedia('gallery') as $media)
-            @if (str_contains($media->mime_type, "image"))
-              <div class="slideshow__item">
-                <img src="{{ url('/imagecache/large') }}/{{ $media->id }}/{{ $media->file_name }}" alt="{{ $media->alt }}">
-              </div>
-            @endif
-          @endforeach
-        @endif
-      </div>
+
       <p class="article__intro">{{ $article->intro }}</p>
       <!-- content -->
       <div class="body">
@@ -32,7 +22,17 @@
       </div>
       <!-- /content -->
       <!-- gallery -->
-
+      @if ($article->getMedia('gallery'))
+        <div class="article__gallery">
+          @foreach($article->getMedia('gallery') as $media)
+            @if (str_contains($media->mime_type, "image"))
+              <div class="gallery__item">
+                <img src="{{ url('/imagecache/large') }}/{{ $media->id }}/{{ $media->file_name }}" alt="{{ $media->alt }}">
+              </div>
+            @endif
+          @endforeach
+        </div>
+      @endif
       <!-- /gallery -->
       <!-- category -->
       @if ($article->category)

@@ -114,6 +114,7 @@ class PagesController extends AdminController
       'page_class' => 'pages',
       'page_title' => 'Page create',
       'page_id'    => 'create-page-'.$parent_id,
+      'table_type' => $this->table_type,
     );
     $article = new Page;
     // $article->parent_id = $parent_id;
