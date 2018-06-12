@@ -28,7 +28,7 @@ class PagesController extends FrontController{
                   ->where('published', 1)
                   ->orderBy('order', 'asc')
                   ->get();
-    if($slug != 0){
+    if($slug === 0){
       $article = $articles->first();
     }else{
       $article = Page::whereTranslation('slug', $slug)->first();
