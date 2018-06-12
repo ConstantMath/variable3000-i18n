@@ -96,6 +96,7 @@ class PagesController extends AdminController
       'page_class' => 'pages',
       'page_title' => 'Page edit',
       'page_id'    => 'index-pages',
+      'table_type' => $this->table_type,
     );
   	return view('admin/templates/page-edit',  compact('article', 'data'));
   }

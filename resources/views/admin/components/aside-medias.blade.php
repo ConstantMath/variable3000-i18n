@@ -93,7 +93,7 @@ $collection_name = 'gallery';
     var article_id = $('#' + main_form_id + ' input[name=id]').val();
     var current_medias = $('#' + main_form_id + ' #' + media_collection_name).val();
     var panel = $("#panel-" + media_collection_name);
-    var model_name = 'articles';
+    var model_name = '{{$data['table_type']}}';
     // Get from DB
     if(article_id){
       $.ajax({
