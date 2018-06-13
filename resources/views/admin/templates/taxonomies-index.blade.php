@@ -49,7 +49,7 @@ $(document).ready(function() {
         },
         language: {
           'search': '',
-          'searchPlaceholder': 'Search',
+          'searchPlaceholder': '{{ $taxonomy->name }}',
           'paginate': {
             'previous': '&larr;',
             'next': '&rarr;'

@@ -41,7 +41,7 @@ $(document).ready(function() {
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Users",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'
