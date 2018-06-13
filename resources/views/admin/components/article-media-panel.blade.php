@@ -6,7 +6,7 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
   data-article-model_type="get_class($article)"
   >
   <div class="panel-heading">
-    {{ $panel_title }}
+    <h2>{{ $panel_title }}</h2>
     @if (isset($article->id))
       {!! Form::model($article, ['route' => ['admin.medias.storeandlink', $article->getTable(), $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else

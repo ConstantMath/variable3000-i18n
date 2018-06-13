@@ -22,6 +22,7 @@
         @else
           <li class="js-dropdown-toggle">
             <a role="button">
+              <?php // IDEA: changer admin en tools ? ?>
               Admin&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
             <ul class="js-dropdown-content" role="menu">

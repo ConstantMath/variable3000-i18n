@@ -40,7 +40,7 @@ $(document).ready(function() {
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Permissions",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'

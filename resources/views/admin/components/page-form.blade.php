@@ -26,9 +26,7 @@
         @endif
         {{-- Is published ? --}}
         <div class="is-published">
-          <div class="checkbox">
-            <label>{!! Form::checkbox('published', 1, null) !!}Published</label>
-          </div>
+            <label>{!! Form::checkbox('published', 1, null) !!}<span>Published</span></label>
         </div>
       </div>
     </div>

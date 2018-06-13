@@ -1,0 +1,50 @@
+
+.CodeMirror,
+.editor-toolbar,
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple,
+.select2-container--default .select2-selection--multiple,
+.select2-selection,
+.select2-dropdown,
+.form-control{
+  border-width: $border-width-sm !important;
+  border-color: $bordergray !important;
+  border-style: solid;
+  border-radius:0 !important;
+  .select2-selection__choice {
+    border: none;
+    border-radius: 0;
+    background-color: $lightgray;
+  }
+}
+
+.form-control {
+  display:block;
+  width:100%;
+  resize:none;
+  padding: $spacing-xxs $spacing-xs;
+  &:focus{
+    outline:none;
+  }
+}
+.select2-selection__choice {
+  border: none;
+  border-radius: 0;
+  background-color: $lightgray;
+}
+.editor-toolbar {
+  &::after {margin-top:$spacing-xxs;}
+  &::before {margin-bottom:$spacing-xxs;}
+  &, &:hover{
+    opacity:1;
+  }
+  a {
+    color:$action !important;
+    border:none !important;
+    &:hover{
+      color:$action-response !important;
+    }
+  }
+}
+.cm-s-paper {
+  border-top: none;
+}

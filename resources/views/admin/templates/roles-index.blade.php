@@ -54,7 +54,7 @@ $(document).ready(function() {
       ajax: '{{ route('admin.roles.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Roles",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'
@@ -77,7 +77,7 @@ $(document).ready(function() {
       ajax: '{{ route('admin.permissions.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Permissions",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'

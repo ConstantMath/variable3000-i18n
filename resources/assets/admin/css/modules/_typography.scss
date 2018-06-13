@@ -7,22 +7,31 @@
   @extend %font-body-bold;
 }
 .ts-subtitle {
-  @extend %font-size-xl;
-  @extend %font-body-bold;
-}
-.ts-subsubtitle {
   @extend %font-size-lg;
   @extend %font-body-bold;
 }
+
 .ts-body {
+  @extend %font-body;
   @extend %font-size-md;
+  letter-spacing: .02em;
+}
+.ts-label {
+  @extend %font-body;
+  @extend %font-size-xs;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.ts-input {
+  @extend %font-body;
+  @extend %font-size-lg;
 }
 .ts-small {
+  @extend %font-body;
   @extend %font-size-sm;
+  text-transform: none;
 }
-.ts-xsmall {
-  @extend %font-size-xs;
-}
+
 .ts-link {
   color: $action;
   text-decoration: none;

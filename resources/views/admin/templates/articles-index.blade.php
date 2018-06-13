@@ -7,7 +7,6 @@
 <div class="panel panel-default">
   <div class="table-responsive">
     <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
-
     <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
         <thead>
           <tr>
@@ -17,6 +16,7 @@
             <th></th>
           </tr>
         </thead>
+
     </table>
   </div>
 </div>
@@ -42,13 +42,14 @@ $(document).ready(function() {
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Articles",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'
         },
       },
       columns: [
+        //IDEA: Ajouter column de contenu cachée pour recherche (texte d'article ect)?
         {data: 'order', render: function ( data, type, row, meta ) {
           if(row.published == 1){
             return '<i class="fa fa-circle icon-published"></i>';

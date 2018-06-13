@@ -4,6 +4,9 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
+    <div class="edit__header">
+      <h1 class="edit__title">Edit</h1>
+    </div>
       @if(isset($article->id))
         {!! Form::model($article, ['route' => ['admin.articles.update', $article->id], 'method' => 'put', 'class' => 'panel panel-edit main-form', 'id' => 'main-form', 'files' => true]) !!}
       @else

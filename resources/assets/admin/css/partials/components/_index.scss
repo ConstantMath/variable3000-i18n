@@ -1,19 +1,15 @@
 
 .table-responsive {
-  .btn-xs {
-    position:absolute;
-    right:0;
-    top:$spacing-xs;
-  }
   .panel-body {
     padding-top: 0;
     padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
+    background-color:transparent;
   }
 
   .panel-heading {
-    padding-top:$spacing-xs;
+    padding-top:0;
     padding-bottom: $spacing-xs;
     .dataTables_filter {
       label{
@@ -23,11 +19,21 @@
         }
       }
       input {
-        @extend .form-control;
-        border: 0;
-        padding-top: $spacing-xxs;
-        padding-bottom: $spacing-xxs;
+        border: none;
+        background-color:transparent;
+        padding:0;
         width: 100%;
+        @extend .ts-title;
+        &::placeholder { /* Chrome/Opera/Safari */
+          color: $base-color !important;
+          opacity: 1 !important;
+        }
+        &:hover::placeholder{
+          opacity:0.5 !important;
+        }
+        &:focus{
+          outline:none;
+        }
       }
     }
   }
@@ -38,6 +44,17 @@
 .dataTables_wrapper{
   .table {
     border:none;
+    thead{
+      border: 1px solid white;
+      th {
+        @extend .ts-label;
+        padding-bottom:0 !important;
+        padding-top:0 !important;
+      }
+    }
+    tbody {
+      background:white;
+    }
     tr {
       border-bottom: $border-width-sm solid $lightgray;
       position:relative;
@@ -71,9 +88,6 @@
           padding-right :calc(#{$grid-gutter-width} / 2);
         }
       }
-      th {
-        font-weight: bold;
-      }
     }
   }
 
@@ -103,13 +117,4 @@
   .dataTables_info{
     @extend %font-size-sm;
   }
-}
-
-
-
-.icon-published {
-  font-size: $font-size-xs;
-  vertical-align: middle;
-  margin-right: $spacing-xxs;
-  color: $blue;
 }

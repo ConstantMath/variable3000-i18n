@@ -1,0 +1,56 @@
+.panel {
+  position:relative;
+}
+
+.panel-heading {
+  &, input{
+    @extend .ts-small;
+  }
+  .tab-select {
+    @extend .ts-label;
+  }
+  h2 {
+    @extend .ts-subtitle;
+  }
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    display:inline;
+  }
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-xs;
+}
+
+.panel-body {
+  label {
+    color: $base-color;
+    @extend .ts-label;
+  }
+  padding-left :calc(#{$grid-gutter-width} / 2);
+  padding-right :calc(#{$grid-gutter-width} / 2);
+  padding-top: $spacing-sm;
+  padding-bottom: $spacing-sm;
+  background-color: $white;
+}
+
+.panel-footer {
+  @extend .ts-small;
+  li {
+    margin-top: $spacing-xs;
+    margin-right: $spacing-sm;
+  }
+  list-style: none;
+  margin-top: $spacing-sm;
+  margin-bottom: $spacing-md;
+  color: $gray;
+}
+
+.panel-action {
+  position:sticky;
+  bottom:0;
+  z-index: 5;
+  border-top: $border-width-md solid $lightgray;
+  margin-top: $spacing-sm;
+}

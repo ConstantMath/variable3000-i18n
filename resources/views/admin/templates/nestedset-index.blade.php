@@ -99,7 +99,7 @@ $(document).ready(function() {
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata', $parent_id) }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Pages",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'

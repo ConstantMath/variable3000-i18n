@@ -5,7 +5,7 @@
 // Main colour palette
 $white            : #FFFFFF;
 $black            : #000000;
-$blue             : #0066ff;
+$blue             : #0065cd;
 $lightgray        : #efefef;
 $bordergray       : #BCBCBC;
 $gray             : #888888;
@@ -43,27 +43,27 @@ $grid-gutter-width: 30px !default;
 \*------------------------------------*/
 
 %font-body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
 %font-body-italic {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   font-style: italic;
 }
 
 %font-body-bold {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   font-weight: 700;
 }
 
 %font-body-bold-italic {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
   font-style: italic;
   font-weight: 700;
 }
 
 %font-var {
-  font-family: "Times New Roman", Times, Georgia, serif;
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
 
@@ -76,12 +76,12 @@ $font-base         : 1rem;
 $line-height       : 1.5;
 $line-height-var   : 1.3;
 
-$font-size-xs      : $font-base * 0.750; // 12
-$font-size-sm      : $font-base * 0.875; // 14
-$font-size-md      : $font-base * 1.000; // 18
-$font-size-lg      : $font-base * 1.222; // 22
-$font-size-xl      : $font-base * 2.000; // 36
-$font-size-xxl     : $font-base * 2.667; // 48
+$font-size-xs      : $font-base * 0.666; // 11
+$font-size-sm      : $font-base * 0.813; // 13
+$font-size-md      : $font-base * 1.000; // 16
+$font-size-lg      : $font-base * 1.125; // 18
+$font-size-xl      : $font-base * 2.000; // 32
+$font-size-xxl     : $font-base * 2.5;   // 48
 
 html {
   font-size: 16px;
@@ -93,6 +93,7 @@ html {
 %font-size-xs {
   font-size: $font-size-xs;
   line-height: $line-height;
+  letter-spacing:0.06em;
 }
 %font-size-sm {
   font-size: $font-size-sm;
@@ -104,7 +105,7 @@ html {
 }
 %font-size-lg {
   font-size: $font-size-lg;
-  line-height: $line-height;
+  line-height: $line-height-var;
 }
 %font-size-xl {
   font-size: $font-size-xl;
@@ -139,4 +140,4 @@ $spacing-xxs      : $spacing-base * 0.357; // 5
 \*------------------------------------*/
 
 $border-width-sm         : 1px;
-$border-width-md         : $border-width-sm*2;
+$border-width-md         : $border-width-sm*3;
