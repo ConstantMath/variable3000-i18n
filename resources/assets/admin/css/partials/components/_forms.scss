@@ -17,11 +17,11 @@
   }
 }
 
-.form-control {
+.form-control{
   display:block;
   width:100%;
   resize:none;
-  padding: $spacing-xxs $spacing-xs;
+  padding: $spacing-xs $spacing-xs;
   &:focus{
     outline:none;
   }
