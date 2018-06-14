@@ -66,27 +66,3 @@ a {
   position:absolute;
   z-index:-1;
 }
-
-label {
-  @extend %font-size-sm;
-  display:inline-block;
-}
-
-.form-group {
-  margin-top: $spacing-sm;
-  &:first-child{
-    margin-top:0;
-  }
-  label {
-    margin-bottom: $spacing-xxs;
-  }
-}
-
-
-
-input[type="checkbox"]{
-  margin-right: $spacing-xxs;
-}
-input::placeholder, textarea::placeholder {
-  color: #DDD !important;
-}

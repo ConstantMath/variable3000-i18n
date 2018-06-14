@@ -4,8 +4,6 @@
     position:absolute;
     right:0;
     top:0.8rem;
-    min-width: 100px;
-    width:12%;
   }
   .panel-body {
     padding-top: 0;
@@ -30,6 +28,7 @@
         padding:0;
         width: 100%;
         @extend .ts-title;
+        cursor:pointer;
         &::placeholder { /* Chrome/Opera/Safari */
           color: $base-color !important;
           opacity: 1 !important;
@@ -38,6 +37,7 @@
           opacity:0.5 !important;
         }
         &:focus{
+          cursor:text;
           outline:none;
         }
       }
@@ -66,6 +66,10 @@
         &.main-column{
           width:60%;
           max-width: 50vw;
+        }
+        &:not(th):not(.main-column):not(.sorting_1){
+          @extend .ts-small;
+          color:$gray;
         }
         .text-content{
           width:100%;

@@ -5,10 +5,8 @@ $(document).ready(function() {
       previousPlaceholder = $(this).attr('placeholder');
     }
     $(this).attr('placeholder','Search');
-    console.log(previousPlaceholder);
   });
   $('.main-content').on('mouseout', '.dataTables_filter input', function() {
-    console.log(previousPlaceholder);
     $(this).attr('placeholder', previousPlaceholder);
     previousPlaceholder = undefined;
   });

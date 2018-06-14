@@ -18,13 +18,14 @@
 @section('content')
   <div class="panel panel-default">
     <div class="table-responsive">
+      @include('admin.components.datatable-loading')
       <a href="{{ route('admin.pages.create', $parent_id) }}" class="btn btn-primary btn-xs"> Add</a>
-
       <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
-          <thead>
+          <thead class="hidden">
             <tr>
               <th class="is-published"></th>
               <th class="main-column">Title</th>
+              <th class="hidden-small"></th>
               <th></th>
             </tr>
           </thead>
@@ -32,21 +33,6 @@
     </div>
   </div>
 
- {{-- <div class="panel panel-default">
-   <div class="panel-heading">
-     <h3>{{ $page_title }}</h3>
-     <a href="{{ route('admin.pages.create', $parent_id) }}" class="pull-right"><i class="fa fa-plus-circle"></i> {{ $bt_add_label }}</a>
-   </div>
-   <div class="panel-body table-responsive">
-     <table class="table">
-       <tbody id="sortable" class="sortable">
-         @if($articles) @foreach ($articles as $node)
-           @include('admin.components.table-row-pages')
-         @endforeach @endif
-       </tbody>
-     </table>
-   </div>
- </div> --}}
 @endsection
 
 @section('meta')
@@ -96,6 +82,9 @@ $(document).ready(function() {
       rowReorder: true,
       colReorder: false,
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
+      initComplete: function(settings, json) {
+          $('.datatable-loading').hide();
+        },
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata', $parent_id) }}',
       language: {
         "search": '',
@@ -116,6 +105,9 @@ $(document).ready(function() {
         {data: 'title', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';
         }, name: 'title', orderable: false, class: 'main-column'},
+        {data: 'updated_at', render: function ( data, type, row, meta ) {
+          return '<div class="text-content">'+ data + '</div>';
+        }, name: 'updated_at', searchable: false, orderable: false, class: 'hidden-small updated_at'},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });

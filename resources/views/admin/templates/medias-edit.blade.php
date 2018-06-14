@@ -18,7 +18,6 @@
     <div id="validation"></div>
     <div class="panel-body">
       <div class="file">
-        <?php // TODO: test par type de médias + style affichage media ?>
         <img src="{{ $media->getUrl() }}" style="max-width:100%">
       </div>
       <div class="form-group">

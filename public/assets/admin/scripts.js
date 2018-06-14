@@ -21332,10 +21332,8 @@ $(document).ready(function() {
             previousPlaceholder = $(this).attr('placeholder');
         }
         $(this).attr('placeholder', 'Search');
-        console.log(previousPlaceholder);
     });
     $('.main-content').on('mouseout', '.dataTables_filter input', function() {
-        console.log(previousPlaceholder);
         $(this).attr('placeholder', previousPlaceholder);
         previousPlaceholder = undefined;
     });
@@ -21368,6 +21366,13 @@ function form_layout(el) {
 
     });
 }
+
+
+$('.dataTable')
+    .on('init.dt', function() {
+        console.log('Table initialisation complete: ' + new Date().getTime());
+    })
+    .dataTable();
 
 $('nav .js-dropdown-toggle').click(function(e) {
     e.preventDefault;

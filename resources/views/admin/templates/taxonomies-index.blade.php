@@ -8,11 +8,11 @@
   @if($taxonomies) @foreach ($taxonomies as $taxonomy)
   <div class="panel panel-default">
     <div class="table-responsive">
+      @include('admin.components.datatable-loading')
       <a href="{{ route('admin.taxonomies.create', $taxonomy->id) }}" class="btn btn-primary btn-xs"> Add</a>
       <table class="panel-body table table-hover table-bordered table-striped" style="width:100%" id="datatable-{{$taxonomy->id}}">
-        <thead>
+        <thead class="hidden">
           <tr>
-            <th>#</th>
             <th>{{ $taxonomy->name }}</th>
             <th></th>
           </tr>
@@ -34,13 +34,16 @@
 $(document).ready(function() {
     @if($taxonomies) @foreach ($taxonomies as $taxonomy)
       var table_{{$taxonomy->id}} = $('#datatable-{{$taxonomy->id}}').DataTable({
-        'responsive': true,
+        'responsive': false,
         'processing': true,
         'serverSide': true,
         'rowReorder': true,
         'colReorder': false,
         'paging':   false,
         'dom'       : '<"panel-heading"f> <"panel-body"t> <"panel-footer">',
+        'initComplete': function(settings, json) {
+            $('#datatable-{{$taxonomy->id}}_wrapper').siblings('.datatable-loading').hide();
+          },
         'ajax': {
           'url': '{{ route('admin.' .$data['table_type']. '.getdata') }}',
           'data': function ( d ) {
@@ -56,8 +59,9 @@ $(document).ready(function() {
           },
         },
         columns: [
-          {data: 'order', name: 'order', searchable: false, width: '5%'},
-          {data: 'name', name: 'name', orderable: false, width: '80%'},
+          {data: 'name', render: function ( data, type, row, meta ) {
+            return '<div class="text-content">'+ data + '</div>';
+          }, name: 'name', orderable: false, class: 'main-column'},
           {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
         ]
       });

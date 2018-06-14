@@ -4,12 +4,16 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-    <div class="edit__header">
-      <h1 class="edit__title">Edit</h1>
-    </div>
       @if(isset($article->id))
+        <div class="edit__header">
+          <?php // IDEA: Article → Edit ?>
+          <h1 class="edit__title">Edit</h1>
+        </div>
         {!! Form::model($article, ['route' => ['admin.articles.update', $article->id], 'method' => 'put', 'class' => 'panel panel-edit main-form', 'id' => 'main-form', 'files' => true]) !!}
       @else
+        <div class="edit__header">
+          <h1 class="edit__title">Create</h1>
+        </div>
         {!! Form::model($article, ['route' => ['admin.articles.store'], 'method' => 'post', 'class' => 'panel panel-edit main-form', 'id' => 'main-form', 'files' => true]) !!}
       @endif
         <div id="validation"></div>

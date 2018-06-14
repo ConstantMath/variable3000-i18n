@@ -6,10 +6,10 @@
 @section('content')
   <div class="panel panel-default">
     <div class="table-responsive">
+      @include('admin.components.datatable-loading')
       <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-xs"> Add</a>
-
       <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
-          <thead>
+          <thead class="hidden">
             <tr>
               <th>Name</th>
               <th>Email</th>
@@ -38,6 +38,9 @@ $(document).ready(function() {
       rowReorder: false,
       colReorder: false,
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
+      initComplete: function(settings, json) {
+          $('.datatable-loading').hide();
+        },
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
         "search": '',
