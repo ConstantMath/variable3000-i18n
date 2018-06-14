@@ -24,7 +24,7 @@ if ( $('.panel.multiple').length ){
             success: function(response){
               if(response.status == 'success'){
                 console.log(media_type+'pp');
-                $('<span class="message pull-right">Updated !</span>').appendTo('#panel-' + media_type  + ' .panel-heading').fadeOut(3000);
+                $('<span class="message">Updated !</span>').appendTo('#panel-' + media_type  + ' .panel-heading').fadeOut(3000);
               } else {
               }
             }

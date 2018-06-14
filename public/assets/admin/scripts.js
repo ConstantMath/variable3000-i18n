@@ -19736,20 +19736,6 @@
 });
 
 $(document).ready(function() {
-    var previousPlaceholder;
-    $('.main-content').on('mouseover', '.dataTables_filter input', function() {
-        if (previousPlaceholder === undefined) {
-            previousPlaceholder = $(this).attr('placeholder');
-        }
-        $(this).attr('placeholder', 'Search');
-    });
-    $('.main-content').on('mouseout', '.dataTables_filter input', function() {
-        $(this).attr('placeholder', previousPlaceholder);
-        previousPlaceholder = undefined;
-    });
-});
-
-$(document).ready(function() {
     if ($('.select-admin-layout').length) {
 
         form_layout($('.select-admin-layout'));
@@ -19883,7 +19869,7 @@ if ($('.panel.multiple').length) {
                         success: function(response) {
                             if (response.status == 'success') {
                                 console.log(media_type + 'pp');
-                                $('<span class="message pull-right">Updated !</span>').appendTo('#panel-' + media_type + ' .panel-heading').fadeOut(3000);
+                                $('<span class="message">Updated !</span>').appendTo('#panel-' + media_type + ' .panel-heading').fadeOut(3000);
                             } else {}
                         }
                     });

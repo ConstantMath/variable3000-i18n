@@ -1,13 +1,13 @@
 <?php
 // TODO: pass var to blade include
-$panel_title = 'Featured image';
+$panel_title = __('admin.featured_image');
 $panel_type  = 'single';
 $collection_name = 'une';
 ?>
 @include('admin.components.article-media-panel')
 
 <?php
-$panel_title = 'Gallery';
+$panel_title = __('admin.gallery');
 $panel_type = 'multiple';
 $collection_name = 'gallery';
 ?>
@@ -89,6 +89,7 @@ $collection_name = 'gallery';
   /* manage data list */
   function getMedias(media_collection_name) {
     // mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
+    // TODO: Afficher si aucun contenu
     var main_form_id = 'main-form';
     var article_id = $('#' + main_form_id + ' input[name=id]').val();
     var current_medias = $('#' + main_form_id + ' #' + media_collection_name).val();

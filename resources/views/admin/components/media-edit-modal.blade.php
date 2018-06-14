@@ -12,7 +12,7 @@
         <div class="modal-header">
           <h4 class"modal-title">Edit media</h4>
           <div class="modal-btn">
-            <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-cancel btn-xs" data-dismiss="modal">{{ __('admin.cancel') }}</button>
             <button type="button" class="btn btn-primary btn-xs media-edit-save" data-dismiss="modal">Save</button>
           </div>
         </div>

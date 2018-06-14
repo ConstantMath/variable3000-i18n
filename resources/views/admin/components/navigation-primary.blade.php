@@ -23,7 +23,7 @@
           <li class="js-dropdown-toggle">
             <a role="button">
               <?php // NOTE: tools a la place d'admin?>
-              Tools&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
+              {{ __('admin.tools') }}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
             <ul class="js-dropdown-content" role="menu">
               @can('Admin medias')

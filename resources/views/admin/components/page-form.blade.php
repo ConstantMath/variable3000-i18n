@@ -26,7 +26,7 @@
         @endif
         {{-- Is published ? --}}
         <div class="is-published">
-            <label>{!! Form::checkbox('published', 1, null) !!}<span>Published</span></label>
+            <label>{!! Form::checkbox('published', 1, null) !!}<span>{{__('admin.published')}}</span></label>
         </div>
       </div>
     </div>

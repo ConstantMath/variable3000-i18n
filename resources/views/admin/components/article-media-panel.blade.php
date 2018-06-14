@@ -15,7 +15,7 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     {!! Form::hidden('collection_name', $collection_name) !!}
       {{-- Always put file form before submit bt  --}}
       <input type="file" name="image" class="input-single-media-upload" />
-      <a href="#" class="media-add btn btn-primary btn-xs"> Add</a>
+      <a href="#" class="media-add btn btn-primary btn-xs"> {{__('admin.add')}}</a>
     {!! Form::close() !!}
   </div>
   <div class="panel-body">

@@ -33,6 +33,14 @@
       background-color: darken($blue-alt, 5);
     }
   }
+  &.btn-cancel {
+    background-color: $lightgray;
+    color:$base-color;
+    border-color: $base-color;
+    &:active {
+      background-color: darken($lightgray, 5);
+    }
+  }
   &.btn-small {
     padding: $spacing-xs calc(#{$grid-gutter-width} / 2);
   }
@@ -42,6 +50,7 @@
     display: inline-block;
     text-align: center;
     border-radius:20px;
+    @extend .ts-small;
   }
 }
 

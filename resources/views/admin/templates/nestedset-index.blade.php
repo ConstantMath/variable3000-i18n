@@ -19,7 +19,7 @@
   <div class="panel panel-default">
     <div class="table-responsive">
       @include('admin.components.datatable-loading')
-      <a href="{{ route('admin.pages.create', $parent_id) }}" class="btn btn-primary btn-xs"> Add</a>
+      <a href="{{ route('admin.pages.create', $parent_id) }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
       <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
           <thead class="hidden">
             <tr>

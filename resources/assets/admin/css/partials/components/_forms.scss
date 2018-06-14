@@ -104,6 +104,11 @@ label {
 input[type="checkbox"]{
   margin-right: $spacing-xxs;
 }
-input::placeholder, textarea::placeholder {
-  color: #DDD !important;
+input::placeholder,
+textarea::placeholder,
+.CodeMirror .CodeMirror-placeholder,
+.select2-container .select2-selection .select2-selection__placeholder,
+.select2-selection__placeholder{
+  color: $gray !important;
+  opacity:0.7 !important;
 }

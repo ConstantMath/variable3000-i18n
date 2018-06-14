@@ -7,11 +7,11 @@
 <div class="panel panel-default">
   <div class="table-responsive">
     @include('admin.components.datatable-loading')
-    <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
+    <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
     <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
       <?php // NOTE: THEAD caché, à afficher selon les besoins ?>
         <thead class="hidden">
-          <tr> 
+          <tr>
             <th class="is-published"></th>
             <th class="main-column">Title</th>
             <th class="hidden-small">Updated</th>

@@ -8,7 +8,7 @@
   <div class="panel panel-default">
     <div class="table-responsive">
       @include('admin.components.datatable-loading')
-      <a href="{{ route('admin.roles.create') }}" class="btn btn-primary btn-xs"> Add</a>
+      <a href="{{ route('admin.roles.create') }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
       <table class="panel-body table table-hover table-bordered table-striped" style="width:100%" id="datatable-roles">
         <thead class="hidden">
           <tr>
@@ -23,7 +23,7 @@
   <div class="panel panel-default">
     <div class="table-responsive">
       @include('admin.components.datatable-loading')
-      <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-xs"> Add</a>
+      <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
       <table class="panel-body table table-hover table-bordered table-striped" style="width:100%" id="datatable-permissions">
         <thead class="hidden">
           <tr>
