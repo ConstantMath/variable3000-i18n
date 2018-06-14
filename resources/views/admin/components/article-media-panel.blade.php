@@ -25,7 +25,4 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     <?php // TODO: position du message (dans le header fantom ?) ?>
     <span class="message" class="hidden"></span>
   </div>
-  <div class="panel-action">
-
-  </div>
 </div>

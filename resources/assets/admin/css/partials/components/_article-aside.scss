@@ -57,6 +57,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .media__actions{
+    color: $gray;
+  }
   .media__preview {
     background-position: right;
     background-repeat: no-repeat;

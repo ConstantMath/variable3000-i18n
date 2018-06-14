@@ -71,7 +71,7 @@
 
 body {
   @extend %font-body;
-  background:$lightgray;
+  background-color:$lightgray;
   color: $base-color;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

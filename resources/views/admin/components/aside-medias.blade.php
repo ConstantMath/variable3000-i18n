@@ -137,8 +137,9 @@ $collection_name = 'gallery';
         // Build <li>
         li = li + '<li class="list-group-item media-list__item" data-media-table-type="' + article_model_type + '" data-media-id="' + value.id + '" data-article-id="' + value.mediatable_id + '" data-article-id="' + value.mediatable_id + '" data-media-type="' + value.type + '">';
         li = li + '<div class="media__infos"><p class="media__title">' + value.name + '</p>';
-        li = li + '<p><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-table-type="' + article_model_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a></p>';
-        li = li + '<p><a href="' + admin_url + '/medias/quickdestroy/' + value.id + '" class="link link--delete" data-media-collection-name="'+ media_type +'">{{ __('admin.delete') }}</a></p></div>';
+        li = li + '<div class="media__actions"><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-table-type="' + article_model_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a>';
+        li = li + '<span> / </span>'
+        li = li + '<a href="' + admin_url + '/medias/quickdestroy/' + value.id + '" class="link link--delete" data-media-collection-name="'+ media_type +'">{{ __('admin.delete') }}</a></div></div>';
         //media preview
         if(value.mime_type.includes("image", 0)){
           li = li + '<div class="media__preview" style="background-image:url(\'/imagecache/thumb/' + value.id + '/' + value.file_name + '\')"></div>';

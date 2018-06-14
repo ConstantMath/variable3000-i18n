@@ -12,8 +12,9 @@
   li {
     display: inline-block;
     text-align: center;
-    text-transform: uppercase;
+    border:1px solid white;
     padding: $spacing-xs $spacing-sm;
+    text-transform: capitalize;
     a {
       @extend .ts-link;
     }

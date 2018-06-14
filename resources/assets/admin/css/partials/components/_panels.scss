@@ -7,7 +7,7 @@
     @extend .ts-small;
   }
   .tab-select {
-    @extend .ts-label;
+    @extend .ts-subtitle;
   }
   h2 {
     @extend .ts-subtitle;
@@ -38,8 +38,12 @@
 .panel-footer {
   @extend .ts-small;
   li {
-    margin-top: $spacing-xs;
-    margin-right: $spacing-sm;
+    margin-right: 0;
+    display: inline-block;
+    &:not(:first-child)::before{
+      content:'/';
+      margin-right: $spacing-xxs;
+    }
   }
   list-style: none;
   margin-top: $spacing-xs;
@@ -50,7 +54,6 @@
 .panel-action {
   position:sticky;
   bottom:0;
-  z-index: 5;
   border-top: $border-width-md solid $lightgray;
   margin-top: $spacing-sm;
 }
