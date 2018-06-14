@@ -1,3 +1,5 @@
+
+
 $(document).ready(function() {
 
   $.ajaxSetup({
@@ -5,16 +7,6 @@ $(document).ready(function() {
       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
-
-  // ----- Date picker ----- //
-  // http://eonasdan.github.io/bootstrap-datetimepicker/
-
-  if ( $('.datepicker').length ){
-    $('.datepicker').datetimepicker({
-      locale: 'en',
-      format: 'DD/MM/YYYY'
-    });
-  }
 
 
   // ----- Tags list select ----- //
@@ -25,12 +17,6 @@ $(document).ready(function() {
       tokenSeparators: [","],
       allowClear: true,
     });
-  }
-
-
-  // ----- Color picker ----- //
-  if ( $('.sortable').length ){
-    $('.color-picker').colorpicker({ /*options...*/ });
   }
 
   // ----- Hide index alerts ----- //
