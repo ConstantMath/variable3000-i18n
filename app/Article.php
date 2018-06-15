@@ -128,7 +128,7 @@ class Article extends Model implements HasMedia{
    * @param string  $value (date)
 	 *
    */
-
+   // TODO: Réécrire la date pour toutes les ressources
   public function getUpdatedAtAttribute($value){
     if(!empty($value)){
       Carbon::setLocale('fr');

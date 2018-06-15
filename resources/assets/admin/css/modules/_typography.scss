@@ -43,21 +43,46 @@
 }
 
 /*------------------------------------*\
+  #EDITOR
+\*------------------------------------*/
+
+.editor-title {
+  @extend %font-size-xl;
+  @extend %font-body-bold;
+}
+.editor-subtitle {
+  @extend %font-size-lg;
+  @extend %font-body-bold;
+}
+.editor-subsubtitle {
+  @extend %font-size-lg;
+  @extend %font-body-bold;
+}
+.editor-body {
+  @extend %font-body;
+  @extend %font-size-md;
+}
+.editor-small {
+  @extend %font-body;
+  @extend %font-size-sm;
+}
+/*------------------------------------*\
   #TITLE
 \*------------------------------------*/
 
-.body {
+.editor-preview-side,
+.editor-preview {
   h1,
   h2 {
-    @extend .ts-title !optional;
+    @extend .editor-title !optional;
   }
   h3 {
-    @extend .ts-subtitle !optional;
+    @extend .editor-subtitle !optional;
   }
   h4,
   h5,
   h6 {
-    @extend .ts-subsubtitle !optional;
+    @extend .editor-subsubtitle !optional;
   }
   h2,
   h3,
@@ -76,10 +101,11 @@
   #PARAGRAPH
 \*------------------------------------*/
 
-.body {
-  @extend .ts-body !optional;
+.editor-preview-side,
+.editor-preview {
+  @extend .editor-body !optional;
   p {
-    @extend .ts-body !optional;
+    @extend .editor-body !optional;
     margin-bottom: .5em;
   }
 }
@@ -90,11 +116,12 @@
   #LINK
 \*------------------------------------*/
 
-.body a {
-  color: $action;
+.editor-preview-side a,
+.editor-preview a {
+  color: #0066FF;
   text-decoration: none;
   &:hover {
-    color: $action-response;
+    color: $gray;
     text-decoration: underline;
   }
 }
@@ -105,7 +132,8 @@
   #BOLD-ITALIC
 \*------------------------------------*/
 
-.body {
+.editor-preview-side,
+.editor-preview {
   em,
   i{
     @extend %font-body-italic;
@@ -132,7 +160,8 @@
   #BLOCKQUOTE
 \*------------------------------------*/
 
-.body blockquote {
+.editor-preview-side blockquote,
+.editor-preview blockquote {
   padding-left: 1em;
   border-left: $border-width-sm solid $base-color;
   margin-top: 1em;
@@ -150,7 +179,8 @@
   #DEFINITIONS
 \*------------------------------------*/
 
-.body dl {
+.editor-preview-side dl,
+.editor-preview dl {
   @extend .ts-body !optional;
   dt {
     @extend %font-body-bold;
@@ -174,7 +204,8 @@
 \*------------------------------------*/
 
 // ORDERED
-.body ol {
+.editor-preview-side ol,
+.editor-preview ol {
   counter-reset:li;
   li {
     position: relative;
@@ -196,7 +227,8 @@
 }
 
 // UNORDERED
-.body ul {
+.editor-preview-side ul,
+.editor-preview ul {
   li {
     position: relative;
     padding-left: 1.2em;
@@ -222,7 +254,8 @@
 \*------------------------------------*/
 
 
-.body table {
+.editor-preview-side table,
+.editor-preview table {
   width: 100%;
   thead {
     border-bottom: $border-width-md solid $base-color;
@@ -257,7 +290,8 @@
   #SPACING
 \*------------------------------------*/
 
-.body {
+.editor-preview-side,
+.editor-preview {
   p + h1,
   ul + h1,
   ol + h1,
@@ -303,7 +337,8 @@
   #MISC
 \*------------------------------------*/
 
-.body {
+.editor-preview-side,
+.editor-preview {
   ol,
   ul {
     list-style: none;

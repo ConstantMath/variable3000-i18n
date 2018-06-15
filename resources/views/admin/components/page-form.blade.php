@@ -14,9 +14,7 @@
     <div class="panel-heading">
       @if(count(config('translatable.locales')) > 1 )
       <ul class="tab-select">
-        @foreach (config('translatable.locales') as $lang)
-          <li role="presentation" data-tab="{{$lang}}" @if(App::getLocale() == $lang) class="active" @endif><a href="#" role="tab">{{ $lang }}</a></li>
-        @endforeach
+        @foreach (config('translatable.locales') as $lang)<li role="presentation" data-tab="{{$lang}}" @if(App::getLocale() == $lang) class="active" @endif><a href="#" role="tab">{{ $lang }}</a></li>@endforeach
       </ul>
       <div class="edit-details">
         @if(isset($article->id))
