@@ -38,7 +38,9 @@ $(document).ready(function() {
       autoWidth: false,
       processing: true,
       serverSide: true,
-      rowReorder: true,
+      rowReorder: {
+          selector: '.reorder'
+      },
       colReorder: false,
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
       initComplete: function(settings, json) {
@@ -68,7 +70,9 @@ $(document).ready(function() {
         {data: 'updated_at', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';
         }, name: 'updated_at', searchable: false, orderable: false, class: 'hidden-small updated_at'},
-        {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
+        {data: 'action', render: function ( data, type, row, meta ) {
+          return data + '<i class="fa fa-sort reorder"></i>';
+        }, name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
 

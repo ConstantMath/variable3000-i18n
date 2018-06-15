@@ -61,11 +61,13 @@
       position:relative;
       th,
       td {
-        padding: $spacing-xs calc(#{$grid-gutter-width} / 2);
+        padding: 0 calc(#{$grid-gutter-width} / 2);
         max-width: 20vw;
         &.main-column{
           width:60%;
           max-width: 50vw;
+          padding-top:$spacing-xs;
+          padding-bottom:$spacing-xs;
         }
         &:not(th):not(.main-column):not(.sorting_1){
           @extend .ts-small;

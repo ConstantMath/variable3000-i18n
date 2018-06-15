@@ -56,6 +56,7 @@ gulp.task("admin-sass", function(){
 });
 
 gulp.task('admin-js', function() {
+  // TODO: Babelify
   return gulp.src([
     'resources/assets/admin/js/vendor/*.js',
     'resources/assets/admin/js/modules/*.js',

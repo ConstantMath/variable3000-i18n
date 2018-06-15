@@ -25,7 +25,6 @@
     @endif
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
-  <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
   <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
   <script src="{{ url('/assets/admin/scripts.min.js') }}"></script>
   <script type="text/javascript">

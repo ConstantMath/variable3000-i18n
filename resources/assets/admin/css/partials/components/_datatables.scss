@@ -1,11 +1,9 @@
 table.dt-rowReorder-float {
     position: absolute !important;
-    opacity: 0.8;
+    opacity: 0.5;
     table-layout: fixed;
-    outline: 1px solid $blue;
-    outline-offset: -1px;
     z-index: 2001;
-    max-height:32px;
+    max-height:40px;
     td {
       cursor:grabbing !important;
     }
@@ -32,18 +30,20 @@ body.dt-rowReorder-noOverflow {
 //     cursor: move;
 // }
 
+
 .table-reorderable > tbody {
-  & > tr > td:first-of-type:not(:only-child) {
-    position: relative;
-    cursor:grab;
-    &:hover:before{
-      content:'\f0dc';
-      font-family: 'FontAwesome';
+  & > tr > td:last-child{
+    position:relative;
+    padding-right: 0 !important;
+    .reorder {
+      padding:$spacing-xs;
+      cursor:grab;
       color:$gray;
-      position: absolute;
-      left: calc( -#{$grid-gutter-width} / 2);
-      top: 50%;
-      transform: translateY(-50%);
+      opacity:0.3;
+      transition:0.2;
+      &:hover{
+        opacity:0.8;
+      }
     }
   }
 }

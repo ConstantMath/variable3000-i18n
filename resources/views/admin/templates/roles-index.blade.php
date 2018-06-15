@@ -67,7 +67,7 @@ $(document).ready(function() {
         },
       },
       columns: [
-        {data: 'name', name: 'name', orderable: false, width: '60%'},
+        {data: 'name', name: 'name', orderable: false, class: 'main-column'},
         {data: 'updated_at', name: 'title', searchable: false, orderable: false, class: 'hidden-small'},
         {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
       ]

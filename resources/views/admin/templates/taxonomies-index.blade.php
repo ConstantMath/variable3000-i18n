@@ -10,7 +10,7 @@
     <div class="table-responsive">
       @include('admin.components.datatable-loading')
       <a href="{{ route('admin.taxonomies.create', $taxonomy->id) }}" class="btn btn-primary btn-xs"> Add</a>
-      <table class="panel-body table table-hover table-bordered table-striped" style="width:100%" id="datatable-{{$taxonomy->id}}">
+      <table class="panel-body table table-hover table-bordered table-striped table-reorderable" style="width:100%" id="datatable-{{$taxonomy->id}}">
         <thead class="hidden">
           <tr>
             <th>{{ $taxonomy->name }}</th>
@@ -37,7 +37,9 @@ $(document).ready(function() {
         'responsive': false,
         'processing': true,
         'serverSide': true,
-        'rowReorder': true,
+        'rowReorder': {
+            selector: '.reorder'
+        },
         'colReorder': false,
         'paging':   false,
         'dom'       : '<"panel-heading"f> <"panel-body"t> <"panel-footer">',
@@ -62,7 +64,9 @@ $(document).ready(function() {
           {data: 'name', render: function ( data, type, row, meta ) {
             return '<div class="text-content">'+ data + '</div>';
           }, name: 'name', orderable: false, class: 'main-column'},
-          {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
+          {data: 'action', render: function ( data, type, row, meta ) {
+            return data + '<i class="fa fa-sort reorder"></i>';
+          }, name: 'action', orderable: false, searchable: false, class:'faded'}
         ]
       });
 

@@ -12,6 +12,7 @@
           min-width: 35px;
           height:75px;
           object-fit: contain;
+          object-position: center;
           @include media("<sm") {
             height:35px;
           }
