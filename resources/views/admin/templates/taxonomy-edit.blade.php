@@ -14,7 +14,9 @@
 
   <div class="panel panel-edit panel-edit--single panel-default">
     <div class="panel-heading">
-      {{ $taxonomy->parent->name }}
+      <div class="edit__header">
+        <h1 class="edit__title">{{ $taxonomy->parent->name }}</h1>
+      </div>
     </div>
     <div class="panel-body">
         {{-- Validation errors --}}
