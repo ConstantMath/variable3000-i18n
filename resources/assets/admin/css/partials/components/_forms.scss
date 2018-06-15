@@ -99,10 +99,18 @@ label {
   label {
     margin-bottom: $spacing-xxs;
   }
+  .description {
+    display:block;
+    color:$gray;
+    @extend .ts-small;
+  }
 }
 
 input[type="checkbox"]{
   margin-right: $spacing-xxs;
+}
+textarea {
+  @extend %font-body;
 }
 input::placeholder,
 textarea::placeholder,

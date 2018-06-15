@@ -25,11 +25,13 @@
 .ts-input {
   @extend %font-body;
   @extend %font-size-lg;
+  letter-spacing: .02em;
 }
 .ts-small {
   @extend %font-body;
   @extend %font-size-sm;
   text-transform: none;
+  letter-spacing: .02em;
 }
 
 .ts-link {

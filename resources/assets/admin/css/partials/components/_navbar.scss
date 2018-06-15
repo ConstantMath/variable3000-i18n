@@ -70,12 +70,16 @@
   &:hover{
     background-image: url('/assets/admin/images/fantom_.gif');
   }
+  @include media("<sm") {
+    margin-top: $spacing-xs;
+    margin-right: calc(#{$grid-gutter-width} / 3 );
+    position:static;
+  }
 }
 
 .navbar__nav {
   position: relative;
   justify-content: space-between;
-  flex:1;
   @extend .wrapper;
 }
 
@@ -83,6 +87,7 @@
   align-items: center;
   &.navbar__list--left {
     padding-right: $spacing-sm;
+    flex:1;
     li:first-child{
       a {
         padding-left: 0;
