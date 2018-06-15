@@ -51,7 +51,7 @@ $(document).ready(function() {
         },
       },
       columns: [
-        {data: 'name', name: 'name', orderable: false, width: '60%'},
+        {data: 'name', name: 'name', orderable: false, class:'main-column'},
         {data: 'email', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';
         }, name: 'email', searchable: false, orderable: false},
