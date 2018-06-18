@@ -20,7 +20,7 @@
           <li><a href="{{ url('/login') }}">Login</a></li>
           <li><a href="{{ url('/register') }}">Register</a></li>
         @else
-          <li class="js-dropdown-toggle">
+          <li class="js-dropdown-toggle tools">
             <a role="button">
               <?php // NOTE: tools a la place d'admin?>
               {{ __('admin.tools') }}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
