@@ -84,6 +84,8 @@ class MediasController extends AdminMediasController {
       }
     }
     $articles = Article::listAll();
+    $collections = $media->pluck('collection_name')->unique();
+    dd($collections);
     return view('admin/templates/medias-edit',  compact('media', 'data', 'articles'));
   }
 
