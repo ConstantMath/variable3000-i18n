@@ -11,7 +11,9 @@
   @endif
   <div class="panel panel-edit panel-edit--single panel-default">
     <div class="panel-heading">
-      Edit user
+      <div class="edit__header">
+        <h1 class="edit__title">Edit user</h1>
+      </div>
     </div>
     <div id="validation"></div>
     <div class="panel-body">

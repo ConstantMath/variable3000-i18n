@@ -1,13 +1,13 @@
 <?php
 // TODO: pass var to blade include
-$panel_title = 'Featured image';
+$panel_title = __('admin.featured_image');
 $panel_type  = 'single';
 $collection_name = 'une';
 ?>
 @include('admin.components.article-media-panel')
 
 <?php
-$panel_title = 'Gallery';
+$panel_title = __('admin.gallery');
 $panel_type = 'multiple';
 $collection_name = 'gallery';
 ?>
@@ -88,11 +88,13 @@ $collection_name = 'gallery';
 
   /* manage data list */
   function getMedias(media_collection_name) {
+    // mediatable_type = typeof mediatable_type  === 'undefined' ? 'articles' : mediatable_type;
+    // TODO: Afficher si aucun contenu
     var main_form_id = 'main-form';
     var article_id = $('#' + main_form_id + ' input[name=id]').val();
     var current_medias = $('#' + main_form_id + ' #' + media_collection_name).val();
     var panel = $("#panel-" + media_collection_name);
-    var model_name = '{{class_basename($article)}}';
+    var model_name = '{{$data['table_type']}}';
     // Get from DB
     if(article_id){
       $.ajax({
@@ -134,8 +136,9 @@ $collection_name = 'gallery';
         // Build <li>
         li = li + '<li class="list-group-item media-list__item" data-media-id="' + value.id + '" data-article-id="' + value.model_id + '" data-media-collection-name="' + value.collection_name + '">';
         li = li + '<div class="media__infos"><p class="media__title">' + value.name + '</p>';
-        li = li + '<p><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a></p>';
-        li = li + '<p><a href="' + admin_url + '/medias/quickdestroy/' + value.id + '" class="link link--delete" data-media-collection-name="'+ media_type +'">{{ __('admin.delete') }}</a></p></div>';
+        li = li + '<div class="media__actions"><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-table-type="' + article_model_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a>';
+        li = li + '<span> / </span>'
+        li = li + '<a href="' + admin_url + '/medias/quickdestroy/' + value.id + '" class="link link--delete" data-media-collection-name="'+ media_type +'">{{ __('admin.delete') }}</a></div></div>';
         //media preview
         if(value.mime_type.includes("image", 0)){
           li = li + '<div class="media__preview" style="background-image:url(\'/imagecache/thumb/' + value.id + '/' + value.file_name + '\')"></div>';

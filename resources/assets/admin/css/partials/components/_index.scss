@@ -1,9 +1,9 @@
 
 .table-responsive {
-  .btn-xs {
+  .btn{
     position:absolute;
     right:0;
-    top:$spacing-xs;
+    top:0.8rem;
   }
   .panel-body {
     padding-top: 0;
@@ -13,21 +13,33 @@
   }
 
   .panel-heading {
-    padding-top:$spacing-xs;
-    padding-bottom: $spacing-xs;
+    padding-top:0;
+    margin-bottom: $spacing-xs;
     .dataTables_filter {
       label{
-        width: 30%;
+        width: 80%;
         @include media("<sm") {
-          width: calc(100% - 70px);
+          width: calc(100% - 100px);
         }
       }
       input {
-        @extend .form-control;
-        border: 0;
-        padding-top: $spacing-xxs;
-        padding-bottom: $spacing-xxs;
+        border: none;
+        background-color:transparent;
+        padding:0;
         width: 100%;
+        @extend .ts-title;
+        cursor:pointer;
+        &::placeholder { /* Chrome/Opera/Safari */
+          color: $base-color !important;
+          opacity: 1 !important;
+        }
+        &:hover::placeholder{
+          opacity:0.5 !important;
+        }
+        &:focus{
+          cursor:text;
+          outline:none;
+        }
       }
     }
   }
@@ -38,16 +50,28 @@
 .dataTables_wrapper{
   .table {
     border:none;
+    thead{
+      th {
+        @extend .ts-label;
+        padding-bottom:$spacing-xxs !important;
+      }
+    }
     tr {
       border-bottom: $border-width-sm solid $lightgray;
       position:relative;
       th,
       td {
-        padding: $spacing-xs calc(#{$grid-gutter-width} / 2);
+        padding: 0 calc(#{$grid-gutter-width} / 2);
         max-width: 20vw;
         &.main-column{
           width:60%;
           max-width: 50vw;
+          padding-top:$spacing-xs;
+          padding-bottom:$spacing-xs;
+        }
+        &:not(th):not(.main-column):not(.sorting_1){
+          @extend .ts-small;
+          color:$gray;
         }
         .text-content{
           width:100%;
@@ -70,9 +94,6 @@
           text-align:right;
           padding-right :calc(#{$grid-gutter-width} / 2);
         }
-      }
-      th {
-        font-weight: bold;
       }
     }
   }
@@ -103,13 +124,4 @@
   .dataTables_info{
     @extend %font-size-sm;
   }
-}
-
-
-
-.icon-published {
-  font-size: $font-size-xs;
-  vertical-align: middle;
-  margin-right: $spacing-xxs;
-  color: $blue;
 }

@@ -16,7 +16,9 @@
   {!! Form::hidden('model_id', $media->model_id) !!}
   <div class="panel panel-default panel-edit panel-edit--single panel-settings">
     <div class="panel-heading">
-      Edit media
+      <div class="edit__header">
+        <h1 class="edit__title">Edit media</h1>
+      </div>
     </div>
     <div id="validation"></div>
     <div class="panel-body">
@@ -26,7 +28,6 @@
       </div>
       @if(!empty($media->id))
       <div class="file">
-        <?php // TODO: test par type de médias + style affichage media ?>
         <img src="{{ $media->getUrl() }}" style="max-width:100%">
       </div>
       @endif

@@ -1,3 +1,11 @@
+.edit__header{
+  margin-bottom: $spacing-xs;
+}
+.edit__title{
+  display:block;
+  @extend .ts-title;
+}
+
 .panel {
   &.panel-edit {
     @include media(">=sm") {
@@ -52,35 +60,31 @@
   }
 }
 
-.form-group--published {
+.edit-details .is-published {
+  label {
+    cursor:pointer;
+  }
+  input[type="checkbox"] {
+    display:none;
+  }
+  span::before{
+    @extend .icon-published;
+    content:"\f10c";
+    font-family: 'FontAwesome';
+  }
+  &:hover span::before{
+    content:"\f192"
+  }
+  :checked + span::before{
+    content:"\f111";
+  }
 }
 
 .form-group {
   .slug {
+    @extend .ts-small;
     display:inline-block;
     color: $gray;
     margin-top: $spacing-xxs;
   }
-}
-
-.CodeMirror,
-.editor-toolbar,
-.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple,
-.select2-container--default .select2-selection--multiple,
-.select2-selection,
-.select2-dropdown,
-input{
-  border-width: $border-width-sm !important;
-  border-color: $bordergray !important;
-  border-radius:0 !important;
-  .select2-selection__choice {
-    border: none;
-    border-radius: 0;
-    background-color: $lightgray;
-  }
-}
-.select2-selection__choice {
-  border: none;
-  border-radius: 0;
-  background-color: $lightgray;
 }

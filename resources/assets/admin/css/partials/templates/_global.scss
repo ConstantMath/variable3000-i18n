@@ -3,14 +3,30 @@
 \*------------------------------------*/
 
 .main-content {
-  margin-top: $spacing-sm !important;
+  margin-top: $spacing-md !important;
   min-height: calc(100vh - 195px);
+}
 
+.wrapper {
+  margin:0 auto;
+  width: 90%;
+  max-width: 1600px;
+  &.wrapper--small {
+    width: 60%;
+    max-width: 1000px;
+  }
 }
 
 a {
   cursor: pointer;
   text-decoration: none;
+}
+
+.icon-published {
+  font-size: $font-size-xs;
+  vertical-align: baseline;
+  margin-right: $spacing-xxs;
+  color: $blue;
 }
 
 .help-block,
@@ -19,9 +35,10 @@ a {
   text-align: left;
   background-color: $lightyellow;
   position: fixed;
+  overflow: hidden;
   left:0;
   top: 0;
-  z-index: 5;
+  z-index: 999;
   padding-left: 5%;
   padding-right: 5%;
   padding-top: 1rem;
@@ -41,16 +58,6 @@ a {
   }
 }
 
-.wrapper {
-  margin:0 auto;
-  width: 90%;
-  max-width: 1600px;
-  &.wrapper--small {
-    width: 60%;
-    max-width: 1000px;
-  }
-}
-
 .fantom{
   background-image: url('/assets/admin/images/fantom.gif');
   background-repeat: no-repeat;
@@ -59,82 +66,4 @@ a {
   width:28px;
   position:absolute;
   z-index:-1;
-}
-
-
-.panel-body {
-  padding-left :calc(#{$grid-gutter-width} / 2);
-  padding-right :calc(#{$grid-gutter-width} / 2);
-}
-
-.panel {
-  position:relative;
-}
-.panel-heading {
-  padding-top: $spacing-sm;
-  padding-bottom: $spacing-xs;
-  color: $gray;
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    display:inline;
-  }
-}
-
-.panel-body {
-  padding-top: $spacing-sm;
-  padding-bottom: $spacing-sm;
-  background-color: $white;
-}
-
-.panel-action {
-  padding-top: $spacing-sm;
-}
-
-.panel-footer {
-  list-style: none;
-  margin: $spacing-lg ;
-  color: $gray;
-  li {
-    margin-top: $spacing-sm;
-    margin-right: $spacing-sm;
-  }
-}
-
-label {
-  @extend %font-size-sm;
-  color: $gray;
-  display:inline-block;
-}
-
-.form-group {
-  margin-top: $spacing-sm;
-  &:first-child{
-    margin-top:0;
-  }
-  label {
-    margin-bottom: $spacing-xxs;
-  }
-}
-.form-control {
-  display:block;
-  width:100%;
-  resize:none;
-  border: $border-width-sm solid $gray;
-  padding: $spacing-xxs $spacing-xs;
-  &:focus{
-    outline:none;
-    border-color: $blue !important;
-  }
-}
-
-
-
-input[type="checkbox"]{
-  margin-right: $spacing-xxs;
-}
-input::placeholder, textarea::placeholder {
-  color: #DDD !important;
 }

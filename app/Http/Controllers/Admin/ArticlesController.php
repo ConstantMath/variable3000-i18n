@@ -80,6 +80,7 @@ class ArticlesController extends AdminController
       'page_class' => 'article',
       'page_title' => 'Article edit',
       'page_id'    => 'index-',
+      'table_type' => $this->table_type,
     );
   	return view('admin/templates/article-edit',  compact('article', 'data'));
   }
@@ -97,6 +98,7 @@ class ArticlesController extends AdminController
       'page_class' => 'article create',
       'page_title' => 'Article create',
       'page_id'    => 'index-'.$parent_id,
+      'table_type' => $this->table_type,
     );
     $article = new Article;
     $article->parent = new Article;

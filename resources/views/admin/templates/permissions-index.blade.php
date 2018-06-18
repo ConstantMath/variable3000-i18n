@@ -6,7 +6,7 @@
 @section('content')
   <div class="panel panel-default">
     <div class="table-responsive">
-      <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-xs"> Add</a>
+      <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
       <table class="panel-body table table-hover table-bordered table-striped" style="width:100%" id="datatable">
         <thead>
           <tr>
@@ -40,7 +40,7 @@ $(document).ready(function() {
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Permissions",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'

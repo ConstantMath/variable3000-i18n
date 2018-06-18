@@ -6,10 +6,10 @@
 @section('content')
 <div class="panel panel-default">
   <div class="table-responsive">
-    <a href="{{ route('admin.medias.create') }}" class="btn btn-primary btn-xs"> Add</a>
-
+    @include('admin.components.datatable-loading')
+    <a href="{{ route('admin.medias.create') }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
     <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
-        <thead>
+        <thead class="hidden">
           <tr>
             <th class="media-preview"></th>
             <th class="main-column">Name</th>
@@ -39,10 +39,13 @@ $(document).ready(function() {
       rowReorder: false,
       colReorder: false,
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
+      initComplete: function(settings, json) {
+          $('.datatable-loading').hide();
+        },
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Medias",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'

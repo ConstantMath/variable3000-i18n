@@ -6,10 +6,11 @@
 @section('content')
 <div class="panel panel-default">
   <div class="table-responsive">
-    <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs"> Add</a>
-
+    @include('admin.components.datatable-loading')
+    <a href="{{ route('admin.articles.create') }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
     <table class="panel-body table table-hover table-bordered table-striped table-reorderable" id="datatable" style="width:100%">
-        <thead>
+      <?php // NOTE: THEAD caché, à afficher selon les besoins ?>
+        <thead class="hidden">
           <tr>
             <th class="is-published"></th>
             <th class="main-column">Title</th>
@@ -17,6 +18,7 @@
             <th></th>
           </tr>
         </thead>
+
     </table>
   </div>
 </div>
@@ -36,19 +38,25 @@ $(document).ready(function() {
       autoWidth: false,
       processing: true,
       serverSide: true,
-      rowReorder: true,
+      rowReorder: {
+          selector: '.reorder'
+      },
       colReorder: false,
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
+      initComplete: function(settings, json) {
+          $('div.datatable-loading').hide();
+        },
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
-        'search': '',
-        'searchPlaceholder': 'Search',
-        'paginate': {
-        'previous': '&larr;',
-        'next': '&rarr;'
+        "search": '',
+        searchPlaceholder: "Articles",
+        "paginate": {
+          "previous": '&larr;',
+          "next": '&rarr;'
         },
       },
       columns: [
+        //IDEA: Ajouter column de contenu cachée pour recherche (texte d'article ect)?
         {data: 'order', render: function ( data, type, row, meta ) {
           if(row.published == 1){
             return '<i class="fa fa-circle icon-published"></i>';
@@ -61,8 +69,10 @@ $(document).ready(function() {
         }, name: 'title', orderable: false, class: 'main-column'},
         {data: 'updated_at', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';
-        }, name: 'updated_at', searchable: false, orderable: false, class: 'hidden-small'},
-        {data: 'action', name: 'action', orderable: false, searchable: false, class:'faded'}
+        }, name: 'updated_at', searchable: false, orderable: false, class: 'hidden-small updated_at'},
+        {data: 'action', render: function ( data, type, row, meta ) {
+          return data + '<i class="fa fa-sort reorder"></i>';
+        }, name: 'action', orderable: false, searchable: false, class:'faded'}
       ]
     });
 

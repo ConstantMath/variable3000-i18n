@@ -6,10 +6,10 @@
 @section('content')
   <div class="panel panel-default">
     <div class="table-responsive">
-      <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-xs"> Add</a>
-
+      @include('admin.components.datatable-loading')
+      <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-xs">{{__('admin.add')}}</a>
       <table class="panel-body table table-hover table-bordered table-striped" id="datatable" style="width:100%">
-          <thead>
+          <thead class="hidden">
             <tr>
               <th>Name</th>
               <th>Email</th>
@@ -38,17 +38,20 @@ $(document).ready(function() {
       rowReorder: false,
       colReorder: false,
       dom       : '<"panel-heading"f> <"panel-body"t> <"panel-footer"<li>p>',
+      initComplete: function(settings, json) {
+          $('.datatable-loading').hide();
+        },
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata') }}',
       language: {
         "search": '',
-        searchPlaceholder: "Search",
+        searchPlaceholder: "Users",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'
         },
       },
       columns: [
-        {data: 'name', name: 'name', orderable: false, width: '60%'},
+        {data: 'name', name: 'name', orderable: false, class:'main-column'},
         {data: 'email', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';
         }, name: 'email', searchable: false, orderable: false},

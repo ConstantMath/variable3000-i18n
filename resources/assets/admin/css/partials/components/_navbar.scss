@@ -1,11 +1,11 @@
 .navbar__nav,
 .navbar__list {
   display:flex;
-} 
+}
 
 .navbar {
   z-index: 2;
-  background-color: $white;
+  background-color: $body-color;
   width:100%;
   overflow-x: auto;
   height:auto;
@@ -28,13 +28,13 @@
   &.nav--secondary {
     list-style: none;
     width:100%;
-    background:$white;
-    position:fixed;
+    background:$body-color;
+    position:sticky;
+    top:53px;
     display:none;
     .js-dropdown-menu {
       display:flex;
       @extend .wrapper;
-      width: calc(90% + (#{$grid-gutter-width} / 1.5 )) !important;
       @include media(">=sm") {
         justify-content: flex-end;
       }
@@ -70,12 +70,16 @@
   &:hover{
     background-image: url('/assets/admin/images/fantom_.gif');
   }
+  @include media("<sm") {
+    margin-top: $spacing-xs;
+    margin-right: calc(#{$grid-gutter-width} / 3 );
+    position:static;
+  }
 }
 
 .navbar__nav {
   position: relative;
   justify-content: space-between;
-  flex:1;
   @extend .wrapper;
 }
 
@@ -83,6 +87,7 @@
   align-items: center;
   &.navbar__list--left {
     padding-right: $spacing-sm;
+    flex:1;
     li:first-child{
       a {
         padding-left: 0;

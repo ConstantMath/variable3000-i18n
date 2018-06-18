@@ -45,13 +45,16 @@
 @import "partials/components/_tabs.scss";
 @import "partials/components/_datatables.scss";
 @import "partials/components/_footer.scss";
+@import "partials/components/_index.scss";
+@import "partials/components/_panels.scss";
+@import "partials/components/_forms.scss";
 @import "partials/templates/_global.scss";
 @import "partials/templates/_login.scss";
 @import "partials/templates/_article-edit.scss";
-@import "partials/templates/_articles-index.scss";
 @import "partials/templates/_settings-index.scss";
 @import "partials/templates/_medias-index.scss";
 @import "partials/templates/_medias-edit.scss";
+@import "partials/templates/_pages-index.scss";
 
 
 /*------------------------------------*\
@@ -69,7 +72,7 @@
 
 body {
   @extend %font-body;
-  background:$lightgray;
+  background-color:$lightgray;
   color: $base-color;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

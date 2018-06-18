@@ -1,0 +1,33 @@
+
+.dataTables_wrapper{
+  .table {
+    .has-child {
+      .main-column {
+        cursor:pointer;
+        .text-content::after {
+          content:' ';
+          font: normal normal normal 14px/1 FontAwesome;
+          display: inline-block;
+          margin-left: $spacing-xxs;
+        }
+      }
+      &.shown {
+        .text-content::after {
+          transform: rotateX(180deg);
+        }
+      }
+    }
+    tr.datatable-child {
+      & > td {
+        padding: 0;
+        padding-left:50px;
+      }
+      table {
+        width: 100%;
+        tr {
+          border-bottom:none;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+
+.CodeMirror,
+.editor-toolbar,
+.select2-container--default.select2-container--open.select2-container--below .select2-selection--single, .select2-container--default.select2-container--open.select2-container--below .select2-selection--multiple,
+.select2-container--default .select2-selection--multiple,
+.select2-selection,
+.select2-dropdown,
+.form-control{
+  border-width: $border-width-sm !important;
+  border-color: $bordergray !important;
+  border-style: solid;
+  border-radius:0px !important;
+}
+
+.form-control{
+  display:block;
+  width:100%;
+  resize:none;
+  padding: $spacing-xs $spacing-xs;
+  &:focus{
+    outline:none;
+  }
+}
+.select2-container {
+  line-height:1;
+  .select2-selection--single{
+    height:auto;
+     .select2-selection__arrow{
+       height:20px;
+       top:50%;
+       transform:translateY(-50%);
+     }
+     .select2-selection__clear{
+       left:-20px;
+     }
+     .select2-results__option--highlighted[aria-selected]{
+       background: $blue;
+     }
+  }
+  .select2-selection__rendered{
+    padding: $spacing-xxs !important;
+    .select2-search:only-child{
+    }
+    .select2-selection__choice {
+      border: none;
+      border-radius: 0;
+      background-color: $lightgray;
+      margin:0;
+      padding: $spacing-xxs;
+      margin-right:$spacing-xs;
+      .select2-selection__choice__remove{
+        margin-right:$spacing-xxs;
+      }
+    }
+  }
+}
+.select2-dropdown {
+  .select2-results__option[aria-selected="true"]{
+    background:$lightgray;
+  }
+  .select2-results__option--highlighted[aria-selected]{
+    background: $gray;
+  }
+}
+
+.editor-toolbar {
+  &::after {margin-top:$spacing-xxs;}
+  &::before {margin-bottom:$spacing-xxs;}
+  &, &:hover{
+    opacity:1;
+  }
+  a {
+    color:$action !important;
+    border:none !important;
+    &:hover{
+      color:$action-response !important;
+    }
+  }
+}
+.cm-s-paper {
+  border-top: none;
+}
+.CodeMirror{
+  z-index:0;
+}
+.CodeMirror-fullscreen {
+  z-index:10;
+}
+label {
+  @extend %font-size-sm;
+  display:inline-block;
+}
+
+.form-group {
+  margin-top: $spacing-sm;
+  &:first-child{
+    margin-top:0;
+  }
+  label {
+    margin-bottom: $spacing-xxs;
+  }
+  .description {
+    display:block;
+    color:$gray;
+    @extend .ts-small;
+  }
+}
+
+input[type="checkbox"]{
+  margin-right: $spacing-xxs;
+}
+textarea {
+  @extend %font-body;
+}
+input::placeholder,
+textarea::placeholder,
+.CodeMirror .CodeMirror-placeholder,
+.select2-container .select2-selection .select2-selection__placeholder,
+.select2-selection__placeholder{
+  color: $gray !important;
+  opacity:0.7 !important;
+}

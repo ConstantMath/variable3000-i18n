@@ -6,7 +6,7 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
   data-article-model_type="{{ get_class($article) }}"
   >
   <div class="panel-heading">
-    {{ $panel_title }}
+    <h2>{{ $panel_title }}</h2>
     @if (isset($article->id))
       {!! Form::model($article, ['route' => ['admin.medias.storeandlink', $article->getTable(), $article->id], 'method' => 'post', 'class' => 'form-horizontal single-media-form', 'autocomplete' => 'off', 'enctype' => 'multipart/form-data', 'files'=>'true']) !!}
     @else
@@ -15,7 +15,7 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     {!! Form::hidden('collection_name', $collection_name) !!}
       {{-- Always put file form before submit bt  --}}
       <input type="file" name="image" class="input-single-media-upload" />
-      <a href="#" class="media-add btn btn-primary btn-xs"> Add</a>
+      <a href="#" class="media-add btn btn-primary btn-xs"> {{__('admin.add')}}</a>
     {!! Form::close() !!}
   </div>
   <div class="panel-body">
@@ -24,8 +24,5 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     <i class="fa fa-ellipsis-h blink"></i>
     <?php // TODO: position du message (dans le header fantom ?) ?>
     <span class="message" class="hidden"></span>
-  </div>
-  <div class="panel-action">
-
   </div>
 </div>

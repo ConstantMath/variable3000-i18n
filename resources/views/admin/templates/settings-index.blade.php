@@ -6,7 +6,9 @@
 @section('content')
   <div class="panel panel-default panel-edit panel-edit--single panel-settings">
     <div class="panel-heading">
-      Settings
+      <div class="edit__header">
+        <h1 class="edit__title">Settings</h1>
+      </div>
     </div>
       @foreach ($settings as $setting)
         <?php $translations = $setting->getTranslationsArray(); ?>

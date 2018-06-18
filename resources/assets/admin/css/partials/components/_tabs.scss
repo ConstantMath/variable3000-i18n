@@ -8,19 +8,21 @@
 .tab-select {
   @extend %font-size-sm;
   list-style: none;
-  margin-bottom: -1px;
+  margin-bottom:-1px;
   li {
     display: inline-block;
     text-align: center;
-    text-transform: uppercase;
-    padding: $spacing-xs $spacing-sm;
+    padding: $spacing-xxs $spacing-sm;
+    text-transform: capitalize;
+    outline: $border-width-sm solid $body-color;
+    outline-offset: -1px;
     a {
       @extend .ts-link;
     }
     &.active {
       background-color: $body-color;
       a {
-        color: $black;
+        color: $base-color;
       }
     }
   }

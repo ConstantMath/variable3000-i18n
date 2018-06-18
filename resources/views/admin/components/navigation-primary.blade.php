@@ -22,7 +22,8 @@
         @else
           <li class="js-dropdown-toggle">
             <a role="button">
-              Admin&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
+              <?php // NOTE: tools a la place d'admin?>
+              {{ __('admin.tools') }}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
             <ul class="js-dropdown-content" role="menu">
               @can('Admin medias')

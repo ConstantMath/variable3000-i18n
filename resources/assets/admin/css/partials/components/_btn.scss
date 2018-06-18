@@ -12,20 +12,34 @@
   text-decoration: none;
   text-align: left;
   text-decoration: none;
-  &::-moz-focus-inner {
+  padding: calc(#{$spacing-sm} * 0.67) calc(#{$grid-gutter-width} / 2);
+  &::-moz-focus-inner{
     border: 0;
     padding: 0;
   }
-  padding: calc(#{$spacing-sm} * 0.67) calc(#{$grid-gutter-width} / 2);
   &.btn-primary {
     background-color:$blue;
     color: $white;
     border-color: $white;
+    &:active {
+      background-color: darken($blue, 5);
+    }
   }
   &.btn-default {
-    background-color: $lightgray;
-    color:$black;
+    background-color: $blue-alt;
+    color:$white;
     border-color: $blue;
+    &:active {
+      background-color: darken($blue-alt, 5);
+    }
+  }
+  &.btn-cancel {
+    background-color: $lightgray;
+    color:$base-color;
+    border-color: $base-color;
+    &:active {
+      background-color: darken($lightgray, 5);
+    }
   }
   &.btn-small {
     padding: $spacing-xs calc(#{$grid-gutter-width} / 2);
@@ -35,6 +49,8 @@
     width:auto;
     display: inline-block;
     text-align: center;
+    border-radius:20px;
+    @extend .ts-small;
   }
 }
 
@@ -45,7 +61,7 @@
     box-sizing: border-box;
     flex:1;
   }
-  .btn:first-of-type{
-    border-right: 1px solid white;
+  .btn-primary {
+    flex:3;
   }
 }
