@@ -104,7 +104,6 @@ $(document).ready(function() {
       });
     });
     $.fn.dataTable.ext.errMode = 'throw';
-
 });
 </script>
 @endsection

@@ -21,6 +21,7 @@ return [
     'preview' => 'Prévisualiser',
     'delete' => 'Supprimer',
     'edit' => 'Éditer',
+    'this' => 'cet',
     'cancel' => 'Annuler',
     'search' => 'Rechercher',
     'select_file' => 'Sélectionez un fichier',
@@ -35,6 +36,7 @@ return [
 
     /*ARTICLES*/
     'this_article' => 'cet article',
+
     'on_website' => 'sur le site',
     'published' => 'Publié',
 
