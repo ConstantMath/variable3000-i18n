@@ -32,7 +32,7 @@ class UsersController extends AdminController
 
   public function index(){
     $data = array(
-      'page_class' => 'users-index',
+      'page_class' => 'users-index tools',
       'page_title' => 'Users index',
       'page_id'    => 'users',
       'table_type' => $this->table_type,

@@ -23,7 +23,7 @@ class RoleController extends AdminController{
 
   public function index() {
     $data = array(
-      'page_class' => 'roles-index',
+      'page_class' => 'roles-index tools',
       'page_title' => 'Roles index',
       'page_id'    => 'roles',
       'page_type'  => 'users',

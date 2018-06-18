@@ -25,7 +25,7 @@ class PermissionController extends AdminController{
 
   public function index() {
     $data = array(
-      'page_class' => 'permissions-index',
+      'page_class' => 'permissions-index tools',
       'page_title' => 'Permissions index',
       'page_id'    => 'permissions',
       'page_type'  => 'users',

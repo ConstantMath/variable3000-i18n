@@ -28,7 +28,7 @@ class TaxonomiesController extends AdminController
 
   public function index(){
    $data = array(
-     'page_class' => 'taxonomies-index',
+     'page_class' => 'taxonomies-index tools',
      'page_title' => 'Taxonomies',
      'page_id'    => 'taxonomies',
      'table_type' => $this->table_type,
