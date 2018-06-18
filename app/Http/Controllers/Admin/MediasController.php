@@ -33,7 +33,7 @@ class MediasController extends AdminController {
 
   public function index(){
     $data = array(
-      'page_class' => 'medias',
+      'page_class' => 'medias tools',
       'page_title' => 'Medias',
       'page_id'    => 'index-medias',
       'table_type' => $this->table_type,

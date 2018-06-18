@@ -26,6 +26,7 @@
     @extend %font-size-md;
   }
   &.nav--secondary {
+    margin-top:-1px; //pour cacher la bordure de la nav--primary
     list-style: none;
     width:100%;
     background:$body-color;

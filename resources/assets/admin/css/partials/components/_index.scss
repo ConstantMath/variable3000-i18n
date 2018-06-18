@@ -68,12 +68,18 @@
           max-width: 50vw;
           padding-top:$spacing-xs;
           padding-bottom:$spacing-xs;
+          a {
+            @extend .link;
+            border-bottom: none;
+            color: $base-color;
+          }
         }
         &:not(th):not(.main-column):not(.sorting_1){
           @extend .ts-small;
           color:$gray;
         }
         .text-content{
+          display: block;
           width:100%;
           overflow: hidden;
           text-overflow: ellipsis;
