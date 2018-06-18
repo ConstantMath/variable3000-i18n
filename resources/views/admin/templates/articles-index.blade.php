@@ -66,7 +66,8 @@ $(document).ready(function() {
         }, name: 'order', searchable: false, class: 'is-published'},
         // TODO: lien main-column sur chaque ressource
         {data: 'title', render: function ( data, type, row, meta ) {
-          return '<a href="{{$data['table_type']}}/'+row.id+'/edit" class="text-content">'+ data + '</a>';
+          return '<div class="text-content">'+ data + '</div>';
+          // return '<a href="{{$data['table_type']}}/'+row.id+'/edit" class="text-content">'+ data + '</a>';
           // return '<a href="{{ url('/admin/'.$data['table_type']) }}/'+row.id+'/edit" class="text-content">'+ data + '</a>';
         }, name: 'title', orderable: false, class: 'main-column'},
         {data: 'updated_at', render: function ( data, type, row, meta ) {
