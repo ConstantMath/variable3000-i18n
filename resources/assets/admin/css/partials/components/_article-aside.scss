@@ -63,7 +63,7 @@
   .media__preview {
     background-position: right;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     width:100px;
     display: flex;
     &.txt{
