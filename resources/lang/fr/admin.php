@@ -12,11 +12,13 @@ return [
 
     /* PAGES */
     'tools' => 'Outils',
-    'settings' => '',
-    'users' => '',
+    'settings' => 'Paramètres',
+    'users' => 'Utilisateurs',
 
 
     /*ACTIONS*/
+    'login' => '',
+    'logout' => '',
     'add' => 'Ajouter',
     'preview' => 'Prévisualiser',
     'delete' => 'Supprimer',
@@ -25,7 +27,7 @@ return [
     'cancel' => 'Annuler',
     'search' => 'Rechercher',
     'select_file' => 'Sélectionez un fichier',
-    'save' => '',
+    'save' => 'Enregistrer',
     'save_and_close' => '',
 
     /*INDEX*/

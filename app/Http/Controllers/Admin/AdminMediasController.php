@@ -93,4 +93,24 @@ class AdminMediasController extends Controller
       'App\\' . studly_case(str_singular($table_name)) :
       null;
   }
+
+
+  /**
+   * Delete
+   *
+   * @param $model
+   * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+   */
+
+  public function destroyObject($model, $path = 'index'){
+    $class = get_class($model);
+    $article = $class::findOrFail($model->id);
+    // cascade delete medias
+    if(!empty($article->medias)):  foreach ($article->medias as $media):
+      Media::deleteMediaFile($media->id);
+    endforeach; endif;
+    $article -> delete();
+    session()->flash('flash_message', 'Deleted');
+    return redirect()->route('admin.medias.index');
+  }
 }

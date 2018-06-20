@@ -4,17 +4,22 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-  @if(isset($role->id))
-    {!! Form::model($role, ['route' => ['admin.roles.update', $role->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
-  @else
-    {!! Form::model($role, ['route' => ['admin.roles.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
-  @endif
   <div class="panel panel-default panel-edit panel-edit--single panel-settings">
-    <div class="panel-heading">
-      <div class="edit__header">
-        <h1 class="edit__title">Edit role</h1>
-      </div>
-    </div>
+      @if(isset($role->id))
+        <div class="panel-heading">
+          <div class="edit__header">
+            <h1 class="edit__title">Edit role</h1>
+          </div>
+        </div>
+        {!! Form::model($role, ['route' => ['admin.roles.update', $role->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+      @else
+        <div class="panel-heading">
+          <div class="edit__header">
+            <h1 class="edit__title">Create role</h1>
+          </div>
+        </div>
+        {!! Form::model($role, ['route' => ['admin.roles.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
+      @endif
     <div id="validation"></div>
     <div class="panel-body">
         <div class="form-group">

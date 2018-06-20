@@ -4,17 +4,22 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-  @if(isset($user->id))
-    {!! Form::model($user, ['route' => ['admin.users.update', $user->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
-  @else
-    {!! Form::model($user, ['route' => ['admin.users.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
-  @endif
   <div class="panel panel-edit panel-edit--single panel-default">
+    @if(isset($user->id))
     <div class="panel-heading">
       <div class="edit__header">
         <h1 class="edit__title">Edit user</h1>
       </div>
     </div>
+      {!! Form::model($user, ['route' => ['admin.users.update', $user->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+    @else
+    <div class="panel-heading">
+      <div class="edit__header">
+        <h1 class="edit__title">Create user</h1>
+      </div>
+    </div>
+      {!! Form::model($user, ['route' => ['admin.users.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
+    @endif
     <div id="validation"></div>
     <div class="panel-body">
         {{-- Name --}}

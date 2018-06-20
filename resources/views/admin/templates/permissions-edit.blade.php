@@ -4,17 +4,22 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-  @if(isset($permission->id))
-    {!! Form::model($permission, ['route' => ['admin.permissions.update', $permission->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
-  @else
-    {!! Form::model($permission, ['route' => ['admin.permissions.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
-  @endif
   <div class="panel panel-default panel-edit panel-edit--single panel-settings">
-    <div class="panel-heading">
-      <div class="edit__header">
-        <h1 class="edit__title">Edit permission</h1>
-      </div>
-    </div>
+      @if(isset($permission->id))
+        <div class="panel-heading">
+          <div class="edit__header">
+            <h1 class="edit__title">Edit permission</h1>
+          </div>
+        </div>
+        {!! Form::model($permission, ['route' => ['admin.permissions.update', $permission->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+      @else
+        <div class="panel-heading">
+          <div class="edit__header">
+            <h1 class="edit__title">Create permission</h1>
+          </div>
+        </div>
+        {!! Form::model($permission, ['route' => ['admin.permissions.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form']) !!}
+      @endif
     <div id="validation"></div>
     <div class="panel-body">
         <div class="form-group">

@@ -4,20 +4,20 @@
 @section('page_class', $data['page_class'])
 
 @section('content')
-  @if(isset($taxonomy->id))
-    {!! Form::model($taxonomy, ['route' => ['admin.taxonomies.update', $taxonomy->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
-  @else
-    {!! Form::model($taxonomy, ['route' => ['admin.taxonomies.store'], 'method' => 'post', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
-  @endif
-  {!! Form::hidden('parent_id', $taxonomy->parent->id) !!}
-  {!! Form::hidden('order', (!empty($taxonomy->order))? $taxonomy->order : 0) !!}
-
   <div class="panel panel-edit panel-edit--single panel-default">
     <div class="panel-heading">
       <div class="edit__header">
         <h1 class="edit__title">{{ $taxonomy->parent->name }}</h1>
       </div>
     </div>
+      @if(isset($taxonomy->id))
+        {!! Form::model($taxonomy, ['route' => ['admin.taxonomies.update', $taxonomy->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+      @else
+        {!! Form::model($taxonomy, ['route' => ['admin.taxonomies.store'], 'method' => 'post', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form']) !!}
+      @endif
+      {!! Form::hidden('parent_id', $taxonomy->parent->id) !!}
+      {!! Form::hidden('order', (!empty($taxonomy->order))? $taxonomy->order : 0) !!}
+
     <div class="panel-body">
         {{-- Validation errors --}}
         @foreach ($errors->all() as $error)

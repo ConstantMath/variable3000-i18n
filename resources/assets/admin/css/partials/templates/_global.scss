@@ -34,10 +34,10 @@ a {
   display: inline-block;
   text-align: left;
   background-color: $lightyellow;
-  position: fixed;
+  position: fixed !important;
   overflow: hidden;
-  left:0;
-  top: 0;
+  left:0 !important;
+  top: 0 !important;
   z-index: 999;
   padding-left: 5%;
   padding-right: 5%;

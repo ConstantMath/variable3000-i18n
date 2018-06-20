@@ -11,12 +11,14 @@ return [
 
     /* PAGES */
     'tools' => 'Tools',
-    'settings' => '',
-    'users' => '',
+    'settings' => 'Settings',
+    'users' => 'Users',
 
 
 
     /*ACTIONS*/
+    'login' => 'Login',
+    'logout' => 'Logout',
     'add' => 'Add',
     'preview' => 'Preview',
     'delete' => 'Delete',
@@ -27,8 +29,8 @@ return [
     'cancel' => 'Cancel',
     'search' => 'Search',
     'select_file' => 'Select a file to upload',
-    'save' => '',
-    'save_and_close' => '',
+    'save' => 'Save',
+    'save_and_close' => 'Save & close',
 
     /*INDEX*/
     'loading' => 'Loading',
