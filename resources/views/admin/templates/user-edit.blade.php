@@ -58,22 +58,22 @@
     </div>
     {{-- Submit buttons --}}
     <div class="submit">
-      {!! Form::submit('save', ['class' => 'btn btn-primary', 'name' => 'finish']) !!}
+      {!! Form::submit(__('admin.save'), ['class' => 'btn btn-primary', 'name' => 'finish']) !!}
     </div>
     {!! Form::close() !!}
     @if(isset($user->id))
       {!! Form::model($user, ['route' => ['admin.users.destroy', $user->id], 'method' => 'post', 'class' => 'form-horizontal panel-footer', 'name' => 'delete-form']) !!}
         {{ Form::hidden('_method', 'DELETE') }}
-        <a href="#" class="link" data-toggle="modal" data-target="#confirm-delete">delete</a>
+        <a href="#" class="link" data-toggle="modal" data-target="#confirm-delete">{{__('admin.delete')}}</a>
         <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Are you sure ?</h4>
-              </div>
-              <div class="modal-btn">
-                <button type="button" class="btn btn-default btn-xs" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary btn-xs" onclick="document.forms['delete-form'].submit();">Delete</button>
+                <h4 class="modal-title" id="myModalLabel">{{__('admin.are_you_sure')}}</h4>
+                <div class="modal-btn">
+                  <button type="button" class="btn btn-cancel btn-xs" data-dismiss="modal">{{__('admin.cancel')}}</button>
+                  <button type="button" class="btn btn-primary btn-xs" onclick="document.forms['delete-form'].submit();">{{__('admin.delete')}}</button>
+                </div>
               </div>
             </div>
           </div>

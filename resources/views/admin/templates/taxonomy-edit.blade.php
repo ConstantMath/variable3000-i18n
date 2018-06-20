@@ -40,7 +40,7 @@
 
     </div>
     <div class="submit">
-      {!! Form::submit('save', ['class' => 'btn btn-primary', 'name' => 'finish']) !!}
+      {!! Form::submit(__('admin.save'), ['class' => 'btn btn-primary', 'name' => 'finish']) !!}
     </div>
     {!! Form::close() !!}
     <div class="panel-footer">

@@ -29,7 +29,7 @@ return [
     'search' => 'Search',
     'select_file' => 'Select a file to upload',
     'save' => 'Save',
-    'save_and_close' => 'Save & close',
+    'saveclose' => 'Save & close',
 
     /*INDEX*/
     'loading' => 'Loading',
@@ -53,4 +53,5 @@ return [
     /*MEDIAS*/
     'featured_image' => 'Featured image',
     'gallery' => 'Gallery',
+    
 ];

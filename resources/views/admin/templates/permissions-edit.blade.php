@@ -40,7 +40,7 @@
         @endif
       </div>
       {{-- Submit buttons --}}
-        {!! Form::submit('save', ['class' => 'btn btn-primary']) !!}
+        {!! Form::submit(__('admin.save'), ['class' => 'btn btn-primary']) !!}
       <div class="panel-footer">
         {!! Form::close() !!}
         @if(isset($permission->id))

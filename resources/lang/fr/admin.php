@@ -29,7 +29,7 @@ return [
     'search' => 'Rechercher',
     'select_file' => 'Sélectionez un fichier',
     'save' => 'Enregistrer',
-    'save_and_close' => '',
+    'saveclose' => '',
 
     /*INDEX*/
     'loading' => 'Chargement',
