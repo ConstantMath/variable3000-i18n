@@ -17,12 +17,11 @@
       <ul class="navbar__list navbar__list--right">
         {{-- <!-- Authentication Links --> --}}
         @if (Auth::guest())
-          <li><a href="{{ url('/login') }}">Login</a></li>
-          <li><a href="{{ url('/register') }}">Register</a></li>
+          <li><a href="{{ url('/login') }}">{{__('admin.login')}}</a></li>
+          <li><a href="{{ url('/register') }}">{{__('admin.register')}}</a></li>
         @else
           <li class="js-dropdown-toggle tools">
             <a role="button">
-              <?php // NOTE: tools a la place d'admin?>
               {{ __('admin.tools') }}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
             <ul class="js-dropdown-content" role="menu">
@@ -41,7 +40,7 @@
               @can('Admin users')
               <li class="nav-item">
                 <?php $users_active = (strpos($data['page_id'], 'users') !== false) ? 'active' : ''; ?>
-                {!! link_to_route('admin.users.index', 'Users', '', ['class' => $users_active] ) !!}
+                {!! link_to_route('admin.users.index', __('admin.users'), '', ['class' => $users_active] ) !!}
               </li>
               @endcan
               @can('Admin users')
@@ -53,7 +52,7 @@
               @can('Admin settings')
               <li class="nav-item">
                 <?php $settings_active = (strpos($data['page_id'], 'settings') !== false) ? 'active' : ''; ?>
-                {!! link_to_route('admin.settings.index', 'Settings', '', ['class' => $settings_active] ) !!}
+                {!! link_to_route('admin.settings.index', __('admin.settings'), '', ['class' => $settings_active] ) !!}
               </li>
               @endcan
             </ul>
@@ -63,7 +62,7 @@
               {{ Auth::user()->name }}&nbsp;<i class="fa fa-angle-down js-dropdown-icon"></i>
             </a>
             <ul class="js-dropdown-content" role="menu">
-              <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+              <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{__('admin.logout')}}</a></li>
               {{-- lang --}}
               @if(count(config('translatable.locales')) > 1 )
                 @foreach (config('translatable.locales') as $lang)

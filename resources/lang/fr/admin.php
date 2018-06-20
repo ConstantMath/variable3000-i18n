@@ -17,8 +17,9 @@ return [
 
 
     /*ACTIONS*/
-    'login' => '',
-    'logout' => '',
+    'login' => 'Se connecter',
+    'logout' => 'Se déconnecter',
+    'register' => 'S\'inscrire',
     'add' => 'Ajouter',
     'preview' => 'Prévisualiser',
     'delete' => 'Supprimer',

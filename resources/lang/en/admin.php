@@ -19,6 +19,7 @@ return [
     /*ACTIONS*/
     'login' => 'Login',
     'logout' => 'Logout',
+    'register' => 'Register',
     'add' => 'Add',
     'preview' => 'Preview',
     'delete' => 'Delete',

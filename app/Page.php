@@ -29,6 +29,21 @@ class Page extends Model implements HasMedia{
 
 
   /**
+   * Réécrit la date d'update
+   * @param string  $value (date)
+	 *
+   */
+  public function getUpdatedAtAttribute($value){
+    if(!empty($value)){
+      Carbon::setLocale('fr');
+      $date = Carbon::parse($value)->diffForHumans();
+    }else{
+      $date = "";
+    }
+    return $date;
+  }
+
+  /**
    * GET: Formate le champs 'created_at'
    * @param date  $date
    *
