@@ -36,6 +36,9 @@ return [
     'add_subpage' => 'Add a sub page',
     'add_parentpage' => 'Add a parent page',
     'updated_at' => '',
+    'datatable_lengthMenu' => 'Show _MENU_ entries',
+    'datatable_zeroRecords' => 'No matching records found',
+    'datatable_info' => 'Showing _START_ to _END_ of _TOTAL_ entries',
 
     /*ARTICLE/PAGE */
     'this_article' => 'this article',

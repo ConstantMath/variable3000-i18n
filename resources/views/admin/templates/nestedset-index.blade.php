@@ -63,7 +63,7 @@ function format ( parent ) {
         h += '<td class="main-column"><div class="text-content">'+ data[i].title +'</div></td>';
         var edit = '{{ route('admin.pages.edit', ':id') }}';
         edit = edit.replace(':id', data[i].id);
-        h += '<td><a href="'+ edit +'" class="link">Edit</a></td>';
+        h += '<td><a href="'+ edit +'" class="link"> {{__('admin.edit')}}</a></td>';
         h += '</td>';
       }
       h += '</table>';
@@ -95,6 +95,9 @@ $(document).ready(function() {
           "previous": '&larr;',
           "next": '&rarr;'
         },
+        lengthMenu: "{{__('admin.datatable_lengthMenu')}}",
+        zeroRecords: "{{__('admin.datatable_zeroRecords')}}",
+        info: "{{__('admin.datatable_info')}}",
       },
       columns: [
         {data: 'order', render: function ( data, type, row, meta ) {
