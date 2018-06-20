@@ -59,9 +59,9 @@ $(document).ready(function() {
         //IDEA: Ajouter column de contenu cachée pour recherche (texte d'article ect)?
         {data: 'order', render: function ( data, type, row, meta ) {
           if(row.published == 1){
-            return '<i class="fa fa-circle icon-published"></i>';
+            return '<i class="fa fa-circle icon-published" title="{{__('admin.published')}}"></i>';
           }else {
-            return '<i class="fa fa-circle-o icon-published"></i>';
+            return '<i class="fa fa-circle-o icon-published" title="{{__('admin.not_published')}}"></i>';
           }
         }, name: 'order', searchable: false, class: 'is-published'},
         // TODO: lien main-column sur chaque ressource

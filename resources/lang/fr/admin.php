@@ -39,9 +39,9 @@ return [
 
     /*ARTICLES*/
     'this_article' => 'cet article',
-
     'on_website' => 'sur le site',
     'published' => 'Publié',
+    'not_published' => 'Non publié',
 
     /*EXPRESSIONS GENERALES*/
     'are_you_sure' => 'Êtes-vous sur ?',

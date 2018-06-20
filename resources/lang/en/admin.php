@@ -25,8 +25,6 @@ return [
     'delete' => 'Delete',
     'edit' => 'Edit',
     'this' => 'this',
-    'on_website' => 'on the website',
-    'are_you_sure' => 'Are you sure ?',
     'cancel' => 'Cancel',
     'search' => 'Search',
     'select_file' => 'Select a file to upload',
@@ -43,6 +41,7 @@ return [
     'this_article' => 'this article',
     'on_website' => 'on the website',
     'published' => 'Published',
+    'not_published' => 'Not published',
 
     /*EXPRESSIONS GENERALES*/
     'are_you_sure' => 'Are you sure ?',
