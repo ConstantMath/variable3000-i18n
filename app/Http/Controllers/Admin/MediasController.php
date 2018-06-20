@@ -55,7 +55,7 @@ class MediasController extends AdminMediasController {
                           return '/imagecache/thumb/' . $article->id . '/' . $article->file_name;
                         })
                         ->addColumn('action', function ($article) {
-                          return '<a href="' . route('admin.medias.edit', $article->id) . '" class="link">Edit</a>';
+                          return '<a href="' . route('admin.medias.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                         })
                         ->make(true);
   }

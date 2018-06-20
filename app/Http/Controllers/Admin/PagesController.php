@@ -66,13 +66,13 @@ class PagesController extends AdminController
                          ->get())
                          ->addColumn('action', function ($article) {
                            if(count($article->children)) {
-                             return '<a href="' . route('admin.pages.index', $article->id) . '" class="link">View&nbsp;Pages</a> <a href="' . route('admin.pages.create', $article->id) . '" class="link">Add&nbsp;Page</a> <a href="' . route('admin.pages.edit', $article->id) . '" class="link">Edit</a>';
+                             return '<a href="' . route('admin.pages.index', $article->id) . '" class="link">View&nbsp;Pages</a> <a href="' . route('admin.pages.create', $article->id) . '" class="link">Add&nbsp;Page</a> <a href="' . route('admin.pages.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                            }
                            elseif($article->parent_id == 0){
-                             return '<a href="' . route('admin.pages.create', $article->id) . '" class="link">Add Page</a> <a href="' . route('admin.pages.edit', $article->id) . '" class="link">Edit</a>';
+                             return '<a href="' . route('admin.pages.create', $article->id) . '" class="link">Add Page</a> <a href="' . route('admin.pages.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                            }
                            else {
-                             return '<a href="' . route('admin.pages.edit', $article->id) . '" class="link">Edit</a>';
+                             return '<a href="' . route('admin.pages.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                            }
                          })
                          ->setRowClass(function ($article) {

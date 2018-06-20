@@ -48,7 +48,7 @@ class TaxonomiesController extends AdminController
     $parent_id = (!empty($_GET['parent_id'])) ? $_GET['parent_id'] : 0;
     return \DataTables::of(Taxonomy::where('parent_id', $parent_id)->get())
                         ->addColumn('action', function ($article) {
-                          return '<a href="' . route('admin.taxonomies.edit', $article->id) . '" class="link">Edit</a>';
+                          return '<a href="' . route('admin.taxonomies.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                         })
                         ->make(true);
   }
