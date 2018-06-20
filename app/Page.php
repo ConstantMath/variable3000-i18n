@@ -35,7 +35,7 @@ class Page extends Model implements HasMedia{
    */
   public function getUpdatedAtAttribute($value){
     if(!empty($value)){
-      Carbon::setLocale('fr');
+      Carbon::setLocale(config('app.locale'));
       $date = Carbon::parse($value)->diffForHumans();
     }else{
       $date = "";
