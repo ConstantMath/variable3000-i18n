@@ -7,19 +7,24 @@
   @foreach ($errors->all() as $error)
       <span class="help-block">{{ $error }}</span>
   @endforeach
-  @if(isset($media->id))
-    {!! Form::model($media, ['route' => ['admin.medias.update', $media->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form', 'files'=>'true']) !!}
-  @else
-    {!! Form::model($media, ['route' => ['admin.medias.store'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form', 'files'=>'true']) !!}
-  @endif
-  {!! Form::hidden('model_type', $media->model_type) !!}
-  {!! Form::hidden('model_id', $media->model_id) !!}
   <div class="panel panel-default panel-edit panel-edit--single panel-settings">
-    <div class="panel-heading">
-      <div class="edit__header">
-        <h1 class="edit__title">Edit media</h1>
+    @if(isset($media->id))
+      <div class="panel-heading">
+        <div class="edit__header">
+          <h1 class="edit__title">Edit media</h1>
+        </div>
       </div>
-    </div>
+      {!! Form::model($media, ['route' => ['admin.medias.update', $media->id ], 'method' => 'put', 'class' => 'form-horizontal panel main-form', 'id' => 'main-form', 'files'=>'true']) !!}
+    @else
+      <div class="panel-heading">
+        <div class="edit__header">
+          <h1 class="edit__title">Create media</h1>
+        </div>
+      </div>
+      {!! Form::model($media, ['route' => ['admin.medias.storeandlink', 'associated_model'], 'method' => 'post', 'class' => 'form-horizontal panel', 'id' => 'main-form', 'files'=>'true']) !!}
+    @endif
+    {!! Form::hidden('model_type', $media->model_type) !!}
+    {!! Form::hidden('model_id', $media->model_id) !!}
     <div id="validation"></div>
     <div class="panel-body">
       <div class="form-group model">

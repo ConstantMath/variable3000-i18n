@@ -32,7 +32,7 @@ class UsersController extends AdminController
 
   public function index(){
     $data = array(
-      'page_class' => 'users-index',
+      'page_class' => 'users-index tools',
       'page_title' => 'Users index',
       'page_id'    => 'users',
       'table_type' => $this->table_type,
@@ -92,7 +92,7 @@ class UsersController extends AdminController
   public function getDataTable(){
     return \DataTables::of(User::get())
                         ->addColumn('action', function ($article) {
-                          return '<a href="' . route('admin.users.edit', $article->id) . '" class="link">Edit</a>';
+                          return '<a href="' . route('admin.users.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                         })
                         ->make(true);
   }

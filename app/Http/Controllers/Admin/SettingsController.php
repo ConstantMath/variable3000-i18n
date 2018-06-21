@@ -20,7 +20,7 @@ class SettingsController extends AdminController
    */
   public function index(){
     $data = array(
-      'page_class' => 'settings-index',
+      'page_class' => 'settings-index tools',
       'page_title' => 'Settings index',
       'page_id'    => 'settings',
     );

@@ -45,6 +45,9 @@ $(document).ready(function() {
           "previous": '&larr;',
           "next": '&rarr;'
         },
+        lengthMenu: "{{__('admin.datatable_lengthMenu')}}",
+        zeroRecords: "{{__('admin.datatable_zeroRecords')}}",
+        info: "{{__('admin.datatable_info')}}",
       },
       columns: [
         {data: 'name', name: 'name', orderable: false, width: '60%'},

@@ -54,18 +54,24 @@ $(document).ready(function() {
           "previous": '&larr;',
           "next": '&rarr;'
         },
+        lengthMenu: "{{__('admin.datatable_lengthMenu')}}",
+        zeroRecords: "{{__('admin.datatable_zeroRecords')}}",
+        info: "{{__('admin.datatable_info')}}",
       },
       columns: [
         //IDEA: Ajouter column de contenu cachée pour recherche (texte d'article ect)?
         {data: 'order', render: function ( data, type, row, meta ) {
           if(row.published == 1){
-            return '<i class="fa fa-circle icon-published"></i>';
+            return '<i class="fa fa-circle icon-published" title="{{__('admin.published')}}"></i>';
           }else {
-            return '<i class="fa fa-circle-o icon-published"></i>';
+            return '<i class="fa fa-circle-o icon-published" title="{{__('admin.not_published')}}"></i>';
           }
         }, name: 'order', searchable: false, class: 'is-published'},
+        // TODO: lien main-column sur chaque ressource
         {data: 'title', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';
+          // return '<a href="{{$data['table_type']}}/'+row.id+'/edit" class="text-content">'+ data + '</a>';
+          // return '<a href="{{ url('/admin/'.$data['table_type']) }}/'+row.id+'/edit" class="text-content">'+ data + '</a>';
         }, name: 'title', orderable: false, class: 'main-column'},
         {data: 'updated_at', render: function ( data, type, row, meta ) {
           return '<div class="text-content">'+ data + '</div>';

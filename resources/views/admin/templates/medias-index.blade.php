@@ -50,6 +50,9 @@ $(document).ready(function() {
           "previous": '&larr;',
           "next": '&rarr;'
         },
+        lengthMenu: "{{__('admin.datatable_lengthMenu')}}",
+        zeroRecords: "{{__('admin.datatable_zeroRecords')}}",
+        info: "{{__('admin.datatable_info')}}",
       },
       columns: [
         {data: 'img', render: function ( data, type, row, meta ) {

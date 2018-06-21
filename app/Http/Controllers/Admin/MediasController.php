@@ -33,7 +33,7 @@ class MediasController extends AdminMediasController {
 
   public function index(){
     $data = array(
-      'page_class' => 'medias',
+      'page_class' => 'medias tools',
       'page_title' => 'Medias',
       'page_id'    => 'index-medias',
       'table_type' => $this->table_type,
@@ -55,7 +55,7 @@ class MediasController extends AdminMediasController {
                           return '/imagecache/thumb/' . $article->id . '/' . $article->file_name;
                         })
                         ->addColumn('action', function ($article) {
-                          return '<a href="' . route('admin.medias.edit', $article->id) . '" class="link">Edit</a>';
+                          return '<a href="' . route('admin.medias.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                         })
                         ->make(true);
   }
@@ -85,7 +85,6 @@ class MediasController extends AdminMediasController {
     }
     $articles = Article::listAll();
     $collections = $media->pluck('collection_name')->unique();
-    // dd($collections);
     return view('admin/templates/medias-edit',  compact('media', 'data', 'articles'));
   }
 
@@ -120,24 +119,24 @@ class MediasController extends AdminMediasController {
     // Save article
     return $this->saveObject($media, $request);
 
-    // $this->linkRelatedArticle($request);
-    // dd($request);
-    // if($media->model_id && $media->model_type){
-    //   $article = $media->model_type::find($media->model_id);
-    //   dd($article);
-    // };
-    // $file                 = $request->file('file');
-    // if(!empty($file)){
-    //   $fileSystem           = app(\Spatie\MediaLibrary\Filesystem\Filesystem::class);
-    //   $fileSystem->removeAllFiles($media);
-    //   $path                 = $file->path();
-    //   list($width, $height) = getimagesize($file);
-    //   // Copy the new file
-    //   $fileSystem->copyToMediaLibrary($path, $media, false, $media->file_name);
-    // }
-    // $media->name = $request['name'];
-    // $media->save();
-    // return redirect()->route('admin.medias.edit', $media->id);
+    $this->linkRelatedArticle($request);
+    dd($request);
+    if($media->model_id && $media->model_type){
+      $article = $media->model_type::find($media->model_id);
+      dd($article);
+    };
+    $file                 = $request->file('file');
+    if(!empty($file)){
+      $fileSystem           = app(\Spatie\MediaLibrary\Filesystem\Filesystem::class);
+      $fileSystem->removeAllFiles($media);
+      $path                 = $file->path();
+      list($width, $height) = getimagesize($file);
+      // Copy the new file
+      $fileSystem->copyToMediaLibrary($path, $media, false, $media->file_name);
+    }
+    $media->name = $request['name'];
+    $media->save();
+    return redirect()->route('admin.medias.edit', $media->id);
 
   }
 

@@ -128,15 +128,15 @@ $collection_name = 'gallery';
 
   /* manage data list */
   function printList(medias, media_type) {
-    if(medias && media_type){
-      var ul = $('#panel-' + media_type + ' .media-list');
-      var	li = '';
-      // Json Medias loop
-      $.each( medias, function( key, value ) {
+    var ul = $('#panel-' + media_type + ' .media-list');
+    var	li = '';
+    // Json Medias loop
+    $.each( medias, function( key, value ) {
+      if(medias && media_type){
         // Build <li>
         li = li + '<li class="list-group-item media-list__item" data-media-id="' + value.id + '" data-article-id="' + value.model_id + '" data-media-collection-name="' + value.collection_name + '">';
         li = li + '<div class="media__infos"><p class="media__title">' + value.name + '</p>';
-        li = li + '<div class="media__actions"><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-table-type="' + article_model_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a>';
+        li = li + '<div class="media__actions"><a href="" class="link link--edit" data-toggle="modal" data-target="#modal-media-edit" data-media-collection-name="'+ media_type +'" data-media-table-type="' + value.model_type +'" data-media-id="'+ value.id+'" data-media-description="' + value.description + '" data-mime-type="' + value.mime_type + '" data-media-alt="' + value.name + '" data-media-name="' + value.file_name + '">{{ __('admin.edit') }}</a>';
         li = li + '<span> / </span>'
         li = li + '<a href="' + admin_url + '/medias/quickdestroy/' + value.id + '" class="link link--delete" data-media-collection-name="'+ media_type +'">{{ __('admin.delete') }}</a></div></div>';
         //media preview
@@ -150,9 +150,9 @@ $collection_name = 'gallery';
           li = li + '<div class="media__preview txt"><span>FILE</span></div>';
         }
         li = li + '</li>';
-      });
+      }
       ul.html(li);
-    }
+    });
   }
 
 
@@ -224,6 +224,12 @@ $collection_name = 'gallery';
     $(".media-edit-save").click(function(e) {
       e.preventDefault();
       $(this).closest('form').ajaxForm(media_edit_options).submit();
+      //rafraichir la liste des medias
+      $('.media-panel').each(function( index ) {
+        var media_collection_name = $(this).attr('data-media-collection-name');
+        // Build media list
+        getMedias(media_collection_name);
+      });
     });
 
     function mediaEditResponse(response, statusText, xhr, $form){
@@ -246,7 +252,7 @@ $collection_name = 'gallery';
             var media_id   = evt.item.getAttribute('data-media-id');
             var collection_name = evt.item.getAttribute('data-media-collection-name');
             var new_order  = evt.newIndex;
-            var model_name = '{{class_basename($article)}}';
+            var model_name = '{{$data['table_type']}}';
             if (article_id && media_id) {
               jQuery.ajax({
                 url: admin_url + '/medias/reorder/' + collection_name + '/' + model_name + '/' + article_id,

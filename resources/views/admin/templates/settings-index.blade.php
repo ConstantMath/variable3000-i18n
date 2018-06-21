@@ -7,7 +7,7 @@
   <div class="panel panel-default panel-edit panel-edit--single panel-settings">
     <div class="panel-heading">
       <div class="edit__header">
-        <h1 class="edit__title">Settings</h1>
+        <h1 class="edit__title">{{__('admin.settings')}}</h1>
       </div>
     </div>
       @foreach ($settings as $setting)
@@ -27,7 +27,7 @@
             </div>
           </div>
         </div>
-        {!! Form::submit('save', ['class' => 'btn btn-primary small', 'name' => 'finish']) !!}
+        {!! Form::submit(__('admin.save'), ['class' => 'btn btn-primary small', 'name' => 'finish']) !!}
         @endforeach
         {!! Form::close() !!}
       @endforeach

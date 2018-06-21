@@ -56,14 +56,14 @@ function format ( parent ) {
       for(var i = 0; i < data.length; i++) {
         h += '<tr>';
         if(data[i].published == 1){
-          h += '<td class="is-published"><i class="fa fa-circle icon-published"></i></td>';
+          h += '<td class="is-published"><i class="fa fa-circle icon-published"  title="{{__('admin.published')}}"></i></td>';
         }else {
-          h += '<td class="is-published"><i class="fa fa-circle-o icon-published"></i></td>';
+          h += '<td class="is-published"><i class="fa fa-circle-o icon-published"  title="{{__('admin.not_published')}}"></i></td>';
         }
         h += '<td class="main-column"><div class="text-content">'+ data[i].title +'</div></td>';
         var edit = '{{ route('admin.pages.edit', ':id') }}';
         edit = edit.replace(':id', data[i].id);
-        h += '<td><a href="'+ edit +'" class="link">Edit</a></td>';
+        h += '<td><a href="'+ edit +'" class="link"> {{__('admin.edit')}}</a></td>';
         h += '</td>';
       }
       h += '</table>';
@@ -90,18 +90,21 @@ $(document).ready(function() {
       ajax: '{{ route('admin.' .$data['table_type']. '.getdata', $parent_id) }}',
       language: {
         "search": '',
-        searchPlaceholder: "Pages",
+        searchPlaceholder: "<?php echo $page_title ?>",
         "paginate": {
           "previous": '&larr;',
           "next": '&rarr;'
         },
+        lengthMenu: "{{__('admin.datatable_lengthMenu')}}",
+        zeroRecords: "{{__('admin.datatable_zeroRecords')}}",
+        info: "{{__('admin.datatable_info')}}",
       },
       columns: [
         {data: 'order', render: function ( data, type, row, meta ) {
           if(row.published == 1){
-            return '<i class="fa fa-circle icon-published"></i>';
+            return '<i class="fa fa-circle icon-published" title="{{__('admin.published')}}"></i>';
           }else {
-            return '<i class="fa fa-circle-o icon-published"></i>';
+            return '<i class="fa fa-circle-o icon-published" title="{{__('admin.not_published')}}"></i>';
           }
         }, name: 'order', searchable: false, class: 'is-published'},
         {data: 'title', render: function ( data, type, row, meta ) {

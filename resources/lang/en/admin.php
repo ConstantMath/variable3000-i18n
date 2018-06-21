@@ -11,35 +11,40 @@ return [
 
     /* PAGES */
     'tools' => 'Tools',
-    'settings' => '',
-    'users' => '',
+    'settings' => 'Settings',
+    'users' => 'Users',
 
 
 
     /*ACTIONS*/
+    'login' => 'Login',
+    'logout' => 'Logout',
+    'register' => 'Register',
     'add' => 'Add',
     'preview' => 'Preview',
     'delete' => 'Delete',
     'edit' => 'Edit',
     'this' => 'this',
-    'on_website' => 'on the website',
-    'are_you_sure' => 'Are you sure ?',
     'cancel' => 'Cancel',
     'search' => 'Search',
     'select_file' => 'Select a file to upload',
-    'save' => '',
-    'save_and_close' => '',
+    'save' => 'Save',
+    'saveclose' => 'Save & close',
 
     /*INDEX*/
     'loading' => 'Loading',
     'add_subpage' => 'Add a sub page',
     'add_parentpage' => 'Add a parent page',
     'updated_at' => '',
+    'datatable_lengthMenu' => 'Show _MENU_ entries',
+    'datatable_zeroRecords' => 'No matching records found',
+    'datatable_info' => 'Showing _START_ to _END_ of _TOTAL_ entries',
 
     /*ARTICLE/PAGE */
     'this_article' => 'this article',
     'on_website' => 'on the website',
     'published' => 'Published',
+    'not_published' => 'Not published',
 
     /*EXPRESSIONS GENERALES*/
     'are_you_sure' => 'Are you sure ?',
@@ -48,4 +53,5 @@ return [
     /*MEDIAS*/
     'featured_image' => 'Featured image',
     'gallery' => 'Gallery',
+    
 ];

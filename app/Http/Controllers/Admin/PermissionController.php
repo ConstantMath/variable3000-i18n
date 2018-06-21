@@ -25,7 +25,7 @@ class PermissionController extends AdminController{
 
   public function index() {
     $data = array(
-      'page_class' => 'permissions-index',
+      'page_class' => 'permissions-index tools',
       'page_title' => 'Permissions index',
       'page_id'    => 'permissions',
       'page_type'  => 'users',
@@ -63,7 +63,7 @@ class PermissionController extends AdminController{
   public function getDataTable(){
     return \DataTables::of(Permission::get())
                         ->addColumn('action', function ($article) {
-                          return '<a href="' . route('admin.permissions.edit', $article->id) . '" class="link">Edit</a>';
+                          return '<a href="' . route('admin.permissions.edit', $article->id) . '" class="link">' . __('admin.edit') . '</a>';
                         })
                         ->make(true);
   }
