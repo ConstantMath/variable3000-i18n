@@ -47,7 +47,7 @@
       color: $gray;
       padding-left: calc(#{$grid-gutter-width} / 3 );
       padding-right: calc(#{$grid-gutter-width} / 3 );
-      padding-top: $spacing-sm;
+      padding-top: 0;
       padding-bottom: $spacing-sm;
       &:hover,
       &.active {
