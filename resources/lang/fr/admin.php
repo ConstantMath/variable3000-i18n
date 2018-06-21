@@ -45,10 +45,14 @@ return [
     'on_website' => 'sur le site',
     'published' => 'Publié',
     'not_published' => 'Non publié',
+    'save_this_first' => 'Veuillez d\'abord enregistrer l\'article',
 
     /*EXPRESSIONS GENERALES*/
     'are_you_sure' => 'Êtes-vous sur ?',
     'no_content' => 'Aucun contenu',
+    'created' => 'Création réussie',
+    'deleted' => 'Suppression réussie',
+    'updated' => 'Mis à jour',
 
     /*MEDIAS*/
     'featured_image' => 'Image à la une',

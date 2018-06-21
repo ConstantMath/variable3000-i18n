@@ -45,13 +45,17 @@ return [
     'on_website' => 'on the website',
     'published' => 'Published',
     'not_published' => 'Not published',
+    'save_this_first' => 'You need to save the article first',
 
     /*EXPRESSIONS GENERALES*/
     'are_you_sure' => 'Are you sure ?',
     'no_content' => 'No content',
+    'created' => 'Successfully created',
+    'deleted' => 'Successfully deleted',
+    'updated' => 'Updated',
 
     /*MEDIAS*/
     'featured_image' => 'Featured image',
     'gallery' => 'Gallery',
-    
+
 ];

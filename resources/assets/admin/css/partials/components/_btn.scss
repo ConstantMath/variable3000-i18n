@@ -52,6 +52,13 @@
     border-radius:20px;
     @extend .ts-small;
   }
+  &.btn-disabled {
+    cursor:not-allowed;
+    background-color:$gray;
+    &:active {
+      background-color: $gray;
+    }
+  }
 }
 
 .btn-container {

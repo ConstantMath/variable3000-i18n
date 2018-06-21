@@ -61,7 +61,7 @@ class AdminController extends Controller{
     // Do update
     $collection->update($request->all());
     // Redirect
-    session()->flash('flash_message', 'Updated');
+    session()->flash('flash_message', __('admin.updated'));
     if(isset($request['finish'])){
       return redirect()->route('admin.' . snake_case($this->model) . '.index');
     }else{
@@ -115,11 +115,11 @@ class AdminController extends Controller{
         }
       }
     }
-    session()->flash('flash_message', 'Created');
-    if($return_type == 'redirect'){
-      return redirect()->route('admin.' . snake_case($this->getModel()) . '.index', $request->parent_id);
+    session()->flash('flash_message', __('admin.created'));
+    if(isset($request['finish'])){
+      return redirect()->route('admin.' . snake_case($this->model) . '.index');
     }else{
-      return $article;
+      return redirect()->route('admin.' . snake_case($this->model) . '.edit', $article->id);
     }
   }
 
@@ -139,7 +139,7 @@ class AdminController extends Controller{
       Media::deleteMediaFile($media->id);
     endforeach; endif;
     $article -> delete();
-    session()->flash('flash_message', 'Deleted');
+    session()->flash('flash_message', __('admin.deleted'));
     return redirect()->route('admin.' . snake_case($this->model) . '.index', $article->parent_id);
   }
 

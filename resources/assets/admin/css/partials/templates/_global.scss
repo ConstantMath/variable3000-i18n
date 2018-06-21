@@ -58,6 +58,11 @@ a {
   }
 }
 
+.advice {
+  @extend .ts-small;
+  color: $gray;
+}
+
 .fantom{
   background-image: url('/assets/admin/images/fantom.gif');
   background-repeat: no-repeat;
