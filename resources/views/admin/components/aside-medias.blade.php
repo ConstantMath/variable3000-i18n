@@ -247,7 +247,6 @@ $collection_name = 'gallery';
       $(el).each(function (i,e) {
         var sortable = Sortable.create(e, {
           onUpdate: function (evt) {
-            console.log(evt.item);
             var article_id = evt.item.getAttribute('data-article-id');
             var media_id   = evt.item.getAttribute('data-media-id');
             var collection_name = evt.item.getAttribute('data-media-collection-name');
@@ -255,7 +254,7 @@ $collection_name = 'gallery';
             var model_name = '{{$data['table_type']}}';
             if (article_id && media_id) {
               jQuery.ajax({
-                url: admin_url + '/medias/reorder/' + collection_name + '/' + model_name + '/' + article_id,
+                url: admin_url + '/medias/reorder/' + model_name + '/' +  article_id + '/' + collection_name,
                 data: {
                   'mediaId' : media_id,
                   'newOrder': new_order,
@@ -263,8 +262,8 @@ $collection_name = 'gallery';
                 type: 'POST',
                 success: function(response){
                   if(response.status == 'success'){
-                    console.log(media_type+'pp');
-                    $('<span class="message pull-right">Updated !</span>').appendTo('#panel-' + media_type  + ' .panel-heading').fadeOut(3000);
+                    getMedias(collection_name);
+                    $('<span class="help-block">Updated</span>').appendTo('body').fadeOut(4000);
                   } else {
                   }
                 }

@@ -256,14 +256,13 @@ class MediasController extends AdminMediasController {
   * @return \Illuminate\Http\Response
   */
 
-  public function reorder(Request $request, $media_type, $model, $article_id){
-    $class = $this->getClass($model);
+  public function reorder(Request $request, $model_type, $article_id, $collection_name){
+    $class = $this->getClass($model_type);
     $article = $class::findOrFail($article_id);
     $media_id  = $request->mediaId;
-
     $new_order = $request->newOrder;
     $v = 1;
-    $medias = $article->getMedia($media_type);
+    $medias = $article->getMedia($collection_name);
     if(isset($medias)){
      $v = 0;
      // loop in related medias
