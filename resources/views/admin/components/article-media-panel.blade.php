@@ -26,7 +26,6 @@ class="panel panel-default media-panel loading {{ $panel_type }}"
     @else
       <p class="advice">{{__('admin.save_this_first')}}</p>
     @endif
-    <?php // TODO: position du message (dans le header fantom ?) ?>
-    <span class="message" class="hidden"></span>
+
   </div>
 </div>

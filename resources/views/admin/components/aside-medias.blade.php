@@ -56,9 +56,8 @@ $collection_name = 'gallery';
         addMediaInput(response.media);
       }else{
         var panel = $('#panel-' + response.collection);
-        var message_field = $('#panel-' + response.collection + ' .message');
+        $('<span class="help-block">' + response.error + '</span>').appendTo('body').fadeOut(6000);
         panel.removeClass('loading');
-        message_field.html(response.error).fadeOut(6000);
       }
     }
 

@@ -46,7 +46,7 @@ class AdminController extends Controller{
 
   public function saveObject($model, $request, $taxonomies = false){
     $class = get_class($model);
-    $collection = $class::findOrFail($model->id);
+    $article = $class::findOrFail($model->id);
     if($request['created_at']){
       $request['created_at'] = Carbon::createFromFormat('d.m.Y', $request->created_at )->format('Y-m-d H:i:s');
     }
@@ -56,10 +56,10 @@ class AdminController extends Controller{
     endif;
     // Taxonomies
     if(!empty($taxonomies)):
-      $this->manageTaxonomies($taxonomies, $request, $collection->id, $class);
+      Taxonomy::manageRelationships($taxonomies, $request, $article->id, $class);
     endif;
     // Do update
-    $collection->update($request->all());
+    $article->update($request->all());
     // Redirect
     session()->flash('flash_message', __('admin.updated'));
     if(isset($request['finish'])){
@@ -91,7 +91,7 @@ class AdminController extends Controller{
     $article = $class::create($request->all());
     // Taxonomies
     if(!empty($taxonomies)):
-      $this->manageTaxonomies($taxonomies, $request, $article->id, $class);
+      Taxonomy::manageRelationships($taxonomies, $request, $article->id, $class);
     endif;
     // Image une
     if ($request->has('une') && !empty($request->une[0])) {
@@ -199,31 +199,6 @@ class AdminController extends Controller{
     return !empty($table_name) ?
       'App\\' . studly_case(str_singular($table_name)) :
       null;
-  }
-
-
-  /**
-  * Manage relationsips
-  *
-  * @param $model taxonomies
-  * @param $request
-  * @return string
-  */
-
-  public function manageTaxonomies($model_taxonomies, $request, $article_id, $class){
-    // Loop through all model s taxonomies
-    foreach ($model_taxonomies as $key => $val):
-      $taxonomy_parent_id = $val;
-      // Get the taxonmies request input
-      $taxonomy_input = (!empty($request->taxonomies[$taxonomy_parent_id])) ? $request->taxonomies[$taxonomy_parent_id] : '' ;
-      if(!empty($taxonomy_input) && !empty($taxonomy_input[0])){
-        $new_taxonomies = Taxonomy::processTaxonomies($taxonomy_input, $taxonomy_parent_id);
-      }else{
-        $new_taxonomies = '';
-      }
-      // Link the taxonomies
-      Taxonomy::detachOldAddNew($new_taxonomies, $taxonomy_parent_id, $article_id, $class);
-    endforeach;
   }
 
 

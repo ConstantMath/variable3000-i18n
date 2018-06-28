@@ -84,9 +84,35 @@ class Taxonomy extends Model{
 
 
   /**
-   * Get all children
-   *
-   */
+  * Manage relationsips
+  *
+  * @param $model taxonomies
+  * @param $request
+  * @return string
+  */
+
+  public static function manageRelationships($model_taxonomies, $request, $article_id, $class){
+    // Loop through all model's taxonomies
+    foreach ($model_taxonomies as $key => $val):
+      $taxonomy_parent_id = $val;
+      // Get the taxonmies request input
+      $taxonomy_input = (!empty($request->taxonomies[$taxonomy_parent_id])) ? $request->taxonomies[$taxonomy_parent_id] : '' ;
+      if(!empty($taxonomy_input) && !empty($taxonomy_input[0])){
+        $new_taxonomies = Taxonomy::processTaxonomies($taxonomy_input, $taxonomy_parent_id);
+      }else{
+        $new_taxonomies = '';
+      }
+      // Link the taxonomies
+      Taxonomy::detachOldAddNew($new_taxonomies, $taxonomy_parent_id, $article_id, $class);
+    endforeach;
+  }
+
+
+  /**
+  * Get all children
+  *
+  */
+
   public function children(){
     return $this->hasMany('App\Taxonomy', 'parent_id')->orderBy('order', 'asc');
   }

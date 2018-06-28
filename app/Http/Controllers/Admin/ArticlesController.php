@@ -82,6 +82,7 @@ class ArticlesController extends AdminController
       'page_id'    => 'index-',
       'table_type' => $this->table_type,
     );
+    // dd($article->categories);
   	return view('admin/templates/article-edit',  compact('article', 'data'));
   }
 

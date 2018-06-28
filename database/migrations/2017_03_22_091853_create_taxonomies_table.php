@@ -19,15 +19,6 @@ class CreateTaxonomiesTable extends Migration
           $table->string('slug');
           $table->timestamps();
         });
-
-        // Table de pivot
-        Schema::create('article_taxonomy', function (Blueprint $table) {
-          $table->integer('article_id')->unsigned()->index();
-          $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
-          $table->integer('taxonomy_id')->unsigned()->index();
-          $table->foreign('taxonomy_id')->references('id')->on('taxonomies')->onDelete('cascade');
-          $table->timestamps();
-        });
     }
 
     /**
@@ -37,7 +28,6 @@ class CreateTaxonomiesTable extends Migration
      */
     public function down()
     {
-      Schema::drop('article_taxonomy');
       Schema::drop('taxonomies');
     }
 }

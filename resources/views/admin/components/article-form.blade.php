@@ -71,7 +71,7 @@
   <div class="form-group">
     <label for="category">Category</label>
     {{-- [1] = parent_id --}}
-    {!! Form::select('taxonomies[1][]', $article->taxonomiesDropdown(1,1), $article->category, ['class' => 'form-control select2', 'id' => '']) !!}
+    {!! Form::select('taxonomies[1][]', $article->taxonomiesDropdown(1,1), $article->categories, ['class' => 'form-control select2', 'id' => '']) !!}
   </div>
 </div>
 @include('admin.components.form-submit')

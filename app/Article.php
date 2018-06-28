@@ -33,66 +33,40 @@ class Article extends Model implements HasMedia{
 
 
   /**
-   * Retourne les articles enfants
-   *
-   */
-
-  public function children(){
-    return $this->hasMany('App\Article', 'parent_id')
-                ->orderBy('order', 'asc');
-  }
-
-
-  /**
-   * Get the parent article
-   * @param int  $id
-	 *
-   */
-
-   public function parent(){
-     return $this->belongsTo('App\Article', 'parent_id');
-   }
-
-
-  /**
-   * Returns the child/nested articles
-   *
-   */
-
-  public function publishedChildren(){
-    return $this->hasMany('App\article', 'parent_id')
-                ->where('published', 1)
-                ->orderBy('order', 'asc');
-  }
-
-
-  /**
-  * Returns the category (unique)
+  * Get all of the tags for the post.
   */
-
-  public function category(){
-    return $this->belongsToMany('App\Taxonomy')->where('parent_id', 1)->withTimestamps();
-  }
-
-
-  /**
-   * Returns the tags (n)
-   *
-   */
-
   public function taxonomies(){
-    return $this->belongsToMany('App\Taxonomy')->withTimestamps();
+    return $this->morphToMany('App\Taxonomy', 'taxonomyable');
   }
 
-
-  /**
-   * Returns all the tags
-   *
-   */
-
-  public function tags(){
-    return $this->belongsToMany('App\Taxonomy')->where('parent_id', 2)->withTimestamps();
-  }
+  // /**
+  //  * Returns the tags (n)
+  //  *
+  //  */
+  //
+  // public function taxonomies(){
+  //   return $this->belongsToMany('App\Taxonomy')->withTimestamps();
+  // }
+  //
+  //
+  // /**
+  // * Returns the category (unique)
+  // */
+  //
+  // public function category(){
+  //   return $this->belongsToMany('App\Taxonomy')->where('parent_id', 1)->withTimestamps();
+  // }
+  //
+  //
+  //
+  // /**
+  //  * Returns all the tags
+  //  *
+  //  */
+  //
+  // public function tags(){
+  //   return $this->belongsToMany('App\Taxonomy')->where('parent_id', 2)->withTimestamps();
+  // }
 
 
   /**
@@ -110,10 +84,10 @@ class Article extends Model implements HasMedia{
 
 
   /**
-   * Retourne l'id de l'article sur base du slug
-   * @param string  $title
-   *
-   */
+  * Retourne l'id de l'article sur base du slug
+  * @param string  $title
+  *
+  */
 
   public static function getSlugFromId($id){
     $article = Article::find($id);
