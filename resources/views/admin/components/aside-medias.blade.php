@@ -237,17 +237,11 @@ $collection_name = 'gallery';
     $(".media-edit-save").click(function(e) {
       e.preventDefault();
       $(this).closest('form').ajaxForm(media_edit_options).submit();
-      //rafraichir la liste des medias
-      $('.media-panel').each(function( index ) {
-        var media_collection_name = $(this).attr('data-media-collection-name');
-        // Build media list
-        getMedias(media_collection_name);
-      });
     });
 
     function mediaEditResponse(response, statusText, xhr, $form){
       if(response.status == 'success'){
-        getMedias(response.media_type);
+        getMedias(response.collection_name);
       }
     }
 

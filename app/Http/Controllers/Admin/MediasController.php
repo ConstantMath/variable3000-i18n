@@ -305,7 +305,7 @@ class MediasController extends AdminMediasController {
     return response()->json([
      'status'                  => 'success',
      'media_id'                => $media->id,
-     'media_type'              => $media->type,
+     'collection_name'              => $media->collection_name,
     ]);
   }
 
