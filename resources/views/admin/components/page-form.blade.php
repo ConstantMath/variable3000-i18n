@@ -1,10 +1,6 @@
 {!! Form::hidden('id', (!empty($article->id))? $article->id : '') !!}
 {!! Form::hidden('parent_id', (!empty($article->parent) ? $article->parent->id : 0)) !!}
 {!! Form::hidden('order', (!empty($article->order))? $article->order : 0) !!}
-{!! Form::hidden('une[]', null, ['id' => 'une']) !!}
-{!! Form::hidden('gallery[]', null, ['id' => 'gallery']) !!}
-
-
 {{-- Validation errors --}}
 @foreach ($errors->all() as $error)
     <span class="help-block">{{ $error }}</span>
